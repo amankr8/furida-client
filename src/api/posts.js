@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// const url = 'https://furida.herokuapp.com/posts'
-const url = 'http://localhost:8080/posts'
+const url = 'https://furida.herokuapp.com/posts'
+// const url = 'http://localhost:8080/posts'
 const token = localStorage.getItem('token')
 
 const config1 = {

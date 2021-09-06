@@ -1,8 +1,8 @@
 import React from 'react'
 
 const CardImg = (props) => {
-    // const url = 'https://furida.s3.amazonaws.com/posts/'
-    const url = 'http://localhost:8080/uploads/posts/'
+    const url = 'https://furida.s3.amazonaws.com/posts/'
+    // const url = 'http://localhost:8080/uploads/posts/'
 
     return (
         <div>
