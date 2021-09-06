@@ -6,7 +6,7 @@ const Cover = () => {
 
     return (
         <div>
-            <img src={url + 'furida_cover.png'} className="img-fluid rounded shadow" width="100%" alt="Cover" />
+            <img src={url + 'furida_cover.jpg'} className="img-fluid rounded shadow" width="100%" alt="Cover" />
         </div>
     )
 }
