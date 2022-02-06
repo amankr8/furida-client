@@ -25,6 +25,9 @@ function Navbar() {
                             <li className="nav-item">
                                 <a href="/#contact" className="nav-link">Contact</a>
                             </li>
+                            <li className="nav-item">
+                                <a href="/#contact" className="nav-link">CCTV</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
