@@ -15,7 +15,19 @@ export class PostService {
     return this.http.get(this.base_url);
   }
 
+  getPostById(id: number): Observable<any> {
+    return this.http.get(this.base_url + `/${id}`);
+  }
+
   createPost(post: Post): Observable<any> {
     return this.http.post(this.base_url, post);
+  }
+
+  updatePost(id: number, post: Post): Observable<any> {
+    return this.http.put(this.base_url + `/${id}`, post);
+  }
+
+  deletePost(id: number): Observable<any> {
+    return this.http.delete(this.base_url + `/${id}`);
   }
 }
