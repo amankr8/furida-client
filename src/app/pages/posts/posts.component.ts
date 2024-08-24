@@ -4,7 +4,7 @@ import { PostService } from '../../service/post.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { EditPostComponent } from '../edit-post/edit-post.component';
 
 @Component({
@@ -16,7 +16,7 @@ import { EditPostComponent } from '../edit-post/edit-post.component';
 })
 export class PostsComponent {
   posts: Post[] = [];
-  readonly dialog = inject(MatDialog);
+  readonly editDialog = inject(MatDialog);
 
   constructor(private postService: PostService) {}
 
@@ -28,12 +28,14 @@ export class PostsComponent {
   }
 
   openEditDialog(id: number): void {
-    this.dialog.open(EditPostComponent, {
+    const currPost = this.posts.find((post) => post.id === id);
+    this.editDialog.open(EditPostComponent, {
+      data: currPost,
       width: '50%',
     });
   }
 
-  deletePost(id: number) {
+  deletePost(id: number): void {
     this.postService.deletePost(id).subscribe((res) => {
       this.posts = this.posts.filter((item) => item.id !== id);
       console.log('Post deleted successfully');
