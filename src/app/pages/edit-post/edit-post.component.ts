@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
+  MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
@@ -8,15 +9,21 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PostService } from '../../service/post.service';
 import { Post } from '../../interface/post';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-post',
   standalone: true,
   imports: [
     MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
+    MatButtonModule,
     MatDialogClose,
   ],
   templateUrl: './edit-post.component.html',
@@ -24,6 +31,7 @@ import { Post } from '../../interface/post';
 })
 export class EditPostComponent {
   posts: Post[] = [];
+  data = inject<Post>(MAT_DIALOG_DATA);
 
   constructor(private postService: PostService) {}
 

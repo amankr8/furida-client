@@ -28,15 +28,8 @@ export class PostsComponent {
   }
 
   openEditDialog(id: number): void {
-    const dialogRef = this.dialog.open(EditPostComponent, {
-      data: {
-        title: this.posts[id].title,
-        content: this.posts[id].content,
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((res) => {
-      console.log('The dialog was closed');
+    this.dialog.open(EditPostComponent, {
+      width: '50%',
     });
   }
 
