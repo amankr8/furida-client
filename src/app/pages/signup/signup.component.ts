@@ -47,7 +47,6 @@ export class SignupComponent {
   ngOnInit() {
     localStorage.removeItem('jwtToken');
     this.roleService.getAllRoles().subscribe((data) => {
-      console.log(data);
       this.roles = data;
     });
     this.form = new FormGroup({
@@ -56,6 +55,10 @@ export class SignupComponent {
       password: new FormControl('', Validators.required),
       role: new FormControl('', Validators.required),
     });
+  }
+
+  navigateToLogin() {
+    this.router.navigate(['/login']);
   }
 
   signup() {

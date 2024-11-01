@@ -47,6 +47,10 @@ export class LoginComponent {
     });
   }
 
+  navigateToSignUp() {
+    this.router.navigate(['/signup']);
+  }
+
   login() {
     this.authService.login(this.form.value).subscribe(() => {
       this.router.navigate(['/posts']);
