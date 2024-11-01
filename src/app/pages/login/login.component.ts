@@ -43,8 +43,8 @@ export class LoginComponent {
     });
   }
 
-  login() {
-    this.authService.login(this.form.value).subscribe(() => {
+  signin() {
+    this.authService.signin(this.form.value).subscribe(() => {
       this.router.navigate(['/posts']);
     });
   }

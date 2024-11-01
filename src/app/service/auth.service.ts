@@ -22,7 +22,7 @@ export class AuthService {
     return this.http.post(`${this.authUrl}/signup`, user);
   }
 
-  login(user: User): Observable<any> {
+  signin(user: User): Observable<any> {
     console.log('Debug: ', user);
     return this.http.post(`${this.authUrl}/signin`, user).pipe(
       map((response: any) => {
@@ -32,7 +32,7 @@ export class AuthService {
     );
   }
 
-  logout(): void {
+  signout(): void {
     localStorage.removeItem('jwtToken');
     this.router.navigate(['/login']);
   }
