@@ -18,11 +18,12 @@ export class AuthService {
   ) {}
 
   signup(user: User): Observable<any> {
+    console.log(user);
     return this.http.post(`${this.authUrl}/signup`, user);
   }
 
-  signin(user: User): Observable<any> {
-    return this.http.post(`${this.authUrl}/signin`, user).pipe(
+  login(user: User): Observable<any> {
+    return this.http.post(`${this.authUrl}/login`, user).pipe(
       map((response: any) => {
         localStorage.setItem('jwtToken', response.token); // Save token to localStorage
         return response;
@@ -30,9 +31,8 @@ export class AuthService {
     );
   }
 
-  signout(): void {
+  logout(): void {
     localStorage.removeItem('jwtToken');
-    this.router.navigate(['/login']);
   }
 
   isAuthenticated(): boolean {

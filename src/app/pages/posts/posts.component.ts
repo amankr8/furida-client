@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditPostComponent } from '../edit-post/edit-post.component';
 import { Router } from '@angular/router';
 import { DeletePostComponent } from '../delete-post/delete-post.component';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-posts',
@@ -23,11 +24,23 @@ export class PostsComponent {
   readonly deleteDialog = inject(MatDialog);
   private snackBarRef = inject(MatSnackBar);
 
-  constructor(private postService: PostService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private postService: PostService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.postService.getAllPosts().subscribe((data) => {
       this.posts = data;
+    });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+    this.snackBarRef.open('Logged out successfully!', 'Dismiss', {
+      duration: 3000,
     });
   }
 

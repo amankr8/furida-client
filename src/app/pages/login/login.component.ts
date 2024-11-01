@@ -40,15 +40,15 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    localStorage.removeItem('jwtToken');
+    this.authService.logout();
     this.form = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     });
   }
 
-  signin() {
-    this.authService.signin(this.form.value).subscribe(() => {
+  login() {
+    this.authService.login(this.form.value).subscribe(() => {
       this.router.navigate(['/posts']);
       this.snackBarRef.open('Login successful!', 'Dismiss', {
         duration: 3000,
