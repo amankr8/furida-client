@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
 import {
   FormControl,
@@ -51,8 +51,11 @@ export class SignupComponent {
     });
     this.form = new FormGroup({
       username: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
       role: new FormControl('', Validators.required),
     });
   }

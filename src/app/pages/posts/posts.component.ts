@@ -55,13 +55,15 @@ export class PostsComponent {
     });
 
     editDialogref.afterClosed().subscribe((newPost: Post) => {
-      this.postService.updatePost(newPost.id, newPost).subscribe((res) => {
-        const index = this.posts.findIndex((post) => post.id === newPost.id);
-        this.posts[index] = newPost;
-        this.snackBarRef.open('Post updated successfully!', 'Dismiss', {
-          duration: 3000,
+      if (newPost) {
+        this.postService.updatePost(newPost.id, newPost).subscribe((res) => {
+          const index = this.posts.findIndex((post) => post.id === newPost.id);
+          this.posts[index] = newPost;
+          this.snackBarRef.open('Post updated successfully!', 'Dismiss', {
+            duration: 3000,
+          });
         });
-      });
+      }
     });
   }
 

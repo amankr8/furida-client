@@ -43,7 +43,10 @@ export class LoginComponent {
     this.authService.logout();
     this.form = new FormGroup({
       username: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
     });
   }
 

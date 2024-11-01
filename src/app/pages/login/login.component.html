@@ -20,15 +20,17 @@
             <div class="d-flex justify-content-end">
               <button
                 mat-raised-button
-                class="text-bg-primary w-25 mb-2"
+                color="primary"
+                class="w-25 mb-2"
                 type="submit"
+                [disabled]="form.invalid"
               >
                 Log In
               </button>
             </div>
             <div class="d-flex justify-content-end">
               <a class="link-primary" (click)="navigateToSignUp()"
-                >Haven't registered? Sign Up</a
+                >Not registered? Sign Up</a
               >
             </div>
           </div>

@@ -32,8 +32,10 @@
             <div class="d-flex justify-content-end">
               <button
                 mat-raised-button
-                class="text-bg-primary w-25 mb-2"
+                color="primary"
+                class="w-25 mb-2"
                 type="submit"
+                [disabled]="form.invalid"
               >
                 Sign Up
               </button>
