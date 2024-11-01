@@ -45,6 +45,7 @@ export class SignupComponent {
   ) {}
 
   ngOnInit() {
+    localStorage.removeItem('jwtToken');
     this.roleService.getAllRoles().subscribe((data) => {
       console.log(data);
       this.roles = data;
