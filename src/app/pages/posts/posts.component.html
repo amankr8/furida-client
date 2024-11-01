@@ -9,9 +9,7 @@
       >
         Create New Post
       </button>
-      <button mat-raised-button color="secondary" (click)="logout()">
-        Logout
-      </button>
+      <button mat-raised-button (click)="logout()">Logout</button>
     </div>
   </div>
 </div>
@@ -35,7 +33,7 @@
         <mat-card-content class="truncate-text card-content-h">
           <p>{{ post.content }}</p>
         </mat-card-content>
-        <mat-card-actions>
+        <mat-card-actions class="btn-group">
           <button mat-button (click)="openEditDialog(post.id)">EDIT</button>
           <button mat-button (click)="openDeleteDialog(post.id)">DELETE</button>
         </mat-card-actions>

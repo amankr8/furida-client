@@ -6,11 +6,14 @@
   <div class="d-flex justify-content-center">
     <button
       mat-raised-button
+      color="primary"
       [mat-dialog-close]="deletePost(data)"
-      class="text-bg-primary w-25 mx-1"
+      class="w-25 mx-1"
     >
       Yes, Delete
     </button>
-    <button mat-button mat-dialog-close class="w-25 mx-1">No, Cancel</button>
+    <button mat-raised-button mat-dialog-close class="w-25 mx-1">
+      No, Cancel
+    </button>
   </div>
 </div>

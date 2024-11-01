@@ -13,12 +13,15 @@
       <div class="d-flex justify-content-start">
         <button
           mat-raised-button
+          color="primary"
           [mat-dialog-close]="updatePost(data)"
-          class="text-bg-primary w-25 mx-1"
+          class="w-25 mx-1"
         >
           Save
         </button>
-        <button mat-button mat-dialog-close class="w-25 mx-1">Cancel</button>
+        <button mat-raised-button mat-dialog-close class="w-25 mx-1">
+          Cancel
+        </button>
       </div>
     </div>
   </div>
