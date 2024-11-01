@@ -1,7 +1,7 @@
-<form [formGroup]="form" (ngSubmit)="updatePost(data)">
+<form [formGroup]="form">
   <div class="container py-3">
     <div class="d-flex flex-column">
-      <h1 class="text-center">Edit Post</h1>
+      <p class="text-center h4 py-2">Edit Post</p>
       <mat-form-field>
         <mat-label>Title</mat-label>
         <input matInput formControlName="title" />
@@ -13,8 +13,8 @@
       <div class="d-flex justify-content-start">
         <button
           mat-raised-button
+          [mat-dialog-close]="updatePost(data)"
           class="text-bg-primary w-25 mx-1"
-          type="submit"
         >
           Save
         </button>

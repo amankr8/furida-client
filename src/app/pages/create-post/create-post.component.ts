@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -12,6 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-post',
@@ -23,27 +25,35 @@ import { MatCardModule } from '@angular/material/card';
     MatSelectModule,
     MatButtonModule,
     MatCardModule,
+    MatIconModule,
   ],
   templateUrl: './create-post.component.html',
   styleUrl: './create-post.component.scss',
 })
 export class CreatePostComponent {
   form!: FormGroup;
+  private snackBarRef = inject(MatSnackBar);
 
   constructor(private postService: PostService, private router: Router) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.form = new FormGroup({
       title: new FormControl('', Validators.required),
       content: new FormControl('', Validators.required),
     });
   }
 
+  goBack() {
+    this.router.navigate(['/posts']);
+  }
+
   submit() {
     console.log(this.form.value);
     this.postService.createPost(this.form.value).subscribe((res) => {
-      console.log('Post created successfully!');
       this.router.navigateByUrl('');
+      this.snackBarRef.open('Post created successfully!', 'Dismiss', {
+        duration: 3000,
+      });
     });
   }
 }

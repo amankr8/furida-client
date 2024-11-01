@@ -4,7 +4,6 @@ import {
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
-  MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -17,7 +16,6 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 
 @Component({
@@ -39,35 +37,23 @@ import {
 })
 export class EditPostComponent {
   form!: FormGroup;
-  posts: Post[] = [];
-  data = inject<Post>(MAT_DIALOG_DATA);
+  readonly data = inject<Post>(MAT_DIALOG_DATA);
 
-  constructor(
-    private postService: PostService,
-    private dialogRef: MatDialogRef<EditPostComponent>
-  ) {}
+  constructor(private postService: PostService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.form = new FormGroup({
       title: new FormControl(this.data.title),
       content: new FormControl(this.data.content),
     });
   }
 
-  closeEditDialog(): void {
-    this.dialogRef.close();
-  }
-
-  updatePost(post: Post) {
+  updatePost(post: Post): Post {
     const updatedPost = {
       ...post,
       title: this.form.value.title,
       content: this.form.value.content,
     };
-    this.postService.updatePost(post.id, updatedPost).subscribe((res) => {
-      const index = this.posts.findIndex((ob) => ob.id === post.id);
-      this.posts[index] = updatedPost;
-      this.closeEditDialog();
-    });
+    return updatedPost;
   }
 }

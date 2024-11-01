@@ -1,20 +1,17 @@
-<button mat-button class="mb-2" (click)="goBack()">
-  <mat-icon>arrow_back</mat-icon>BACK
-</button>
-<form [formGroup]="form" (ngSubmit)="submit()">
+<form [formGroup]="form" (ngSubmit)="login()">
   <div class="d-flex justify-content-center my-2">
     <div class="w-50">
       <mat-card appearance="outlined" class="shadow">
         <div class="container py-3">
           <div class="d-flex flex-column">
-            <p class="text-center h4 py-2">Create New Post</p>
+            <p class="text-center h4 py-2">Login</p>
             <mat-form-field>
-              <mat-label>Title</mat-label>
-              <input matInput formControlName="title" />
+              <mat-label>Username</mat-label>
+              <input matInput formControlName="username" />
             </mat-form-field>
             <mat-form-field>
-              <mat-label>Content</mat-label>
-              <textarea matInput rows="5" formControlName="content"></textarea>
+              <mat-label>Password</mat-label>
+              <input matInput formControlName="password" />
             </mat-form-field>
             <div class="d-flex justify-content-end">
               <button

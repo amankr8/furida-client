@@ -7,27 +7,27 @@ import { Post } from '../interface/post';
   providedIn: 'root',
 })
 export class PostService {
-  base_url = 'http://localhost:8080/posts';
+  apiUrl = 'http://localhost:8080/posts';
 
   constructor(private http: HttpClient) {}
 
   getAllPosts(): Observable<any> {
-    return this.http.get(this.base_url);
+    return this.http.get(this.apiUrl);
   }
 
   getPostById(id: number): Observable<Post> {
-    return this.http.get<Post>(this.base_url + `/${id}`);
+    return this.http.get<Post>(this.apiUrl + `/${id}`);
   }
 
   createPost(post: Post): Observable<any> {
-    return this.http.post(this.base_url, post);
+    return this.http.post(this.apiUrl, post);
   }
 
   updatePost(id: number, post: Post): Observable<Post> {
-    return this.http.put<Post>(this.base_url + `/${id}`, post);
+    return this.http.put<Post>(this.apiUrl + `/${id}`, post);
   }
 
   deletePost(id: number): Observable<any> {
-    return this.http.delete(this.base_url + `/${id}`);
+    return this.http.delete(this.apiUrl + `/${id}`);
   }
 }
