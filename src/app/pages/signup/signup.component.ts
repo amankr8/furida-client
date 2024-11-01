@@ -13,6 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelect, MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CommonModule } from '@angular/common';
+import { RoleService } from '../../service/role.service';
 
 @Component({
   selector: 'app-signup',
@@ -25,6 +27,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatButtonModule,
     MatInputModule,
     MatSelectModule,
+    CommonModule,
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
@@ -32,11 +35,20 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SignupComponent {
   form!: FormGroup;
   hide = true;
+  roles: string[] = [];
   private snackBarRef = inject(MatSnackBar);
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private roleService: RoleService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
+    this.roleService.getAllRoles().subscribe((data) => {
+      console.log(data);
+      this.roles = data;
+    });
     this.form = new FormGroup({
       username: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
