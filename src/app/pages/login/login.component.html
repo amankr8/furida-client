@@ -11,7 +11,11 @@
             </mat-form-field>
             <mat-form-field>
               <mat-label>Password</mat-label>
-              <input matInput formControlName="password" />
+              <input
+                matInput
+                formControlName="password"
+                [type]="hide ? 'password' : 'text'"
+              />
             </mat-form-field>
             <div class="d-flex justify-content-end">
               <button
@@ -19,7 +23,7 @@
                 class="text-bg-primary w-25"
                 type="submit"
               >
-                Submit
+                Login
               </button>
             </div>
           </div>

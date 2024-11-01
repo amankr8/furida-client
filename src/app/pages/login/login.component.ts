@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, Inject } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
@@ -15,6 +15,7 @@ import {
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -33,6 +34,8 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class LoginComponent {
   form!: FormGroup;
+  hide = true;
+  private snackBarRef = inject(MatSnackBar);
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -46,6 +49,9 @@ export class LoginComponent {
   signin() {
     this.authService.signin(this.form.value).subscribe(() => {
       this.router.navigate(['/posts']);
+      this.snackBarRef.open('Login successful!', 'Dismiss', {
+        duration: 3000,
+      });
     });
   }
 }

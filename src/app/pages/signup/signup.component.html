@@ -1,1 +1,45 @@
-<p>signup works!</p>
+<form [formGroup]="form" (ngSubmit)="signup()">
+  <div class="d-flex justify-content-center my-2">
+    <div class="w-50">
+      <mat-card appearance="outlined" class="shadow">
+        <div class="container py-3">
+          <div class="d-flex flex-column">
+            <p class="text-center h4 py-2">Sign Up</p>
+            <mat-form-field>
+              <mat-label>Username</mat-label>
+              <input matInput formControlName="username" />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                formControlName="password"
+                [type]="hide ? 'password' : 'text'"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Role</mat-label>
+              <mat-select matInput formControlName="role">
+                <mat-option value="EDITOR">Editor</mat-option>
+                <mat-option value="ADMIN">Admin</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="d-flex justify-content-end">
+              <button
+                mat-raised-button
+                class="text-bg-primary w-25"
+                type="submit"
+              >
+                Sign Up
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</form>
