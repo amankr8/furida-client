@@ -18,7 +18,6 @@ export class AuthService {
   ) {}
 
   signup(user: User): Observable<any> {
-    console.log('Debug: ', user);
     return this.http.post(`${this.authUrl}/signup`, user);
   }
 
