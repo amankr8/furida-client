@@ -11,7 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelect, MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { RoleService } from '../../service/role.service';
@@ -59,7 +59,6 @@ export class SignupComponent {
 
   signup() {
     this.authService.signup(this.form.value).subscribe((res) => {
-      console.log(res);
       this.router.navigate(['/login']);
       this.snackBarRef.open('User registered successfully!', 'Dismiss', {
         duration: 3000,
