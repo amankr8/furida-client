@@ -48,7 +48,6 @@ export class CreatePostComponent {
   }
 
   submit() {
-    console.log(this.form.value);
     this.postService.createPost(this.form.value).subscribe((res) => {
       this.router.navigateByUrl('');
       this.snackBarRef.open('Post created successfully!', 'Dismiss', {

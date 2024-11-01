@@ -23,7 +23,6 @@ export class AuthService {
   }
 
   signin(user: User): Observable<any> {
-    console.log('Debug: ', user);
     return this.http.post(`${this.authUrl}/signin`, user).pipe(
       map((response: any) => {
         localStorage.setItem('jwtToken', response.token); // Save token to localStorage

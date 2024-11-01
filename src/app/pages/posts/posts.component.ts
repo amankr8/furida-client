@@ -28,7 +28,6 @@ export class PostsComponent {
   ngOnInit() {
     this.postService.getAllPosts().subscribe((data) => {
       this.posts = data;
-      console.log(this.posts);
     });
   }
 
