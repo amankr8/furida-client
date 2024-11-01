@@ -74,12 +74,14 @@ export class PostsComponent {
     });
 
     deleteDialogref.afterClosed().subscribe((id: number) => {
-      this.postService.deletePost(id).subscribe((res) => {
-        this.posts = this.posts.filter((post) => post.id !== id);
-        this.snackBarRef.open('Post deleted successfully!', 'Dismiss', {
-          duration: 3000,
+      if (id) {
+        this.postService.deletePost(id).subscribe((res) => {
+          this.posts = this.posts.filter((post) => post.id !== id);
+          this.snackBarRef.open('Post deleted successfully!', 'Dismiss', {
+            duration: 3000,
+          });
         });
-      });
+      }
     });
   }
 }
