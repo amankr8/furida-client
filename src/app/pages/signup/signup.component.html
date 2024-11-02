@@ -12,6 +12,17 @@
             <mat-form-field>
               <mat-label>Email</mat-label>
               <input matInput formControlName="email" />
+              <mat-error *ngIf="form.get('email')?.hasError('required')">
+                Email is required
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  form.get('email')?.hasError('email') &&
+                  !form.get('email')?.hasError('required')
+                "
+              >
+                Please enter a valid email address
+              </mat-error>
             </mat-form-field>
             <mat-form-field>
               <mat-label>Password</mat-label>
@@ -20,6 +31,17 @@
                 formControlName="password"
                 [type]="hide ? 'password' : 'text'"
               />
+              <mat-error *ngIf="form.get('password')?.hasError('required')">
+                Password is required
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  form.get('password')?.hasError('minlength') &&
+                  !form.get('password')?.hasError('required')
+                "
+              >
+                Password must be at least 8 characters long
+              </mat-error>
             </mat-form-field>
             <mat-form-field>
               <mat-label>Role</mat-label>
