@@ -11,11 +11,7 @@ import { User } from '../interface/user';
 export class AuthService {
   private authUrl = 'http://localhost:8080/auth';
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private jwtHelper: JwtHelperService
-  ) {}
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
   signup(user: User): Observable<any> {
     return this.http.post(`${this.authUrl}/signup`, user).pipe(
