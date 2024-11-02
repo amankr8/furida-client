@@ -10,18 +10,16 @@
         <mat-label>Content</mat-label>
         <textarea matInput rows="5" formControlName="content"></textarea>
       </mat-form-field>
-      <div class="d-flex justify-content-start">
+      <div class="d-flex justify-content-start gap-2">
         <button
           mat-raised-button
           color="primary"
           [mat-dialog-close]="updatePost(data)"
-          class="w-25 mx-1"
+          class="w-25"
         >
           Save
         </button>
-        <button mat-raised-button mat-dialog-close class="w-25 mx-1">
-          Cancel
-        </button>
+        <button mat-raised-button mat-dialog-close class="w-25">Cancel</button>
       </div>
     </div>
   </div>
