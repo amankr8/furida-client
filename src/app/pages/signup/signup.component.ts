@@ -65,11 +65,18 @@ export class SignupComponent {
   }
 
   signup() {
-    this.authService.signup(this.form.value).subscribe((res) => {
-      this.router.navigate(['/login']);
-      this.snackBarRef.open('User registered successfully!', 'Dismiss', {
-        duration: 3000,
-      });
+    this.authService.signup(this.form.value).subscribe({
+      next: (res) => {
+        this.router.navigate(['/login']);
+        this.snackBarRef.open(res.message, 'Dismiss', {
+          duration: 3000,
+        });
+      },
+      error: (err) => {
+        this.snackBarRef.open(err, 'Dismiss', {
+          duration: 3000,
+        });
+      },
     });
   }
 }

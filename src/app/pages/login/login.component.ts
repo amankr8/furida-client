@@ -57,11 +57,18 @@ export class LoginComponent {
   }
 
   login() {
-    this.authService.login(this.form.value).subscribe(() => {
-      this.router.navigate(['/posts']);
-      this.snackBarRef.open('Login successful!', 'Dismiss', {
-        duration: 3000,
-      });
+    this.authService.login(this.form.value).subscribe({
+      next: (res) => {
+        this.router.navigate(['/posts']);
+        this.snackBarRef.open(res.message, 'Dismiss', {
+          duration: 3000,
+        });
+      },
+      error: (err) => {
+        this.snackBarRef.open(err, 'Dismiss', {
+          duration: 3000,
+        });
+      },
     });
   }
 }
