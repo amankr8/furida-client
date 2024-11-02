@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { User } from '../interface/user';
 
 @Injectable({
@@ -19,7 +19,11 @@ export class AuthService {
 
   signup(user: User): Observable<any> {
     console.log(user);
-    return this.http.post(`${this.authUrl}/signup`, user);
+    return this.http.post(`${this.authUrl}/signup`, user).pipe(
+      catchError((err: HttpErrorResponse) => {
+        return throwError(() => new Error(this.getErrorMessage(err)));
+      })
+    );
   }
 
   login(user: User): Observable<any> {
@@ -27,6 +31,9 @@ export class AuthService {
       map((response: any) => {
         localStorage.setItem('jwtToken', response.token); // Save token to localStorage
         return response;
+      }),
+      catchError((err: HttpErrorResponse) => {
+        return throwError(() => new Error(this.getErrorMessage(err)));
       })
     );
   }
@@ -38,5 +45,17 @@ export class AuthService {
   isAuthenticated(): boolean {
     const token = localStorage.getItem('jwtToken');
     return token != null && !this.jwtHelper.isTokenExpired(token);
+  }
+
+  private getErrorMessage(error: HttpErrorResponse): string {
+    if (error.status === 400) {
+      return 'Invalid input. Please check your details.';
+    } else if (error.status === 401) {
+      return 'Unauthorized. Invalid username or password.';
+    } else if (error.status === 500) {
+      return 'Internal server error. Please try again later.';
+    } else {
+      return 'Something went wrong. Please try again.';
+    }
   }
 }
