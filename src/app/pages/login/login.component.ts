@@ -42,7 +42,6 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.authService.logout();
     this.form = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', [

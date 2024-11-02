@@ -45,7 +45,6 @@ export class SignupComponent {
   ) {}
 
   ngOnInit() {
-    this.authService.logout();
     this.roleService.getAllRoles().subscribe((data) => {
       this.roles = data;
     });
