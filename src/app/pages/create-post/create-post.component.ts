@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HeaderComponent } from '../../components/header/header.component';
 
 @Component({
   selector: 'app-create-post',
@@ -26,6 +27,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
+    HeaderComponent,
   ],
   templateUrl: './create-post.component.html',
   styleUrl: './create-post.component.scss',

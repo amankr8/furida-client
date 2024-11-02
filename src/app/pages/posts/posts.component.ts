@@ -10,11 +10,12 @@ import { EditPostComponent } from '../edit-post/edit-post.component';
 import { Router } from '@angular/router';
 import { DeletePostComponent } from '../delete-post/delete-post.component';
 import { AuthService } from '../../service/auth.service';
+import { HeaderComponent } from '../../components/header/header.component';
 
 @Component({
   selector: 'app-posts',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule],
+  imports: [MatCardModule, MatButtonModule, CommonModule, HeaderComponent],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
 })
