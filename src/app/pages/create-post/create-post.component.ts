@@ -34,6 +34,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 })
 export class CreatePostComponent {
   form!: FormGroup;
+  selectedFile: File | null = null;
   private snackBarRef = inject(MatSnackBar);
 
   constructor(private postService: PostService, private router: Router) {}
@@ -49,8 +50,21 @@ export class CreatePostComponent {
     this.router.navigate(['/posts']);
   }
 
+  onFileSelect(event: Event): void {
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput.files && fileInput.files.length > 0) {
+      this.selectedFile = fileInput.files[0];
+    }
+  }
+
   submit() {
-    this.postService.createPost(this.form.value).subscribe((res) => {
+    const formData = new FormData();
+    formData.append('title', this.form.get('title')?.value);
+    formData.append('content', this.form.get('content')?.value);
+    this.selectedFile ? formData.append('file', this.selectedFile) : false;
+
+    this.postService.createPost(formData).subscribe((res) => {
+      console.log(res);
       this.router.navigate(['/posts']);
       this.snackBarRef.open('Post created successfully!', 'Dismiss', {
         duration: 3000,

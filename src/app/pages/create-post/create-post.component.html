@@ -17,6 +17,7 @@
               <mat-label>Content</mat-label>
               <textarea matInput rows="5" formControlName="content"></textarea>
             </mat-form-field>
+            <input type="file" (change)="onFileSelect($event)" />
             <div class="d-flex justify-content-end">
               <button
                 mat-raised-button
