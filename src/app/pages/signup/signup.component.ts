@@ -34,7 +34,7 @@ import { RoleService } from '../../service/role.service';
 })
 export class SignupComponent {
   form!: FormGroup;
-  hide = true;
+  isLoading = false;
   roles: string[] = [];
   private snackBarRef = inject(MatSnackBar);
 
@@ -65,6 +65,7 @@ export class SignupComponent {
   }
 
   signup() {
+    this.isLoading = true;
     this.authService.signup(this.form.value).subscribe({
       next: (res) => {
         this.router.navigate(['/login']);
@@ -73,6 +74,7 @@ export class SignupComponent {
         });
       },
       error: (err) => {
+        this.isLoading = false;
         this.snackBarRef.open(err, 'Dismiss', {
           duration: 3000,
         });

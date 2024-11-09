@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HeaderComponent } from '../../components/header/header.component';
 import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-create-post',
@@ -30,6 +31,7 @@ import { CommonModule } from '@angular/common';
     MatIconModule,
     HeaderComponent,
     CommonModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './create-post.component.html',
   styleUrl: './create-post.component.scss',
@@ -37,6 +39,7 @@ import { CommonModule } from '@angular/common';
 export class CreatePostComponent {
   form!: FormGroup;
   selectedFile: File | null = null;
+  isLoading = false;
   private snackBarRef = inject(MatSnackBar);
 
   constructor(private postService: PostService, private router: Router) {}
@@ -68,17 +71,25 @@ export class CreatePostComponent {
   }
 
   submit() {
+    this.isLoading = true;
+
     const formData = new FormData();
     formData.append('title', this.form.get('title')?.value);
     formData.append('content', this.form.get('content')?.value);
     this.selectedFile ? formData.append('file', this.selectedFile) : false;
 
-    this.postService.createPost(formData).subscribe((res) => {
-      console.log(res);
-      this.router.navigate(['/posts']);
-      this.snackBarRef.open('Post created successfully!', 'Dismiss', {
-        duration: 3000,
-      });
+    this.postService.createPost(formData).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.router.navigate(['/posts']);
+        this.snackBarRef.open('Post created successfully!', 'Dismiss', {
+          duration: 3000,
+        });
+      },
+      error: (err) => {
+        console.error('Create post failed: ', err);
+        this.isLoading = false;
+      },
     });
   }
 }

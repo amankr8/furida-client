@@ -28,11 +28,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Password</mat-label>
-            <input
-              matInput
-              formControlName="password"
-              [type]="hide ? 'password' : 'text'"
-            />
+            <input matInput formControlName="password" type="password" />
             <mat-error *ngIf="form.get('password')?.hasError('required')">
               Password is required
             </mat-error>
@@ -62,7 +58,7 @@
               color="primary"
               class="w-25 mb-2"
               type="submit"
-              [disabled]="form.invalid"
+              [disabled]="form.invalid || isLoading"
             >
               Sign Up
             </button>

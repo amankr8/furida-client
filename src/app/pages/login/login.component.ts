@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-login',
@@ -30,13 +31,14 @@ import { CommonModule } from '@angular/common';
     MatInputModule,
     MatButtonModule,
     CommonModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   form!: FormGroup;
-  hide = true;
+  isLoading = false;
   private snackBarRef = inject(MatSnackBar);
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -57,6 +59,7 @@ export class LoginComponent {
   }
 
   login() {
+    this.isLoading = true;
     this.authService.login(this.form.value).subscribe({
       next: (res) => {
         this.router.navigate(['/posts']);
@@ -65,6 +68,7 @@ export class LoginComponent {
         });
       },
       error: (err) => {
+        this.isLoading = false;
         this.snackBarRef.open(err, 'Dismiss', {
           duration: 3000,
         });
