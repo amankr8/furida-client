@@ -15,6 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HeaderComponent } from '../../components/header/header.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-post',
@@ -28,6 +29,7 @@ import { HeaderComponent } from '../../components/header/header.component';
     MatCardModule,
     MatIconModule,
     HeaderComponent,
+    CommonModule,
   ],
   templateUrl: './create-post.component.html',
   styleUrl: './create-post.component.scss',
@@ -53,7 +55,15 @@ export class CreatePostComponent {
   onFileSelect(event: Event): void {
     const fileInput = event.target as HTMLInputElement;
     if (fileInput.files && fileInput.files.length > 0) {
-      this.selectedFile = fileInput.files[0];
+      const file = fileInput.files[0];
+      // Check if the file type is an image
+      if (file.type.startsWith('image/')) {
+        this.selectedFile = file;
+        console.log('Selected file:', file);
+      } else {
+        alert('Only image files are allowed!');
+        fileInput.value = ''; // Clear the input if the file is not an image
+      }
     }
   }
 
