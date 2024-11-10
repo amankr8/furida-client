@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { RoleService } from '../../service/role.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-signup',
@@ -28,6 +29,7 @@ import { RoleService } from '../../service/role.service';
     MatInputModule,
     MatSelectModule,
     CommonModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
