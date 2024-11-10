@@ -1,11 +1,6 @@
 <app-header></app-header>
 <div class="container">
-  <button mat-button (click)="goBack()">
-    <div class="d-flex justify-content-end align-items-center">
-      <mat-icon>arrow_back</mat-icon>
-      <div class="px-2">BACK</div>
-    </div>
-  </button>
+  <app-back></app-back>
   <div class="d-flex justify-content-center mt-2">
     <form [formGroup]="form" (ngSubmit)="submit()" class="w-50">
       <mat-card appearance="outlined">
