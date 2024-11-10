@@ -12,13 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-delete-post',
   standalone: true,
-  imports: [
-    MatDialogContent,
-    MatDialogActions,
-    MatFormFieldModule,
-    MatDialogClose,
-    MatButtonModule,
-  ],
+  imports: [MatFormFieldModule, MatDialogClose, MatButtonModule],
   templateUrl: './delete-post.component.html',
   styleUrl: './delete-post.component.scss',
 })
