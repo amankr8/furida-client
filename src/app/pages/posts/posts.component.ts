@@ -57,12 +57,17 @@ export class PostsComponent {
 
     editDialogref.afterClosed().subscribe((newPost: Post) => {
       if (!newPost) return;
-      this.postService.updatePost(newPost.id, newPost).subscribe((res) => {
-        const index = this.posts.findIndex((post) => post.id === newPost.id);
-        this.posts[index] = newPost;
-        this.snackBarRef.open('Post updated successfully!', 'Dismiss', {
-          duration: 3000,
-        });
+      this.postService.updatePost(newPost.id, newPost).subscribe({
+        next: (res) => {
+          const index = this.posts.findIndex((post) => post.id === newPost.id);
+          this.posts[index] = newPost;
+          this.snackBarRef.open('Post updated successfully!', 'Dismiss', {
+            duration: 3000,
+          });
+        },
+        error: (err) => {
+          console.error('Some error occured: ', err);
+        },
       });
     });
   }
@@ -73,14 +78,19 @@ export class PostsComponent {
       width: '50%',
     });
 
-    deleteDialogref.afterClosed().subscribe((id: number) => {
-      if (!id) return;
-      this.postService.deletePost(id).subscribe((res) => {
-        this.posts = this.posts.filter((post) => post.id !== id);
-        this.snackBarRef.open('Post deleted successfully!', 'Dismiss', {
-          duration: 3000,
+    deleteDialogref.afterClosed().subscribe({
+      next: (res) => {
+        if (!id) return;
+        this.postService.deletePost(id).subscribe((res) => {
+          this.posts = this.posts.filter((post) => post.id !== id);
+          this.snackBarRef.open('Post deleted successfully!', 'Dismiss', {
+            duration: 3000,
+          });
         });
-      });
+      },
+      error: (err) => {
+        console.error('Some error occured: ', err);
+      },
     });
   }
 }

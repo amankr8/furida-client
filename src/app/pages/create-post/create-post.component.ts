@@ -87,7 +87,7 @@ export class CreatePostComponent {
         });
       },
       error: (err) => {
-        console.error('Create post failed: ', err);
+        console.error('Some error occured: ', err);
         this.isLoading = false;
       },
     });

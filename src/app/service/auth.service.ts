@@ -14,11 +14,7 @@ export class AuthService {
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
   signup(user: User): Observable<any> {
-    return this.http.post(`${this.authUrl}/signup`, user).pipe(
-      catchError((err: HttpErrorResponse) => {
-        return throwError(() => new Error(err.error.message));
-      })
-    );
+    return this.http.post(`${this.authUrl}/signup`, user);
   }
 
   login(user: User): Observable<any> {
@@ -26,9 +22,6 @@ export class AuthService {
       map((res: any) => {
         localStorage.setItem('jwtToken', res.token); // Save token to localStorage
         return res;
-      }),
-      catchError((err: HttpErrorResponse) => {
-        return throwError(() => new Error(err.error.message));
       })
     );
   }

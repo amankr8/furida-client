@@ -16,6 +16,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { RoleService } from '../../service/role.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -77,10 +78,21 @@ export class SignupComponent {
       },
       error: (err) => {
         this.isLoading = false;
-        this.snackBarRef.open(err, 'Dismiss', {
+        this.snackBarRef.open(this.getErrorMessage(err), 'Dismiss', {
           duration: 3000,
         });
       },
     });
+  }
+
+  getErrorMessage(err: HttpErrorResponse): string {
+    switch (err.status) {
+      case 400:
+        return 'Error: User already exists';
+      case 500:
+        return 'Server Error: Please try again later';
+      default:
+        return 'Error: An unknown error occurred';
+    }
   }
 }

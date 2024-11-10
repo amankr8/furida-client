@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -69,10 +70,23 @@ export class LoginComponent {
       },
       error: (err) => {
         this.isLoading = false;
-        this.snackBarRef.open(err, 'Dismiss', {
+        this.snackBarRef.open(this.getErrorMessage(err), 'Dismiss', {
           duration: 3000,
         });
       },
     });
+  }
+
+  getErrorMessage(err: HttpErrorResponse): string {
+    switch (err.status) {
+      case 404:
+        return "Error: User doesn't exist";
+      case 400:
+        return 'Error: Invalid credentials';
+      case 500:
+        return 'Server Error: Please try again later';
+      default:
+        return 'Error: An unknown error occurred';
+    }
   }
 }
