@@ -56,6 +56,8 @@ export class CreatePostComponent {
     this.router.navigate(['/posts']);
   }
 
+  resetForm() {}
+
   onFileSelect(event: Event): void {
     const fileInput = event.target as HTMLInputElement;
     if (fileInput.files && fileInput.files.length > 0) {
@@ -95,7 +97,11 @@ export class CreatePostComponent {
         });
       },
       error: (err) => {
-        console.error('Some error occured: ', err);
+        console.error(err);
+        this.snackBarRef.open('An unknown error has occurred', 'Dismiss', {
+          duration: 3000,
+        });
+        this.resetForm();
         this.isLoading = false;
       },
     });

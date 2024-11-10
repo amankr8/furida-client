@@ -66,7 +66,10 @@ export class PostsComponent {
           });
         },
         error: (err) => {
-          console.error('Some error occured: ', err);
+          console.error(err);
+          this.snackBarRef.open('An unknown error has occurred', 'Dismiss', {
+            duration: 3000,
+          });
         },
       });
     });
@@ -89,7 +92,10 @@ export class PostsComponent {
         });
       },
       error: (err) => {
-        console.error('Some error occured: ', err);
+        console.error(err);
+        this.snackBarRef.open('An unknown error has occurred', 'Dismiss', {
+          duration: 3000,
+        });
       },
     });
   }
