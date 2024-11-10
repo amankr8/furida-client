@@ -55,12 +55,18 @@ export class PostsComponent {
       width: '50%',
     });
 
-    editDialogref.afterClosed().subscribe((newPost: Post) => {
-      if (!newPost) return;
-      this.postService.updatePost(newPost.id, newPost).subscribe({
+    editDialogref.afterClosed().subscribe((updatedPost: Post) => {
+      if (!updatedPost) return;
+
+      const postDto = new FormData();
+      postDto.append('title', updatedPost.title);
+      postDto.append('content', updatedPost.content);
+      this.postService.updatePost(updatedPost.id, postDto).subscribe({
         next: (res) => {
-          const index = this.posts.findIndex((post) => post.id === newPost.id);
-          this.posts[index] = newPost;
+          const index = this.posts.findIndex(
+            (post) => post.id === updatedPost.id
+          );
+          this.posts[index] = updatedPost;
           this.snackBarRef.open('Post updated successfully!', 'Dismiss', {
             duration: 3000,
           });
@@ -84,6 +90,7 @@ export class PostsComponent {
     deleteDialogref.afterClosed().subscribe({
       next: (res) => {
         if (!id) return;
+
         this.postService.deletePost(id).subscribe((res) => {
           this.posts = this.posts.filter((post) => post.id !== id);
           this.snackBarRef.open('Post deleted successfully!', 'Dismiss', {
