@@ -39,6 +39,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 export class CreatePostComponent {
   form!: FormGroup;
   selectedFile: File | null = null;
+  imagePreview: string | ArrayBuffer | null = null;
   isLoading = false;
   private snackBarRef = inject(MatSnackBar);
 
@@ -63,6 +64,13 @@ export class CreatePostComponent {
       if (file.type.startsWith('image/')) {
         this.selectedFile = file;
         console.log('Selected file:', file);
+
+        // Preview the image
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.imagePreview = reader.result;
+        };
+        reader.readAsDataURL(this.selectedFile);
       } else {
         alert('Only image files are allowed!');
         fileInput.value = ''; // Clear the input if the file is not an image
