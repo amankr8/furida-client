@@ -85,7 +85,7 @@ export class PostsComponent {
         },
         error: (err) => {
           console.error(err);
-          this.snackBarRef.open('An unknown error has occurred', 'Dismiss', {
+          this.snackBarRef.open('Error: Failed to update post', 'Dismiss', {
             duration: 3000,
           });
         },
@@ -114,7 +114,7 @@ export class PostsComponent {
       },
       error: (err) => {
         console.error(err);
-        this.snackBarRef.open('An unknown error has occurred', 'Dismiss', {
+        this.snackBarRef.open('Error: Failed to delete post', 'Dismiss', {
           duration: 3000,
         });
       },
