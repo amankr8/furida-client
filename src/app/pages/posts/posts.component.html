@@ -26,7 +26,7 @@
       <mat-card appearance="outlined" class="mb-3 shadow-sm">
         <img
           mat-card-image
-          [src]="post.imgUrl"
+          [src]="post.imgUrl || 'https://placehold.co/600x400'"
           alt="No image found"
           class="card-image-h"
         />

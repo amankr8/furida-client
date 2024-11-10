@@ -40,8 +40,10 @@ export class PostsComponent {
   ) {}
 
   ngOnInit() {
+    this.isLoading = true;
     this.postService.getAllPosts().subscribe((data) => {
       this.posts = data;
+      this.isLoading = false;
     });
   }
 
