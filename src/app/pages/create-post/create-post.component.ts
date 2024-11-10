@@ -48,7 +48,10 @@ export class CreatePostComponent {
   ngOnInit() {
     this.form = new FormGroup({
       title: new FormControl('', Validators.required),
-      content: new FormControl('', Validators.required),
+      content: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(510),
+      ]),
     });
   }
 

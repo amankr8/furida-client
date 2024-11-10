@@ -54,6 +54,14 @@
               <mat-error *ngIf="form.get('content')?.hasError('required')">
                 Content is required
               </mat-error>
+              <mat-error
+                *ngIf="
+                  form.get('content')?.hasError('maxlength') &&
+                  !form.get('content')?.hasError('required')
+                "
+              >
+                Content is too large
+              </mat-error>
             </mat-form-field>
             <div class="d-flex justify-content-end align-items-center gap-2">
               <mat-spinner *ngIf="isLoading" diameter="30"></mat-spinner>
