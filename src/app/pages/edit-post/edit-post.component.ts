@@ -16,7 +16,9 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-post',
@@ -28,6 +30,7 @@ import {
     MatButtonModule,
     MatDialogClose,
     ReactiveFormsModule,
+    CommonModule,
   ],
   templateUrl: './edit-post.component.html',
   styleUrl: './edit-post.component.scss',
@@ -40,8 +43,11 @@ export class EditPostComponent {
 
   ngOnInit() {
     this.form = new FormGroup({
-      title: new FormControl(this.data.title),
-      content: new FormControl(this.data.content),
+      title: new FormControl(this.data.title, Validators.required),
+      content: new FormControl(this.data.content, [
+        Validators.required,
+        Validators.maxLength(510),
+      ]),
     });
   }
 
