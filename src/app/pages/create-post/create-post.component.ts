@@ -58,6 +58,10 @@ export class CreatePostComponent {
     });
   }
 
+  goBack() {
+    this.router.navigate(['/posts']);
+  }
+
   resetForm() {}
 
   onFileSelect(event: Event): void {

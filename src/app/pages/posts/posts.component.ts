@@ -12,6 +12,7 @@ import { DeletePostComponent } from '../delete-post/delete-post.component';
 import { AuthService } from '../../service/auth.service';
 import { HeaderComponent } from '../../components/header/header.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-posts',
@@ -19,6 +20,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   imports: [
     MatCardModule,
     MatButtonModule,
+    MatIconModule,
     CommonModule,
     HeaderComponent,
     MatProgressBarModule,
