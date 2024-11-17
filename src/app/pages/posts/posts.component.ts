@@ -47,12 +47,8 @@ export class PostsComponent {
     });
   }
 
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-    this.snackBarRef.open('Logged out successfully!', 'Dismiss', {
-      duration: 3000,
-    });
+  goBack() {
+    this.router.navigate(['/admin']);
   }
 
   navigateToCreatePost() {

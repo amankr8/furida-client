@@ -63,7 +63,7 @@ export class LoginComponent {
     this.isLoading = true;
     this.authService.login(this.form.value).subscribe({
       next: (res) => {
-        this.router.navigate(['/posts']);
+        this.router.navigate(['/admin']);
         this.snackBarRef.open(res.message, 'Dismiss', {
           duration: 3000,
         });

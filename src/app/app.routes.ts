@@ -5,8 +5,10 @@ import { PostsComponent } from './pages/posts/posts.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { authGuard } from './guard/auth.guard';
+import { AdminComponent } from './pages/admin/admin.component';
 
 export const routes: Routes = [
+  { path: 'admin', component: AdminComponent, canActivate: [authGuard] },
   { path: 'posts', component: PostsComponent, canActivate: [authGuard] },
   {
     path: 'create-post',
