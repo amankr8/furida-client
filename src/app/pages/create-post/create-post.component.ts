@@ -44,6 +44,7 @@ export class CreatePostComponent {
   imagePreview: string | ArrayBuffer | null = null;
   isLoading = false;
   private snackBarRef = inject(MatSnackBar);
+  private maxFileSize = 2 * 1024 * 1024;
 
   constructor(private postService: PostService, private router: Router) {}
 
@@ -64,9 +65,14 @@ export class CreatePostComponent {
     if (fileInput.files && fileInput.files.length > 0) {
       const file = fileInput.files[0];
       // Check if the file type is an image
-      if (file.type.startsWith('image/')) {
+      if (!file.type.startsWith('image/')) {
+        alert('Only image files are allowed!');
+        fileInput.value = ''; // Clear the input if the file is not an image
+      } else if (file.size > this.maxFileSize) {
+        alert('File size is too large!');
+        fileInput.value = '';
+      } else {
         this.selectedFile = file;
-        console.log('Selected file:', file);
 
         // Preview the image
         const reader = new FileReader();
@@ -74,9 +80,6 @@ export class CreatePostComponent {
           this.imagePreview = reader.result;
         };
         reader.readAsDataURL(this.selectedFile);
-      } else {
-        alert('Only image files are allowed!');
-        fileInput.value = ''; // Clear the input if the file is not an image
       }
     }
   }
