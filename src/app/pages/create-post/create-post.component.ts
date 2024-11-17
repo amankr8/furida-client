@@ -70,7 +70,7 @@ export class CreatePostComponent {
         fileInput.value = ''; // Clear the input if the file is not an image
       } else if (file.size > this.maxFileSize) {
         alert('File size is too large!');
-        fileInput.value = '';
+        fileInput.value = ''; // Clear the input if the file is too large
       } else {
         this.selectedFile = file;
 

@@ -65,31 +65,33 @@ export class PostsComponent {
       width: '50%',
     });
 
-    editDialogref.afterClosed().subscribe((updatedPost: Post) => {
-      if (!updatedPost) return;
-      this.isLoading = true;
+    editDialogref.afterClosed().subscribe({
+      next: (updatedPost) => {
+        if (!updatedPost) return;
+        this.isLoading = true;
 
-      const postDto = new FormData();
-      postDto.append('title', updatedPost.title);
-      postDto.append('content', updatedPost.content);
-      this.postService.updatePost(updatedPost.id, postDto).subscribe({
-        next: (res) => {
-          const index = this.posts.findIndex(
-            (post) => post.id === updatedPost.id
-          );
-          this.posts[index] = updatedPost;
-          this.isLoading = false;
-          this.snackBarRef.open('Post updated successfully!', 'Dismiss', {
-            duration: 3000,
-          });
-        },
-        error: (err) => {
-          console.error(err);
-          this.snackBarRef.open('Error: Failed to update post', 'Dismiss', {
-            duration: 3000,
-          });
-        },
-      });
+        const postDto = new FormData();
+        postDto.append('title', updatedPost.title);
+        postDto.append('content', updatedPost.content);
+        this.postService.updatePost(updatedPost.id, postDto).subscribe({
+          next: (res) => {
+            const index = this.posts.findIndex(
+              (post) => post.id === updatedPost.id
+            );
+            this.posts[index] = updatedPost;
+            this.isLoading = false;
+            this.snackBarRef.open('Post updated successfully!', 'Dismiss', {
+              duration: 3000,
+            });
+          },
+          error: (err) => {
+            console.error(err);
+            this.snackBarRef.open('Error: Failed to update post', 'Dismiss', {
+              duration: 3000,
+            });
+          },
+        });
+      },
     });
   }
 
@@ -100,22 +102,24 @@ export class PostsComponent {
     });
 
     deleteDialogref.afterClosed().subscribe({
-      next: (res) => {
+      next: (id) => {
         if (!id) return;
         this.isLoading = true;
 
-        this.postService.deletePost(id).subscribe((res) => {
-          this.posts = this.posts.filter((post) => post.id !== id);
-          this.isLoading = false;
-          this.snackBarRef.open('Post deleted successfully!', 'Dismiss', {
-            duration: 3000,
-          });
-        });
-      },
-      error: (err) => {
-        console.error(err);
-        this.snackBarRef.open('Error: Failed to delete post', 'Dismiss', {
-          duration: 3000,
+        this.postService.deletePost(id).subscribe({
+          next: (res) => {
+            this.posts = this.posts.filter((post) => post.id !== id);
+            this.isLoading = false;
+            this.snackBarRef.open('Post deleted successfully!', 'Dismiss', {
+              duration: 3000,
+            });
+          },
+          error: (err) => {
+            console.error(err);
+            this.snackBarRef.open('Error: Failed to update post', 'Dismiss', {
+              duration: 3000,
+            });
+          },
         });
       },
     });
