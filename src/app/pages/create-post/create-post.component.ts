@@ -17,7 +17,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HeaderComponent } from '../../components/header/header.component';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { BackComponent } from '../../components/back/back.component';
 
 @Component({
   selector: 'app-create-post',
@@ -33,7 +32,6 @@ import { BackComponent } from '../../components/back/back.component';
     HeaderComponent,
     CommonModule,
     MatProgressSpinnerModule,
-    BackComponent,
   ],
   templateUrl: './create-post.component.html',
   styleUrl: './create-post.component.scss',

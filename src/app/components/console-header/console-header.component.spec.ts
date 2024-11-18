@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BackComponent } from './back.component';
+import { ConsoleHeaderComponent } from './console-header.component';
 
-describe('BackComponent', () => {
-  let component: BackComponent;
-  let fixture: ComponentFixture<BackComponent>;
+describe('ConsoleHeaderComponent', () => {
+  let component: ConsoleHeaderComponent;
+  let fixture: ComponentFixture<ConsoleHeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BackComponent]
+      imports: [ConsoleHeaderComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(BackComponent);
+    fixture = TestBed.createComponent(ConsoleHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
