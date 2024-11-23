@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { CreatePostComponent } from './pages/admin/posts/create-post/create-post.component';
 import { EditPostComponent } from './pages/admin/posts/edit-post/edit-post.component';
 import { PostsComponent } from './pages/admin/posts/posts.component';
-import { SignupComponent } from './pages/signup/signup.component';
+import { SignupComponent } from './pages/admin/users/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { authGuard } from './guard/auth.guard';
 import { AdminComponent } from './pages/admin/admin.component';
