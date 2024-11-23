@@ -7,9 +7,8 @@ import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { EditPostComponent } from '../edit-post/edit-post.component';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DeletePostComponent } from '../delete-post/delete-post.component';
-import { AuthService } from '../../service/auth.service';
 import { HeaderComponent } from '../../components/header/header.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     HeaderComponent,
     MatProgressBarModule,
+    RouterLink,
   ],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
@@ -35,11 +35,7 @@ export class PostsComponent {
   readonly deleteDialog = inject(MatDialog);
   private snackBarRef = inject(MatSnackBar);
 
-  constructor(
-    private authService: AuthService,
-    private postService: PostService,
-    private router: Router
-  ) {}
+  constructor(private postService: PostService) {}
 
   ngOnInit() {
     this.isLoading = true;
@@ -47,14 +43,6 @@ export class PostsComponent {
       this.posts = data;
       this.isLoading = false;
     });
-  }
-
-  goBack() {
-    this.router.navigate(['/admin']);
-  }
-
-  navigateToCreatePost() {
-    this.router.navigate(['/create-post']);
   }
 
   openEditDialog(id: number) {
