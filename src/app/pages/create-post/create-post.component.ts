@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { PostService } from '../../service/post.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,6 +32,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     HeaderComponent,
     CommonModule,
     MatProgressSpinnerModule,
+    RouterLink,
   ],
   templateUrl: './create-post.component.html',
   styleUrl: './create-post.component.scss',
@@ -54,10 +55,6 @@ export class CreatePostComponent {
         Validators.maxLength(510),
       ]),
     });
-  }
-
-  goBack() {
-    this.router.navigate(['/posts']);
   }
 
   resetForm() {}
