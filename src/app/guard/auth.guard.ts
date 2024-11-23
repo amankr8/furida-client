@@ -14,12 +14,15 @@ export const authGuard: CanActivateFn = (route, state) => {
   // Check if token exists and is not expired
   if (token && !jwtHelper.isTokenExpired(token)) {
     return true; // Allow access if the token is valid
-  } else {
-    // Redirect to the login page if the token is missing or expired
-    router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+  } else if (jwtHelper.isTokenExpired(token)) {
+    // Redirect to the login page if the token is expired
+    router.navigate(['/login']);
     snackBarRef.open('Session expired! Please login again', 'Dismiss', {
       duration: 3000,
     });
+    return false;
+  } else {
+    router.navigate(['/']);
     return false;
   }
 };

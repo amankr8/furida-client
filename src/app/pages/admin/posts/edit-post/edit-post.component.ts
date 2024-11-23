@@ -1,14 +1,8 @@
 import { Component, inject } from '@angular/core';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogTitle,
-} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogClose } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { PostService } from '../../service/post.service';
-import { Post } from '../../interface/post';
+import { PostService } from '../../../../service/post.service';
+import { Post } from '../../../../interface/post';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import {

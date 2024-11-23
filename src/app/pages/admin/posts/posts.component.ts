@@ -1,17 +1,17 @@
 import { Component, inject, signal } from '@angular/core';
-import { Post } from '../../interface/post';
-import { PostService } from '../../service/post.service';
+import { Post } from '../../../interface/post';
+import { PostService } from '../../../service/post.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { EditPostComponent } from '../edit-post/edit-post.component';
-import { Router, RouterLink } from '@angular/router';
-import { DeletePostComponent } from '../delete-post/delete-post.component';
-import { HeaderComponent } from '../../components/header/header.component';
+import { RouterLink } from '@angular/router';
+import { DeletePostComponent } from './delete-post/delete-post.component';
+import { HeaderComponent } from '../../../components/header/header.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
+import { EditPostComponent } from './edit-post/edit-post.component';
 
 @Component({
   selector: 'app-posts',
