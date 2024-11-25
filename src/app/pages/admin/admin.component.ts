@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
 import { AuthService } from '../../service/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,7 +10,13 @@ import { MatDividerModule } from '@angular/material/divider';
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [HeaderComponent, MatButtonModule, MatDividerModule, CommonModule],
+  imports: [
+    HeaderComponent,
+    MatButtonModule,
+    MatDividerModule,
+    CommonModule,
+    RouterLink,
+  ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
 })
@@ -25,9 +31,5 @@ export class AdminComponent {
     this.snackBarRef.open('Logged out successfully!', 'Dismiss', {
       duration: 3000,
     });
-  }
-
-  navigateToPosts() {
-    this.router.navigate(['/posts']);
   }
 }
