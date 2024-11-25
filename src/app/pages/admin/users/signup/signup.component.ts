@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,6 +17,8 @@ import { CommonModule } from '@angular/common';
 import { RoleService } from '../../../../service/role.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
+import { HeaderComponent } from '../../../../components/header/header.component';
 
 @Component({
   selector: 'app-signup',
@@ -29,7 +31,10 @@ import { HttpErrorResponse } from '@angular/common/http';
     MatButtonModule,
     MatInputModule,
     MatSelectModule,
+    MatIconModule,
+    HeaderComponent,
     CommonModule,
+    RouterLink,
     MatProgressSpinnerModule,
   ],
   templateUrl: './signup.component.html',
