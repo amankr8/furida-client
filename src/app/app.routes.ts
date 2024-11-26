@@ -8,12 +8,20 @@ import { authGuard } from './guard/auth.guard';
 import { AdminComponent } from './pages/admin/admin.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UsersComponent } from './pages/admin/users/users.component';
+import { ProjectsComponent } from './pages/admin/projects/projects.component';
+import { AddProjectComponent } from './pages/admin/projects/add-project/add-project.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
   { path: 'admin', component: AdminComponent, canActivate: [authGuard] },
   { path: 'posts', component: PostsComponent, canActivate: [authGuard] },
   { path: 'users', component: UsersComponent, canActivate: [authGuard] },
+  { path: 'projects', component: ProjectsComponent, canActivate: [authGuard] },
+  {
+    path: 'add-project',
+    component: AddProjectComponent,
+    canActivate: [authGuard],
+  },
   {
     path: 'create-post',
     component: CreatePostComponent,
