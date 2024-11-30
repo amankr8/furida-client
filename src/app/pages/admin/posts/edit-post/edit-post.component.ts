@@ -49,7 +49,7 @@ export class EditPostComponent {
     });
   }
 
-  updatePost(post: Post): Post {
+  update(post: Post): Post {
     const updatedPost = {
       ...post,
       title: this.form.value.title,
