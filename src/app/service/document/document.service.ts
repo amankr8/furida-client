@@ -13,4 +13,8 @@ export class DocumentService {
   getAllDocuments(): Observable<any> {
     return this.http.get(this.apiUrl);
   }
+
+  deleteDocument(id: number): Observable<any> {
+    return this.http.delete(this.apiUrl + `/${id}`);
+  }
 }

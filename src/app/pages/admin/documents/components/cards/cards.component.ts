@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DocumentService } from '../../../../../service/document/document.service';
 import { Document } from '../../../../../interface/document';
 import { MenuButtonComponent } from '../menu-button/menu-button.component';
+import { DeleteDialogComponent } from '../../../components/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-document-cards',
@@ -36,6 +37,40 @@ export class CardsComponent {
     this.documentService.getAllDocuments().subscribe((data) => {
       this.documents = data;
       this.isLoading = false;
+    });
+  }
+
+  openDeleteDialog(id: number) {
+    const deleteDialogref = this.deleteDialog.open(DeleteDialogComponent, {
+      data: id,
+      width: '50%',
+    });
+
+    deleteDialogref.afterClosed().subscribe({
+      next: (id) => {
+        if (!id) return;
+        this.isLoading = true;
+
+        this.documentService.deleteDocument(id).subscribe({
+          next: (res) => {
+            this.documents = this.documents.filter((doc) => doc.id !== id);
+            this.isLoading = false;
+            this.snackBarRef.open('Document deleted successfully!', 'Dismiss', {
+              duration: 3000,
+            });
+          },
+          error: (err) => {
+            console.error(err);
+            this.snackBarRef.open(
+              'Error: Failed to delete document',
+              'Dismiss',
+              {
+                duration: 3000,
+              }
+            );
+          },
+        });
+      },
     });
   }
 }
