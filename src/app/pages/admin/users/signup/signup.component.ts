@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,6 +19,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { HeaderComponent } from '../../../components/header/header.component';
+import { Level2HeaderComponent } from '../../components/level-2-header/level-2-header.component';
 
 @Component({
   selector: 'app-signup',
@@ -34,13 +35,14 @@ import { HeaderComponent } from '../../../components/header/header.component';
     MatIconModule,
     HeaderComponent,
     CommonModule,
-    RouterLink,
     MatProgressSpinnerModule,
+    Level2HeaderComponent,
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
 export class SignupComponent {
+  headerText: string = 'Add New User';
   form!: FormGroup;
   isLoading = false;
   roles: string[] = [];

@@ -6,17 +6,18 @@ import {
   Validators,
 } from '@angular/forms';
 import { PostService } from '../../../../service/post/post.service';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Level2HeaderComponent } from '../../components/level-2-header/level-2-header.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-create-post',
@@ -28,17 +29,18 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSelectModule,
     MatButtonModule,
     MatCardModule,
-    MatIconModule,
     HeaderComponent,
+    MatIconModule,
     CommonModule,
     MatProgressSpinnerModule,
-    RouterLink,
+    Level2HeaderComponent,
   ],
   templateUrl: './create-post.component.html',
   styleUrl: './create-post.component.scss',
 })
 export class CreatePostComponent {
   form!: FormGroup;
+  headerText: string = 'Add New Post';
   selectedFile: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
   isLoading = false;
