@@ -36,10 +36,10 @@ import { DocumentService } from '../../../../../service/document/document.servic
 export class DocFormComponent {
   form!: FormGroup;
   selectedFile: File | null = null;
-  imagePreview: string | ArrayBuffer | null = null;
+  fileName: string = '';
   isLoading = false;
   private snackBarRef = inject(MatSnackBar);
-  private maxFileSize = 2 * 1024 * 1024;
+  private maxFileSize = 5 * 1024 * 1024;
 
   constructor(private docService: DocumentService, private router: Router) {}
 
@@ -57,21 +57,15 @@ export class DocFormComponent {
     if (fileInput.files && fileInput.files.length > 0) {
       const file = fileInput.files[0];
       // Check if the file type is an image
-      if (!file.type.startsWith('image/')) {
+      if (file.type !== 'application/pdf') {
         alert('Only image files are allowed!');
-        fileInput.value = ''; // Clear the input if the file is not an image
+        fileInput.value = ''; // Clear the input if the file is not in pdf format
       } else if (file.size > this.maxFileSize) {
         alert('File size is too large!');
         fileInput.value = ''; // Clear the input if the file is too large
       } else {
         this.selectedFile = file;
-
-        // Preview the image
-        const reader = new FileReader();
-        reader.onload = () => {
-          this.imagePreview = reader.result;
-        };
-        reader.readAsDataURL(this.selectedFile);
+        this.fileName = file.name;
       }
     }
   }

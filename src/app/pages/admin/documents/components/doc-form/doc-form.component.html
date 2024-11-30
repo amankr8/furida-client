@@ -6,20 +6,16 @@
           <div class="d-flex flex-column">
             <div class="d-flex flex-column align-items-center">
               <!-- Display selected image preview -->
-              <div *ngIf="imagePreview" class="mb-3">
+              <div *ngIf="fileName" class="mb-3">
                 <mat-card appearance="outlined">
-                  <img
-                    [src]="imagePreview"
-                    class="image-preview"
-                    alt="Selected Image Preview"
-                  />
+                  <span class="p-4">{{ fileName }}</span>
                 </mat-card>
               </div>
               <input
-                #imgInput
+                #fileInput
                 type="file"
                 (change)="onFileSelect($event)"
-                accept="image/*"
+                accept="application/pdf"
                 hidden
               />
               <button
@@ -27,7 +23,7 @@
                 color="accent"
                 class="mb-3 w-50"
                 type="button"
-                (click)="imgInput.click()"
+                (click)="fileInput.click()"
               >
                 <mat-icon>file_upload</mat-icon> Upload Document
               </button>
