@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { PostService } from '../../../../../service/post/post.service';
 import { EditPostComponent } from '../../edit-post/edit-post.component';
 import { DeletePostComponent } from '../../delete-post/delete-post.component';
+import { DeleteDialogComponent } from '../../../components/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-post-cards',
@@ -71,7 +72,7 @@ export class CardsComponent {
   }
 
   openDeleteDialog(id: number) {
-    const deleteDialogref = this.deleteDialog.open(DeletePostComponent, {
+    const deleteDialogref = this.deleteDialog.open(DeleteDialogComponent, {
       data: id,
       width: '50%',
     });

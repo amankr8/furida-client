@@ -18,7 +18,13 @@
         </mat-card-content>
         <mat-card-actions class="btn-group">
           <button mat-button [disabled]="isLoading">EDIT</button>
-          <button mat-button [disabled]="isLoading">DELETE</button>
+          <button
+            mat-button
+            (click)="openDeleteDialog(project.id)"
+            [disabled]="isLoading"
+          >
+            DELETE
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
