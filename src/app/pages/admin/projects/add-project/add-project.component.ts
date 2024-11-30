@@ -3,6 +3,7 @@ import { HeaderComponent } from '../../../components/header/header.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Level2HeaderComponent } from '../../components/level-2-header/level-2-header.component';
+import { ProjectFormComponent } from '../components/project-form/project-form.component';
 
 @Component({
   selector: 'app-add-project',
@@ -12,6 +13,7 @@ import { Level2HeaderComponent } from '../../components/level-2-header/level-2-h
     MatIconModule,
     MatButtonModule,
     Level2HeaderComponent,
+    ProjectFormComponent,
   ],
   templateUrl: './add-project.component.html',
   styleUrl: './add-project.component.scss',
