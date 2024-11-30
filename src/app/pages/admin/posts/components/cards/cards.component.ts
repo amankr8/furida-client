@@ -8,7 +8,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PostService } from '../../../../../service/post/post.service';
 import { EditPostComponent } from '../../edit-post/edit-post.component';
-import { DeletePostComponent } from '../../delete-post/delete-post.component';
 import { DeleteDialogComponent } from '../../../components/delete-dialog/delete-dialog.component';
 
 @Component({
