@@ -90,7 +90,7 @@ export class PostFormComponent {
 
     this.postService.createPost(formData).subscribe({
       next: (res) => {
-        this.router.navigate(['/posts']);
+        this.router.navigate(['/admin/posts']);
         this.snackBarRef.open('Post created successfully!', 'Dismiss', {
           duration: 3000,
         });
