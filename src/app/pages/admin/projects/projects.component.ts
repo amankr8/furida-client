@@ -7,8 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Project } from '../../../interface/project';
-import { UserService } from '../../../service/user.service';
-import { ProjectService } from '../../../service/project.service';
+import { UserService } from '../../../service/user/user.service';
+import { ProjectService } from '../../../service/project/project.service';
 
 @Component({
   selector: 'app-projects',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { DocumentService } from '../../../../service/document.service';
+import { DocumentService } from '../../../../service/document/document.service';
 import { CommonModule } from '@angular/common';
 import { Document } from '../../../../interface/document';
 import { MatButtonModule } from '@angular/material/button';
