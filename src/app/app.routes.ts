@@ -13,9 +13,24 @@ import { AddProjectComponent } from './pages/admin/projects/add-project/add-proj
 import { DocumentsComponent } from './pages/documents/documents.component';
 import { AdminDocumentsComponent } from './pages/admin/documents/documents.component';
 import { AddDocumentComponent } from './pages/admin/documents/add-document/add-document.component';
+import { AboutComponent } from './pages/about/about.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 export const routes: Routes = [
+  { path: 'login', component: LoginComponent },
   { path: '', pathMatch: 'full', component: HomeComponent },
+  {
+    path: 'documents',
+    component: DocumentsComponent,
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+  },
+  {
+    path: 'contact',
+    component: ContactComponent,
+  },
   {
     path: 'admin',
     children: [
@@ -91,10 +106,5 @@ export const routes: Routes = [
       },
     ],
   },
-  {
-    path: 'documents',
-    component: DocumentsComponent,
-  },
-  { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '' },
 ];
