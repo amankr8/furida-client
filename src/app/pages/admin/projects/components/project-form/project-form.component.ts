@@ -56,7 +56,7 @@ export class ProjectFormComponent {
       },
       error: (err) => {
         this.isLoading = false;
-        this.snackBarRef.open('this.getErrorMessage(err)', 'Dismiss', {
+        this.snackBarRef.open('Error: Failed to add project', 'Dismiss', {
           duration: 3000,
         });
       },
