@@ -34,7 +34,6 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class PostFormComponent {
   form!: FormGroup;
-  selectedFile: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
   isLoading = false;
   private snackBarRef = inject(MatSnackBar);
@@ -49,10 +48,13 @@ export class PostFormComponent {
         Validators.required,
         Validators.maxLength(510),
       ]),
+      file: new FormControl(null),
     });
   }
 
-  resetForm() {}
+  resetForm() {
+    this.form.reset();
+  }
 
   onFileSelect(event: Event): void {
     const fileInput = event.target as HTMLInputElement;
@@ -66,14 +68,14 @@ export class PostFormComponent {
         alert('File size is too large!');
         fileInput.value = ''; // Clear the input if the file is too large
       } else {
-        this.selectedFile = file;
+        this.form.patchValue({ file: file });
 
         // Preview the image
         const reader = new FileReader();
         reader.onload = () => {
           this.imagePreview = reader.result;
         };
-        reader.readAsDataURL(this.selectedFile);
+        reader.readAsDataURL(file);
       }
     }
   }
@@ -84,7 +86,7 @@ export class PostFormComponent {
     const formData = new FormData();
     formData.append('title', this.form.get('title')?.value);
     formData.append('content', this.form.get('content')?.value);
-    this.selectedFile ? formData.append('file', this.selectedFile) : false;
+    formData.append('file', this.form.get('file')?.value);
 
     this.postService.createPost(formData).subscribe({
       next: (res) => {
