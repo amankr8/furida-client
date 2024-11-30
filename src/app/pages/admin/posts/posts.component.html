@@ -1,60 +1,7 @@
 <app-header></app-header>
-<div class="container">
-  <div class="d-flex justify-content-between align-items-center mt-4 px-4">
-    <div class="display-4">Your Posts</div>
-    <div class="d-flex gap-2">
-      <button mat-raised-button color="primary" routerLink="create-post">
-        Add New Post
-      </button>
-      <button mat-raised-button routerLink="../">
-        <mat-icon>arrow_back</mat-icon>
-        Go Back
-      </button>
-    </div>
-  </div>
-  <hr />
-</div>
-<div class="container">
-  <mat-progress-bar
-    *ngIf="isLoading"
-    mode="indeterminate"
-    class="mb-3"
-  ></mat-progress-bar>
-  <div class="row row-cols-3 px-4">
-    <div class="col" *ngFor="let post of posts">
-      <mat-card appearance="outlined" class="mb-3 shadow-sm">
-        <img
-          mat-card-image
-          [src]="post.imgUrl || 'https://placehold.co/600x400'"
-          alt="No image found"
-          class="card-image-h"
-        />
-        <mat-card-header class="mb-2">
-          <mat-card-title class="single-line-truncate">
-            {{ post.title }}
-          </mat-card-title>
-          <mat-card-subtitle>{{ post.date | date }}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content class="truncate-text card-content-h">
-          <p>{{ post.content }}</p>
-        </mat-card-content>
-        <mat-card-actions class="btn-group">
-          <button
-            mat-button
-            (click)="openEditDialog(post.id)"
-            [disabled]="isLoading"
-          >
-            EDIT
-          </button>
-          <button
-            mat-button
-            (click)="openDeleteDialog(post.id)"
-            [disabled]="isLoading"
-          >
-            DELETE
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-  </div>
-</div>
+<app-level-1-header
+  [headerText]="headerText"
+  [buttonText]="buttonText"
+  [childLevelLink]="childLevelLink"
+></app-level-1-header>
+<app-cards></app-cards>
