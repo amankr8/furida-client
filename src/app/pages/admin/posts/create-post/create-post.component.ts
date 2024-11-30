@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { PostService } from '../../../../service/post.service';
+import { PostService } from '../../../../service/post/post.service';
 import { Router, RouterLink } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
