@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Post } from '../../../../interface/post';
-import { PostService } from '../../../../service/post.service';
+import { PostService } from '../../../../service/post/post.service';
 
 @Component({
   selector: 'app-updates',
