@@ -11,7 +11,7 @@ import { EditPostComponent } from '../../edit-post/edit-post.component';
 import { DeletePostComponent } from '../../delete-post/delete-post.component';
 
 @Component({
-  selector: 'app-cards',
+  selector: 'app-post-cards',
   standalone: true,
   imports: [MatProgressBarModule, MatButtonModule, MatCardModule, CommonModule],
   templateUrl: './cards.component.html',

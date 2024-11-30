@@ -1,0 +1,26 @@
+<div class="container">
+  <mat-progress-bar
+    *ngIf="isLoading"
+    mode="indeterminate"
+    class="mb-3"
+  ></mat-progress-bar>
+  <div class="row row-cols-3 px-4">
+    <div class="col" *ngFor="let user of users">
+      <mat-card appearance="outlined" class="mb-3 shadow-sm">
+        <mat-card-header class="mb-2">
+          <mat-card-title class="single-line-truncate">
+            {{ user.username }}
+          </mat-card-title>
+          <mat-card-subtitle>{{ user.role }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="truncate-text card-content-h">
+          <p>{{ user.email }}</p>
+        </mat-card-content>
+        <mat-card-actions class="btn-group">
+          <button mat-button [disabled]="isLoading">EDIT</button>
+          <button mat-button [disabled]="isLoading">DELETE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

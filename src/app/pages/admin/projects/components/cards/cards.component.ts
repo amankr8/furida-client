@@ -7,7 +7,7 @@ import { ProjectService } from '../../../../../service/project/project.service';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-cards',
+  selector: 'app-project-cards',
   standalone: true,
   imports: [MatCardModule, MatProgressBarModule, CommonModule, MatButtonModule],
   templateUrl: './cards.component.html',
