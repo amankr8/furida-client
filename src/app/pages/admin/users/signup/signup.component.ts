@@ -18,7 +18,7 @@ import { RoleService } from '../../../../service/role.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
-import { HeaderComponent } from '../../../../components/header/header.component';
+import { HeaderComponent } from '../../../components/header/header.component';
 
 @Component({
   selector: 'app-signup',

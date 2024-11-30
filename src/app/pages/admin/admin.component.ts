@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { HeaderComponent } from '../../components/header/header.component';
+import { HeaderComponent } from '../components/header/header.component';
 import { AuthService } from '../../service/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';

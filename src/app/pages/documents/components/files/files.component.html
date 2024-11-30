@@ -1,0 +1,22 @@
+<div class="container mb-3">
+  <mat-progress-bar
+    *ngIf="isLoading"
+    mode="indeterminate"
+    class="mb-3"
+  ></mat-progress-bar>
+  <div class="row row-cols-3 px-4">
+    <div class="col" *ngFor="let doc of docs">
+      <mat-card appearance="outlined" class="mb-3 shadow-sm">
+        <mat-card-header class="mb-2">
+          <mat-card-title class="single-line-truncate">
+            {{ doc.name }}
+          </mat-card-title>
+          <mat-card-subtitle>{{ doc.desc }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <a mat-button [href]="doc.docUrl" target="_blank">DOWNLOAD</a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

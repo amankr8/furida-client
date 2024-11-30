@@ -10,6 +10,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { UsersComponent } from './pages/admin/users/users.component';
 import { ProjectsComponent } from './pages/admin/projects/projects.component';
 import { AddProjectComponent } from './pages/admin/projects/add-project/add-project.component';
+import { DocumentsComponent } from './pages/documents/documents.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
@@ -17,6 +18,10 @@ export const routes: Routes = [
   { path: 'posts', component: PostsComponent, canActivate: [authGuard] },
   { path: 'users', component: UsersComponent, canActivate: [authGuard] },
   { path: 'projects', component: ProjectsComponent, canActivate: [authGuard] },
+  {
+    path: 'documents',
+    component: DocumentsComponent,
+  },
   {
     path: 'add-project',
     component: AddProjectComponent,
