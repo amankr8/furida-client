@@ -5,12 +5,15 @@
         <div class="container py-3">
           <div class="d-flex flex-column">
             <div class="d-flex flex-column align-items-center">
-              <!-- Display selected image preview -->
-              <div *ngIf="fileName" class="mb-3">
-                <mat-card appearance="outlined">
-                  <span class="p-4">{{ fileName }}</span>
-                </mat-card>
-              </div>
+              <!-- Display selected filename preview -->
+              <mat-card appearance="outlined" class="mb-3">
+                <div class="p-4">
+                  <span *ngIf="fileName">{{ fileName }}</span>
+                  <mat-error *ngIf="form.get('file')?.hasError('required')">
+                    Document is required
+                  </mat-error>
+                </div>
+              </mat-card>
               <input
                 #fileInput
                 type="file"

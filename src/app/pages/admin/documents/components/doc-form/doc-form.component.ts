@@ -14,7 +14,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { PostService } from '../../../../../service/post/post.service';
 import { DocumentService } from '../../../../../service/document/document.service';
 
 @Component({
@@ -35,7 +34,6 @@ import { DocumentService } from '../../../../../service/document/document.servic
 })
 export class DocFormComponent {
   form!: FormGroup;
-  selectedFile: File | null = null;
   fileName: string = '';
   isLoading = false;
   private snackBarRef = inject(MatSnackBar);
@@ -47,10 +45,14 @@ export class DocFormComponent {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
       desc: new FormControl('', Validators.required),
+      file: new FormControl(null, Validators.required),
     });
   }
 
-  resetForm() {}
+  resetForm() {
+    this.form.reset();
+    this.fileName = '';
+  }
 
   onFileSelect(event: Event): void {
     const fileInput = event.target as HTMLInputElement;
@@ -64,7 +66,7 @@ export class DocFormComponent {
         alert('File size is too large!');
         fileInput.value = ''; // Clear the input if the file is too large
       } else {
-        this.selectedFile = file;
+        this.form.patchValue({ file: file });
         this.fileName = file.name;
       }
     }
@@ -76,7 +78,7 @@ export class DocFormComponent {
     const formData = new FormData();
     formData.append('name', this.form.get('name')?.value);
     formData.append('desc', this.form.get('desc')?.value);
-    this.selectedFile ? formData.append('file', this.selectedFile) : false;
+    formData.append('file', this.form.get('file')?.value);
 
     this.docService.addDocument(formData).subscribe({
       next: (res) => {
