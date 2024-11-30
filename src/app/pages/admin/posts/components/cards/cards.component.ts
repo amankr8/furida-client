@@ -91,7 +91,7 @@ export class CardsComponent {
           },
           error: (err) => {
             console.error(err);
-            this.snackBarRef.open('Error: Failed to update post', 'Dismiss', {
+            this.snackBarRef.open('Error: Failed to delete post', 'Dismiss', {
               duration: 3000,
             });
           },

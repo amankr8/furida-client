@@ -1,5 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogClose } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogClose,
+  MatDialogModule,
+} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PostService } from '../../../../service/post/post.service';
 import { Post } from '../../../../interface/post';
@@ -22,7 +26,7 @@ import { CommonModule } from '@angular/common';
     MatInputModule,
     FormsModule,
     MatButtonModule,
-    MatDialogClose,
+    MatDialogModule,
     ReactiveFormsModule,
     CommonModule,
   ],

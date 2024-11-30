@@ -15,16 +15,16 @@ export class PostService {
     return this.http.get(this.apiUrl);
   }
 
-  getPostById(id: number): Observable<Post> {
-    return this.http.get<Post>(this.apiUrl + `/${id}`);
+  getPostById(id: number): Observable<any> {
+    return this.http.get(this.apiUrl + `/${id}`);
   }
 
   createPost(postDto: FormData): Observable<any> {
     return this.http.post(this.apiUrl, postDto);
   }
 
-  updatePost(id: number, postDto: FormData): Observable<Post> {
-    return this.http.put<Post>(this.apiUrl + `/${id}`, postDto);
+  updatePost(id: number, postDto: FormData): Observable<any> {
+    return this.http.put(this.apiUrl + `/${id}`, postDto);
   }
 
   deletePost(id: number): Observable<any> {

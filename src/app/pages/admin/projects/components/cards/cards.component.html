@@ -17,7 +17,13 @@
           <p>{{ project.desc }}</p>
         </mat-card-content>
         <mat-card-actions class="btn-group">
-          <button mat-button [disabled]="isLoading">EDIT</button>
+          <button
+            mat-button
+            (click)="openEditDialog(project.id)"
+            [disabled]="isLoading"
+          >
+            EDIT
+          </button>
           <button
             mat-button
             (click)="openDeleteDialog(project.id)"
