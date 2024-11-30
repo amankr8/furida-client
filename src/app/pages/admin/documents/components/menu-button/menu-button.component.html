@@ -1,0 +1,12 @@
+<button
+  mat-icon-button
+  [matMenuTriggerFor]="menu"
+  aria-label="Example icon-button with a menu"
+>
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <a mat-menu-item [href]="downloadLink" target="_blank">
+    <span>Download</span>
+  </a>
+</mat-menu>

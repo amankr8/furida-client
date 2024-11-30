@@ -1,1 +1,24 @@
-<p>cards works!</p>
+<div class="container">
+  <mat-progress-bar
+    *ngIf="isLoading"
+    mode="indeterminate"
+    class="mb-3"
+  ></mat-progress-bar>
+  <div class="row row-cols-3 px-4">
+    <div class="col" *ngFor="let doc of documents">
+      <mat-card appearance="outlined" class="mb-3 shadow-sm">
+        <app-menu-button [downloadLink]="doc.docUrl"></app-menu-button>
+        <mat-card-header class="mb-2">
+          <mat-card-title class="single-line-truncate">
+            {{ doc.name }}
+          </mat-card-title>
+          <mat-card-subtitle>{{ doc.desc }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions class="btn-group">
+          <button mat-button [disabled]="isLoading">EDIT</button>
+          <button mat-button [disabled]="isLoading">DELETE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
