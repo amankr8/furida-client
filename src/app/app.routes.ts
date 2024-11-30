@@ -14,26 +14,70 @@ import { DocumentsComponent } from './pages/documents/documents.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
-  { path: 'admin', component: AdminComponent, canActivate: [authGuard] },
-  { path: 'posts', component: PostsComponent, canActivate: [authGuard] },
-  { path: 'users', component: UsersComponent, canActivate: [authGuard] },
-  { path: 'projects', component: ProjectsComponent, canActivate: [authGuard] },
+  {
+    path: 'admin',
+    children: [
+      {
+        path: '',
+        component: AdminComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'projects',
+        children: [
+          {
+            path: '',
+            component: ProjectsComponent,
+            canActivate: [authGuard],
+          },
+          {
+            path: 'add-project',
+            component: AddProjectComponent,
+            canActivate: [authGuard],
+          },
+        ],
+      },
+      {
+        path: 'posts',
+        children: [
+          {
+            path: '',
+            component: PostsComponent,
+            canActivate: [authGuard],
+          },
+          {
+            path: 'create-post',
+            component: CreatePostComponent,
+            canActivate: [authGuard],
+          },
+          {
+            path: 'edit-post',
+            component: EditPostComponent,
+            canActivate: [authGuard],
+          },
+        ],
+      },
+      {
+        path: 'users',
+        children: [
+          {
+            path: '',
+            component: UsersComponent,
+            canActivate: [authGuard],
+          },
+          {
+            path: 'signup',
+            component: SignupComponent,
+            canActivate: [authGuard],
+          },
+        ],
+      },
+    ],
+  },
   {
     path: 'documents',
     component: DocumentsComponent,
   },
-  {
-    path: 'add-project',
-    component: AddProjectComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'create-post',
-    component: CreatePostComponent,
-    canActivate: [authGuard],
-  },
-  { path: 'edit-post', component: EditPostComponent, canActivate: [authGuard] },
-  { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '' },
 ];
