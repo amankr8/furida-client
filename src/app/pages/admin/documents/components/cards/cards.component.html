@@ -20,7 +20,13 @@
           ></app-menu-button>
         </div>
         <mat-card-actions class="btn-group">
-          <button mat-button [disabled]="isLoading">EDIT</button>
+          <button
+            mat-button
+            (click)="openEditDialog(doc.id)"
+            [disabled]="isLoading"
+          >
+            EDIT
+          </button>
           <button
             mat-button
             (click)="openDeleteDialog(doc.id)"

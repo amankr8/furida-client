@@ -1,12 +1,104 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { PostService } from '../../../../../service/post/post.service';
+import { DocumentService } from '../../../../../service/document/document.service';
 
 @Component({
   selector: 'app-doc-form',
   standalone: true,
-  imports: [],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './doc-form.component.html',
-  styleUrl: './doc-form.component.scss'
+  styleUrl: './doc-form.component.scss',
 })
 export class DocFormComponent {
+  form!: FormGroup;
+  selectedFile: File | null = null;
+  imagePreview: string | ArrayBuffer | null = null;
+  isLoading = false;
+  private snackBarRef = inject(MatSnackBar);
+  private maxFileSize = 2 * 1024 * 1024;
 
+  constructor(private docService: DocumentService, private router: Router) {}
+
+  ngOnInit() {
+    this.form = new FormGroup({
+      name: new FormControl('', Validators.required),
+      desc: new FormControl('', Validators.required),
+    });
+  }
+
+  resetForm() {}
+
+  onFileSelect(event: Event): void {
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput.files && fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+      // Check if the file type is an image
+      if (!file.type.startsWith('image/')) {
+        alert('Only image files are allowed!');
+        fileInput.value = ''; // Clear the input if the file is not an image
+      } else if (file.size > this.maxFileSize) {
+        alert('File size is too large!');
+        fileInput.value = ''; // Clear the input if the file is too large
+      } else {
+        this.selectedFile = file;
+
+        // Preview the image
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.imagePreview = reader.result;
+        };
+        reader.readAsDataURL(this.selectedFile);
+      }
+    }
+  }
+
+  submit() {
+    this.isLoading = true;
+
+    const formData = new FormData();
+    formData.append('name', this.form.get('name')?.value);
+    formData.append('desc', this.form.get('desc')?.value);
+    this.selectedFile ? formData.append('file', this.selectedFile) : false;
+
+    this.docService.addDocument(formData).subscribe({
+      next: (res) => {
+        this.router.navigate(['/admin/documents']);
+        this.snackBarRef.open('Document uploaded successfully!', 'Dismiss', {
+          duration: 3000,
+        });
+      },
+      error: (err) => {
+        console.error(err);
+        this.snackBarRef.open('An unknown error has occurred', 'Dismiss', {
+          duration: 3000,
+        });
+        this.resetForm();
+        this.isLoading = false;
+      },
+    });
+  }
 }

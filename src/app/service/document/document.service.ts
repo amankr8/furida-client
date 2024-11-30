@@ -14,7 +14,15 @@ export class DocumentService {
     return this.http.get(this.apiUrl);
   }
 
+  addDocument(docDto: FormData): Observable<any> {
+    return this.http.post(this.apiUrl, docDto);
+  }
+
   deleteDocument(id: number): Observable<any> {
     return this.http.delete(this.apiUrl + `/${id}`);
+  }
+
+  updateDocument(id: number, docDto: FormData): Observable<any> {
+    return this.http.put(this.apiUrl + `/${id}`, docDto);
   }
 }
