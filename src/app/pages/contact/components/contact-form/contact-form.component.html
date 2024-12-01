@@ -27,14 +27,14 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Message</mat-label>
-            <textarea matInput rows="5" formControlName="message"></textarea>
-            <mat-error *ngIf="form.get('message')?.hasError('required')">
+            <textarea matInput rows="5" formControlName="msg"></textarea>
+            <mat-error *ngIf="form.get('msg')?.hasError('required')">
               Message is required
             </mat-error>
             <mat-error
               *ngIf="
-                form.get('message')?.hasError('maxlength') &&
-                !form.get('message')?.hasError('required')
+                form.get('msg')?.hasError('maxlength') &&
+                !form.get('msg')?.hasError('required')
               "
             >
               Message is larger than the limit

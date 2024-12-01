@@ -49,6 +49,7 @@ export class ProjectFormComponent {
     this.isLoading = true;
     this.projectService.addProject(this.form.value).subscribe({
       next: (res) => {
+        this.isLoading = false;
         this.router.navigate(['/admin/projects']);
         this.snackBarRef.open('Project created successfully!', 'Dismiss', {
           duration: 3000,

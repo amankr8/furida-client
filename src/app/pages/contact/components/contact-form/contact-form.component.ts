@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -11,6 +11,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ContactService } from '../../../../service/contact/contact.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contact-form',
@@ -30,17 +32,45 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 export class ContactFormComponent {
   form!: FormGroup;
   isLoading = false;
+  private snackBarRef = inject(MatSnackBar);
+
+  constructor(private contactService: ContactService) {}
 
   ngOnInit() {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
-      message: new FormControl('', [
+      msg: new FormControl('', [
         Validators.required,
         Validators.maxLength(510),
       ]),
     });
   }
 
-  submit() {}
+  resetForm() {
+    this.form.reset();
+  }
+
+  submit() {
+    this.isLoading = true;
+    this.contactService.sendMessage(this.form.value).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.snackBarRef.open("Message sent! We'll get back soon!", 'Dismiss', {
+          duration: 3000,
+        });
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.snackBarRef.open(
+          'Server error: Please try again later',
+          'Dismiss',
+          {
+            duration: 3000,
+          }
+        );
+      },
+    });
+    this.resetForm();
+  }
 }
