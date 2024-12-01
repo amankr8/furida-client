@@ -56,7 +56,7 @@ export class ContactFormComponent {
     this.contactService.sendMessage(this.form.value).subscribe({
       next: (res) => {
         this.isLoading = false;
-        this.snackBarRef.open("Message sent! We'll get back soon!", 'Dismiss', {
+        this.snackBarRef.open('Thank you for cantacting us!', 'Dismiss', {
           duration: 3000,
         });
       },
