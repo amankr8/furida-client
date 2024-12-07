@@ -83,12 +83,12 @@ export class PostFormComponent {
   submit() {
     this.isLoading = true;
 
-    const formData = new FormData();
-    formData.append('title', this.form.get('title')?.value);
-    formData.append('content', this.form.get('content')?.value);
-    formData.append('file', this.form.get('file')?.value);
+    const postData = new FormData();
+    postData.append('title', this.form.get('title')?.value);
+    postData.append('content', this.form.get('content')?.value);
+    postData.append('file', this.form.get('file')?.value);
 
-    this.postService.createPost(formData).subscribe({
+    this.postService.createPost(postData).subscribe({
       next: (res) => {
         this.router.navigate(['/admin/posts']);
         this.snackBarRef.open('Post created successfully!', 'Dismiss', {

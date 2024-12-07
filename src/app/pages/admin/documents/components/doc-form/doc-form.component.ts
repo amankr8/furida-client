@@ -75,12 +75,12 @@ export class DocFormComponent {
   submit() {
     this.isLoading = true;
 
-    const formData = new FormData();
-    formData.append('name', this.form.get('name')?.value);
-    formData.append('desc', this.form.get('desc')?.value);
-    formData.append('file', this.form.get('file')?.value);
+    const docData = new FormData();
+    docData.append('name', this.form.get('name')?.value);
+    docData.append('desc', this.form.get('desc')?.value);
+    docData.append('file', this.form.get('file')?.value);
 
-    this.docService.addDocument(formData).subscribe({
+    this.docService.addDocument(docData).subscribe({
       next: (res) => {
         this.router.navigate(['/admin/documents']);
         this.snackBarRef.open('Document uploaded successfully!', 'Dismiss', {
