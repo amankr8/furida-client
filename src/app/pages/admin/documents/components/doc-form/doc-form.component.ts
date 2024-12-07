@@ -15,6 +15,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DocumentService } from '../../../../../service/document/document.service';
+import { Project } from '../../../../../interface/project';
+import { ProjectService } from '../../../../../service/project/project.service';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-doc-form',
@@ -28,24 +32,35 @@ import { DocumentService } from '../../../../../service/document/document.servic
     MatCardModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatOptionModule,
+    MatSelectModule,
   ],
   templateUrl: './doc-form.component.html',
   styleUrl: './doc-form.component.scss',
 })
 export class DocFormComponent {
   form!: FormGroup;
+  projects: Project[] = [];
   fileName: string = '';
   isLoading = false;
   private snackBarRef = inject(MatSnackBar);
   private maxFileSize = 5 * 1024 * 1024;
 
-  constructor(private docService: DocumentService, private router: Router) {}
+  constructor(
+    private docService: DocumentService,
+    private projectService: ProjectService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
+    this.projectService.getAllProjects().subscribe((data) => {
+      this.projects = data;
+    });
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
       desc: new FormControl('', Validators.required),
       file: new FormControl(null, Validators.required),
+      projectId: new FormControl(null, Validators.required),
     });
   }
 
@@ -79,6 +94,7 @@ export class DocFormComponent {
     docData.append('name', this.form.get('name')?.value);
     docData.append('desc', this.form.get('desc')?.value);
     docData.append('file', this.form.get('file')?.value);
+    docData.append('projectId', this.form.get('projectId')?.value);
 
     this.docService.addDocument(docData).subscribe({
       next: (res) => {

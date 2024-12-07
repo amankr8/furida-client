@@ -10,6 +10,8 @@ import { Document } from '../../../../../interface/document';
 import { MenuButtonComponent } from '../menu-button/menu-button.component';
 import { DeleteDialogComponent } from '../../../components/delete-dialog/delete-dialog.component';
 import { EditDocumentComponent } from '../../edit-document/edit-document.component';
+import { ProjectService } from '../../../../../service/project/project.service';
+import { Project } from '../../../../../interface/project';
 
 @Component({
   selector: 'app-document-cards',
@@ -26,19 +28,30 @@ import { EditDocumentComponent } from '../../edit-document/edit-document.compone
 })
 export class CardsComponent {
   documents: Document[] = [];
+  projects: Project[] = [];
   isLoading = false;
   readonly editDialog = inject(MatDialog);
   readonly deleteDialog = inject(MatDialog);
   private snackBarRef = inject(MatSnackBar);
 
-  constructor(private documentService: DocumentService) {}
+  constructor(
+    private documentService: DocumentService,
+    private projectService: ProjectService
+  ) {}
 
   ngOnInit() {
     this.isLoading = true;
+    this.projectService.getAllProjects().subscribe((data) => {
+      this.projects = data;
+    });
     this.documentService.getAllDocuments().subscribe((data) => {
       this.documents = data;
       this.isLoading = false;
     });
+  }
+
+  getProjectNameById(id: number) {
+    return this.projects.find((project) => project.id === id)?.name;
   }
 
   openEditDialog(id: number) {

@@ -8,12 +8,19 @@
     <div class="col" *ngFor="let doc of documents">
       <mat-card appearance="outlined" class="mb-3 shadow-sm">
         <div class="d-flex justify-content-between align-items-center">
-          <mat-card-header class="mb-2">
-            <mat-card-title class="single-line-truncate">
-              {{ doc.name }}
-            </mat-card-title>
-            <mat-card-subtitle>{{ doc.desc }}</mat-card-subtitle>
-          </mat-card-header>
+          <div>
+            <mat-card-header class="mb-2">
+              <mat-card-title class="single-line-truncate">
+                {{ doc.name }}
+              </mat-card-title>
+              <mat-card-subtitle>{{
+                getProjectNameById(doc.projectId)
+              }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="truncate-text card-content-h">
+              <p>{{ doc.desc }}</p>
+            </mat-card-content>
+          </div>
           <app-menu-button
             class="px-3"
             [downloadLink]="doc.docUrl"
