@@ -1,0 +1,38 @@
+<div class="container">
+  <mat-progress-bar
+    *ngIf="isLoading"
+    mode="indeterminate"
+    class="mb-3"
+  ></mat-progress-bar>
+  <div class="row row-cols-3 px-4">
+    <div class="col" *ngFor="let message of messages">
+      <mat-card appearance="outlined" class="mb-3 shadow-sm">
+        <mat-card-header class="mb-2">
+          <mat-card-title class="single-line-truncate">
+            {{ message.name }}
+          </mat-card-title>
+          <mat-card-subtitle>{{ message.email }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="truncate-text card-content-h">
+          <p>{{ message.msg }}</p>
+        </mat-card-content>
+        <mat-card-actions class="btn-group">
+          <button
+            mat-button
+            (click)="markAsRead(message.id)"
+            [disabled]="isLoading"
+          >
+            ARCHIVE
+          </button>
+          <button
+            mat-button
+            (click)="openDeleteDialog(message.id)"
+            [disabled]="isLoading"
+          >
+            DELETE
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

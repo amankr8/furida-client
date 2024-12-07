@@ -15,6 +15,8 @@ import { AdminDocumentsComponent } from './pages/admin/documents/documents.compo
 import { AddDocumentComponent } from './pages/admin/documents/add-document/add-document.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { MessagesComponent } from './pages/admin/messages/messages.component';
+import { ReadMessagesComponent } from './pages/admin/messages/read-messages/read-messages.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -100,6 +102,21 @@ export const routes: Routes = [
           {
             path: 'signup',
             component: SignupComponent,
+            canActivate: [authGuard],
+          },
+        ],
+      },
+      {
+        path: 'messages',
+        children: [
+          {
+            path: '',
+            component: MessagesComponent,
+            canActivate: [authGuard],
+          },
+          {
+            path: 'read-messages',
+            component: ReadMessagesComponent,
             canActivate: [authGuard],
           },
         ],
