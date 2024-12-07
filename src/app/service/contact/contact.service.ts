@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Project } from '../../interface/project';
 import { Message } from '../../interface/message';
 
 @Injectable({
@@ -16,8 +15,8 @@ export class ContactService {
     return this.http.post(this.apiUrl, msg);
   }
 
-  getAllMessages(): Observable<any> {
-    return this.http.get(this.apiUrl);
+  getAllMessages(): Observable<Message[]> {
+    return this.http.get<Message[]>(this.apiUrl);
   }
 
   toggleReadStatus(id: number): Observable<any> {

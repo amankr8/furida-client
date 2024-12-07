@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -17,6 +17,10 @@ import { DeleteDialogComponent } from '../../../components/delete-dialog/delete-
   styleUrl: './cards.component.scss',
 })
 export class CardsComponent {
+  @Input() archive: boolean = false;
+  archiveToggleMessage: string = '';
+  archiveButtonText: string = '';
+
   messages: Message[] = [];
   isLoading = false;
   readonly deleteDialog = inject(MatDialog);
@@ -26,13 +30,33 @@ export class CardsComponent {
 
   ngOnInit() {
     this.isLoading = true;
-    this.contactService.getAllMessages().subscribe((data) => {
-      this.messages = data;
+    this.contactService.getAllMessages().subscribe((msgs) => {
+      this.messages = msgs.filter((msg) => msg.read === this.archive);
       this.isLoading = false;
     });
+    this.archiveToggleMessage = this.archive
+      ? 'Message Unarchived!'
+      : 'Message Archived!';
+    this.archiveButtonText = this.archive ? 'UNARCHIVE' : 'ARCHIVE';
   }
 
-  markAsRead(id: number) {}
+  markAsRead(id: number) {
+    this.contactService.toggleReadStatus(id).subscribe({
+      next: (res) => {
+        this.messages = this.messages.filter((message) => message.id !== id);
+        this.isLoading = false;
+        this.snackBarRef.open(this.archiveToggleMessage, 'Dismiss', {
+          duration: 3000,
+        });
+      },
+      error: (err) => {
+        console.error(err);
+        this.snackBarRef.open('Error: Internal server error!', 'Dismiss', {
+          duration: 3000,
+        });
+      },
+    });
+  }
 
   openDeleteDialog(id: number) {
     const deleteDialogref = this.deleteDialog.open(DeleteDialogComponent, {

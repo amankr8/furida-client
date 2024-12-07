@@ -12,6 +12,6 @@ import { CardsComponent } from './components/cards/cards.component';
 })
 export class MessagesComponent {
   headerText: string = 'Inbox';
-  buttonText: string = 'Archived Inbox';
+  buttonText: string = 'Archive Inbox';
   childLevelLink: string = 'read-messages';
 }
