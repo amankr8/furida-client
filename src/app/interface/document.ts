@@ -3,4 +3,5 @@ export interface Document {
   name: string;
   desc: string;
   docUrl: string;
+  projectId: number;
 }
