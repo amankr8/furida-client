@@ -11,8 +11,13 @@
           <mat-card-title class="single-line-truncate">
             {{ doc.name }}
           </mat-card-title>
-          <mat-card-subtitle>{{ doc.desc }}</mat-card-subtitle>
+          <mat-card-subtitle>{{
+            getProjectNameById(doc.projectId)
+          }}</mat-card-subtitle>
         </mat-card-header>
+        <mat-card-content class="truncate-text card-content-h">
+          <p>{{ doc.desc }}</p>
+        </mat-card-content>
         <mat-card-actions>
           <a mat-button [href]="doc.docUrl" target="_blank">DOWNLOAD</a>
         </mat-card-actions>
