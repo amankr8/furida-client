@@ -4,7 +4,16 @@
       <a routerLink="\" class="navbar-brand fw-bold letter-spacing-1">FURIDA</a>
       <div class="d-flex gap-2">
         <button mat-button routerLink="/about">About</button>
-        <button mat-button routerLink="/documents">Projects</button>
+        <button mat-button [matMenuTriggerFor]="projectMenu">Projects</button>
+        <mat-menu #projectMenu="matMenu">
+          <button
+            mat-menu-item
+            *ngFor="let project of projects"
+            [routerLink]="['/projects', project.id]"
+          >
+            {{ project.name }}
+          </button>
+        </mat-menu>
         <button mat-button routerLink="/contact">Contact</button>
         <button mat-button>CCTV</button>
       </div>

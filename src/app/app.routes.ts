@@ -22,8 +22,13 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', pathMatch: 'full', component: HomeComponent },
   {
-    path: 'documents',
-    component: DocumentsComponent,
+    path: 'projects',
+    children: [
+      {
+        path: ':id',
+        component: DocumentsComponent,
+      },
+    ],
   },
   {
     path: 'about',
