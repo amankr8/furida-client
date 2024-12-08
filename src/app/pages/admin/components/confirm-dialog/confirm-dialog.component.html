@@ -1,0 +1,12 @@
+<div class="container py-3">
+  <p class="text-center h4 mb-3">Confirm</p>
+  <p class="text-center blockquote mb-4">
+    {{ data.message }}
+  </p>
+  <div class="d-flex justify-content-center gap-2">
+    <button mat-raised-button color="primary" (click)="confirm()" class="w-25">
+      Yes, Confirm
+    </button>
+    <button mat-raised-button mat-dialog-close class="w-25">No, Cancel</button>
+  </div>
+</div>

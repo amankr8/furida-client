@@ -13,24 +13,23 @@ import {
   loadProjectsFail,
   loadProjectsSuccess,
 } from './project.actions';
-import { catchError, map, mergeMap, of, Subject, tap } from 'rxjs';
+import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { Project } from '../../interface/project';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteDialogComponent } from '../../pages/admin/components/delete-dialog/delete-dialog.component';
-import { Store } from '@ngrx/store';
+import { ConfirmDialogComponent } from '../../pages/admin/components/confirm-dialog/confirm-dialog.component';
+import { Action } from '@ngrx/store';
 
 @Injectable()
 export class ProjectEffects {
-  readonly deleteDialog = inject(MatDialog);
+  readonly confirmDialog = inject(MatDialog);
 
   constructor(
     private actions$: Actions,
     private projectService: ProjectService,
     private router: Router,
-    private snackBar: MatSnackBar,
-    private store: Store
+    private snackBar: MatSnackBar
   ) {}
 
   loadProjects$ = createEffect(() =>
@@ -91,14 +90,21 @@ export class ProjectEffects {
       this.actions$.pipe(
         ofType(confirmDeleteProject),
         tap(({ projectId }) => {
-          this.deleteDialog.open(DeleteDialogComponent, {
-            data: { action: deleteProject({ projectId }) },
-            width: '50%',
-          });
+          this.showDeleteWarningDialog(deleteProject({ projectId }));
         })
       ),
     { dispatch: false }
   );
+
+  showDeleteWarningDialog(action: Action) {
+    this.confirmDialog.open(ConfirmDialogComponent, {
+      data: {
+        action: action,
+        message: 'Are you sure you want to delete this project?',
+      },
+      width: '50%',
+    });
+  }
 
   deleteProject$ = createEffect(() =>
     this.actions$.pipe(
