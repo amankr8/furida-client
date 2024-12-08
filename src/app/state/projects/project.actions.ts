@@ -27,3 +27,21 @@ export const addProjectFail = createAction(
   '[Projects] Add Project Fail',
   props<{ error: string }>()
 );
+
+// Delete Project
+export const deleteProject = createAction(
+  '[Project] Delete Project',
+  props<{ projectId: number }>()
+);
+
+// Delete Project Success
+export const deleteProjectSuccess = createAction(
+  '[Project] Delete Project Success',
+  props<{ projectId: number }>()
+);
+
+// Delete Project Fail
+export const deleteProjectFail = createAction(
+  '[Project] Delete Project Fail',
+  props<{ error: string }>()
+);

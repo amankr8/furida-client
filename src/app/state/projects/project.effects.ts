@@ -5,6 +5,9 @@ import {
   addProject,
   addProjectFail,
   addProjectSuccess,
+  deleteProject,
+  deleteProjectFail,
+  deleteProjectSuccess,
   loadProjects,
   loadProjectsFail,
   loadProjectsSuccess,
@@ -43,9 +46,7 @@ export class ProjectEffects {
           map((newProject: Project) =>
             addProjectSuccess({ project: newProject })
           ),
-          catchError((error) =>
-            of(addProjectFail({ error: 'Error: Failed to add project' }))
-          )
+          catchError((error) => of(addProjectFail({ error: error.message })))
         )
       )
     )
@@ -69,8 +70,46 @@ export class ProjectEffects {
     () =>
       this.actions$.pipe(
         ofType(addProjectFail),
+        tap(({ error }) => {
+          this.snackBar.open(`Server Error: ${error}`, 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  deleteProject$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(deleteProject),
+      mergeMap(({ projectId }) =>
+        this.projectService.deleteProject(projectId).pipe(
+          map(() => deleteProjectSuccess({ projectId })),
+          catchError((error) => of(deleteProjectFail({ error: error.message })))
+        )
+      )
+    )
+  );
+
+  deleteProjectSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(deleteProjectSuccess),
         tap(() => {
-          this.snackBar.open('Error: Failed to add project!', 'Dismiss', {
+          this.snackBar.open('Project deleted successfully!', 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  deleteProjectFail$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(deleteProjectFail),
+        tap(({ error }) => {
+          this.snackBar.open(`Failed to delete: ${error}`, 'Dismiss', {
             duration: 3000,
           });
         })

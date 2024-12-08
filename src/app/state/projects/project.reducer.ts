@@ -4,6 +4,9 @@ import {
   addProject,
   addProjectFail,
   addProjectSuccess,
+  deleteProject,
+  deleteProjectFail,
+  deleteProjectSuccess,
   loadProjects,
   loadProjectsFail,
   loadProjectsSuccess,
@@ -13,21 +16,22 @@ export const projectReducer = createReducer(
   initialProjectsState,
   on(loadProjects, (state) => ({
     ...state,
-    loading: true,
     error: null,
+    loading: true,
   })),
   on(loadProjectsSuccess, (state, { projects }) => ({
     ...state,
-    loading: false,
     projects,
+    loading: false,
   })),
   on(loadProjectsFail, (state, { error }) => ({
     ...state,
-    loading: false,
     error,
+    loading: false,
   })),
   on(addProject, (state) => ({
     ...state,
+    error: null,
     loading: true,
   })),
   on(addProjectSuccess, (state, { project }) => ({
@@ -37,7 +41,28 @@ export const projectReducer = createReducer(
   })),
   on(addProjectFail, (state, { error }) => ({
     ...state,
-    loading: false,
     error,
+    loading: false,
+  })),
+
+  // Delete Project
+  on(deleteProject, (state) => ({
+    ...state,
+    error: null,
+    loading: true,
+  })),
+
+  // Delete Project Success
+  on(deleteProjectSuccess, (state, { projectId }) => ({
+    ...state,
+    projects: state.projects.filter((project) => project.id !== projectId),
+    loading: false,
+  })),
+
+  // Delete Project Fail
+  on(deleteProjectFail, (state, { error }) => ({
+    ...state,
+    error,
+    loading: false,
   }))
 );

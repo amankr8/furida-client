@@ -16,7 +16,10 @@ import {
   selectLoading,
   selectProjects,
 } from '../../../../../state/projects/project.selectors';
-import { loadProjects } from '../../../../../state/projects/project.actions';
+import {
+  deleteProject,
+  loadProjects,
+} from '../../../../../state/projects/project.actions';
 
 @Component({
   selector: 'app-project-cards',
@@ -103,29 +106,7 @@ export class ProjectCardsComponent {
     deleteDialogref.afterClosed().subscribe({
       next: (id) => {
         if (!id) return;
-        this.isLoading = true;
-
-        this.projectService.deleteProject(id).subscribe({
-          next: (res) => {
-            this.projects = this.projects.filter(
-              (project) => project.id !== id
-            );
-            this.isLoading = false;
-            this.snackBarRef.open('Project deleted successfully!', 'Dismiss', {
-              duration: 3000,
-            });
-          },
-          error: (err) => {
-            console.error(err);
-            this.snackBarRef.open(
-              'Error: Failed to delete project',
-              'Dismiss',
-              {
-                duration: 3000,
-              }
-            );
-          },
-        });
+        this.store.dispatch(deleteProject({ projectId: id }));
       },
     });
   }
