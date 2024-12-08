@@ -9,14 +9,18 @@ import {
   loadProjectsFail,
   loadProjectsSuccess,
 } from './project.actions';
-import { catchError, map, mergeMap, of } from 'rxjs';
+import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { Project } from '../../interface/project';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class ProjectEffects {
   constructor(
     private actions$: Actions,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   loadProjects$ = createEffect(() =>
@@ -39,9 +43,38 @@ export class ProjectEffects {
           map((newProject: Project) =>
             addProjectSuccess({ project: newProject })
           ),
-          catchError((error) => of(addProjectFail({ error: error.message })))
+          catchError((error) =>
+            of(addProjectFail({ error: 'Error: Failed to add project' }))
+          )
         )
       )
     )
+  );
+
+  addProjectSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(addProjectSuccess),
+        tap(() => {
+          this.router.navigate(['/admin/projects']);
+          this.snackBar.open('Project created successfully!', 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  addProjectFail$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(addProjectFail),
+        tap(() => {
+          this.snackBar.open('Error: Failed to add project!', 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
   );
 }

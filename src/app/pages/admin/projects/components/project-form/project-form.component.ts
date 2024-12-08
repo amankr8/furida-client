@@ -14,6 +14,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { addProject } from '../../../../../state/projects/project.actions';
+import { Observable } from 'rxjs';
+import { selectLoading } from '../../../../../state/projects/project.selectors';
 
 @Component({
   selector: 'app-project-form',
@@ -32,10 +36,11 @@ import { CommonModule } from '@angular/common';
 })
 export class ProjectFormComponent {
   form!: FormGroup;
-  isLoading = false;
-  private snackBarRef = inject(MatSnackBar);
+  loading$: Observable<Boolean>;
 
-  constructor(private projectService: ProjectService, private router: Router) {}
+  constructor(private store: Store) {
+    this.loading$ = this.store.select(selectLoading);
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -45,22 +50,7 @@ export class ProjectFormComponent {
     });
   }
 
-  submit() {
-    this.isLoading = true;
-    this.projectService.addProject(this.form.value).subscribe({
-      next: (res) => {
-        this.isLoading = false;
-        this.router.navigate(['/admin/projects']);
-        this.snackBarRef.open('Project created successfully!', 'Dismiss', {
-          duration: 3000,
-        });
-      },
-      error: (err) => {
-        this.isLoading = false;
-        this.snackBarRef.open('Error: Failed to add project', 'Dismiss', {
-          duration: 3000,
-        });
-      },
-    });
+  formSubmit() {
+    this.store.dispatch(addProject({ project: this.form.value }));
   }
 }
