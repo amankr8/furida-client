@@ -1,7 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogClose } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogClose,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-delete-dialog',
@@ -11,9 +15,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   styleUrl: './delete-dialog.component.scss',
 })
 export class DeleteDialogComponent {
-  readonly data = inject<number>(MAT_DIALOG_DATA);
+  constructor(
+    private store: Store,
+    private dialogRef: MatDialogRef<DeleteDialogComponent>,
+    @Inject(MAT_DIALOG_DATA)
+    private data: { action: any }
+  ) {}
 
-  delete(id: number): number {
-    return id;
+  confirm() {
+    this.store.dispatch(this.data.action);
+    this.dialogRef.close();
   }
 }

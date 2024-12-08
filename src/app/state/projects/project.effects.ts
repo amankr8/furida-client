@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ProjectService } from '../../service/project/project.service';
 import {
   addProject,
   addProjectFail,
   addProjectSuccess,
+  confirmDeleteProject,
   deleteProject,
   deleteProjectFail,
   deleteProjectSuccess,
@@ -12,18 +13,24 @@ import {
   loadProjectsFail,
   loadProjectsSuccess,
 } from './project.actions';
-import { catchError, map, mergeMap, of, tap } from 'rxjs';
+import { catchError, map, mergeMap, of, Subject, tap } from 'rxjs';
 import { Project } from '../../interface/project';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '../../pages/admin/components/delete-dialog/delete-dialog.component';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class ProjectEffects {
+  readonly deleteDialog = inject(MatDialog);
+
   constructor(
     private actions$: Actions,
     private projectService: ProjectService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private store: Store
   ) {}
 
   loadProjects$ = createEffect(() =>
@@ -73,6 +80,20 @@ export class ProjectEffects {
         tap(({ error }) => {
           this.snackBar.open(`Server Error: ${error}`, 'Dismiss', {
             duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  confirmDeleteProject$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(confirmDeleteProject),
+        tap(({ projectId }) => {
+          this.deleteDialog.open(DeleteDialogComponent, {
+            data: { action: deleteProject({ projectId }) },
+            width: '50%',
           });
         })
       ),

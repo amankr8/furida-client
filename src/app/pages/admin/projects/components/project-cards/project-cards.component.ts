@@ -7,7 +7,6 @@ import { ProjectService } from '../../../../../service/project/project.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteDialogComponent } from '../../../components/delete-dialog/delete-dialog.component';
 import { UpdateProjectComponent } from '../../update-project/update-project.component';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -17,7 +16,7 @@ import {
   selectProjects,
 } from '../../../../../state/projects/project.selectors';
 import {
-  deleteProject,
+  confirmDeleteProject,
   loadProjects,
 } from '../../../../../state/projects/project.actions';
 
@@ -98,16 +97,6 @@ export class ProjectCardsComponent {
   }
 
   openDeleteDialog(id: number) {
-    const deleteDialogref = this.deleteDialog.open(DeleteDialogComponent, {
-      data: id,
-      width: '50%',
-    });
-
-    deleteDialogref.afterClosed().subscribe({
-      next: (id) => {
-        if (!id) return;
-        this.store.dispatch(deleteProject({ projectId: id }));
-      },
-    });
+    this.store.dispatch(confirmDeleteProject({ projectId: id }));
   }
 }

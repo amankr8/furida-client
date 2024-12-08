@@ -4,12 +4,7 @@
     Are you sure you want to delete this?
   </p>
   <div class="d-flex justify-content-center gap-2">
-    <button
-      mat-raised-button
-      color="primary"
-      [mat-dialog-close]="delete(data)"
-      class="w-25"
-    >
+    <button mat-raised-button color="primary" (click)="confirm()" class="w-25">
       Yes, Delete
     </button>
     <button mat-raised-button mat-dialog-close class="w-25">No, Cancel</button>
