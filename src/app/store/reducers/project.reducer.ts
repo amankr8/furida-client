@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { initialProjectsState } from './project.state';
+import { initialProjectsState } from '../project.state';
 import {
   addProject,
   addProjectFail,
@@ -10,7 +10,10 @@ import {
   loadProjects,
   loadProjectsFail,
   loadProjectsSuccess,
-} from './project.actions';
+  updateProject,
+  updateProjectFail,
+  updateProjectSuccess,
+} from '../../store/actions/project.actions';
 
 export const projectReducer = createReducer(
   initialProjectsState,
@@ -19,47 +22,67 @@ export const projectReducer = createReducer(
     error: null,
     loading: true,
   })),
+
   on(loadProjectsSuccess, (state, { projects }) => ({
     ...state,
     projects,
     loading: false,
   })),
+
   on(loadProjectsFail, (state, { error }) => ({
     ...state,
     error,
     loading: false,
   })),
+
   on(addProject, (state) => ({
     ...state,
     error: null,
     loading: true,
   })),
+
   on(addProjectSuccess, (state, { project }) => ({
     ...state,
     projects: [...state.projects, project],
     loading: false,
   })),
+
   on(addProjectFail, (state, { error }) => ({
     ...state,
     error,
     loading: false,
   })),
 
-  // Delete Project
+  on(updateProject, (state) => ({
+    ...state,
+    error: null,
+    loading: true,
+  })),
+
+  on(updateProjectSuccess, (state, { project }) => ({
+    ...state,
+    projects: state.projects.map((p) => (p.id === project.id ? project : p)),
+    loading: false,
+  })),
+
+  on(updateProjectFail, (state, { error }) => ({
+    ...state,
+    error,
+    loading: false,
+  })),
+
   on(deleteProject, (state) => ({
     ...state,
     error: null,
     loading: true,
   })),
 
-  // Delete Project Success
   on(deleteProjectSuccess, (state, { projectId }) => ({
     ...state,
     projects: state.projects.filter((project) => project.id !== projectId),
     loading: false,
   })),
 
-  // Delete Project Fail
   on(deleteProjectFail, (state, { error }) => ({
     ...state,
     error,

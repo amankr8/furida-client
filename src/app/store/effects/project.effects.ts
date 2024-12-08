@@ -12,7 +12,7 @@ import {
   loadProjects,
   loadProjectsFail,
   loadProjectsSuccess,
-} from './project.actions';
+} from '../../store/actions/project.actions';
 import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { Project } from '../../interface/project';
 import { Router } from '@angular/router';

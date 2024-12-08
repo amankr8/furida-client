@@ -11,14 +11,14 @@ import { UpdateProjectComponent } from '../../update-project/update-project.comp
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import {
-  selectError,
-  selectLoading,
-  selectProjects,
-} from '../../../../../state/projects/project.selectors';
-import {
   confirmDeleteProject,
   loadProjects,
-} from '../../../../../state/projects/project.actions';
+} from '../../../../../store/actions/project.actions';
+import {
+  selectProjects,
+  selectLoading,
+  selectError,
+} from '../../../../../store/selectors/project.selectors';
 
 @Component({
   selector: 'app-project-cards',

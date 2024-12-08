@@ -28,6 +28,21 @@ export const addProjectFail = createAction(
   props<{ error: string }>()
 );
 
+export const updateProject = createAction(
+  '[Projects] Update Project',
+  props<{ project: Project }>()
+);
+
+export const updateProjectSuccess = createAction(
+  '[Projects] Update Project Success',
+  props<{ project: Project }>()
+);
+
+export const updateProjectFail = createAction(
+  '[Projects] Update Project Fail',
+  props<{ error: string }>()
+);
+
 // Confirm Delete Project
 export const confirmDeleteProject = createAction(
   '[Project] Confirm Delete Project',

@@ -9,8 +9,8 @@ import { jwtInterceptor } from './config/jwt.interceptor';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { ProjectEffects } from './state/projects/project.effects';
-import { projectReducer } from './state/projects/project.reducer';
+import { ProjectEffects } from './store/effects/project.effects';
+import { projectReducer } from './store/reducers/project.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
