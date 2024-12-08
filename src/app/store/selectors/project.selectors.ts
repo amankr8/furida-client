@@ -4,6 +4,11 @@ import { ProjectState } from '../project.state';
 export const selectProjectsState =
   createFeatureSelector<ProjectState>('projects');
 
+export const selectProjectById = (id: number) =>
+  createSelector(selectProjectsState, (state) =>
+    state.projects.find((p) => p.id === id)
+  );
+
 export const selectProjects = createSelector(
   selectProjectsState,
   (state) => state.projects

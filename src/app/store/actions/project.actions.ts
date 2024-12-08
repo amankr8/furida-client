@@ -30,7 +30,7 @@ export const addProjectFail = createAction(
 
 export const openEditDialog = createAction(
   '[Project] Open Edit Dialog',
-  props<{ project: Project }>()
+  props<{ projectId: number }>()
 );
 
 export const updateProject = createAction(

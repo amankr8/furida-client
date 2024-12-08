@@ -20,14 +20,14 @@
           <button
             mat-button
             (click)="updateProject(project.id)"
-            [disabled]="isLoading"
+            [disabled]="loading$ | async"
           >
             EDIT
           </button>
           <button
             mat-button
             (click)="deleteProject(project.id)"
-            [disabled]="isLoading"
+            [disabled]="loading$ | async"
           >
             DELETE
           </button>

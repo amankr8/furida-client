@@ -17,14 +17,15 @@ import {
   updateProjectFail,
   updateProjectSuccess,
 } from '../../store/actions/project.actions';
-import { catchError, map, mergeMap, of, tap } from 'rxjs';
+import { catchError, first, map, mergeMap, of, tap } from 'rxjs';
 import { Project } from '../../interface/project';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../pages/admin/components/confirm-dialog/confirm-dialog.component';
-import { Action } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { UpdateProjectComponent } from '../../pages/admin/projects/update-project/update-project.component';
+import { selectProjectById } from '../selectors/project.selectors';
 
 @Injectable()
 export class ProjectEffects {
@@ -34,7 +35,8 @@ export class ProjectEffects {
     private actions$: Actions,
     private projectService: ProjectService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private store: Store
   ) {}
 
   loadProjects$ = createEffect(() =>
@@ -94,9 +96,18 @@ export class ProjectEffects {
     () =>
       this.actions$.pipe(
         ofType(openEditDialog),
-        tap(({ project }) => {
-          this.showEditFormDialog(project);
-        })
+        mergeMap(({ projectId }) =>
+          this.store.select(selectProjectById(projectId)).pipe(
+            first(),
+            map((project) => {
+              if (project) {
+                this.showEditFormDialog(project);
+              } else {
+                console.error('Project not found in state');
+              }
+            })
+          )
+        )
       ),
     { dispatch: false }
   );
