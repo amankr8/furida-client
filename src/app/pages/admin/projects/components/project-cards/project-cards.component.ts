@@ -22,10 +22,10 @@ import { loadProjects } from '../../../../../state/projects/project.actions';
   selector: 'app-project-cards',
   standalone: true,
   imports: [MatCardModule, MatProgressBarModule, CommonModule, MatButtonModule],
-  templateUrl: './cards.component.html',
-  styleUrl: './cards.component.scss',
+  templateUrl: './project-cards.component.html',
+  styleUrl: './project-cards.component.scss',
 })
-export class CardsComponent {
+export class ProjectCardsComponent {
   projects$: Observable<Project[]>;
   loading$: Observable<boolean>;
   error$: Observable<string | null>;

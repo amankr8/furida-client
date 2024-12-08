@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
 import { Level1HeaderComponent } from '../components/level-1-header/level-1-header.component';
-import { CardsComponent } from './components/cards/cards.component';
+import { ProjectCardsComponent } from './components/project-cards/project-cards.component';
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [HeaderComponent, Level1HeaderComponent, CardsComponent],
+  imports: [HeaderComponent, Level1HeaderComponent, ProjectCardsComponent],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
 })
