@@ -12,7 +12,7 @@
             {{ doc.name }}
           </mat-card-title>
           <mat-card-subtitle>{{
-            getProjectNameById(doc.projectId)
+            getProjectNameById(doc.projectId) | async
           }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="truncate-text card-content-h">

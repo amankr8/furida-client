@@ -9,6 +9,8 @@ import { BannerBottomComponent } from '../components/banner-bottom/banner-bottom
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProjectService } from '../../service/project/project.service';
+import { Store } from '@ngrx/store';
+import { selectProjectById } from '../../store/selectors/project.selectors';
 
 @Component({
   selector: 'app-documents',
@@ -31,10 +33,7 @@ export class DocumentsComponent {
   projectId!: number;
   private subscriptions: Subscription = new Subscription();
 
-  constructor(
-    private route: ActivatedRoute,
-    private projectService: ProjectService
-  ) {}
+  constructor(private route: ActivatedRoute, private store: Store) {}
 
   ngOnInit() {
     this.subscriptions.add(
@@ -47,8 +46,8 @@ export class DocumentsComponent {
 
   loadProjectName() {
     this.subscriptions.add(
-      this.projectService
-        .getProjectById(this.projectId)
+      this.store
+        .select(selectProjectById(this.projectId))
         .subscribe((project) => {
           this.title = project?.name || 'Unknown';
         })

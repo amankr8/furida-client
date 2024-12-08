@@ -6,6 +6,10 @@ import { RouterLink } from '@angular/router';
 import { Project } from '../../../interface/project';
 import { ProjectService } from '../../../service/project/project.service';
 import { CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { selectProjects } from '../../../store/selectors/project.selectors';
+import { Observable } from 'rxjs';
+import { loadProjects } from '../../../store/actions/project.actions';
 
 @Component({
   selector: 'app-header',
@@ -21,13 +25,13 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  projects: Project[] = [];
+  projects$: Observable<Project[]>;
 
-  constructor(private projectService: ProjectService) {}
+  constructor(private projectService: ProjectService, private store: Store) {
+    this.projects$ = this.store.select(selectProjects);
+  }
 
   ngOnInit() {
-    this.projectService.getAllProjects().subscribe((data) => {
-      this.projects = data;
-    });
+    this.store.dispatch(loadProjects());
   }
 }
