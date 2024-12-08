@@ -9,6 +9,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../../../components/delete-dialog/delete-dialog.component';
 import { UpdateProjectComponent } from '../../update-project/update-project.component';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import {
+  selectError,
+  selectLoading,
+  selectProjects,
+} from '../../../../../state/projects/project.selectors';
+import { loadProjects } from '../../../../../state/projects/project.actions';
 
 @Component({
   selector: 'app-project-cards',
@@ -18,15 +26,24 @@ import { UpdateProjectComponent } from '../../update-project/update-project.comp
   styleUrl: './cards.component.scss',
 })
 export class CardsComponent {
+  projects$: Observable<Project[]>;
+  loading$: Observable<boolean>;
+  error$: Observable<string | null>;
+
   projects: Project[] = [];
   isLoading = false;
   readonly editDialog = inject(MatDialog);
   readonly deleteDialog = inject(MatDialog);
   private snackBarRef = inject(MatSnackBar);
 
-  constructor(private projectService: ProjectService) {}
+  constructor(private projectService: ProjectService, private store: Store) {
+    this.projects$ = this.store.select(selectProjects);
+    this.loading$ = this.store.select(selectLoading);
+    this.error$ = this.store.select(selectError);
+  }
 
   ngOnInit() {
+    this.store.dispatch(loadProjects());
     this.isLoading = true;
     this.projectService.getAllProjects().subscribe((data) => {
       this.projects = data;
