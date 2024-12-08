@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './files.component.scss',
 })
 export class FilesComponent {
-  @Input() projectId: number = -1;
+  @Input() projectId!: number;
 
   docs: Document[] = [];
   projects: Project[] = [];

@@ -26,9 +26,9 @@ import { ProjectService } from '../../service/project/project.service';
   styleUrl: './documents.component.scss',
 })
 export class DocumentsComponent {
-  title: string = '';
+  title!: string;
   heading: string = 'DOCUMENTS';
-  projectId: number = -1;
+  projectId!: number;
   private subscriptions: Subscription = new Subscription();
 
   constructor(
