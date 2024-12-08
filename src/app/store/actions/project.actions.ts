@@ -28,6 +28,11 @@ export const addProjectFail = createAction(
   props<{ error: string }>()
 );
 
+export const openEditDialog = createAction(
+  '[Project] Open Edit Dialog',
+  props<{ project: Project }>()
+);
+
 export const updateProject = createAction(
   '[Projects] Update Project',
   props<{ project: Project }>()
@@ -43,25 +48,21 @@ export const updateProjectFail = createAction(
   props<{ error: string }>()
 );
 
-// Confirm Delete Project
-export const confirmDeleteProject = createAction(
-  '[Project] Confirm Delete Project',
+export const openDeleteDialog = createAction(
+  '[Project] Open Delete Dialog',
   props<{ projectId: number }>()
 );
 
-// Delete Project
 export const deleteProject = createAction(
   '[Project] Delete Project',
   props<{ projectId: number }>()
 );
 
-// Delete Project Success
 export const deleteProjectSuccess = createAction(
   '[Project] Delete Project Success',
   props<{ projectId: number }>()
 );
 
-// Delete Project Fail
 export const deleteProjectFail = createAction(
   '[Project] Delete Project Fail',
   props<{ error: string }>()

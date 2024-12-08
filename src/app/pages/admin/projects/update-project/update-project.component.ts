@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -6,11 +6,18 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Project } from '../../../../interface/project';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
+import { Action, Store } from '@ngrx/store';
+import { DeleteDialogComponent } from '../../components/delete-dialog/delete-dialog.component';
+import { updateProject } from '../../../../store/actions/project.actions';
 
 @Component({
   selector: 'app-update-project',
@@ -28,7 +35,13 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class UpdateProjectComponent {
   form!: FormGroup;
-  readonly data = inject<Project>(MAT_DIALOG_DATA);
+
+  constructor(
+    public store: Store,
+    public dialogRef: MatDialogRef<DeleteDialogComponent>,
+    @Inject(MAT_DIALOG_DATA)
+    public data: Project
+  ) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -38,13 +51,14 @@ export class UpdateProjectComponent {
     });
   }
 
-  update(project: Project): Project {
+  submit() {
     const updatedProject = {
-      ...project,
+      ...this.data,
       name: this.form.value.name,
       desc: this.form.value.desc,
       address: this.form.value.address,
     };
-    return updatedProject;
+    this.store.dispatch(updateProject({ project: updatedProject }));
+    this.dialogRef.close();
   }
 }

@@ -5,13 +5,17 @@ import {
   addProject,
   addProjectFail,
   addProjectSuccess,
-  confirmDeleteProject,
   deleteProject,
   deleteProjectFail,
   deleteProjectSuccess,
   loadProjects,
   loadProjectsFail,
   loadProjectsSuccess,
+  openDeleteDialog,
+  openEditDialog,
+  updateProject,
+  updateProjectFail,
+  updateProjectSuccess,
 } from '../../store/actions/project.actions';
 import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { Project } from '../../interface/project';
@@ -20,10 +24,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../pages/admin/components/confirm-dialog/confirm-dialog.component';
 import { Action } from '@ngrx/store';
+import { UpdateProjectComponent } from '../../pages/admin/projects/update-project/update-project.component';
 
 @Injectable()
 export class ProjectEffects {
-  readonly confirmDialog = inject(MatDialog);
+  readonly matDialog = inject(MatDialog);
 
   constructor(
     private actions$: Actions,
@@ -85,10 +90,69 @@ export class ProjectEffects {
     { dispatch: false }
   );
 
-  confirmDeleteProject$ = createEffect(
+  openEditDialog$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(confirmDeleteProject),
+        ofType(openEditDialog),
+        tap(({ project }) => {
+          this.showEditFormDialog(project);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  showEditFormDialog(project: Project) {
+    this.matDialog.open(UpdateProjectComponent, {
+      data: project,
+      width: '50%',
+    });
+  }
+
+  updateProject$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateProject),
+      mergeMap(({ project }) =>
+        this.projectService.updateProject(project.id, project).pipe(
+          map((newProject: Project) =>
+            updateProjectSuccess({ project: newProject })
+          ),
+          catchError((error) => of(updateProjectFail({ error: error.message })))
+        )
+      )
+    )
+  );
+
+  updateProjectSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(updateProjectSuccess),
+        tap(() => {
+          this.router.navigate(['/admin/projects']);
+          this.snackBar.open('Project updated successfully!', 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  updateProjectFail$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(updateProjectFail),
+        tap(({ error }) => {
+          this.snackBar.open(`Server Error: ${error}`, 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  openDeleteDialog$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(openDeleteDialog),
         tap(({ projectId }) => {
           this.showDeleteWarningDialog(deleteProject({ projectId }));
         })
@@ -97,7 +161,7 @@ export class ProjectEffects {
   );
 
   showDeleteWarningDialog(action: Action) {
-    this.confirmDialog.open(ConfirmDialogComponent, {
+    this.matDialog.open(ConfirmDialogComponent, {
       data: {
         action: action,
         message: 'Are you sure you want to delete this project?',

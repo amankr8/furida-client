@@ -11,7 +11,7 @@ import { UpdateProjectComponent } from '../../update-project/update-project.comp
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import {
-  confirmDeleteProject,
+  openDeleteDialog,
   loadProjects,
 } from '../../../../../store/actions/project.actions';
 import {
@@ -53,7 +53,7 @@ export class ProjectCardsComponent {
     });
   }
 
-  openEditDialog(id: number) {
+  updateProject(id: number) {
     const editDialogref = this.editDialog.open(UpdateProjectComponent, {
       data: this.projects.find((project) => project.id === id),
       width: '50%',
@@ -96,7 +96,7 @@ export class ProjectCardsComponent {
     });
   }
 
-  openDeleteDialog(id: number) {
-    this.store.dispatch(confirmDeleteProject({ projectId: id }));
+  deleteProject(id: number) {
+    this.store.dispatch(openDeleteDialog({ projectId: id }));
   }
 }

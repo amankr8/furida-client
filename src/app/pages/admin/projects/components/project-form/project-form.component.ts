@@ -47,7 +47,7 @@ export class ProjectFormComponent {
     });
   }
 
-  formSubmit() {
+  submit() {
     this.store.dispatch(addProject({ project: this.form.value }));
   }
 }

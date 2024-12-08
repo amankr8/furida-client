@@ -5,7 +5,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { Store } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
@@ -20,7 +20,7 @@ export class ConfirmDialogComponent {
     public store: Store,
     public dialogRef: MatDialogRef<DeleteDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: { action: any; message: string }
+    public data: { action: Action; message: string }
   ) {}
 
   confirm() {
