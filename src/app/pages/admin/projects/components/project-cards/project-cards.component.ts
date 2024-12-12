@@ -30,7 +30,7 @@ export class ProjectCardsComponent {
   loading$: Observable<boolean>;
   error$: Observable<string | null>;
 
-  constructor(private projectService: ProjectService, private store: Store) {
+  constructor(private store: Store) {
     this.projects$ = this.store.select(selectProjects);
     this.loading$ = this.store.select(selectLoading);
     this.error$ = this.store.select(selectError);

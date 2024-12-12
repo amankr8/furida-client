@@ -1,11 +1,11 @@
 <div class="container">
   <mat-progress-bar
-    *ngIf="isLoading"
+    *ngIf="loading$ | async"
     mode="indeterminate"
     class="mb-3"
   ></mat-progress-bar>
   <div class="row row-cols-3 px-4">
-    <div class="col" *ngFor="let message of messages">
+    <div class="col" *ngFor="let message of messages$ | async">
       <mat-card appearance="outlined" class="mb-3 shadow-sm">
         <mat-card-header class="mb-2">
           <mat-card-title class="single-line-truncate">
@@ -19,15 +19,15 @@
         <mat-card-actions class="btn-group">
           <button
             mat-button
-            (click)="markAsRead(message.id)"
-            [disabled]="isLoading"
+            (click)="archiveMessage(message.id)"
+            [disabled]="loading$ | async"
           >
             {{ archiveButtonText }}
           </button>
           <button
             mat-button
-            (click)="openDeleteDialog(message.id)"
-            [disabled]="isLoading"
+            (click)="deleteMessage(message.id)"
+            [disabled]="loading$ | async"
           >
             DELETE
           </button>

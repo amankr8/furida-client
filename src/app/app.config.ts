@@ -11,6 +11,8 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { ProjectEffects } from './store/effects/project.effects';
 import { projectReducer } from './store/reducers/project.reducer';
+import { MessageEffects } from './store/effects/message.effects';
+import { messageReducer } from './store/reducers/message.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,7 +23,8 @@ export const appConfig: ApplicationConfig = {
     { provide: JwtHelperService, useClass: JwtHelperService },
     provideStore(),
     provideState('projects', projectReducer),
-    provideEffects([ProjectEffects]),
+    provideState('messages', messageReducer),
+    provideEffects([ProjectEffects, MessageEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],
 };
