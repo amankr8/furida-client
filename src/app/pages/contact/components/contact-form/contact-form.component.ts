@@ -13,6 +13,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ContactService } from '../../../../service/contact/contact.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectLoading } from '../../../../store/selectors/message.selectors';
+import { sendMessage } from '../../../../store/actions/message.action';
 
 @Component({
   selector: 'app-contact-form',
@@ -31,10 +35,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ContactFormComponent {
   form!: FormGroup;
-  isLoading = false;
+  loading$: Observable<boolean>;
   private snackBarRef = inject(MatSnackBar);
 
-  constructor(private contactService: ContactService) {}
+  constructor(private contactService: ContactService, private store: Store) {
+    this.loading$ = this.store.select(selectLoading);
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -52,25 +58,7 @@ export class ContactFormComponent {
   }
 
   submit() {
-    this.isLoading = true;
-    this.contactService.sendMessage(this.form.value).subscribe({
-      next: (res) => {
-        this.isLoading = false;
-        this.snackBarRef.open('Thank you for cantacting us!', 'Dismiss', {
-          duration: 3000,
-        });
-      },
-      error: (err) => {
-        this.isLoading = false;
-        this.snackBarRef.open(
-          'Server error: Please try again later',
-          'Dismiss',
-          {
-            duration: 3000,
-          }
-        );
-      },
-    });
+    this.store.dispatch(sendMessage({ message: this.form.value }));
     this.resetForm();
   }
 }

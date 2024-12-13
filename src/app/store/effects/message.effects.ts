@@ -16,6 +16,9 @@ import {
   openDeleteDialog,
   deleteMessageFail,
   deleteMessageSuccess,
+  sendMessage,
+  sendMessageFail,
+  sendMessageSuccess,
 } from '../actions/message.action';
 import { ConfirmDialogComponent } from '../../pages/admin/components/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -42,6 +45,44 @@ export class MessageEffects {
         )
       )
     )
+  );
+
+  sendMessage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(sendMessage),
+      mergeMap(({ message }) =>
+        this.messageService.sendMessage(message).pipe(
+          map(() => sendMessageSuccess({ message })),
+          catchError((error) => of(sendMessageFail({ error: error.message })))
+        )
+      )
+    )
+  );
+
+  sendMessageSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(sendMessageSuccess),
+        tap(() => {
+          this.snackBar.open('Thank you for contacting us!', 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  sendMessageFail$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(sendMessageFail),
+        tap(({ error }) => {
+          this.snackBar.open('Some error occured! Try later', 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
   );
 
   toggleArchive$ = createEffect(() =>

@@ -7,6 +7,9 @@ import {
   loadMessages,
   loadMessagesFail,
   loadMessagesSuccess,
+  sendMessage,
+  sendMessageFail,
+  sendMessageSuccess,
   toggleArchive,
   toggleArchiveFail,
   toggleArchiveSuccess,
@@ -31,6 +34,24 @@ export const messageReducer = createReducer(
     ...state,
     loading: false,
     error,
+  })),
+
+  on(sendMessage, (state) => ({
+    ...state,
+    error: null,
+    loading: true,
+  })),
+
+  on(sendMessageSuccess, (state, { message }) => ({
+    ...state,
+    messages: [...state.messages, message],
+    loading: false,
+  })),
+
+  on(sendMessageFail, (state, { error }) => ({
+    ...state,
+    error,
+    loading: false,
   })),
 
   on(toggleArchive, (state) => ({

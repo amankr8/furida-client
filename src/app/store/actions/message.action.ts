@@ -13,6 +13,21 @@ export const loadMessagesFail = createAction(
   props<{ error: string }>()
 );
 
+export const sendMessage = createAction(
+  '[Message] Send Message',
+  props<{ message: Message }>()
+);
+
+export const sendMessageSuccess = createAction(
+  '[Message] Send Message Success',
+  props<{ message: Message }>()
+);
+
+export const sendMessageFail = createAction(
+  '[Message] Send Message Fail',
+  props<{ error: string }>()
+);
+
 export const toggleArchive = createAction(
   '[Messages] Toggle Archive',
   props<{ messageId: number }>()
