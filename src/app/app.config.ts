@@ -13,6 +13,8 @@ import { ProjectEffects } from './store/effects/project.effects';
 import { projectReducer } from './store/reducers/project.reducer';
 import { MessageEffects } from './store/effects/message.effects';
 import { messageReducer } from './store/reducers/message.reducer';
+import { documentReducer } from './store/reducers/document.reducer';
+import { DocumentEffects } from './store/effects/document.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,7 +26,8 @@ export const appConfig: ApplicationConfig = {
     provideStore(),
     provideState('projects', projectReducer),
     provideState('messages', messageReducer),
-    provideEffects([ProjectEffects, MessageEffects]),
+    provideState('documents', documentReducer),
+    provideEffects([ProjectEffects, MessageEffects, DocumentEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],
 };
