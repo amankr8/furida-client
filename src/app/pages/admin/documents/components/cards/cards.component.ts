@@ -52,11 +52,11 @@ export class CardsComponent {
       .pipe(map((project) => (project ? project.name : 'Unknown')));
   }
 
-  openEditDialog(id: number) {
+  update(id: number) {
     this.store.dispatch(openEditDialog({ documentId: id }));
   }
 
-  openDeleteDialog(id: number) {
+  delete(id: number) {
     this.store.dispatch(openDeleteDialog({ documentId: id }));
   }
 }

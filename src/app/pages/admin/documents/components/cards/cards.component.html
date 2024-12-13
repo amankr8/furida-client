@@ -29,14 +29,14 @@
         <mat-card-actions class="btn-group">
           <button
             mat-button
-            (click)="openEditDialog(doc.id)"
+            (click)="update(doc.id)"
             [disabled]="loading$ | async"
           >
             EDIT
           </button>
           <button
             mat-button
-            (click)="openDeleteDialog(doc.id)"
+            (click)="delete(doc.id)"
             [disabled]="loading$ | async"
           >
             DELETE

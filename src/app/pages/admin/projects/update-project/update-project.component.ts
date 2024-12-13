@@ -1,4 +1,4 @@
-import { Component, Inject, inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -15,8 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { Project } from '../../../../interface/project';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
-import { Action, Store } from '@ngrx/store';
-import { DeleteDialogComponent } from '../../components/delete-dialog/delete-dialog.component';
+import { Store } from '@ngrx/store';
 import { updateProject } from '../../../../store/actions/project.actions';
 
 @Component({
@@ -38,7 +37,7 @@ export class UpdateProjectComponent {
 
   constructor(
     public store: Store,
-    public dialogRef: MatDialogRef<DeleteDialogComponent>,
+    public dialogRef: MatDialogRef<UpdateProjectComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: Project
   ) {}

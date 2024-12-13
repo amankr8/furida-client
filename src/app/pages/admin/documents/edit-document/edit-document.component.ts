@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,10 +7,16 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Document } from '../../../../interface/document';
+import { Store } from '@ngrx/store';
+import { updateDocument } from '../../../../store/actions/document.action';
 
 @Component({
   selector: 'app-edit-document',
@@ -28,7 +34,13 @@ import { Document } from '../../../../interface/document';
 })
 export class EditDocumentComponent {
   form!: FormGroup;
-  readonly data = inject<Document>(MAT_DIALOG_DATA);
+
+  constructor(
+    public store: Store,
+    public dialogRef: MatDialogRef<EditDocumentComponent>,
+    @Inject(MAT_DIALOG_DATA)
+    public data: Document
+  ) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -37,12 +49,14 @@ export class EditDocumentComponent {
     });
   }
 
-  update(doc: Document): Document {
-    const updatedDoc = {
-      ...doc,
-      name: this.form.value.name,
-      desc: this.form.value.desc,
-    };
-    return updatedDoc;
+  submit() {
+    const docData = new FormData();
+    docData.append('name', this.form.get('name')?.value);
+    docData.append('desc', this.form.get('desc')?.value);
+
+    this.store.dispatch(
+      updateDocument({ documentId: this.data.id, document: docData })
+    );
+    this.dialogRef.close();
   }
 }
