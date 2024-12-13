@@ -1,17 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatDialog } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { DocumentService } from '../../../../../service/document/document.service';
 import { Document } from '../../../../../interface/document';
 import { MenuButtonComponent } from '../menu-button/menu-button.component';
-import { DeleteDialogComponent } from '../../../components/delete-dialog/delete-dialog.component';
-import { EditDocumentComponent } from '../../edit-document/edit-document.component';
-import { ProjectService } from '../../../../../service/project/project.service';
-import { Project } from '../../../../../interface/project';
+import { map, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import {
+  selectDocuments,
+  selectLoading,
+} from '../../../../../store/selectors/document.selectors';
+import { selectProjectById } from '../../../../../store/selectors/project.selectors';
+import {
+  loadDocuments,
+  openDeleteDialog,
+  openEditDialog,
+} from '../../../../../store/actions/document.action';
+import { loadProjects } from '../../../../../store/actions/project.actions';
 
 @Component({
   selector: 'app-document-cards',
@@ -27,105 +33,30 @@ import { Project } from '../../../../../interface/project';
   styleUrl: './cards.component.scss',
 })
 export class CardsComponent {
-  documents: Document[] = [];
-  projects: Project[] = [];
-  isLoading = false;
-  readonly editDialog = inject(MatDialog);
-  readonly deleteDialog = inject(MatDialog);
-  private snackBarRef = inject(MatSnackBar);
+  documents$: Observable<Document[]>;
+  loading$: Observable<boolean>;
 
-  constructor(
-    private documentService: DocumentService,
-    private projectService: ProjectService
-  ) {}
-
-  ngOnInit() {
-    this.isLoading = true;
-    this.projectService.getAllProjects().subscribe((data) => {
-      this.projects = data;
-    });
-    this.documentService.getAllDocuments().subscribe((data) => {
-      this.documents = data;
-      this.isLoading = false;
-    });
+  constructor(private store: Store) {
+    this.documents$ = this.store.select(selectDocuments);
+    this.loading$ = this.store.select(selectLoading);
   }
 
-  getProjectNameById(id: number) {
-    return this.projects.find((project) => project.id === id)?.name;
+  ngOnInit() {
+    this.store.dispatch(loadDocuments());
+    this.store.dispatch(loadProjects());
+  }
+
+  getProjectNameById(id: number): Observable<String> {
+    return this.store
+      .select(selectProjectById(id))
+      .pipe(map((project) => (project ? project.name : 'Unknown')));
   }
 
   openEditDialog(id: number) {
-    const editDialogref = this.editDialog.open(EditDocumentComponent, {
-      data: this.documents.find((document) => document.id === id),
-      width: '50%',
-    });
-
-    editDialogref.afterClosed().subscribe({
-      next: (updatedDoc) => {
-        if (!updatedDoc) return;
-        this.isLoading = true;
-
-        const docDto = new FormData();
-        docDto.append('name', updatedDoc.name);
-        docDto.append('desc', updatedDoc.desc);
-        this.documentService.updateDocument(updatedDoc.id, docDto).subscribe({
-          next: (res) => {
-            const index = this.documents.findIndex(
-              (document) => document.id === updatedDoc.id
-            );
-            this.documents[index] = updatedDoc;
-            this.isLoading = false;
-            this.snackBarRef.open('Document updated successfully!', 'Dismiss', {
-              duration: 3000,
-            });
-          },
-          error: (err) => {
-            this.isLoading = false;
-            console.error(err);
-            this.snackBarRef.open(
-              'Error: Failed to update document',
-              'Dismiss',
-              {
-                duration: 3000,
-              }
-            );
-          },
-        });
-      },
-    });
+    this.store.dispatch(openEditDialog({ documentId: id }));
   }
 
   openDeleteDialog(id: number) {
-    const deleteDialogref = this.deleteDialog.open(DeleteDialogComponent, {
-      data: id,
-      width: '50%',
-    });
-
-    deleteDialogref.afterClosed().subscribe({
-      next: (id) => {
-        if (!id) return;
-        this.isLoading = true;
-
-        this.documentService.deleteDocument(id).subscribe({
-          next: (res) => {
-            this.documents = this.documents.filter((doc) => doc.id !== id);
-            this.isLoading = false;
-            this.snackBarRef.open('Document deleted successfully!', 'Dismiss', {
-              duration: 3000,
-            });
-          },
-          error: (err) => {
-            console.error(err);
-            this.snackBarRef.open(
-              'Error: Failed to delete document',
-              'Dismiss',
-              {
-                duration: 3000,
-              }
-            );
-          },
-        });
-      },
-    });
+    this.store.dispatch(openDeleteDialog({ documentId: id }));
   }
 }

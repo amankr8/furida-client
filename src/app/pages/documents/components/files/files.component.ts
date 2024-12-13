@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { map, Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectProjectById } from '../../../../store/selectors/project.selectors';
+import { loadProjects } from '../../../../store/actions/project.actions';
+import { loadDocuments } from '../../../../store/actions/document.action';
 
 @Component({
   selector: 'app-files',
@@ -21,11 +23,13 @@ export class FilesComponent {
 
   docs: Document[] = [];
   isLoading = false;
-  private subscriptions: Subscription = new Subscription();
 
   constructor(private documentService: DocumentService, private store: Store) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.dispatch(loadDocuments());
+    this.store.dispatch(loadProjects());
+  }
 
   ngOnChanges() {
     this.documentService

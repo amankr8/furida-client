@@ -1,11 +1,11 @@
 <div class="container">
   <mat-progress-bar
-    *ngIf="isLoading"
+    *ngIf="loading$ | async"
     mode="indeterminate"
     class="mb-3"
   ></mat-progress-bar>
   <div class="row row-cols-3 px-4">
-    <div class="col" *ngFor="let doc of documents">
+    <div class="col" *ngFor="let doc of documents$ | async">
       <mat-card appearance="outlined" class="mb-3 shadow-sm">
         <div class="d-flex justify-content-between align-items-center">
           <div>
@@ -14,7 +14,7 @@
                 {{ doc.name }}
               </mat-card-title>
               <mat-card-subtitle>{{
-                getProjectNameById(doc.projectId)
+                getProjectNameById(doc.projectId) | async
               }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content class="truncate-text card-content-h">
@@ -30,14 +30,14 @@
           <button
             mat-button
             (click)="openEditDialog(doc.id)"
-            [disabled]="isLoading"
+            [disabled]="loading$ | async"
           >
             EDIT
           </button>
           <button
             mat-button
             (click)="openDeleteDialog(doc.id)"
-            [disabled]="isLoading"
+            [disabled]="loading$ | async"
           >
             DELETE
           </button>
