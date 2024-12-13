@@ -1,11 +1,11 @@
 <div class="container">
   <mat-progress-bar
-    *ngIf="isLoading"
+    *ngIf="loading$ | async"
     mode="indeterminate"
     class="mb-3"
   ></mat-progress-bar>
   <div class="row row-cols-3 px-4">
-    <div class="col" *ngFor="let user of users">
+    <div class="col" *ngFor="let user of users$ | async">
       <mat-card appearance="outlined" class="mb-3 shadow-sm">
         <mat-card-header class="mb-2">
           <mat-card-title class="single-line-truncate">
@@ -17,8 +17,8 @@
           <p>{{ user.email }}</p>
         </mat-card-content>
         <mat-card-actions class="btn-group">
-          <button mat-button [disabled]="isLoading">EDIT</button>
-          <button mat-button [disabled]="isLoading">DELETE</button>
+          <button mat-button [disabled]="loading$ | async">EDIT</button>
+          <button mat-button [disabled]="loading$ | async">DELETE</button>
         </mat-card-actions>
       </mat-card>
     </div>

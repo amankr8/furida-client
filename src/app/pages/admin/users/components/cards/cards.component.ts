@@ -4,7 +4,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { User } from '../../../../../interface/user';
-import { UserService } from '../../../../../service/user/user.service';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import {
+  selectLoading,
+  selectUsers,
+} from '../../../../../store/selectors/user.selectors';
+import { loadUsers } from '../../../../../store/actions/user.action';
 
 @Component({
   selector: 'app-user-cards',
@@ -14,16 +20,15 @@ import { UserService } from '../../../../../service/user/user.service';
   styleUrl: './cards.component.scss',
 })
 export class CardsComponent {
-  users: User[] = [];
-  isLoading = false;
+  users$: Observable<User[]>;
+  loading$: Observable<boolean>;
 
-  constructor(private userService: UserService) {}
+  constructor(private store: Store) {
+    this.users$ = this.store.select(selectUsers);
+    this.loading$ = this.store.select(selectLoading);
+  }
 
   ngOnInit() {
-    this.isLoading = true;
-    this.userService.getAllUsers().subscribe((data) => {
-      this.users = data;
-      this.isLoading = false;
-    });
+    this.store.dispatch(loadUsers());
   }
 }
