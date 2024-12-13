@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -10,11 +10,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { PostService } from '../../../../../service/post/post.service';
-import { Router } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectLoading } from '../../../../../store/selectors/post.selectors';
+import { addPost } from '../../../../../store/actions/post.action';
 
 @Component({
   selector: 'app-post-form',
@@ -35,11 +36,12 @@ import { MatInputModule } from '@angular/material/input';
 export class PostFormComponent {
   form!: FormGroup;
   imagePreview: string | ArrayBuffer | null = null;
-  isLoading = false;
-  private snackBarRef = inject(MatSnackBar);
+  loading$: Observable<boolean>;
   private maxFileSize = 2 * 1024 * 1024;
 
-  constructor(private postService: PostService, private router: Router) {}
+  constructor(private store: Store) {
+    this.loading$ = this.store.select(selectLoading);
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -81,28 +83,11 @@ export class PostFormComponent {
   }
 
   submit() {
-    this.isLoading = true;
-
     const postData = new FormData();
     postData.append('title', this.form.get('title')?.value);
     postData.append('content', this.form.get('content')?.value);
     postData.append('file', this.form.get('file')?.value);
 
-    this.postService.createPost(postData).subscribe({
-      next: (res) => {
-        this.router.navigate(['/admin/posts']);
-        this.snackBarRef.open('Post created successfully!', 'Dismiss', {
-          duration: 3000,
-        });
-      },
-      error: (err) => {
-        console.error(err);
-        this.snackBarRef.open('An unknown error has occurred', 'Dismiss', {
-          duration: 3000,
-        });
-        this.resetForm();
-        this.isLoading = false;
-      },
-    });
+    this.store.dispatch(addPost({ post: postData }));
   }
 }

@@ -4,7 +4,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Post } from '../../../../interface/post';
-import { PostService } from '../../../../service/post/post.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectPosts } from '../../../../store/selectors/post.selectors';
+import { selectLoading } from '../../../../store/selectors/project.selectors';
+import { loadPosts } from '../../../../store/actions/post.action';
 
 @Component({
   selector: 'app-updates',
@@ -14,16 +18,15 @@ import { PostService } from '../../../../service/post/post.service';
   styleUrl: './updates.component.scss',
 })
 export class UpdatesComponent {
-  posts: Post[] = [];
-  isLoading = false;
+  posts$: Observable<Post[]>;
+  loading$: Observable<boolean>;
 
-  constructor(private postService: PostService) {}
+  constructor(private store: Store) {
+    this.posts$ = this.store.select(selectPosts);
+    this.loading$ = this.store.select(selectLoading);
+  }
 
   ngOnInit() {
-    this.isLoading = true;
-    this.postService.getAllPosts().subscribe((data) => {
-      this.posts = data;
-      this.isLoading = false;
-    });
+    this.store.dispatch(loadPosts());
   }
 }

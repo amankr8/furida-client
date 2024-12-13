@@ -1,14 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Post } from '../../../../../interface/post';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { PostService } from '../../../../../service/post/post.service';
-import { EditPostComponent } from '../../edit-post/edit-post.component';
-import { DeleteDialogComponent } from '../../../components/delete-dialog/delete-dialog.component';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import {
+  selectLoading,
+  selectPosts,
+} from '../../../../../store/selectors/post.selectors';
+import {
+  loadPosts,
+  openDeleteDialog,
+  openEditDialog,
+} from '../../../../../store/actions/post.action';
 
 @Component({
   selector: 'app-post-cards',
@@ -18,85 +25,23 @@ import { DeleteDialogComponent } from '../../../components/delete-dialog/delete-
   styleUrl: './cards.component.scss',
 })
 export class CardsComponent {
-  posts: Post[] = [];
-  isLoading = false;
-  readonly editDialog = inject(MatDialog);
-  readonly deleteDialog = inject(MatDialog);
-  private snackBarRef = inject(MatSnackBar);
+  posts$: Observable<Post[]>;
+  loading$: Observable<boolean>;
 
-  constructor(private postService: PostService) {}
+  constructor(private store: Store) {
+    this.posts$ = this.store.select(selectPosts);
+    this.loading$ = this.store.select(selectLoading);
+  }
 
   ngOnInit() {
-    this.isLoading = true;
-    this.postService.getAllPosts().subscribe((data) => {
-      this.posts = data;
-      this.isLoading = false;
-    });
+    this.store.dispatch(loadPosts());
   }
 
-  openEditDialog(id: number) {
-    const editDialogref = this.editDialog.open(EditPostComponent, {
-      data: this.posts.find((post) => post.id === id),
-      width: '50%',
-    });
-
-    editDialogref.afterClosed().subscribe({
-      next: (updatedPost) => {
-        if (!updatedPost) return;
-        this.isLoading = true;
-
-        const postDto = new FormData();
-        postDto.append('title', updatedPost.title);
-        postDto.append('content', updatedPost.content);
-        this.postService.updatePost(updatedPost.id, postDto).subscribe({
-          next: (res) => {
-            const index = this.posts.findIndex(
-              (post) => post.id === updatedPost.id
-            );
-            this.posts[index] = updatedPost;
-            this.isLoading = false;
-            this.snackBarRef.open('Post updated successfully!', 'Dismiss', {
-              duration: 3000,
-            });
-          },
-          error: (err) => {
-            console.error(err);
-            this.snackBarRef.open('Error: Failed to update post', 'Dismiss', {
-              duration: 3000,
-            });
-          },
-        });
-      },
-    });
+  update(id: number) {
+    this.store.dispatch(openEditDialog({ postId: id }));
   }
 
-  openDeleteDialog(id: number) {
-    const deleteDialogref = this.deleteDialog.open(DeleteDialogComponent, {
-      data: id,
-      width: '50%',
-    });
-
-    deleteDialogref.afterClosed().subscribe({
-      next: (id) => {
-        if (!id) return;
-        this.isLoading = true;
-
-        this.postService.deletePost(id).subscribe({
-          next: (res) => {
-            this.posts = this.posts.filter((post) => post.id !== id);
-            this.isLoading = false;
-            this.snackBarRef.open('Post deleted successfully!', 'Dismiss', {
-              duration: 3000,
-            });
-          },
-          error: (err) => {
-            console.error(err);
-            this.snackBarRef.open('Error: Failed to delete post', 'Dismiss', {
-              duration: 3000,
-            });
-          },
-        });
-      },
-    });
+  delete(id: number) {
+    this.store.dispatch(openDeleteDialog({ postId: id }));
   }
 }

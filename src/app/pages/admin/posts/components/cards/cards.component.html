@@ -1,11 +1,11 @@
 <div class="container">
   <mat-progress-bar
-    *ngIf="isLoading"
+    *ngIf="loading$ | async"
     mode="indeterminate"
     class="mb-3"
   ></mat-progress-bar>
   <div class="row row-cols-3 px-4">
-    <div class="col" *ngFor="let post of posts">
+    <div class="col" *ngFor="let post of posts$ | async">
       <mat-card appearance="outlined" class="mb-3 shadow-sm">
         <img
           mat-card-image
@@ -25,15 +25,15 @@
         <mat-card-actions class="btn-group">
           <button
             mat-button
-            (click)="openEditDialog(post.id)"
-            [disabled]="isLoading"
+            (click)="update(post.id)"
+            [disabled]="loading$ | async"
           >
             EDIT
           </button>
           <button
             mat-button
-            (click)="openDeleteDialog(post.id)"
-            [disabled]="isLoading"
+            (click)="delete(post.id)"
+            [disabled]="loading$ | async"
           >
             DELETE
           </button>

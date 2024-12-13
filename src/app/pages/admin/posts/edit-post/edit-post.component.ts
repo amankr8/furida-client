@@ -1,11 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
-  MatDialogClose,
   MatDialogModule,
+  MatDialogRef,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { PostService } from '../../../../service/post/post.service';
 import { Post } from '../../../../interface/post';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -17,6 +16,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { updatePost } from '../../../../store/actions/post.action';
 
 @Component({
   selector: 'app-edit-post',
@@ -35,9 +36,13 @@ import { CommonModule } from '@angular/common';
 })
 export class EditPostComponent {
   form!: FormGroup;
-  readonly data = inject<Post>(MAT_DIALOG_DATA);
 
-  constructor(private postService: PostService) {}
+  constructor(
+    public store: Store,
+    public dialogRef: MatDialogRef<EditPostComponent>,
+    @Inject(MAT_DIALOG_DATA)
+    public data: Post
+  ) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -49,12 +54,12 @@ export class EditPostComponent {
     });
   }
 
-  update(post: Post): Post {
-    const updatedPost = {
-      ...post,
-      title: this.form.value.title,
-      content: this.form.value.content,
-    };
-    return updatedPost;
+  submit() {
+    const postData = new FormData();
+    postData.append('title', this.form.get('title')?.value);
+    postData.append('content', this.form.get('content')?.value);
+
+    this.store.dispatch(updatePost({ postId: this.data.id, post: postData }));
+    this.dialogRef.close();
   }
 }
