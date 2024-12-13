@@ -16,9 +16,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DocumentService } from '../../../../../service/document/document.service';
 import { Project } from '../../../../../interface/project';
-import { ProjectService } from '../../../../../service/project/project.service';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectProjects } from '../../../../../store/selectors/project.selectors';
+import { selectLoading } from '../../../../../store/selectors/document.selectors';
+import { addDocument } from '../../../../../store/actions/document.action';
 
 @Component({
   selector: 'app-doc-form',
@@ -40,22 +44,17 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class DocFormComponent {
   form!: FormGroup;
-  projects: Project[] = [];
+  projects$: Observable<Project[]>;
+  loading$: Observable<boolean>;
   fileName: string = '';
-  isLoading = false;
-  private snackBarRef = inject(MatSnackBar);
   private maxFileSize = 5 * 1024 * 1024;
 
-  constructor(
-    private docService: DocumentService,
-    private projectService: ProjectService,
-    private router: Router
-  ) {}
+  constructor(private store: Store) {
+    this.projects$ = this.store.select(selectProjects);
+    this.loading$ = this.store.select(selectLoading);
+  }
 
   ngOnInit() {
-    this.projectService.getAllProjects().subscribe((data) => {
-      this.projects = data;
-    });
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
       desc: new FormControl('', Validators.required),
@@ -88,29 +87,12 @@ export class DocFormComponent {
   }
 
   submit() {
-    this.isLoading = true;
-
     const docData = new FormData();
     docData.append('name', this.form.get('name')?.value);
     docData.append('desc', this.form.get('desc')?.value);
     docData.append('file', this.form.get('file')?.value);
     docData.append('projectId', this.form.get('projectId')?.value);
 
-    this.docService.addDocument(docData).subscribe({
-      next: (res) => {
-        this.router.navigate(['/admin/documents']);
-        this.snackBarRef.open('Document uploaded successfully!', 'Dismiss', {
-          duration: 3000,
-        });
-      },
-      error: (err) => {
-        console.error(err);
-        this.snackBarRef.open('An unknown error has occurred', 'Dismiss', {
-          duration: 3000,
-        });
-        this.resetForm();
-        this.isLoading = false;
-      },
-    });
+    this.store.dispatch(addDocument({ document: docData }));
   }
 }
