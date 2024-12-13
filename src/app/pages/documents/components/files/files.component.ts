@@ -10,6 +10,11 @@ import { Store } from '@ngrx/store';
 import { selectProjectById } from '../../../../store/selectors/project.selectors';
 import { loadProjects } from '../../../../store/actions/project.actions';
 import { loadDocuments } from '../../../../store/actions/document.action';
+import {
+  selectDocuments,
+  selectDocumentsByProjectId,
+  selectLoading,
+} from '../../../../store/selectors/document.selectors';
 
 @Component({
   selector: 'app-files',
@@ -20,9 +25,10 @@ import { loadDocuments } from '../../../../store/actions/document.action';
 })
 export class FilesComponent {
   @Input() projectId!: number;
-
-  docs: Document[] = [];
-  isLoading = false;
+  docs$: Observable<Document[]> = this.store.select(
+    selectDocumentsByProjectId(this.projectId)
+  );
+  loading$: Observable<boolean> = this.store.select(selectLoading);
 
   constructor(private documentService: DocumentService, private store: Store) {}
 
@@ -32,12 +38,8 @@ export class FilesComponent {
   }
 
   ngOnChanges() {
-    this.documentService
-      .getDocumentsByProjectId(this.projectId)
-      .subscribe((data) => {
-        this.docs = data;
-        this.isLoading = false;
-      });
+    this.docs$ = this.store.select(selectDocumentsByProjectId(this.projectId));
+    this.loading$ = this.store.select(selectLoading);
   }
 
   getProjectNameById(id: number): Observable<String> {

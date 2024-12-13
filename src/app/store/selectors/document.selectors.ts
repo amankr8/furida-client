@@ -9,6 +9,11 @@ export const selectDocumentById = (id: number) =>
     state.documents.find((doc) => doc.id === id)
   );
 
+export const selectDocumentsByProjectId = (projectId: number) =>
+  createSelector(selectDocumentsState, (state) =>
+    state.documents.filter((doc) => doc.projectId === projectId)
+  );
+
 export const selectDocuments = createSelector(
   selectDocumentsState,
   (state) => state.documents
