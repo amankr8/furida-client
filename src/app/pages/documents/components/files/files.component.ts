@@ -30,7 +30,7 @@ export class FilesComponent {
   );
   loading$: Observable<boolean> = this.store.select(selectLoading);
 
-  constructor(private documentService: DocumentService, private store: Store) {}
+  constructor(private store: Store) {}
 
   ngOnInit() {
     this.store.dispatch(loadDocuments());

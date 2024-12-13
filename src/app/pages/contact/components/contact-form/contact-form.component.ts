@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -11,8 +11,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ContactService } from '../../../../service/contact/contact.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectLoading } from '../../../../store/selectors/message.selectors';
@@ -36,9 +34,8 @@ import { sendMessage } from '../../../../store/actions/message.action';
 export class ContactFormComponent {
   form!: FormGroup;
   loading$: Observable<boolean>;
-  private snackBarRef = inject(MatSnackBar);
 
-  constructor(private contactService: ContactService, private store: Store) {
+  constructor(private store: Store) {
     this.loading$ = this.store.select(selectLoading);
   }
 
