@@ -26,12 +26,14 @@ export const projectReducer = createReducer(
   on(loadProjectsSuccess, (state, { projects }) => ({
     ...state,
     projects,
+    isLoaded: true,
     loading: false,
   })),
 
   on(loadProjectsFail, (state, { error }) => ({
     ...state,
     error,
+    isLoaded: false,
     loading: false,
   })),
 

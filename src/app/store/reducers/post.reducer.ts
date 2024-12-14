@@ -26,12 +26,14 @@ export const postReducer = createReducer(
   on(loadPostsSuccess, (state, { posts }) => ({
     ...state,
     posts,
+    isLoaded: true,
     loading: false,
   })),
 
   on(loadPostsFail, (state, { error }) => ({
     ...state,
     error,
+    isLoaded: false,
     loading: false,
   })),
 

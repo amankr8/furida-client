@@ -1,18 +1,20 @@
 import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { DocumentService } from '../../../../service/document/document.service';
 import { CommonModule } from '@angular/common';
 import { Document } from '../../../../interface/document';
 import { MatButtonModule } from '@angular/material/button';
 import { map, Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectProjectById } from '../../../../store/selectors/project.selectors';
+import {
+  selectIsProjectLoaded,
+  selectProjectById,
+} from '../../../../store/selectors/project.selectors';
 import { loadProjects } from '../../../../store/actions/project.actions';
 import { loadDocuments } from '../../../../store/actions/document.actions';
 import {
-  selectDocuments,
   selectDocumentsByProjectId,
+  selectIsDocumentLoaded,
   selectLoading,
 } from '../../../../store/selectors/document.selectors';
 
@@ -28,13 +30,23 @@ export class FilesComponent {
   docs$: Observable<Document[]> = this.store.select(
     selectDocumentsByProjectId(this.projectId)
   );
+  isDocumentsLoaded$: Observable<boolean> = this.store.select(
+    selectIsDocumentLoaded
+  );
+  isProjectsLoaded$: Observable<boolean> = this.store.select(
+    selectIsProjectLoaded
+  );
   loading$: Observable<boolean> = this.store.select(selectLoading);
 
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.store.dispatch(loadDocuments());
-    this.store.dispatch(loadProjects());
+    this.isDocumentsLoaded$.subscribe((isLoaded) => {
+      if (!isLoaded) this.store.dispatch(loadDocuments());
+    });
+    this.isProjectsLoaded$.subscribe((isLoaded) => {
+      if (!isLoaded) this.store.dispatch(loadProjects());
+    });
   }
 
   ngOnChanges() {

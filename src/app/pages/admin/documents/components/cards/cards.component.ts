@@ -9,9 +9,13 @@ import { map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
   selectDocuments,
+  selectIsDocumentLoaded,
   selectLoading,
 } from '../../../../../store/selectors/document.selectors';
-import { selectProjectById } from '../../../../../store/selectors/project.selectors';
+import {
+  selectIsProjectLoaded,
+  selectProjectById,
+} from '../../../../../store/selectors/project.selectors';
 import {
   loadDocuments,
   openDeleteDialog,
@@ -33,17 +37,24 @@ import { loadProjects } from '../../../../../store/actions/project.actions';
   styleUrl: './cards.component.scss',
 })
 export class CardsComponent {
-  documents$: Observable<Document[]>;
-  loading$: Observable<boolean>;
+  documents$: Observable<Document[]> = this.store.select(selectDocuments);
+  isDocumentLoaded$: Observable<boolean> = this.store.select(
+    selectIsDocumentLoaded
+  );
+  isProjectLoaded$: Observable<boolean> = this.store.select(
+    selectIsProjectLoaded
+  );
+  loading$: Observable<boolean> = this.store.select(selectLoading);
 
-  constructor(private store: Store) {
-    this.documents$ = this.store.select(selectDocuments);
-    this.loading$ = this.store.select(selectLoading);
-  }
+  constructor(private store: Store) {}
 
   ngOnInit() {
-    this.store.dispatch(loadDocuments());
-    this.store.dispatch(loadProjects());
+    this.isDocumentLoaded$.subscribe((isLoaded) => {
+      if (!isLoaded) this.store.dispatch(loadDocuments());
+    });
+    this.isProjectLoaded$.subscribe((isLoaded) => {
+      if (!isLoaded) this.store.dispatch(loadProjects());
+    });
   }
 
   getProjectNameById(id: number): Observable<String> {

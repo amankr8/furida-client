@@ -16,6 +16,7 @@ import {
   selectProjects,
   selectLoading,
   selectError,
+  selectIsProjectLoaded,
 } from '../../../../../store/selectors/project.selectors';
 
 @Component({
@@ -26,18 +27,18 @@ import {
   styleUrl: './project-cards.component.scss',
 })
 export class ProjectCardsComponent {
-  projects$: Observable<Project[]>;
-  loading$: Observable<boolean>;
-  error$: Observable<string | null>;
+  projects$: Observable<Project[]> = this.store.select(selectProjects);
+  isProjectLoaded: Observable<boolean> = this.store.select(
+    selectIsProjectLoaded
+  );
+  loading$: Observable<boolean> = this.store.select(selectLoading);
 
-  constructor(private store: Store) {
-    this.projects$ = this.store.select(selectProjects);
-    this.loading$ = this.store.select(selectLoading);
-    this.error$ = this.store.select(selectError);
-  }
+  constructor(private store: Store) {}
 
   ngOnInit() {
-    this.store.dispatch(loadProjects());
+    this.isProjectLoaded.subscribe((isLoaded) => {
+      if (!isLoaded) this.store.dispatch(loadProjects());
+    });
   }
 
   updateProject(id: number) {

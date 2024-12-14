@@ -6,7 +6,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Post } from '../../../../interface/post';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectPosts } from '../../../../store/selectors/post.selectors';
+import {
+  selectIsPostLoaded,
+  selectPosts,
+} from '../../../../store/selectors/post.selectors';
 import { selectLoading } from '../../../../store/selectors/project.selectors';
 import { loadPosts } from '../../../../store/actions/post.actions';
 
@@ -18,15 +21,15 @@ import { loadPosts } from '../../../../store/actions/post.actions';
   styleUrl: './updates.component.scss',
 })
 export class UpdatesComponent {
-  posts$: Observable<Post[]>;
-  loading$: Observable<boolean>;
+  posts$: Observable<Post[]> = this.store.select(selectPosts);
+  isPostLoaded$: Observable<boolean> = this.store.select(selectIsPostLoaded);
+  loading$: Observable<boolean> = this.store.select(selectLoading);
 
-  constructor(private store: Store) {
-    this.posts$ = this.store.select(selectPosts);
-    this.loading$ = this.store.select(selectLoading);
-  }
+  constructor(private store: Store) {}
 
   ngOnInit() {
-    this.store.dispatch(loadPosts());
+    this.isPostLoaded$.subscribe((isLoaded) => {
+      if (!isLoaded) this.store.dispatch(loadPosts());
+    });
   }
 }

@@ -26,12 +26,14 @@ export const documentReducer = createReducer(
   on(loadDocumentsSuccess, (state, { documents }) => ({
     ...state,
     documents,
+    isLoaded: true,
     loading: false,
   })),
 
   on(loadDocumentsFail, (state, { error }) => ({
     ...state,
     error,
+    isLoaded: false,
     loading: false,
   })),
 

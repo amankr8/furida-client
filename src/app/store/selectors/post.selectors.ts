@@ -13,6 +13,11 @@ export const selectPosts = createSelector(
   (state) => state.posts
 );
 
+export const selectIsPostLoaded = createSelector(
+  selectPostsState,
+  (state) => state.isLoaded
+);
+
 export const selectLoading = createSelector(
   selectPostsState,
   (state) => state.loading

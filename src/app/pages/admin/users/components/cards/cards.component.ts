@@ -7,6 +7,7 @@ import { User } from '../../../../../interface/user';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
+  selectIsUserLoaded,
   selectLoading,
   selectUsers,
 } from '../../../../../store/selectors/user.selectors';
@@ -20,15 +21,15 @@ import { loadUsers } from '../../../../../store/actions/user.actions';
   styleUrl: './cards.component.scss',
 })
 export class CardsComponent {
-  users$: Observable<User[]>;
-  loading$: Observable<boolean>;
+  users$: Observable<User[]> = this.store.select(selectUsers);
+  isUserLoaded: Observable<boolean> = this.store.select(selectIsUserLoaded);
+  loading$: Observable<boolean> = this.store.select(selectLoading);
 
-  constructor(private store: Store) {
-    this.users$ = this.store.select(selectUsers);
-    this.loading$ = this.store.select(selectLoading);
-  }
+  constructor(private store: Store) {}
 
   ngOnInit() {
-    this.store.dispatch(loadUsers());
+    this.isUserLoaded.subscribe((isLoaded) => {
+      if (!isLoaded) this.store.dispatch(loadUsers());
+    });
   }
 }

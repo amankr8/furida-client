@@ -27,11 +27,13 @@ export const messageReducer = createReducer(
   on(loadMessagesSuccess, (state, { messages }) => ({
     ...state,
     messages,
+    isLoaded: true,
     loading: false,
   })),
 
   on(loadMessagesFail, (state, { error }) => ({
     ...state,
+    isLoaded: false,
     loading: false,
     error,
   })),

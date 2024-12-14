@@ -13,6 +13,11 @@ export const selectUsers = createSelector(
   (state) => state.users
 );
 
+export const selectIsUserLoaded = createSelector(
+  selectUsersState,
+  (state) => state.isLoaded
+);
+
 export const selectLoading = createSelector(
   selectUsersState,
   (state) => state.loading

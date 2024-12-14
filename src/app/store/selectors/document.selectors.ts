@@ -19,6 +19,11 @@ export const selectDocuments = createSelector(
   (state) => state.documents
 );
 
+export const selectIsDocumentLoaded = createSelector(
+  selectDocumentsState,
+  (state) => state.isLoaded
+);
+
 export const selectLoading = createSelector(
   selectDocumentsState,
   (state) => state.loading

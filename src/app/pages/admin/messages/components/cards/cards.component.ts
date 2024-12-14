@@ -10,9 +10,10 @@ import {
   loadMessages,
   toggleArchive,
 } from '../../../../../store/actions/message.actions';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
   selectError,
+  selectIsMessageLoaded,
   selectLoading,
   selectMessages,
 } from '../../../../../store/selectors/message.selectors';
@@ -30,13 +31,18 @@ export class CardsComponent {
   messages$: Observable<Message[]> = this.store.select(
     selectMessages(this.archive)
   );
+  isMessageLoaded$: Observable<boolean> = this.store.select(
+    selectIsMessageLoaded
+  );
   loading$: Observable<boolean> = this.store.select(selectLoading);
   error$: Observable<string | null> = this.store.select(selectError);
 
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.store.dispatch(loadMessages());
+    this.isMessageLoaded$.subscribe((isLoaded) => {
+      if (!isLoaded) this.store.dispatch(loadMessages());
+    });
   }
 
   ngOnChanges() {

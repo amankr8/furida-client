@@ -7,6 +7,7 @@ import { Post } from '../../../../../interface/post';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import {
+  selectIsPostLoaded,
   selectLoading,
   selectPosts,
 } from '../../../../../store/selectors/post.selectors';
@@ -24,16 +25,16 @@ import {
   styleUrl: './cards.component.scss',
 })
 export class CardsComponent {
-  posts$: Observable<Post[]>;
-  loading$: Observable<boolean>;
+  posts$: Observable<Post[]> = this.store.select(selectPosts);
+  isPostLoaded: Observable<boolean> = this.store.select(selectIsPostLoaded);
+  loading$: Observable<boolean> = this.store.select(selectLoading);
 
-  constructor(private store: Store) {
-    this.posts$ = this.store.select(selectPosts);
-    this.loading$ = this.store.select(selectLoading);
-  }
+  constructor(private store: Store) {}
 
   ngOnInit() {
-    this.store.dispatch(loadPosts());
+    this.isPostLoaded.subscribe((isLoaded) => {
+      if (!isLoaded) this.store.dispatch(loadPosts());
+    });
   }
 
   update(id: number) {
