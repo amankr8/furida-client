@@ -8,21 +8,19 @@ export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const snackBarRef = inject(MatSnackBar);
 
-  // Retrieve the token from local storage
   const token = localStorage.getItem('jwtToken');
 
   // Check if token exists and is not expired
-  if (token && !jwtHelper.isTokenExpired(token)) {
-    return true; // Allow access if the token is valid
+  if (!token) {
+    router.navigate(['/']);
+    return false;
   } else if (jwtHelper.isTokenExpired(token)) {
-    // Redirect to the login page if the token is expired
     router.navigate(['/login']);
     snackBarRef.open('Session expired! Please login again', 'Dismiss', {
       duration: 3000,
     });
     return false;
   } else {
-    router.navigate(['/']);
-    return false;
+    return true;
   }
 };
