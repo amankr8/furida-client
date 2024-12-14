@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class DocumentService {
-  apiUrl = environment.baseUrl + 'documents';
+  apiUrl = environment.baseUrl + '/api/documents';
 
   constructor(private http: HttpClient) {}
 

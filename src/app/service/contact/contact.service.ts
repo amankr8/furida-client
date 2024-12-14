@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class ContactService {
-  apiUrl = environment.baseUrl + 'messages';
+  apiUrl = environment.baseUrl + '/api/messages';
 
   constructor(private http: HttpClient) {}
 

@@ -7,7 +7,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class RoleService {
-  apiUrl = environment.baseUrl + 'roles';
+  apiUrl = environment.baseUrl + '/api/roles';
 
   constructor(private http: HttpClient) {}
 
