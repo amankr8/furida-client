@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Document } from '../../interface/document';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DocumentService {
-  apiUrl = 'http://localhost:8080/documents';
+  apiUrl = environment.baseUrl + 'documents';
 
   constructor(private http: HttpClient) {}
 

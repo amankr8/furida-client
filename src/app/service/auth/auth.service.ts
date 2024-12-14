@@ -4,12 +4,13 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { User } from '../../interface/user';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private authUrl = 'http://localhost:8080/auth';
+  private authUrl = environment.baseUrl + 'auth';
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 

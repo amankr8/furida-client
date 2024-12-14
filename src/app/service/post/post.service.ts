@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Post } from '../../interface/post';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostService {
-  apiUrl = 'http://localhost:8080/posts';
+  apiUrl = environment.baseUrl + 'posts';
 
   constructor(private http: HttpClient) {}
 
