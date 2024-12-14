@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -12,9 +12,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { DocumentService } from '../../../../../service/document/document.service';
 import { Project } from '../../../../../interface/project';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
@@ -22,7 +19,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectProjects } from '../../../../../store/selectors/project.selectors';
 import { selectLoading } from '../../../../../store/selectors/document.selectors';
-import { addDocument } from '../../../../../store/actions/document.action';
+import { addDocument } from '../../../../../store/actions/document.actions';
 
 @Component({
   selector: 'app-doc-form',

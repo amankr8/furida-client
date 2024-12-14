@@ -16,7 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Document } from '../../../../interface/document';
 import { Store } from '@ngrx/store';
-import { updateDocument } from '../../../../store/actions/document.action';
+import { updateDocument } from '../../../../store/actions/document.actions';
 
 @Component({
   selector: 'app-edit-document',

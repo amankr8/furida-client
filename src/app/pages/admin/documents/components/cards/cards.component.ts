@@ -16,7 +16,7 @@ import {
   loadDocuments,
   openDeleteDialog,
   openEditDialog,
-} from '../../../../../store/actions/document.action';
+} from '../../../../../store/actions/document.actions';
 import { loadProjects } from '../../../../../store/actions/project.actions';
 
 @Component({

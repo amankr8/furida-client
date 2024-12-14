@@ -19,7 +19,7 @@ import {
   sendMessage,
   sendMessageFail,
   sendMessageSuccess,
-} from '../actions/message.action';
+} from '../actions/message.actions';
 import { ConfirmDialogComponent } from '../../pages/admin/components/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 

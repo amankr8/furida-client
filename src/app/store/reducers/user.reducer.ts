@@ -9,7 +9,7 @@ import {
   deleteUser,
   deleteUserSuccess,
   deleteUserFail,
-} from '../actions/user.action';
+} from '../actions/user.actions';
 import { initialUsersState } from '../user.state';
 
 export const userReducer = createReducer(

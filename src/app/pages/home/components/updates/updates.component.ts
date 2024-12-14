@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectPosts } from '../../../../store/selectors/post.selectors';
 import { selectLoading } from '../../../../store/selectors/project.selectors';
-import { loadPosts } from '../../../../store/actions/post.action';
+import { loadPosts } from '../../../../store/actions/post.actions';
 
 @Component({
   selector: 'app-updates',

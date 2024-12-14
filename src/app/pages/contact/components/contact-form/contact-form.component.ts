@@ -14,7 +14,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectLoading } from '../../../../store/selectors/message.selectors';
-import { sendMessage } from '../../../../store/actions/message.action';
+import { sendMessage } from '../../../../store/actions/message.actions';
 
 @Component({
   selector: 'app-contact-form',

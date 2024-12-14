@@ -8,7 +8,7 @@ import { mergeMap, map, catchError, of, tap, first } from 'rxjs';
 import { User } from '../../interface/user';
 import { ConfirmDialogComponent } from '../../pages/admin/components/confirm-dialog/confirm-dialog.component';
 import { UserService } from '../../service/user/user.service';
-import { openEditDialog, openDeleteDialog } from '../actions/user.action';
+import { openEditDialog, openDeleteDialog } from '../actions/user.actions';
 import {
   loadUsers,
   loadUsersSuccess,
@@ -19,7 +19,7 @@ import {
   deleteUser,
   deleteUserSuccess,
   deleteUserFail,
-} from '../actions/user.action';
+} from '../actions/user.actions';
 
 @Injectable()
 export class UserEffects {

@@ -9,7 +9,7 @@ import {
   deleteMessage,
   loadMessages,
   toggleArchive,
-} from '../../../../../store/actions/message.action';
+} from '../../../../../store/actions/message.actions';
 import { Observable, Subscription } from 'rxjs';
 import {
   selectError,

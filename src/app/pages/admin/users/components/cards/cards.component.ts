@@ -10,7 +10,7 @@ import {
   selectLoading,
   selectUsers,
 } from '../../../../../store/selectors/user.selectors';
-import { loadUsers } from '../../../../../store/actions/user.action';
+import { loadUsers } from '../../../../../store/actions/user.actions';
 
 @Component({
   selector: 'app-user-cards',

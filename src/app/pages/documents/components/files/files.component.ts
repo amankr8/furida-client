@@ -9,7 +9,7 @@ import { map, Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectProjectById } from '../../../../store/selectors/project.selectors';
 import { loadProjects } from '../../../../store/actions/project.actions';
-import { loadDocuments } from '../../../../store/actions/document.action';
+import { loadDocuments } from '../../../../store/actions/document.actions';
 import {
   selectDocuments,
   selectDocumentsByProjectId,

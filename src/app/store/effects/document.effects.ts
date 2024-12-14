@@ -20,8 +20,8 @@ import {
   deleteDocument,
   deleteDocumentSuccess,
   deleteDocumentFail,
-} from '../actions/document.action';
-import { openEditDialog, openDeleteDialog } from '../actions/document.action';
+} from '../actions/document.actions';
+import { openEditDialog, openDeleteDialog } from '../actions/document.actions';
 import { selectDocumentById } from '../selectors/document.selectors';
 import { Document } from '../../interface/document';
 import { EditDocumentComponent } from '../../pages/admin/documents/edit-document/edit-document.component';

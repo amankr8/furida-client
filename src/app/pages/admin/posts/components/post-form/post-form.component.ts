@@ -15,7 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectLoading } from '../../../../../store/selectors/post.selectors';
-import { addPost } from '../../../../../store/actions/post.action';
+import { addPost } from '../../../../../store/actions/post.actions';
 
 @Component({
   selector: 'app-post-form',

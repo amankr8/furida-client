@@ -13,7 +13,7 @@ import {
   toggleArchive,
   toggleArchiveFail,
   toggleArchiveSuccess,
-} from '../actions/message.action';
+} from '../actions/message.actions';
 
 export const messageReducer = createReducer(
   initialMessagesState,

@@ -22,8 +22,8 @@ import {
   deletePost,
   deletePostSuccess,
   deletePostFail,
-} from '../actions/post.action';
-import { openEditDialog, openDeleteDialog } from '../actions/post.action';
+} from '../actions/post.actions';
+import { openEditDialog, openDeleteDialog } from '../actions/post.actions';
 import { selectPostById } from '../selectors/post.selectors';
 
 @Injectable()

@@ -12,7 +12,7 @@ import {
   deleteDocument,
   deleteDocumentSuccess,
   deleteDocumentFail,
-} from '../actions/document.action';
+} from '../actions/document.actions';
 import { initialDocumentsState } from '../document.state';
 
 export const documentReducer = createReducer(

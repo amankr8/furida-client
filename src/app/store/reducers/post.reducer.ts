@@ -12,7 +12,7 @@ import {
   deletePost,
   deletePostSuccess,
   deletePostFail,
-} from '../actions/post.action';
+} from '../actions/post.actions';
 import { initialPostsState } from '../post.state';
 
 export const postReducer = createReducer(
