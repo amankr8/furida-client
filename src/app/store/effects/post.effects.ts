@@ -22,9 +22,11 @@ import {
   deletePost,
   deletePostSuccess,
   deletePostFail,
+  openViewDialog,
 } from '../actions/post.actions';
 import { openEditDialog, openDeleteDialog } from '../actions/post.actions';
 import { selectPostById } from '../selectors/post.selectors';
+import { ViewPostComponent } from '../../pages/home/components/view-post/view-post.component';
 
 @Injectable()
 export class PostEffects {
@@ -88,6 +90,40 @@ export class PostEffects {
       ),
     { dispatch: false }
   );
+
+  openViewDialog$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(openViewDialog),
+        mergeMap(({ postId }) =>
+          this.store.select(selectPostById(postId)).pipe(
+            first(),
+            map((post) => {
+              if (post) {
+                this.showViewPostDialog(post);
+              } else {
+                this.snackBar.open(
+                  'Some error occurred! Try again later',
+                  'Dismiss',
+                  {
+                    duration: 3000,
+                  }
+                );
+                console.error('Post not found in state');
+              }
+            })
+          )
+        )
+      ),
+    { dispatch: false }
+  );
+
+  showViewPostDialog(post: Post) {
+    this.matDialog.open(ViewPostComponent, {
+      data: post,
+      width: '30%',
+    });
+  }
 
   openEditDialog$ = createEffect(
     () =>

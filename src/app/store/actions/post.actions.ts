@@ -28,6 +28,11 @@ export const addPostFail = createAction(
   props<{ error: string }>()
 );
 
+export const openViewDialog = createAction(
+  '[Post] Open View Dialog',
+  props<{ postId: number }>()
+);
+
 export const openEditDialog = createAction(
   '[Post] Open Edit Dialog',
   props<{ postId: number }>()
