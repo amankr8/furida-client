@@ -11,7 +11,10 @@ import {
   selectPosts,
 } from '../../../../store/selectors/post.selectors';
 import { selectLoading } from '../../../../store/selectors/project.selectors';
-import { loadPosts } from '../../../../store/actions/post.actions';
+import {
+  loadPosts,
+  openViewDialog,
+} from '../../../../store/actions/post.actions';
 
 @Component({
   selector: 'app-updates',
@@ -31,5 +34,9 @@ export class UpdatesComponent {
     this.isPostLoaded$.subscribe((isLoaded) => {
       if (!isLoaded) this.store.dispatch(loadPosts());
     });
+  }
+
+  viewPost(id: number) {
+    this.store.dispatch(openViewDialog({ postId: id }));
   }
 }
