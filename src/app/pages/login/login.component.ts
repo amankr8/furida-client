@@ -1,6 +1,5 @@
-import { Component, inject, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../../service/auth/auth.service';
-import { Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import {
   MatFormField,
@@ -15,10 +14,12 @@ import {
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { HttpErrorResponse } from '@angular/common/http';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectLoading } from '../../store/selectors/auth.selectors';
+import { signInUser } from '../../store/actions/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -39,10 +40,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LoginComponent {
   form!: FormGroup;
-  isLoading = false;
-  private snackBarRef = inject(MatSnackBar);
+  loading$: Observable<boolean> = this.store.select(selectLoading);
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private store: Store) {}
 
   ngOnInit() {
     this.authService.logout();
@@ -56,33 +56,6 @@ export class LoginComponent {
   }
 
   login() {
-    this.isLoading = true;
-    this.authService.login(this.form.value).subscribe({
-      next: (res) => {
-        this.router.navigate(['/admin']);
-        this.snackBarRef.open(res.message, 'Dismiss', {
-          duration: 3000,
-        });
-      },
-      error: (err) => {
-        this.isLoading = false;
-        this.snackBarRef.open(this.getErrorMessage(err), 'Dismiss', {
-          duration: 3000,
-        });
-      },
-    });
-  }
-
-  getErrorMessage(err: HttpErrorResponse): string {
-    switch (err.status) {
-      case 404:
-        return "Error: User doesn't exist";
-      case 400:
-        return 'Error: Invalid credentials';
-      case 500:
-        return 'Server Error: Please try again later';
-      default:
-        return 'Error: An unknown error occurred';
-    }
+    this.store.dispatch(signInUser({ user: this.form.value }));
   }
 }

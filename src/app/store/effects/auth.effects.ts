@@ -40,8 +40,8 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(signUpUserSuccess),
       tap(() => {
-        this.router.navigate(['/admin']);
-        this.snackBar.open('Logged In successfully!', 'Dismiss', {
+        this.router.navigate(['/admin/users']);
+        this.snackBar.open('Added user successfully!', 'Dismiss', {
           duration: 3000,
         });
       }),

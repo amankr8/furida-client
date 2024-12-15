@@ -7,3 +7,13 @@ export const selectAuthUsername = createSelector(
   selectAuthState,
   (state) => state.username
 );
+
+export const selectLoading = createSelector(
+  selectAuthState,
+  (state) => state.loading
+);
+
+export const selectError = createSelector(
+  selectAuthState,
+  (state) => state.error
+);
