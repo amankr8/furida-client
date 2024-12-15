@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -12,12 +12,12 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { RoleService } from '../../../../../service/role/role.service';
-import { AuthService } from '../../../../../service/auth/auth.service';
-import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectLoading } from '../../../../../store/selectors/auth.selectors';
+import { signUpUser } from '../../../../../store/actions/auth.actions';
 
 @Component({
   selector: 'app-signup-form',
@@ -38,15 +38,10 @@ import { CommonModule } from '@angular/common';
 })
 export class SignupFormComponent {
   form!: FormGroup;
-  isLoading = false;
+  loading$: Observable<boolean> = this.store.select(selectLoading);
   roles: string[] = [];
-  private snackBarRef = inject(MatSnackBar);
 
-  constructor(
-    private roleService: RoleService,
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private roleService: RoleService, private store: Store) {}
 
   ngOnInit() {
     this.roleService.getAllRoles().subscribe((data) => {
@@ -63,36 +58,7 @@ export class SignupFormComponent {
     });
   }
 
-  navigateToLogin() {
-    this.router.navigate(['/login']);
-  }
-
   signup() {
-    this.isLoading = true;
-    this.authService.signup(this.form.value).subscribe({
-      next: (res) => {
-        this.router.navigate(['/login']);
-        this.snackBarRef.open(res.message, 'Dismiss', {
-          duration: 3000,
-        });
-      },
-      error: (err) => {
-        this.isLoading = false;
-        this.snackBarRef.open(this.getErrorMessage(err), 'Dismiss', {
-          duration: 3000,
-        });
-      },
-    });
-  }
-
-  getErrorMessage(err: HttpErrorResponse): string {
-    switch (err.status) {
-      case 400:
-        return 'Error: User already exists';
-      case 500:
-        return 'Server Error: Please try again later';
-      default:
-        return 'Error: An unknown error occurred';
-    }
+    this.store.dispatch(signUpUser({ user: this.form.value }));
   }
 }
