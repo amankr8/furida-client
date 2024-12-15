@@ -55,10 +55,6 @@ export class LoginComponent {
     });
   }
 
-  navigateToSignUp() {
-    this.router.navigate(['/signup']);
-  }
-
   login() {
     this.isLoading = true;
     this.authService.login(this.form.value).subscribe({

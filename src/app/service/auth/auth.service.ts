@@ -19,12 +19,7 @@ export class AuthService {
   }
 
   login(user: User): Observable<any> {
-    return this.http.post(`${this.authUrl}/login`, user).pipe(
-      map((res: any) => {
-        localStorage.setItem('jwtToken', res.token); // Save token to localStorage
-        return res;
-      })
-    );
+    return this.http.post(`${this.authUrl}/login`, user);
   }
 
   logout(): void {

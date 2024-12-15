@@ -8,6 +8,11 @@ export const selectUserById = (id: number) =>
     state.users.find((usr) => usr.id === id)
   );
 
+export const selectUserByUsername = (username: string) =>
+  createSelector(selectUsersState, (state) =>
+    state.users.find((usr) => usr.username === username)
+  );
+
 export const selectUsers = createSelector(
   selectUsersState,
   (state) => state.users
