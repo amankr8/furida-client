@@ -65,7 +65,7 @@ export const userReducer = createReducer(
 
   on(deleteUserFail, (state, { error }) => ({
     ...state,
-    error,
+    error: error.message,
     loading: false,
   }))
 );

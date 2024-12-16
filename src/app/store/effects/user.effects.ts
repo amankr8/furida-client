@@ -23,6 +23,7 @@ import {
 import { selectUserById } from '../selectors/user.selectors';
 import { UpdateUserComponent } from '../../pages/admin/users/update-user/update-user.component';
 import { AuthService } from '../../service/auth/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class UserEffects {
@@ -128,7 +129,7 @@ export class UserEffects {
       mergeMap(({ userId }) =>
         this.userService.deleteUser(userId).pipe(
           map(() => deleteUserSuccess({ userId })),
-          catchError((error) => of(deleteUserFail({ error: error.message })))
+          catchError((err) => of(deleteUserFail({ error: err })))
         )
       )
     )
@@ -152,11 +153,22 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(deleteUserFail),
         tap(({ error }) => {
-          this.snackBar.open(`Failed to delete: ${error}`, 'Dismiss', {
+          this.snackBar.open(this.getDelUserErrMsg(error), 'Dismiss', {
             duration: 3000,
           });
         })
       ),
     { dispatch: false }
   );
+
+  getDelUserErrMsg(err: HttpErrorResponse): string {
+    switch (err.status) {
+      case 400:
+        return 'Error: Logged in user cannot be deleted';
+      case 404:
+        return 'Error: User not found';
+      default:
+        return 'Error: An unknown error occurred';
+    }
+  }
 }

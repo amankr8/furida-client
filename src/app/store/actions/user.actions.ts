@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { User } from '../../interface/user';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export const loadUsers = createAction('[Users] Load Users');
 
@@ -44,5 +45,5 @@ export const deleteUserSuccess = createAction(
 
 export const deleteUserFail = createAction(
   '[User] Delete User Fail',
-  props<{ error: string }>()
+  props<{ error: HttpErrorResponse }>()
 );
