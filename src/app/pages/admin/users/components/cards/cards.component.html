@@ -17,22 +17,20 @@
           <p>{{ user.email }}</p>
         </mat-card-content>
         <mat-card-actions class="btn-group">
-          <ng-container *ngIf="getButtonStates(user) | async as states">
-            <button
-              mat-button
-              (click)="updateUser()"
-              [disabled]="!states.canEdit"
-            >
-              EDIT
-            </button>
-            <button
-              mat-button
-              (click)="deleteUser(user.id)"
-              [disabled]="!states.canDelete"
-            >
-              DELETE
-            </button>
-          </ng-container>
+          <button
+            mat-button
+            (click)="updateUser()"
+            [disabled]="!isLoggedInUser(user.username) || (loading$ | async)"
+          >
+            EDIT
+          </button>
+          <button
+            mat-button
+            (click)="deleteUser(user.id)"
+            [disabled]="isLoggedInUser(user.username) || (loading$ | async)"
+          >
+            DELETE
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
