@@ -13,20 +13,14 @@ export const loadUsersFail = createAction(
   props<{ error: string }>()
 );
 
-export const openEditDialog = createAction(
-  '[User] Open Edit Dialog',
-  props<{ userId: number }>()
-);
+export const openEditDialog = createAction('[User] Open Edit Dialog');
 
 export const updateUser = createAction(
   '[Users] Update User',
-  props<{ user: User }>()
+  props<{ oldPassword: string; newPassword: string }>()
 );
 
-export const updateUserSuccess = createAction(
-  '[Users] Update User Success',
-  props<{ user: User }>()
-);
+export const updateUserSuccess = createAction('[Users] Update User Success');
 
 export const updateUserFail = createAction(
   '[Users] Update User Fail',

@@ -22,6 +22,11 @@ export class AuthService {
     return this.http.post(`${this.authUrl}/login`, user);
   }
 
+  updateUser(oldPassword: string, newPassword: string): Observable<any> {
+    const payload = { oldPassword, newPassword };
+    return this.http.post(this.authUrl + '/update-password', payload);
+  }
+
   logout(): void {
     localStorage.removeItem('jwtToken');
   }

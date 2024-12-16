@@ -40,9 +40,8 @@ export const userReducer = createReducer(
     loading: true,
   })),
 
-  on(updateUserSuccess, (state, { user }) => ({
+  on(updateUserSuccess, (state) => ({
     ...state,
-    users: state.users.map((p) => (p.id === user.id ? user : p)),
     loading: false,
   })),
 

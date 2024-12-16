@@ -11,7 +11,10 @@ import {
   selectLoading,
   selectUsers,
 } from '../../../../../store/selectors/user.selectors';
-import { loadUsers } from '../../../../../store/actions/user.actions';
+import {
+  loadUsers,
+  openEditDialog,
+} from '../../../../../store/actions/user.actions';
 
 @Component({
   selector: 'app-user-cards',
@@ -31,5 +34,9 @@ export class CardsComponent {
     this.isUserLoaded.subscribe((isLoaded) => {
       if (!isLoaded) this.store.dispatch(loadUsers());
     });
+  }
+
+  updateUser() {
+    this.store.dispatch(openEditDialog());
   }
 }

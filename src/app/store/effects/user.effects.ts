@@ -20,6 +20,9 @@ import {
   deleteUserSuccess,
   deleteUserFail,
 } from '../actions/user.actions';
+import { selectUserById } from '../selectors/user.selectors';
+import { UpdateUserComponent } from '../../pages/admin/users/update-user/update-user.component';
+import { AuthService } from '../../service/auth/auth.service';
 
 @Injectable()
 export class UserEffects {
@@ -28,6 +31,7 @@ export class UserEffects {
   constructor(
     private actions$: Actions,
     private userService: UserService,
+    private authService: AuthService,
     private router: Router,
     private snackBar: MatSnackBar,
     private store: Store
@@ -45,128 +49,114 @@ export class UserEffects {
     )
   );
 
-  //   openEditDialog$ = createEffect(
-  //     () =>
-  //       this.actions$.pipe(
-  //         ofType(openEditDialog),
-  //         mergeMap(({ userId }) =>
-  //           this.store.select(selectUserById(userId)).pipe(
-  //             first(),
-  //             map((user) => {
-  //               if (user) {
-  //                 this.showEditFormDialog(user);
-  //               } else {
-  //                 console.error('User not found in state');
-  //               }
-  //             })
-  //           )
-  //         )
-  //       ),
-  //     { dispatch: false }
-  //   );
+  openEditDialog$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(openEditDialog),
+        tap(() =>
+          this.matDialog.open(UpdateUserComponent, {
+            width: '30%',
+          })
+        )
+      ),
+    { dispatch: false }
+  );
 
-  //   showEditFormDialog(user: User) {
-  //     this.matDialog.open(UpdateUserComponent, {
-  //       data: user,
-  //       width: '50%',
-  //     });
-  //   }
+  updateUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateUser),
+      mergeMap(({ oldPassword, newPassword }) =>
+        this.authService.updateUser(oldPassword, newPassword).pipe(
+          map(() => updateUserSuccess()),
+          catchError((error) => of(updateUserFail({ error: error.message })))
+        )
+      )
+    )
+  );
 
-  //   updateUser$ = createEffect(() =>
-  //     this.actions$.pipe(
-  //       ofType(updateUser),
-  //       mergeMap(({ user }) =>
-  //         this.userService.updateUser(user.id, user).pipe(
-  //           map((newUser: User) => updateUserSuccess({ user: newUser })),
-  //           catchError((error) => of(updateUserFail({ error: error.message })))
-  //         )
-  //       )
-  //     )
-  //   );
+  updateUserSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(updateUserSuccess),
+        tap(() => {
+          this.router.navigate(['/admin/users']);
+          this.snackBar.open('Details updated successfully!', 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
 
-  //   updateUserSuccess$ = createEffect(
-  //     () =>
-  //       this.actions$.pipe(
-  //         ofType(updateUserSuccess),
-  //         tap(() => {
-  //           this.router.navigate(['/admin/users']);
-  //           this.snackBar.open('User updated successfully!', 'Dismiss', {
-  //             duration: 3000,
-  //           });
-  //         })
-  //       ),
-  //     { dispatch: false }
-  //   );
+  updateUserFail$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(updateUserFail),
+        tap(({ error }) => {
+          this.snackBar.open(`Server Error: ${error}`, 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
 
-  //   updateUserFail$ = createEffect(
-  //     () =>
-  //       this.actions$.pipe(
-  //         ofType(updateUserFail),
-  //         tap(({ error }) => {
-  //           this.snackBar.open(`Server Error: ${error}`, 'Dismiss', {
-  //             duration: 3000,
-  //           });
-  //         })
-  //       ),
-  //     { dispatch: false }
-  //   );
+  openDeleteDialog$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(openDeleteDialog),
+        tap(({ userId }) => {
+          this.showDeleteWarningDialog(deleteUser({ userId }));
+        })
+      ),
+    { dispatch: false }
+  );
 
-  //   openDeleteDialog$ = createEffect(
-  //     () =>
-  //       this.actions$.pipe(
-  //         ofType(openDeleteDialog),
-  //         tap(({ userId }) => {
-  //           this.showDeleteWarningDialog(deleteUser({ userId }));
-  //         })
-  //       ),
-  //     { dispatch: false }
-  //   );
+  showDeleteWarningDialog(action: Action) {
+    this.matDialog.open(ConfirmDialogComponent, {
+      data: {
+        action: action,
+        message: 'Are you sure you want to delete this user?',
+      },
+      width: '50%',
+    });
+  }
 
-  //   showDeleteWarningDialog(action: Action) {
-  //     this.matDialog.open(ConfirmDialogComponent, {
-  //       data: {
-  //         action: action,
-  //         message: 'Are you sure you want to delete this user?',
-  //       },
-  //       width: '50%',
-  //     });
-  //   }
+  deleteUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(deleteUser),
+      mergeMap(({ userId }) =>
+        this.userService.deleteUser(userId).pipe(
+          map(() => deleteUserSuccess({ userId })),
+          catchError((error) => of(deleteUserFail({ error: error.message })))
+        )
+      )
+    )
+  );
 
-  //   deleteUser$ = createEffect(() =>
-  //     this.actions$.pipe(
-  //       ofType(deleteUser),
-  //       mergeMap(({ userId }) =>
-  //         this.userService.deleteUser(userId).pipe(
-  //           map(() => deleteUserSuccess({ userId })),
-  //           catchError((error) => of(deleteUserFail({ error: error.message })))
-  //         )
-  //       )
-  //     )
-  //   );
+  deleteUserSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(deleteUserSuccess),
+        tap(() => {
+          this.snackBar.open('User deleted successfully!', 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
 
-  //   deleteUserSuccess$ = createEffect(
-  //     () =>
-  //       this.actions$.pipe(
-  //         ofType(deleteUserSuccess),
-  //         tap(() => {
-  //           this.snackBar.open('User deleted successfully!', 'Dismiss', {
-  //             duration: 3000,
-  //           });
-  //         })
-  //       ),
-  //     { dispatch: false }
-  //   );
-
-  //   deleteUserFail$ = createEffect(
-  //     () =>
-  //       this.actions$.pipe(
-  //         ofType(deleteUserFail),
-  //         tap(({ error }) => {
-  //           this.snackBar.open(`Failed to delete: ${error}`, 'Dismiss', {
-  //             duration: 3000,
-  //           });
-  //         })
-  //       ),
-  //     { dispatch: false }
-  //   );
+  deleteUserFail$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(deleteUserFail),
+        tap(({ error }) => {
+          this.snackBar.open(`Failed to delete: ${error}`, 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
 }
