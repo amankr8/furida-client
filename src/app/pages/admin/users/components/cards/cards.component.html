@@ -17,8 +17,20 @@
           <p>{{ user.email }}</p>
         </mat-card-content>
         <mat-card-actions class="btn-group">
-          <button mat-button [disabled]="loading$ | async">EDIT</button>
-          <button mat-button [disabled]="loading$ | async">DELETE</button>
+          <button
+            mat-button
+            (click)="updateUser()"
+            [disabled]="!isLoggedInUser(user.username) || (loading$ | async)"
+          >
+            EDIT
+          </button>
+          <button
+            mat-button
+            (click)="deleteUser(user.id)"
+            [disabled]="isLoggedInUser(user.username) || (loading$ | async)"
+          >
+            DELETE
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>

@@ -11,7 +11,12 @@ import {
   selectLoading,
   selectUsers,
 } from '../../../../../store/selectors/user.selectors';
-import { loadUsers } from '../../../../../store/actions/user.actions';
+import {
+  loadUsers,
+  openDeleteDialog,
+  openEditDialog,
+} from '../../../../../store/actions/user.actions';
+import { AuthService } from '../../../../../service/auth/auth.service';
 
 @Component({
   selector: 'app-user-cards',
@@ -24,12 +29,26 @@ export class CardsComponent {
   users$: Observable<User[]> = this.store.select(selectUsers);
   isUserLoaded: Observable<boolean> = this.store.select(selectIsUserLoaded);
   loading$: Observable<boolean> = this.store.select(selectLoading);
+  loggedInUser: string | null = null;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private authService: AuthService) {}
 
   ngOnInit() {
     this.isUserLoaded.subscribe((isLoaded) => {
       if (!isLoaded) this.store.dispatch(loadUsers());
     });
+    this.loggedInUser = this.authService.getLoggedInUsername();
+  }
+
+  isLoggedInUser(username: string): boolean {
+    return username === this.loggedInUser;
+  }
+
+  updateUser() {
+    this.store.dispatch(openEditDialog());
+  }
+
+  deleteUser(id: number) {
+    this.store.dispatch(openDeleteDialog({ userId: id }));
   }
 }
