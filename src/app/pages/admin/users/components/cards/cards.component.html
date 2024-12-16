@@ -24,7 +24,13 @@
           >
             EDIT
           </button>
-          <button mat-button [disabled]="loading$ | async">DELETE</button>
+          <button
+            mat-button
+            (click)="deleteUser(user.id)"
+            [disabled]="loading$ | async"
+          >
+            DELETE
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>

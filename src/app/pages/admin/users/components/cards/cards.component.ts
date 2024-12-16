@@ -13,6 +13,7 @@ import {
 } from '../../../../../store/selectors/user.selectors';
 import {
   loadUsers,
+  openDeleteDialog,
   openEditDialog,
 } from '../../../../../store/actions/user.actions';
 
@@ -38,5 +39,9 @@ export class CardsComponent {
 
   updateUser() {
     this.store.dispatch(openEditDialog());
+  }
+
+  deleteUser(id: number) {
+    this.store.dispatch(openDeleteDialog({ userId: id }));
   }
 }
