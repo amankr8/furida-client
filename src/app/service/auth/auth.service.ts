@@ -5,6 +5,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { User } from '../../interface/user';
 import { environment } from '../../../environments/environment';
+import { JwtPayload, jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +26,15 @@ export class AuthService {
   updateUser(oldPassword: string, newPassword: string): Observable<any> {
     const payload = { oldPassword, newPassword };
     return this.http.post(this.authUrl + '/update-password', payload);
+  }
+
+  getLoggedInUsername(): string | null {
+    const token = localStorage.getItem('jwtToken');
+    if (token) {
+      const decodedToken: JwtPayload = jwtDecode<JwtPayload>(token);
+      return decodedToken.sub || null;
+    }
+    return null;
   }
 
   logout(): void {

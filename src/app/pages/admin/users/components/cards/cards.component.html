@@ -17,20 +17,22 @@
           <p>{{ user.email }}</p>
         </mat-card-content>
         <mat-card-actions class="btn-group">
-          <button
-            mat-button
-            (click)="updateUser()"
-            [disabled]="loading$ | async"
-          >
-            EDIT
-          </button>
-          <button
-            mat-button
-            (click)="deleteUser(user.id)"
-            [disabled]="loading$ | async"
-          >
-            DELETE
-          </button>
+          <ng-container *ngIf="getButtonStates(user) | async as states">
+            <button
+              mat-button
+              (click)="updateUser()"
+              [disabled]="!states.canEdit"
+            >
+              EDIT
+            </button>
+            <button
+              mat-button
+              (click)="deleteUser(user.id)"
+              [disabled]="!states.canDelete"
+            >
+              DELETE
+            </button>
+          </ng-container>
         </mat-card-actions>
       </mat-card>
     </div>
