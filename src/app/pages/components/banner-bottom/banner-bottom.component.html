@@ -18,10 +18,18 @@
       </div>
       <div class="col-lg-4">
         <p class="fs-5 mb-4">Quick Links</p>
-        <p class="fs-6 mb-3">About</p>
-        <p class="fs-6 mb-3">Projects</p>
-        <p class="fs-6 mb-3">Contact</p>
-        <p class="fs-6 mb-3">CCTV</p>
+        <p class="fs-6 mb-3">
+          <a [routerLink]="'/'" class="link-style">Home</a>
+        </p>
+        <p class="fs-6 mb-3">
+          <a [routerLink]="'/about'" class="link-style">About</a>
+        </p>
+        <p class="fs-6 mb-3">
+          <a [routerLink]="'/contact'" class="link-style">Contact</a>
+        </p>
+        <p class="fs-6 mb-3">
+          <a [routerLink]="'/cctv'" class="link-style">CCTV</a>
+        </p>
       </div>
     </div>
   </div>
