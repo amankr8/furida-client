@@ -93,10 +93,11 @@ export class AuthEffects {
       ofType(signInUser),
       mergeMap(({ user }) =>
         this.authService.login(user).pipe(
-          map((res) => {
+          mergeMap((res) => {
             const token = res.token;
             localStorage.setItem('jwtToken', token);
-            return signInUserSuccess({ username: user.username });
+
+            return [signInUserSuccess(), loadAuthUser()];
           }),
           catchError((err) => of(signInUserFail({ error: err })))
         )

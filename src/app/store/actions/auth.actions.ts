@@ -31,10 +31,7 @@ export const signInUser = createAction(
   props<{ user: User }>()
 );
 
-export const signInUserSuccess = createAction(
-  '[Auth] Sign In User Success',
-  props<{ username: string }>()
-);
+export const signInUserSuccess = createAction('[Auth] Sign In User Success');
 
 export const signInUserFail = createAction(
   '[Auth] Sign In User Fail',

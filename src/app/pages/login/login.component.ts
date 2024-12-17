@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectLoading } from '../../store/selectors/auth.selectors';
+import { selectAuthLoading } from '../../store/selectors/auth.selectors';
 import { signInUser } from '../../store/actions/auth.actions';
 
 @Component({
@@ -40,7 +40,7 @@ import { signInUser } from '../../store/actions/auth.actions';
 })
 export class LoginComponent {
   form!: FormGroup;
-  loading$: Observable<boolean> = this.store.select(selectLoading);
+  loading$: Observable<boolean> = this.store.select(selectAuthLoading);
 
   constructor(private authService: AuthService, private store: Store) {}
 
