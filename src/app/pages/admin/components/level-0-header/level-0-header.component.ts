@@ -9,12 +9,19 @@ import { loadAuthUser } from '../../../../store/actions/auth.actions';
 import {
   selectAuthUser,
   selectAuthLoaded,
+  selectAuthLoading,
 } from '../../../../store/selectors/auth.selectors';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-level-0-header',
   standalone: true,
-  imports: [DisplayTextHeadComponent, LogoutButtonComponent, CommonModule],
+  imports: [
+    DisplayTextHeadComponent,
+    LogoutButtonComponent,
+    CommonModule,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './level-0-header.component.html',
   styleUrl: './level-0-header.component.scss',
 })
@@ -22,6 +29,7 @@ export class Level0HeaderComponent {
   headerText: string = 'Admin Console';
   authUser$: Observable<User | null> = this.store.select(selectAuthUser);
   authLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
+  authLoading$: Observable<boolean> = this.store.select(selectAuthLoading);
 
   constructor(private store: Store) {}
 
@@ -33,7 +41,7 @@ export class Level0HeaderComponent {
 
   getAuthUser(): Observable<string> {
     return this.authUser$.pipe(
-      map((user) => (user ? `${user.username}(${user.role})` : '[Not Found]'))
+      map((user) => (user ? `${user.username}(${user.role})` : ''))
     );
   }
 }

@@ -16,7 +16,7 @@ import { RoleService } from '../../../../../service/role/role.service';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectLoading } from '../../../../../store/selectors/auth.selectors';
+import { selectAuthLoading } from '../../../../../store/selectors/auth.selectors';
 import { signUpUser } from '../../../../../store/actions/auth.actions';
 
 @Component({
@@ -38,7 +38,7 @@ import { signUpUser } from '../../../../../store/actions/auth.actions';
 })
 export class SignupFormComponent {
   form!: FormGroup;
-  loading$: Observable<boolean> = this.store.select(selectLoading);
+  loading$: Observable<boolean> = this.store.select(selectAuthLoading);
   roles: string[] = [];
 
   constructor(private roleService: RoleService, private store: Store) {}

@@ -13,7 +13,7 @@ export const selectAuthLoaded = createSelector(
   (state) => state.loaded
 );
 
-export const selectLoading = createSelector(
+export const selectAuthLoading = createSelector(
   selectAuthState,
   (state) => state.loading
 );

@@ -1,0 +1,9 @@
+.link-style {
+  color: black; /* Default color */
+  text-decoration: none; /* No underline */
+  transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+.link-style:hover {
+  color: blue; /* Color when hovered */
+}
