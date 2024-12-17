@@ -9,11 +9,35 @@ import {
   logoutUser,
   logoutUserFail,
   logoutUserSuccess,
+  loadAuthUser,
+  loadAuthUserFail,
+  loadAuthUserSuccess,
 } from '../actions/auth.actions';
 import { initialAuthState } from '../auth.state';
 
 export const authReducer = createReducer(
   initialAuthState,
+
+  on(loadAuthUser, (state) => ({
+    ...state,
+    error: null,
+    loading: true,
+  })),
+
+  on(loadAuthUserSuccess, (state, { user }) => ({
+    ...state,
+    user,
+    loaded: true,
+    loading: false,
+  })),
+
+  on(loadAuthUserFail, (state, { error }) => ({
+    ...state,
+    error,
+    loaded: false,
+    loading: false,
+  })),
+
   on(signUpUser, (state) => ({
     ...state,
     error: null,

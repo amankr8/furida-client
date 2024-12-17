@@ -4,6 +4,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mergeMap, map, catchError, of, tap } from 'rxjs';
 import { AuthService } from '../../service/auth/auth.service';
 import {
+  loadAuthUser,
+  loadAuthUserFail,
+  loadAuthUserSuccess,
   signInUser,
   signInUserFail,
   signInUserSuccess,
@@ -23,6 +26,18 @@ export class AuthEffects {
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
+
+  loadAuthUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadAuthUser),
+      mergeMap(() =>
+        this.authService.getAuthUser().pipe(
+          map((user) => loadAuthUserSuccess({ user })),
+          catchError((err) => of(loadAuthUserFail({ error: err.message })))
+        )
+      )
+    )
+  );
 
   signUpUser$ = createEffect(() =>
     this.actions$.pipe(

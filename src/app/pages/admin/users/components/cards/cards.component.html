@@ -20,14 +20,18 @@
           <button
             mat-button
             (click)="updateUser()"
-            [disabled]="!isLoggedInUser(user.username) || (loading$ | async)"
+            [disabled]="
+              !(isLoggedInUser(user.username) | async) || (loading$ | async)
+            "
           >
             EDIT
           </button>
           <button
             mat-button
             (click)="deleteUser(user.id)"
-            [disabled]="isLoggedInUser(user.username) || (loading$ | async)"
+            [disabled]="
+              (isLoggedInUser(user.username) | async) || (loading$ | async)
+            "
           >
             DELETE
           </button>

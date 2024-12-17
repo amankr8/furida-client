@@ -6,7 +6,6 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { Action, Store } from '@ngrx/store';
-import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -18,7 +17,7 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 export class ConfirmDialogComponent {
   constructor(
     public store: Store,
-    public dialogRef: MatDialogRef<DeleteDialogComponent>,
+    public dialogRef: MatDialogRef<ConfirmDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: { action: Action; message: string }
   ) {}
