@@ -2,6 +2,18 @@ import { createAction, props } from '@ngrx/store';
 import { User } from '../../interface/user';
 import { HttpErrorResponse } from '@angular/common/http';
 
+export const loadAuthUser = createAction('[Auth] Load Auth User');
+
+export const loadAuthUserSuccess = createAction(
+  '[Auth] Load Auth User Success',
+  props<{ user: User }>()
+);
+
+export const loadAuthUserFail = createAction(
+  '[Auth] Load Auth User Fail',
+  props<{ error: string }>()
+);
+
 export const signUpUser = createAction(
   '[Auth] Sign Up User',
   props<{ user: User }>()

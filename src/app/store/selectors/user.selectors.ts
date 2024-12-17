@@ -18,7 +18,7 @@ export const selectUsers = createSelector(
   (state) => state.users
 );
 
-export const selectIsUserLoaded = createSelector(
+export const selectUserLoaded = createSelector(
   selectUsersState,
   (state) => state.isLoaded
 );

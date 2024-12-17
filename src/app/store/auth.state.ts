@@ -1,11 +1,15 @@
+import { User } from '../interface/user';
+
 export interface AuthState {
-  username: string | null;
+  user: User | null;
+  loaded: boolean;
   loading: boolean;
   error: string | null;
 }
 
 export const initialAuthState: AuthState = {
-  username: null,
+  user: null,
+  loaded: false,
   loading: false,
   error: null,
 };

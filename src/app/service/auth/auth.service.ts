@@ -1,11 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { User } from '../../interface/user';
 import { environment } from '../../../environments/environment';
-import { JwtPayload, jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -28,13 +26,8 @@ export class AuthService {
     return this.http.post(this.authUrl + '/update-password', payload);
   }
 
-  getLoggedInUsername(): string | null {
-    const token = localStorage.getItem('jwtToken');
-    if (token) {
-      const decodedToken: JwtPayload = jwtDecode<JwtPayload>(token);
-      return decodedToken.sub || null;
-    }
-    return null;
+  getAuthUser(): Observable<User> {
+    return this.http.get<User>(this.authUrl + '/auth-user');
   }
 
   logout(): void {
