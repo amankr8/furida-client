@@ -6,18 +6,18 @@ import { SignupComponent } from './pages/admin/users/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { authGuard } from './guard/auth.guard';
 import { AdminComponent } from './pages/admin/admin.component';
-import { HomeComponent } from './pages/main-layout/landing/home.component';
+import { HomeComponent } from './pages/home/landing/home.component';
 import { UsersComponent } from './pages/admin/users/users.component';
 import { ProjectsComponent } from './pages/admin/projects/projects.component';
 import { AddProjectComponent } from './pages/admin/projects/add-project/add-project.component';
-import { DocumentsComponent } from './pages/main-layout/projects/documents.component';
+import { DocumentsComponent } from './pages/home/projects/documents.component';
 import { AdminDocumentsComponent } from './pages/admin/documents/documents.component';
 import { AddDocumentComponent } from './pages/admin/documents/add-document/add-document.component';
-import { AboutComponent } from './pages/main-layout/about/about.component';
-import { ContactComponent } from './pages/main-layout/contact/contact.component';
+import { AboutComponent } from './pages/home/about/about.component';
+import { ContactComponent } from './pages/home/contact/contact.component';
 import { MessagesComponent } from './pages/admin/messages/messages.component';
 import { ReadMessagesComponent } from './pages/admin/messages/read-messages/read-messages.component';
-import { MainLayoutComponent } from './pages/main-layout/main-layout.component';
+import { MainLayoutComponent } from './pages/home/main-layout.component';
 import { AdminLandingComponent } from './pages/admin/landing/admin-landing.component';
 
 export const routes: Routes = [
