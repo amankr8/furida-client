@@ -17,24 +17,38 @@
           <p>{{ user.email }}</p>
         </mat-card-content>
         <mat-card-actions class="btn-group">
-          <button
-            mat-button
-            (click)="updateUser()"
-            [disabled]="
-              !(isLoggedInUser(user.username) | async) || (loading$ | async)
+          <div
+            [matTooltip]="
+              !(isLoggedInUser(user.username) | async) ? editConstraint : ''
             "
+            [matTooltipDisabled]="isLoggedInUser(user.username) | async"
           >
-            EDIT
-          </button>
-          <button
-            mat-button
-            (click)="deleteUser(user.id)"
-            [disabled]="
-              (isLoggedInUser(user.username) | async) || (loading$ | async)
+            <button
+              mat-button
+              (click)="updateUser()"
+              [disabled]="
+                !(isLoggedInUser(user.username) | async) || (loading$ | async)
+              "
+            >
+              EDIT
+            </button>
+          </div>
+          <div
+            [matTooltip]="
+              (isLoggedInUser(user.username) | async) ? deleteConstraint : ''
             "
+            [matTooltipDisabled]="!(isLoggedInUser(user.username) | async)"
           >
-            DELETE
-          </button>
+            <button
+              mat-button
+              (click)="deleteUser(user.id)"
+              [disabled]="
+                (isLoggedInUser(user.username) | async) || (loading$ | async)
+              "
+            >
+              DELETE
+            </button>
+          </div>
         </mat-card-actions>
       </mat-card>
     </div>

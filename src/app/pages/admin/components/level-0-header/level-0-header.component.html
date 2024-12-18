@@ -6,7 +6,9 @@
     ></app-display-text-head>
     <div class="me-4">
       <mat-spinner *ngIf="authLoading$ | async" diameter="30"></mat-spinner>
-      <p class="mb-0 fs-6 fw-bold fst-italic">{{ getAuthUser() | async }}</p>
+      <p *ngIf="!(authLoading$ | async)" class="mb-0 fs-6 fw-bold fst-italic">
+        {{ getAuthUser() | async }}
+      </p>
     </div>
     <app-logout-button></app-logout-button>
   </div>
