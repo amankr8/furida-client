@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { User } from '../../../../../interface/user';
 import { map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -25,7 +26,13 @@ import { loadAuthUser } from '../../../../../store/actions/auth.actions';
 @Component({
   selector: 'app-user-cards',
   standalone: true,
-  imports: [MatCardModule, MatProgressBarModule, MatButtonModule, CommonModule],
+  imports: [
+    MatCardModule,
+    MatProgressBarModule,
+    MatButtonModule,
+    CommonModule,
+    MatTooltipModule,
+  ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
 })
@@ -34,6 +41,8 @@ export class CardsComponent {
   isUserLoaded$: Observable<boolean> = this.store.select(selectUserLoaded);
   loading$: Observable<boolean> = this.store.select(selectLoading);
   isAuthUserLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
+  editConstraint: string = 'Cannot update other users';
+  deleteConstraint: string = 'Cannot delete current user';
 
   constructor(private store: Store) {}
 
