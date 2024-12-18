@@ -31,7 +31,10 @@ export const signInUser = createAction(
   props<{ user: User }>()
 );
 
-export const signInUserSuccess = createAction('[Auth] Sign In User Success');
+export const signInUserSuccess = createAction(
+  '[Auth] Sign In User Success',
+  props<{ token: string }>()
+);
 
 export const signInUserFail = createAction(
   '[Auth] Sign In User Fail',
@@ -39,10 +42,3 @@ export const signInUserFail = createAction(
 );
 
 export const logoutUser = createAction('[Auth] Logout User');
-
-export const logoutUserSuccess = createAction('[Auth] Logout User Success');
-
-export const logoutUserFail = createAction(
-  '[Auth] Logout User Fail',
-  props<{ error: string }>()
-);

@@ -2,11 +2,14 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthService } from '../service/auth/auth.service';
 
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   const jwtHelper = inject(JwtHelperService);
   const router = inject(Router);
-  const token = localStorage.getItem('jwtToken'); // Retrieve the JWT token from local storage
+  const authService = inject(AuthService);
+
+  const token = authService.getAuthToken();
 
   if (token) {
     // Check if the token is expired

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../../components/header/header.component';
 import { Level2HeaderComponent } from '../../components/level-2-header/level-2-header.component';
 import { CardsComponent } from '../components/cards/cards.component';
+import { AdminHeaderComponent } from '../../../components/admin-header/admin-header.component';
 
 @Component({
   selector: 'app-read-messages',
   standalone: true,
-  imports: [HeaderComponent, Level2HeaderComponent, CardsComponent],
+  imports: [Level2HeaderComponent, CardsComponent, AdminHeaderComponent],
   templateUrl: './read-messages.component.html',
   styleUrl: './read-messages.component.scss',
 })

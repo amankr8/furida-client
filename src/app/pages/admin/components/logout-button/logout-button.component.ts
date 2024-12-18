@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { AuthService } from '../../../../service/auth/auth.service';
-import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
+import { Store } from '@ngrx/store';
+import { logoutUser } from '../../../../store/actions/auth.actions';
 
 @Component({
   selector: 'app-logout-button',
@@ -12,15 +11,9 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './logout-button.component.scss',
 })
 export class LogoutButtonComponent {
-  private snackBarRef = inject(MatSnackBar);
-
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private store: Store) {}
 
   logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-    this.snackBarRef.open('Logged out successfully!', 'Dismiss', {
-      duration: 3000,
-    });
+    this.store.dispatch(logoutUser());
   }
 }

@@ -11,8 +11,15 @@ import {
   selectIsProjectLoaded,
   selectProjects,
 } from '../../../store/selectors/project.selectors';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { loadProjects } from '../../../store/actions/project.actions';
+import {
+  selectAuthLoaded,
+  selectAuthUser,
+} from '../../../store/selectors/auth.selectors';
+import { User } from '../../../interface/user';
+import { loadAuthUser } from '../../../store/actions/auth.actions';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +30,7 @@ import { loadProjects } from '../../../store/actions/project.actions';
     MatButtonModule,
     MatMenuModule,
     CommonModule,
+    MatIconModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -32,12 +40,21 @@ export class HeaderComponent {
   isProjectLoaded$: Observable<boolean> = this.store.select(
     selectIsProjectLoaded
   );
+  authLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
+  authUser$: Observable<User | null> = this.store.select(selectAuthUser);
 
-  constructor(private projectService: ProjectService, private store: Store) {}
+  constructor(private store: Store) {}
 
   ngOnInit() {
     this.isProjectLoaded$.subscribe((isLoaded) => {
       if (!isLoaded) this.store.dispatch(loadProjects());
     });
+    this.authLoaded$.subscribe((loaded) => {
+      if (!loaded) this.store.dispatch(loadAuthUser());
+    });
+  }
+
+  isUserLoggedIn(): Observable<boolean> {
+    return this.authUser$.pipe(map((user) => user !== null));
   }
 }

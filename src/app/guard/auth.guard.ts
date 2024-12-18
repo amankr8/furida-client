@@ -2,13 +2,15 @@ import { inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CanActivateFn, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthService } from '../service/auth/auth.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const jwtHelper = inject(JwtHelperService);
   const router = inject(Router);
   const snackBarRef = inject(MatSnackBar);
+  const authService = inject(AuthService);
 
-  const token = localStorage.getItem('jwtToken');
+  const token = authService.getAuthToken();
 
   // Check if token exists and is not expired
   if (!token) {
