@@ -6,44 +6,53 @@ import { SignupComponent } from './pages/admin/users/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { authGuard } from './guard/auth.guard';
 import { AdminComponent } from './pages/admin/admin.component';
-import { HomeComponent } from './pages/home/home.component';
+import { HomeComponent } from './pages/home/landing/home.component';
 import { UsersComponent } from './pages/admin/users/users.component';
 import { ProjectsComponent } from './pages/admin/projects/projects.component';
 import { AddProjectComponent } from './pages/admin/projects/add-project/add-project.component';
-import { DocumentsComponent } from './pages/documents/documents.component';
+import { DocumentsComponent } from './pages/home/projects/documents.component';
 import { AdminDocumentsComponent } from './pages/admin/documents/documents.component';
 import { AddDocumentComponent } from './pages/admin/documents/add-document/add-document.component';
-import { AboutComponent } from './pages/about/about.component';
-import { ContactComponent } from './pages/contact/contact.component';
+import { AboutComponent } from './pages/home/about/about.component';
+import { ContactComponent } from './pages/home/contact/contact.component';
 import { MessagesComponent } from './pages/admin/messages/messages.component';
 import { ReadMessagesComponent } from './pages/admin/messages/read-messages/read-messages.component';
+import { MainLayoutComponent } from './pages/home/main-layout.component';
+import { AdminLandingComponent } from './pages/admin/landing/admin-landing.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: '', pathMatch: 'full', component: HomeComponent },
   {
-    path: 'projects',
+    path: '',
+    component: MainLayoutComponent,
     children: [
+      { path: '', component: HomeComponent },
       {
-        path: ':id',
-        component: DocumentsComponent,
+        path: 'projects',
+        children: [
+          {
+            path: ':id',
+            component: DocumentsComponent,
+          },
+        ],
+      },
+      {
+        path: 'about',
+        component: AboutComponent,
+      },
+      {
+        path: 'contact',
+        component: ContactComponent,
       },
     ],
   },
   {
-    path: 'about',
-    component: AboutComponent,
-  },
-  {
-    path: 'contact',
-    component: ContactComponent,
-  },
-  {
     path: 'admin',
+    component: AdminComponent,
     children: [
       {
         path: '',
-        component: AdminComponent,
+        component: AdminLandingComponent,
         canActivate: [authGuard],
       },
       {

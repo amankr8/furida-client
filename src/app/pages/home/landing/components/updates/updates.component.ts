@@ -3,18 +3,18 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { Post } from '../../../../interface/post';
+import { Post } from '../../../../../interface/post';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import {
   selectIsPostLoaded,
   selectPosts,
-} from '../../../../store/selectors/post.selectors';
-import { selectLoading } from '../../../../store/selectors/project.selectors';
+} from '../../../../../store/selectors/post.selectors';
+import { selectLoading } from '../../../../../store/selectors/project.selectors';
 import {
   loadPosts,
   openViewDialog,
-} from '../../../../store/actions/post.actions';
+} from '../../../../../store/actions/post.actions';
 
 @Component({
   selector: 'app-updates',

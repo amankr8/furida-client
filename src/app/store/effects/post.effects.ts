@@ -26,7 +26,7 @@ import {
 } from '../actions/post.actions';
 import { openEditDialog, openDeleteDialog } from '../actions/post.actions';
 import { selectPostById } from '../selectors/post.selectors';
-import { ViewPostComponent } from '../../pages/home/components/view-post/view-post.component';
+import { ViewPostComponent } from '../../pages/home/landing/components/view-post/view-post.component';
 
 @Injectable()
 export class PostEffects {

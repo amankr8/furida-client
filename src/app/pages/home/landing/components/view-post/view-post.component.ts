@@ -5,7 +5,7 @@ import {
   MatDialogModule,
 } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { Post } from '../../../../interface/post';
+import { Post } from '../../../../../interface/post';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
