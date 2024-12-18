@@ -1,24 +1,29 @@
 <mat-toolbar color="primary" class="shadow-sm">
   <div class="container-fluid">
     <div class="d-flex justify-content-between">
+      <a
+        *ngIf="!(isUserLoggedIn() | async)"
+        routerLink="\"
+        class="navbar-brand fw-bold letter-spacing-1"
+        >FURIDA</a
+      >
       <div class="d-flex gap-2">
-        <a
-          *ngIf="!(isUserLoggedIn() | async)"
-          routerLink="\"
-          class="navbar-brand fw-bold letter-spacing-1"
-          >FURIDA</a
+        <button
+          *ngIf="isUserLoggedIn() | async"
+          mat-raised-button
+          color="primary"
+          routerLink="/"
         >
+          <mat-icon fontIcon="home"></mat-icon>
+          Home
+        </button>
         <button
           *ngIf="isUserLoggedIn() | async"
           mat-raised-button
           color="primary"
           routerLink="/admin"
         >
-          <mat-icon
-            aria-hidden="false"
-            aria-label="Example home icon"
-            fontIcon="settings"
-          ></mat-icon>
+          <mat-icon fontIcon="settings"></mat-icon>
           Admin Console
         </button>
       </div>
