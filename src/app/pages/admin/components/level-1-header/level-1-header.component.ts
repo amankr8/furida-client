@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { DisplayTextHeadComponent } from '../../../components/display-text-head/display-text-head.component';
+import { DisplayTextHeadComponent } from '../../../main-layout/components/display-text-head/display-text-head.component';
 import { RouterLink } from '@angular/router';
 
 @Component({

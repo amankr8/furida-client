@@ -3,22 +3,21 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
-import { Project } from '../../../interface/project';
-import { ProjectService } from '../../../service/project/project.service';
+import { Project } from '../../../../interface/project';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import {
   selectIsProjectLoaded,
   selectProjects,
-} from '../../../store/selectors/project.selectors';
+} from '../../../../store/selectors/project.selectors';
 import { map, Observable } from 'rxjs';
-import { loadProjects } from '../../../store/actions/project.actions';
+import { loadProjects } from '../../../../store/actions/project.actions';
 import {
   selectAuthLoaded,
   selectAuthUser,
-} from '../../../store/selectors/auth.selectors';
-import { User } from '../../../interface/user';
-import { loadAuthUser } from '../../../store/actions/auth.actions';
+} from '../../../../store/selectors/auth.selectors';
+import { User } from '../../../../interface/user';
+import { loadAuthUser } from '../../../../store/actions/auth.actions';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({

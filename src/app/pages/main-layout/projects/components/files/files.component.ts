@@ -2,21 +2,21 @@ import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
-import { Document } from '../../../../interface/document';
+import { Document } from '../../../../../interface/document';
 import { MatButtonModule } from '@angular/material/button';
 import { map, Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
   selectIsProjectLoaded,
   selectProjectById,
-} from '../../../../store/selectors/project.selectors';
-import { loadProjects } from '../../../../store/actions/project.actions';
-import { loadDocuments } from '../../../../store/actions/document.actions';
+} from '../../../../../store/selectors/project.selectors';
+import { loadProjects } from '../../../../../store/actions/project.actions';
+import { loadDocuments } from '../../../../../store/actions/document.actions';
 import {
   selectDocumentsByProjectId,
   selectIsDocumentLoaded,
   selectLoading,
-} from '../../../../store/selectors/document.selectors';
+} from '../../../../../store/selectors/document.selectors';
 
 @Component({
   selector: 'app-files',

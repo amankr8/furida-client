@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { Level2HeaderComponent } from '../../components/level-2-header/level-2-header.component';
 import { SignupFormComponent } from '../components/signup-form/signup-form.component';
-import { AdminHeaderComponent } from '../../../components/admin-header/admin-header.component';
+import { AdminHeaderComponent } from '../../components/admin-header/admin-header.component';
 
 @Component({
   selector: 'app-signup',
