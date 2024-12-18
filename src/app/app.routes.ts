@@ -17,26 +17,33 @@ import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { MessagesComponent } from './pages/admin/messages/messages.component';
 import { ReadMessagesComponent } from './pages/admin/messages/read-messages/read-messages.component';
+import { MainLayoutComponent } from './pages/main-layout/main-layout.component';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: '', pathMatch: 'full', component: HomeComponent },
   {
-    path: 'projects',
+    path: '',
+    component: MainLayoutComponent,
     children: [
+      { path: '', component: HomeComponent },
+      { path: 'login', component: LoginComponent },
       {
-        path: ':id',
-        component: DocumentsComponent,
+        path: 'projects',
+        children: [
+          {
+            path: ':id',
+            component: DocumentsComponent,
+          },
+        ],
+      },
+      {
+        path: 'about',
+        component: AboutComponent,
+      },
+      {
+        path: 'contact',
+        component: ContactComponent,
       },
     ],
-  },
-  {
-    path: 'about',
-    component: AboutComponent,
-  },
-  {
-    path: 'contact',
-    component: ContactComponent,
   },
   {
     path: 'admin',
