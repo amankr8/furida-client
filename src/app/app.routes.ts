@@ -18,6 +18,7 @@ import { ContactComponent } from './pages/main-layout/contact/contact.component'
 import { MessagesComponent } from './pages/admin/messages/messages.component';
 import { ReadMessagesComponent } from './pages/admin/messages/read-messages/read-messages.component';
 import { MainLayoutComponent } from './pages/main-layout/main-layout.component';
+import { AdminLandingComponent } from './pages/admin/landing/admin-landing.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -47,10 +48,11 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
+    component: AdminComponent,
     children: [
       {
         path: '',
-        component: AdminComponent,
+        component: AdminLandingComponent,
         canActivate: [authGuard],
       },
       {
