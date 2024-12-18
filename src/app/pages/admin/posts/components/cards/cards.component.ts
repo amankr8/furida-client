@@ -10,12 +10,12 @@ import {
   selectIsPostLoaded,
   selectLoading,
   selectPosts,
-} from '../../../../../store/selectors/post.selectors';
+} from '../../../../../state/post/post.selectors';
 import {
   loadPosts,
   openDeleteDialog,
   openEditDialog,
-} from '../../../../../store/actions/post.actions';
+} from '../../../../../state/post/post.actions';
 
 @Component({
   selector: 'app-post-cards',

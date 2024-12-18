@@ -1,5 +1,4 @@
 import { createReducer, on } from '@ngrx/store';
-import { initialMessagesState } from '../message.state';
 import {
   deleteMessage,
   deleteMessageFail,
@@ -13,7 +12,22 @@ import {
   toggleArchive,
   toggleArchiveFail,
   toggleArchiveSuccess,
-} from '../actions/message.actions';
+} from './message.actions';
+import { Message } from '../../interface/message';
+
+export interface MessageState {
+  messages: Message[];
+  isLoaded: boolean;
+  loading: boolean;
+  error: string | null;
+}
+
+export const initialMessagesState: MessageState = {
+  messages: [],
+  isLoaded: false,
+  loading: false,
+  error: null,
+};
 
 export const messageReducer = createReducer(
   initialMessagesState,

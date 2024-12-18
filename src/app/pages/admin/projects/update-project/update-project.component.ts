@@ -16,7 +16,7 @@ import { Project } from '../../../../interface/project';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
-import { updateProject } from '../../../../store/actions/project.actions';
+import { updateProject } from '../../../../state/project/project.actions';
 
 @Component({
   selector: 'app-update-project',

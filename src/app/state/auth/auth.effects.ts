@@ -14,9 +14,9 @@ import {
   signUpUser,
   signUpUserFail,
   signUpUserSuccess,
-} from '../actions/auth.actions';
+} from '../../state/auth/auth.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { loadUsers } from '../actions/user.actions';
+import { loadUsers } from '../../state/user/user.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()

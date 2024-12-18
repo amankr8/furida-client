@@ -1,5 +1,4 @@
 import { createReducer, on } from '@ngrx/store';
-import { initialProjectsState } from '../project.state';
 import {
   addProject,
   addProjectFail,
@@ -13,7 +12,22 @@ import {
   updateProject,
   updateProjectFail,
   updateProjectSuccess,
-} from '../../store/actions/project.actions';
+} from './project.actions';
+import { Project } from '../../interface/project';
+
+export interface ProjectState {
+  projects: Project[];
+  isLoaded: boolean;
+  loading: boolean;
+  error: string | null;
+}
+
+export const initialProjectsState: ProjectState = {
+  projects: [],
+  isLoaded: false,
+  loading: false,
+  error: null,
+};
 
 export const projectReducer = createReducer(
   initialProjectsState,

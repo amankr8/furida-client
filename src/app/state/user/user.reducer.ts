@@ -9,8 +9,22 @@ import {
   deleteUser,
   deleteUserSuccess,
   deleteUserFail,
-} from '../actions/user.actions';
-import { initialUsersState } from '../user.state';
+} from './user.actions';
+import { User } from '../../interface/user';
+
+export interface UserState {
+  users: User[];
+  isLoaded: boolean;
+  loading: boolean;
+  error: string | null;
+}
+
+export const initialUsersState: UserState = {
+  users: [],
+  isLoaded: false,
+  loading: false,
+  error: null,
+};
 
 export const userReducer = createReducer(
   initialUsersState,

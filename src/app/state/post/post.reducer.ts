@@ -12,8 +12,22 @@ import {
   deletePost,
   deletePostSuccess,
   deletePostFail,
-} from '../actions/post.actions';
-import { initialPostsState } from '../post.state';
+} from './post.actions';
+import { Post } from '../../interface/post';
+
+export interface PostState {
+  posts: Post[];
+  isLoaded: boolean;
+  loading: boolean;
+  error: string | null;
+}
+
+export const initialPostsState: PostState = {
+  posts: [],
+  isLoaded: false,
+  loading: false,
+  error: null,
+};
 
 export const postReducer = createReducer(
   initialPostsState,

@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { DocumentState } from '../document.state';
+import { DocumentState } from './document.reducer';
 
 export const selectDocumentsState =
   createFeatureSelector<DocumentState>('documents');

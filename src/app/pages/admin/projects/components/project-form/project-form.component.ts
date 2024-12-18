@@ -12,9 +12,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { addProject } from '../../../../../store/actions/project.actions';
+import { addProject } from '../../../../../state/project/project.actions';
 import { Observable } from 'rxjs';
-import { selectLoading } from '../../../../../store/selectors/project.selectors';
+import { selectLoading } from '../../../../../state/project/project.selectors';
 
 @Component({
   selector: 'app-project-form',

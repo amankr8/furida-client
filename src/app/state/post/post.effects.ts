@@ -23,9 +23,9 @@ import {
   deletePostSuccess,
   deletePostFail,
   openViewDialog,
-} from '../actions/post.actions';
-import { openEditDialog, openDeleteDialog } from '../actions/post.actions';
-import { selectPostById } from '../selectors/post.selectors';
+} from './post.actions';
+import { openEditDialog, openDeleteDialog } from './post.actions';
+import { selectPostById } from './post.selectors';
 import { ViewPostComponent } from '../../pages/home/landing/components/view-post/view-post.component';
 
 @Injectable()

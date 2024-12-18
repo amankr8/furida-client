@@ -16,8 +16,8 @@ import { RoleService } from '../../../../../service/role/role.service';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectAuthLoading } from '../../../../../store/selectors/auth.selectors';
-import { signUpUser } from '../../../../../store/actions/auth.actions';
+import { selectAuthLoading } from '../../../../../state/auth/auth.selectors';
+import { signUpUser } from '../../../../../state/auth/auth.actions';
 
 @Component({
   selector: 'app-signup-form',

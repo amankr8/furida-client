@@ -11,17 +11,17 @@ import {
   selectDocuments,
   selectIsDocumentLoaded,
   selectLoading,
-} from '../../../../../store/selectors/document.selectors';
+} from '../../../../../state/document/document.selectors';
 import {
   selectIsProjectLoaded,
   selectProjectById,
-} from '../../../../../store/selectors/project.selectors';
+} from '../../../../../state/project/project.selectors';
 import {
   loadDocuments,
   openDeleteDialog,
   openEditDialog,
-} from '../../../../../store/actions/document.actions';
-import { loadProjects } from '../../../../../store/actions/project.actions';
+} from '../../../../../state/document/document.actions';
+import { loadProjects } from '../../../../../state/project/project.actions';
 
 @Component({
   selector: 'app-document-cards',

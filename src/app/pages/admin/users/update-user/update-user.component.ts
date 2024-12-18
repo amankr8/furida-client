@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { updateUser } from '../../../../store/actions/user.actions';
+import { updateUser } from '../../../../state/user/user.actions';
 import {
   FormGroup,
   FormControl,

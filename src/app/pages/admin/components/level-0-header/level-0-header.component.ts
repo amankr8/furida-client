@@ -5,12 +5,12 @@ import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { User } from '../../../../interface/user';
-import { loadAuthUser } from '../../../../store/actions/auth.actions';
+import { loadAuthUser } from '../../../../state/auth/auth.actions';
 import {
   selectAuthUser,
   selectAuthLoaded,
   selectAuthLoading,
-} from '../../../../store/selectors/auth.selectors';
+} from '../../../../state/auth/auth.selectors';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({

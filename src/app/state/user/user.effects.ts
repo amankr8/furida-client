@@ -8,7 +8,10 @@ import { mergeMap, map, catchError, of, tap, first } from 'rxjs';
 import { User } from '../../interface/user';
 import { ConfirmDialogComponent } from '../../pages/admin/components/confirm-dialog/confirm-dialog.component';
 import { UserService } from '../../service/user/user.service';
-import { openEditDialog, openDeleteDialog } from '../actions/user.actions';
+import {
+  openEditDialog,
+  openDeleteDialog,
+} from '../../state/user/user.actions';
 import {
   loadUsers,
   loadUsersSuccess,
@@ -19,8 +22,7 @@ import {
   deleteUser,
   deleteUserSuccess,
   deleteUserFail,
-} from '../actions/user.actions';
-import { selectUserById } from '../selectors/user.selectors';
+} from '../../state/user/user.actions';
 import { UpdateUserComponent } from '../../pages/admin/users/update-user/update-user.component';
 import { AuthService } from '../../service/auth/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';

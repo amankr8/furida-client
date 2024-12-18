@@ -11,13 +11,13 @@ import {
   openDeleteDialog,
   loadProjects,
   openEditDialog,
-} from '../../../../../store/actions/project.actions';
+} from '../../../../../state/project/project.actions';
 import {
   selectProjects,
   selectLoading,
   selectError,
   selectIsProjectLoaded,
-} from '../../../../../store/selectors/project.selectors';
+} from '../../../../../state/project/project.selectors';
 
 @Component({
   selector: 'app-project-cards',

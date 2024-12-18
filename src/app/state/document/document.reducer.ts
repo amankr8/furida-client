@@ -12,8 +12,22 @@ import {
   deleteDocument,
   deleteDocumentSuccess,
   deleteDocumentFail,
-} from '../actions/document.actions';
-import { initialDocumentsState } from '../document.state';
+} from './document.actions';
+import { Document } from '../../interface/document';
+
+export interface DocumentState {
+  documents: Document[];
+  isLoaded: boolean;
+  loading: boolean;
+  error: string | null;
+}
+
+export const initialDocumentsState: DocumentState = {
+  documents: [],
+  isLoaded: false,
+  loading: false,
+  error: null,
+};
 
 export const documentReducer = createReducer(
   initialDocumentsState,

@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { MessageState } from '../message.state';
+import { MessageState } from './message.reducer';
 
 export const selectMessagesState =
   createFeatureSelector<MessageState>('messages');

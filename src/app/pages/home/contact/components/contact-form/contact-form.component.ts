@@ -13,8 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectLoading } from '../../../../../store/selectors/message.selectors';
-import { sendMessage } from '../../../../../store/actions/message.actions';
+import { selectLoading } from '../../../../../state/message/message.selectors';
+import { sendMessage } from '../../../../../state/message/message.actions';
 
 @Component({
   selector: 'app-contact-form',

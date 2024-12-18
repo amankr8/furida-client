@@ -16,7 +16,7 @@ import {
   updateProject,
   updateProjectFail,
   updateProjectSuccess,
-} from '../../store/actions/project.actions';
+} from '../../state/project/project.actions';
 import { catchError, first, map, mergeMap, of, tap } from 'rxjs';
 import { Project } from '../../interface/project';
 import { Router } from '@angular/router';
@@ -25,7 +25,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../pages/admin/components/confirm-dialog/confirm-dialog.component';
 import { Action, Store } from '@ngrx/store';
 import { UpdateProjectComponent } from '../../pages/admin/projects/update-project/update-project.component';
-import { selectProjectById } from '../selectors/project.selectors';
+import { selectProjectById } from './project.selectors';
 
 @Injectable()
 export class ProjectEffects {

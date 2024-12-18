@@ -10,8 +10,22 @@ import {
   loadAuthUser,
   loadAuthUserFail,
   loadAuthUserSuccess,
-} from '../actions/auth.actions';
-import { initialAuthState } from '../auth.state';
+} from './auth.actions';
+import { User } from '../../interface/user';
+
+export interface AuthState {
+  user: User | null;
+  loaded: boolean;
+  loading: boolean;
+  error: string | null;
+}
+
+export const initialAuthState: AuthState = {
+  user: null,
+  loaded: false,
+  loading: false,
+  error: null,
+};
 
 export const authReducer = createReducer(
   initialAuthState,

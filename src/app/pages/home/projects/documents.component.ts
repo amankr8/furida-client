@@ -5,7 +5,7 @@ import { BannerComponent } from '../components/banner/banner.component';
 import { SectionHeaderComponent } from '../components/section-header/section-header.component';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectProjectById } from '../../../store/selectors/project.selectors';
+import { selectProjectById } from '../../../state/project/project.selectors';
 import { map, switchMap, tap } from 'rxjs';
 
 @Component({

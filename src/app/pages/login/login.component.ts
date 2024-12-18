@@ -18,8 +18,8 @@ import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectAuthLoading } from '../../store/selectors/auth.selectors';
-import { signInUser } from '../../store/actions/auth.actions';
+import { selectAuthLoading } from '../../state/auth/auth.selectors';
+import { signInUser } from '../../state/auth/auth.actions';
 
 @Component({
   selector: 'app-login',

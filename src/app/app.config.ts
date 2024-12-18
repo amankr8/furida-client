@@ -9,18 +9,18 @@ import { jwtInterceptor } from './config/jwt.interceptor';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { ProjectEffects } from './store/effects/project.effects';
-import { projectReducer } from './store/reducers/project.reducer';
-import { MessageEffects } from './store/effects/message.effects';
-import { messageReducer } from './store/reducers/message.reducer';
-import { documentReducer } from './store/reducers/document.reducer';
-import { DocumentEffects } from './store/effects/document.effects';
-import { postReducer } from './store/reducers/post.reducer';
-import { PostEffects } from './store/effects/post.effects';
-import { userReducer } from './store/reducers/user.reducer';
-import { UserEffects } from './store/effects/user.effects';
-import { AuthEffects } from './store/effects/auth.effects';
-import { authReducer } from './store/reducers/auth.reducer';
+import { ProjectEffects } from './state/project/project.effects';
+import { projectReducer } from './state/project/project.reducer';
+import { MessageEffects } from './state/message/message.effects';
+import { messageReducer } from './state/message/message.reducer';
+import { documentReducer } from './state/document/document.reducer';
+import { DocumentEffects } from './state/document/document.effects';
+import { postReducer } from './state/post/post.reducer';
+import { PostEffects } from './state/post/post.effects';
+import { userReducer } from './state/user/user.reducer';
+import { UserEffects } from './state/user/user.effects';
+import { AuthEffects } from './state/auth/auth.effects';
+import { authReducer } from './state/auth/auth.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
