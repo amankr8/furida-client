@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DisplayTextHeadComponent } from '../../../main-layout/components/display-text-head/display-text-head.component';
+import { DisplayTextHeadComponent } from '../../../components/display-text-head/display-text-head.component';
 import { LogoutButtonComponent } from '../logout-button/logout-button.component';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
