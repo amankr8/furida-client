@@ -20,12 +20,12 @@ import { ReadMessagesComponent } from './pages/admin/messages/read-messages/read
 import { MainLayoutComponent } from './pages/main-layout/main-layout.component';
 
 export const routes: Routes = [
+  { path: 'login', component: LoginComponent },
   {
     path: '',
     component: MainLayoutComponent,
     children: [
       { path: '', component: HomeComponent },
-      { path: 'login', component: LoginComponent },
       {
         path: 'projects',
         children: [
