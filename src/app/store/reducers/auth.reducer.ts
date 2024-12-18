@@ -7,8 +7,6 @@ import {
   signInUserFail,
   signInUserSuccess,
   logoutUser,
-  logoutUserFail,
-  logoutUserSuccess,
   loadAuthUser,
   loadAuthUserFail,
   loadAuthUserSuccess,
@@ -74,19 +72,6 @@ export const authReducer = createReducer(
 
   on(logoutUser, (state) => ({
     ...state,
-    error: null,
-    loading: true,
-  })),
-
-  on(logoutUserSuccess, (state) => ({
-    ...state,
-    username: null,
-    loading: false,
-  })),
-
-  on(logoutUserFail, (state, { error }) => ({
-    ...state,
-    error,
-    loading: false,
+    user: null,
   }))
 );

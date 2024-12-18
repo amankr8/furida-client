@@ -10,6 +10,7 @@ import { environment } from '../../../environments/environment';
 })
 export class AuthService {
   private authUrl = environment.baseUrl + '/api/auth';
+  private authToken: string = 'jwtToken';
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
@@ -30,12 +31,20 @@ export class AuthService {
     return this.http.get<User>(this.authUrl + '/auth-user');
   }
 
-  logout(): void {
-    localStorage.removeItem('jwtToken');
+  getAuthToken(): string | null {
+    return localStorage.getItem(this.authToken);
+  }
+
+  setAuthToken(token: string) {
+    localStorage.setItem(this.authToken, token);
+  }
+
+  logout() {
+    localStorage.removeItem(this.authToken);
   }
 
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('jwtToken');
+    const token = this.getAuthToken();
     return token != null && !this.jwtHelper.isTokenExpired(token);
   }
 }

@@ -7,6 +7,7 @@ import {
   loadAuthUser,
   loadAuthUserFail,
   loadAuthUserSuccess,
+  logoutUser,
   signInUser,
   signInUserFail,
   signInUserSuccess,
@@ -93,12 +94,7 @@ export class AuthEffects {
       ofType(signInUser),
       mergeMap(({ user }) =>
         this.authService.login(user).pipe(
-          mergeMap((res) => {
-            const token = res.token;
-            localStorage.setItem('jwtToken', token);
-
-            return [signInUserSuccess(), loadAuthUser()];
-          }),
+          map((res) => signInUserSuccess({ token: res.token })),
           catchError((err) => of(signInUserFail({ error: err })))
         )
       )
@@ -109,7 +105,8 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(signInUserSuccess),
-        tap(() => {
+        tap(({ token }) => {
+          this.authService.setAuthToken(token);
           this.router.navigate(['/admin']);
           this.snackBar.open('Logged In successfully!', 'Dismiss', {
             duration: 3000,
@@ -144,4 +141,19 @@ export class AuthEffects {
         return 'Error: An unknown error occurred';
     }
   }
+
+  logoutUser$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(logoutUser),
+        tap(() => {
+          this.authService.logout();
+          this.router.navigate(['/']);
+          this.snackBar.open('Logged out successfully!', 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
 }
