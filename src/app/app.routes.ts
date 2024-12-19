@@ -10,7 +10,7 @@ import { HomeLandingComponent } from './pages/home/landing/home-landing.componen
 import { UsersComponent } from './pages/admin/users/users.component';
 import { ProjectsComponent } from './pages/admin/projects/projects.component';
 import { AddProjectComponent } from './pages/admin/projects/add-project/add-project.component';
-import { DocumentsComponent } from './pages/home/projects/documents.component';
+import { MainProjectsComponent } from './pages/home/projects/projects.component';
 import { AdminDocumentsComponent } from './pages/admin/documents/documents.component';
 import { AddDocumentComponent } from './pages/admin/documents/add-document/add-document.component';
 import { AboutComponent } from './pages/home/about/about.component';
@@ -32,7 +32,7 @@ export const routes: Routes = [
         children: [
           {
             path: ':id',
-            component: DocumentsComponent,
+            component: MainProjectsComponent,
           },
         ],
       },

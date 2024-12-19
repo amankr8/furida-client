@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
-import { FilesComponent } from '../projects/components/files/files.component';
+import { FilesComponent } from './components/files/files.component';
 import { BannerComponent } from '../components/banner/banner.component';
 import { SectionHeaderComponent } from '../components/section-header/section-header.component';
 import { ActivatedRoute } from '@angular/router';
@@ -9,7 +9,7 @@ import { selectProjectById } from '../../../state/project/project.selectors';
 import { map, switchMap, tap } from 'rxjs';
 
 @Component({
-  selector: 'app-documents',
+  selector: 'app-main-projects',
   standalone: true,
   imports: [
     MatDividerModule,
@@ -17,10 +17,10 @@ import { map, switchMap, tap } from 'rxjs';
     BannerComponent,
     SectionHeaderComponent,
   ],
-  templateUrl: './documents.component.html',
-  styleUrl: './documents.component.scss',
+  templateUrl: './projects.component.html',
+  styleUrl: './projects.component.scss',
 })
-export class DocumentsComponent {
+export class MainProjectsComponent {
   title: string = 'Unknown';
   heading: string = 'DOCUMENTS';
   projectId!: number;
