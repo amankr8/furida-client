@@ -54,6 +54,7 @@ export class UpdateUserComponent {
         Validators.required,
         Validators.minLength(8),
       ]),
+      reTypedPassword: new FormControl('', [Validators.required]),
     });
   }
 

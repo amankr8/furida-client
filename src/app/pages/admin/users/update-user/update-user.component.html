@@ -25,7 +25,14 @@
           Password must be at least 8 characters long
         </mat-error>
       </mat-form-field>
-      <div class="d-flex justify-content-end align-items-center gap-2">
+      <mat-form-field>
+        <mat-label>Re-type Password</mat-label>
+        <input matInput formControlName="reTypedPassword" type="password" />
+        <mat-error *ngIf="form.get('reTypedPassword')?.hasError('required')">
+          Please re-type new password
+        </mat-error>
+      </mat-form-field>
+      <div class="d-flex justify-content-end align-items-center gap-2 mt-2">
         <mat-spinner *ngIf="loading$ | async" diameter="30"></mat-spinner>
         <button
           mat-raised-button
