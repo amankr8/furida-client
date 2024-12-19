@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -22,6 +22,7 @@ import {
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { generalStatus } from '../../../../constants/global-constants';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-update-user',
@@ -35,6 +36,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatDividerModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatIconModule,
   ],
   templateUrl: './update-user.component.html',
   styleUrl: './update-user.component.scss',
@@ -45,6 +47,12 @@ export class UpdateUserComponent {
   updatePassStatus: Observable<string | null> = this.store.select(
     selectUpdatePassStatus
   );
+
+  hide = signal(true);
+  clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
+  }
 
   constructor(
     public store: Store,

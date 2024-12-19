@@ -12,7 +12,22 @@
       <mat-divider class="py-2"></mat-divider>
       <mat-form-field>
         <mat-label>New Password</mat-label>
-        <input matInput formControlName="newPassword" type="password" />
+        <input
+          matInput
+          formControlName="newPassword"
+          [type]="hide() ? 'password' : 'text'"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          class="mx-1"
+          type="button"
+          (click)="clickEvent($event)"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide()"
+        >
+          <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
         <mat-error *ngIf="form.get('newPassword')?.hasError('required')">
           Password is required
         </mat-error>
