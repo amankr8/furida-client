@@ -26,10 +26,10 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Re-type Password</mat-label>
-        <input matInput formControlName="reTypedPassword" type="password" />
-        <mat-error *ngIf="form.get('reTypedPassword')?.hasError('required')">
-          Please re-type new password
+        <mat-label>Re-enter Password</mat-label>
+        <input matInput formControlName="confirmPassword" type="password" />
+        <mat-error *ngIf="form.get('confirmPassword')?.hasError('required')">
+          Please re-enter new password
         </mat-error>
       </mat-form-field>
       <div class="d-flex justify-content-end align-items-center gap-2 mt-2">

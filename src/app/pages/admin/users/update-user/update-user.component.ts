@@ -21,6 +21,7 @@ import {
 } from '../../../../state/auth/auth.selectors';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { generalStatus } from '../../../../constants/global-constants';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-update-user',
@@ -47,7 +48,8 @@ export class UpdateUserComponent {
 
   constructor(
     public store: Store,
-    public dialogRef: MatDialogRef<UpdateProjectComponent>
+    public dialogRef: MatDialogRef<UpdateProjectComponent>,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -57,11 +59,20 @@ export class UpdateUserComponent {
         Validators.required,
         Validators.minLength(8),
       ]),
-      reTypedPassword: new FormControl('', [Validators.required]),
+      confirmPassword: new FormControl('', [Validators.required]),
     });
   }
 
   submit() {
+    const pass1 = this.form.get('newPassword')?.value;
+    const pass2 = this.form.get('confirmPassword')?.value;
+    if (pass1 !== pass2) {
+      this.snackBar.open('Passwords do not match!', 'Dismiss', {
+        duration: 3000,
+      });
+      return;
+    }
+
     const payload = this.form.value;
     this.store.dispatch(
       updatePass({
