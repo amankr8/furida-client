@@ -5,7 +5,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-main-layout',
+  selector: 'app-home',
   standalone: true,
   imports: [
     HeaderComponent,
@@ -13,7 +13,7 @@ import { RouterOutlet } from '@angular/router';
     FooterComponent,
     RouterOutlet,
   ],
-  templateUrl: './main-layout.component.html',
-  styleUrl: './main-layout.component.scss',
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.scss',
 })
-export class MainLayoutComponent {}
+export class HomeComponent {}

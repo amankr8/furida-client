@@ -6,7 +6,7 @@ import { SignupComponent } from './pages/admin/users/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { authGuard } from './guard/auth.guard';
 import { AdminComponent } from './pages/admin/admin.component';
-import { HomeComponent } from './pages/home/landing/home.component';
+import { HomeLandingComponent } from './pages/home/landing/home-landing.component';
 import { UsersComponent } from './pages/admin/users/users.component';
 import { ProjectsComponent } from './pages/admin/projects/projects.component';
 import { AddProjectComponent } from './pages/admin/projects/add-project/add-project.component';
@@ -17,16 +17,16 @@ import { AboutComponent } from './pages/home/about/about.component';
 import { ContactComponent } from './pages/home/contact/contact.component';
 import { MessagesComponent } from './pages/admin/messages/messages.component';
 import { ReadMessagesComponent } from './pages/admin/messages/read-messages/read-messages.component';
-import { MainLayoutComponent } from './pages/home/main-layout.component';
+import { HomeComponent } from './pages/home/home.component';
 import { AdminLandingComponent } from './pages/admin/landing/admin-landing.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: '',
-    component: MainLayoutComponent,
+    component: HomeComponent,
     children: [
-      { path: '', component: HomeComponent },
+      { path: '', component: HomeLandingComponent },
       {
         path: 'projects',
         children: [
