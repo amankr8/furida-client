@@ -49,7 +49,9 @@ export class AuthEffects {
       mergeMap(({ user }) =>
         this.authService.signup(user).pipe(
           map(() => signUpUserSuccess()),
-          catchError((err) => of(signUpUserFail({ error: err })))
+          catchError((err) =>
+            of(signUpUserFail({ error: this.getSignUpErrMsg(err) }))
+          )
         )
       )
     )
@@ -73,7 +75,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(signUpUserFail),
         tap(({ error }) => {
-          this.snackBar.open(this.getSignUpErrMsg(error), 'Dismiss', {
+          this.snackBar.open(error, 'Dismiss', {
             duration: 3000,
           });
         })
@@ -98,7 +100,9 @@ export class AuthEffects {
       mergeMap(({ user }) =>
         this.authService.login(user).pipe(
           map((res) => signInUserSuccess({ token: res.token })),
-          catchError((err) => of(signInUserFail({ error: err })))
+          catchError((err) =>
+            of(signInUserFail({ error: this.getAuthErrMsg(err) }))
+          )
         )
       )
     )
@@ -124,7 +128,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(signInUserFail),
         tap(({ error }) => {
-          this.snackBar.open(this.getLoginErrMsg(error), 'Dismiss', {
+          this.snackBar.open(error, 'Dismiss', {
             duration: 3000,
           });
         })
@@ -132,7 +136,7 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-  getLoginErrMsg(err: HttpErrorResponse): string {
+  getAuthErrMsg(err: HttpErrorResponse): string {
     switch (err.status) {
       case 404:
         return "Error: User doesn't exist";
@@ -151,7 +155,9 @@ export class AuthEffects {
       mergeMap(({ oldPassword, newPassword }) =>
         this.authService.updateUser(oldPassword, newPassword).pipe(
           map(() => updatePassSuccess()),
-          catchError((error) => of(updatePassFail({ error: error.message })))
+          catchError((error) =>
+            of(updatePassFail({ error: this.getAuthErrMsg(error) }))
+          )
         )
       )
     )
@@ -176,7 +182,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(updatePassFail),
         tap(({ error }) => {
-          this.snackBar.open(`Server Error: ${error}`, 'Dismiss', {
+          this.snackBar.open(error, 'Dismiss', {
             duration: 3000,
           });
         })

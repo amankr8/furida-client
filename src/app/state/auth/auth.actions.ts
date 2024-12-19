@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
 import { User } from '../../interface/user';
-import { HttpErrorResponse } from '@angular/common/http';
 
 export const loadAuthUser = createAction('[Auth] Load Auth User');
 
@@ -23,7 +22,7 @@ export const signUpUserSuccess = createAction('[Auth] Sign Up User Success');
 
 export const signUpUserFail = createAction(
   '[Auth] Sign Up User Fail',
-  props<{ error: HttpErrorResponse }>()
+  props<{ error: string }>()
 );
 
 export const signInUser = createAction(
@@ -38,7 +37,7 @@ export const signInUserSuccess = createAction(
 
 export const signInUserFail = createAction(
   '[Auth] Sign In User Fail',
-  props<{ error: HttpErrorResponse }>()
+  props<{ error: string }>()
 );
 
 export const updatePass = createAction(

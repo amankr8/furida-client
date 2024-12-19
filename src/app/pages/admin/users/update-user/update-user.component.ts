@@ -14,12 +14,13 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { updatePass } from '../../../../state/auth/auth.actions';
-import { Observable, take } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import {
-  selectAuthError,
   selectAuthLoading,
+  selectUpdatePassStatus,
 } from '../../../../state/auth/auth.selectors';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { generalStatus } from '../../../../constants/global-constants';
 
 @Component({
   selector: 'app-update-user',
@@ -40,7 +41,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 export class UpdateUserComponent {
   form!: FormGroup;
   loading$: Observable<boolean> = this.store.select(selectAuthLoading);
-  error$: Observable<string | null> = this.store.select(selectAuthError);
+  updatePassStatus: Observable<string | null> = this.store.select(
+    selectUpdatePassStatus
+  );
 
   constructor(
     public store: Store,
@@ -66,6 +69,12 @@ export class UpdateUserComponent {
         newPassword: payload.newPassword,
       })
     );
-    this.dialogRef.close();
+    this.updatePassStatus
+      .pipe(
+        map((status) =>
+          status === generalStatus.SUCCESS ? this.dialogRef.close() : null
+        )
+      )
+      .subscribe();
   }
 }

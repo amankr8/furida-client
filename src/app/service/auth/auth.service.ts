@@ -1,16 +1,16 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from '../../interface/user';
 import { environment } from '../../../environments/environment';
+import { jwtToken } from '../../constants/global-constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private authUrl = environment.baseUrl + '/api/auth';
-  private authToken: string = 'jwtToken';
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
@@ -32,15 +32,15 @@ export class AuthService {
   }
 
   getAuthToken(): string | null {
-    return localStorage.getItem(this.authToken);
+    return localStorage.getItem(jwtToken);
   }
 
   setAuthToken(token: string) {
-    localStorage.setItem(this.authToken, token);
+    localStorage.setItem(jwtToken, token);
   }
 
   logout() {
-    localStorage.removeItem(this.authToken);
+    localStorage.removeItem(jwtToken);
   }
 
   isAuthenticated(): boolean {
