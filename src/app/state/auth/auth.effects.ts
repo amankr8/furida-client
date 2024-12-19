@@ -14,6 +14,9 @@ import {
   signUpUser,
   signUpUserFail,
   signUpUserSuccess,
+  updatePass,
+  updatePassFail,
+  updatePassSuccess,
 } from '../../state/auth/auth.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { loadUsers } from '../../state/user/user.actions';
@@ -46,7 +49,9 @@ export class AuthEffects {
       mergeMap(({ user }) =>
         this.authService.signup(user).pipe(
           map(() => signUpUserSuccess()),
-          catchError((err) => of(signUpUserFail({ error: err })))
+          catchError((err) =>
+            of(signUpUserFail({ error: this.getSignUpErrMsg(err) }))
+          )
         )
       )
     )
@@ -70,7 +75,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(signUpUserFail),
         tap(({ error }) => {
-          this.snackBar.open(this.getSignUpErrMsg(error), 'Dismiss', {
+          this.snackBar.open(error, 'Dismiss', {
             duration: 3000,
           });
         })
@@ -95,7 +100,9 @@ export class AuthEffects {
       mergeMap(({ user }) =>
         this.authService.login(user).pipe(
           map((res) => signInUserSuccess({ token: res.token })),
-          catchError((err) => of(signInUserFail({ error: err })))
+          catchError((err) =>
+            of(signInUserFail({ error: this.getAuthErrMsg(err) }))
+          )
         )
       )
     )
@@ -121,7 +128,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(signInUserFail),
         tap(({ error }) => {
-          this.snackBar.open(this.getLoginErrMsg(error), 'Dismiss', {
+          this.snackBar.open(error, 'Dismiss', {
             duration: 3000,
           });
         })
@@ -129,7 +136,7 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-  getLoginErrMsg(err: HttpErrorResponse): string {
+  getAuthErrMsg(err: HttpErrorResponse): string {
     switch (err.status) {
       case 404:
         return "Error: User doesn't exist";
@@ -141,6 +148,47 @@ export class AuthEffects {
         return 'Error: An unknown error occurred';
     }
   }
+
+  updatePass$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updatePass),
+      mergeMap(({ oldPassword, newPassword }) =>
+        this.authService.updateUser(oldPassword, newPassword).pipe(
+          map(() => updatePassSuccess()),
+          catchError((error) =>
+            of(updatePassFail({ error: this.getAuthErrMsg(error) }))
+          )
+        )
+      )
+    )
+  );
+
+  updatePassSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(updatePassSuccess),
+        tap(() => {
+          this.router.navigate(['/admin/users']);
+          this.snackBar.open('Details updated successfully!', 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  updatePassFail$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(updatePassFail),
+        tap(({ error }) => {
+          this.snackBar.open(error, 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
 
   logoutUser$ = createEffect(
     () =>

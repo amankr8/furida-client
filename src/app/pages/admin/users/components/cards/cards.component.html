@@ -6,7 +6,12 @@
   ></mat-progress-bar>
   <div class="row row-cols-3 px-4">
     <div class="col" *ngFor="let user of users$ | async">
-      <mat-card appearance="outlined" class="mb-3 shadow-sm">
+      <mat-card
+        matBadge="U"
+        [matBadgeHidden]="!(isLoggedInUser(user.username) | async)"
+        appearance="outlined"
+        class="mb-3 shadow-sm"
+      >
         <mat-card-header class="mb-2">
           <mat-card-title class="single-line-truncate">
             {{ user.username }}
