@@ -9,14 +9,14 @@ import {
   deleteMessage,
   loadMessages,
   toggleArchive,
-} from '../../../../../store/actions/message.actions';
+} from '../../../../../state/message/message.actions';
 import { Observable } from 'rxjs';
 import {
   selectError,
   selectIsMessageLoaded,
   selectLoading,
   selectMessages,
-} from '../../../../../store/selectors/message.selectors';
+} from '../../../../../state/message/message.selectors';
 
 @Component({
   selector: 'app-message-cards',

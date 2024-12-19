@@ -9,15 +9,15 @@ import { Store } from '@ngrx/store';
 import {
   selectIsProjectLoaded,
   selectProjects,
-} from '../../../../store/selectors/project.selectors';
+} from '../../../../state/project/project.selectors';
 import { map, Observable } from 'rxjs';
-import { loadProjects } from '../../../../store/actions/project.actions';
+import { loadProjects } from '../../../../state/project/project.actions';
 import {
   selectAuthLoaded,
   selectAuthUser,
-} from '../../../../store/selectors/auth.selectors';
+} from '../../../../state/auth/auth.selectors';
 import { User } from '../../../../interface/user';
-import { loadAuthUser } from '../../../../store/actions/auth.actions';
+import { loadAuthUser } from '../../../../state/auth/auth.actions';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({

@@ -17,7 +17,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { updatePost } from '../../../../store/actions/post.actions';
+import { updatePost } from '../../../../state/post/post.actions';
 
 @Component({
   selector: 'app-edit-post',

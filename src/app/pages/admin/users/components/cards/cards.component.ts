@@ -11,17 +11,17 @@ import {
   selectUserLoaded,
   selectLoading,
   selectUsers,
-} from '../../../../../store/selectors/user.selectors';
+} from '../../../../../state/user/user.selectors';
 import {
   loadUsers,
   openDeleteDialog,
   openEditDialog,
-} from '../../../../../store/actions/user.actions';
+} from '../../../../../state/user/user.actions';
 import {
   selectAuthUser,
   selectAuthLoaded,
-} from '../../../../../store/selectors/auth.selectors';
-import { loadAuthUser } from '../../../../../store/actions/auth.actions';
+} from '../../../../../state/auth/auth.selectors';
+import { loadAuthUser } from '../../../../../state/auth/auth.actions';
 
 @Component({
   selector: 'app-user-cards',

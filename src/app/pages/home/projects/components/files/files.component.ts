@@ -9,14 +9,14 @@ import { Store } from '@ngrx/store';
 import {
   selectIsProjectLoaded,
   selectProjectById,
-} from '../../../../../store/selectors/project.selectors';
-import { loadProjects } from '../../../../../store/actions/project.actions';
-import { loadDocuments } from '../../../../../store/actions/document.actions';
+} from '../../../../../state/project/project.selectors';
+import { loadProjects } from '../../../../../state/project/project.actions';
+import { loadDocuments } from '../../../../../state/document/document.actions';
 import {
   selectDocumentsByProjectId,
   selectIsDocumentLoaded,
   selectLoading,
-} from '../../../../../store/selectors/document.selectors';
+} from '../../../../../state/document/document.selectors';
 
 @Component({
   selector: 'app-files',

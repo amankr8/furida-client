@@ -9,12 +9,12 @@ import { Observable } from 'rxjs';
 import {
   selectIsPostLoaded,
   selectPosts,
-} from '../../../../../store/selectors/post.selectors';
-import { selectLoading } from '../../../../../store/selectors/project.selectors';
+} from '../../../../../state/post/post.selectors';
+import { selectLoading } from '../../../../../state/project/project.selectors';
 import {
   loadPosts,
   openViewDialog,
-} from '../../../../../store/actions/post.actions';
+} from '../../../../../state/post/post.actions';
 
 @Component({
   selector: 'app-updates',
