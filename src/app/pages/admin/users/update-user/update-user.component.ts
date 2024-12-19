@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { updatePass } from '../../../../state/auth/auth.actions';
-import { map, Observable } from 'rxjs';
+import { filter, first, map, Observable, tap } from 'rxjs';
 import {
   selectAuthLoading,
   selectUpdatePassStatus,
@@ -71,9 +71,11 @@ export class UpdateUserComponent {
     );
     this.updatePassStatus
       .pipe(
-        map((status) =>
-          status === generalStatus.SUCCESS ? this.dialogRef.close() : null
-        )
+        filter((status) => status === generalStatus.SUCCESS),
+        first(),
+        tap(() => {
+          this.dialogRef.close();
+        })
       )
       .subscribe();
   }
