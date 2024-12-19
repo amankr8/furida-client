@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { updateUser } from '../../../../state/user/user.actions';
 import {
   FormGroup,
   FormControl,
@@ -14,6 +13,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
+import { updatePass } from '../../../../state/auth/auth.actions';
+import { Observable, take } from 'rxjs';
+import {
+  selectAuthError,
+  selectAuthLoading,
+} from '../../../../state/auth/auth.selectors';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-update-user',
@@ -26,12 +32,15 @@ import { MatDividerModule } from '@angular/material/divider';
     MatInputModule,
     MatDividerModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './update-user.component.html',
   styleUrl: './update-user.component.scss',
 })
 export class UpdateUserComponent {
   form!: FormGroup;
+  loading$: Observable<boolean> = this.store.select(selectAuthLoading);
+  error$: Observable<string | null> = this.store.select(selectAuthError);
 
   constructor(
     public store: Store,
@@ -51,7 +60,7 @@ export class UpdateUserComponent {
   submit() {
     const payload = this.form.value;
     this.store.dispatch(
-      updateUser({
+      updatePass({
         oldPassword: payload.oldPassword,
         newPassword: payload.newPassword,
       })
