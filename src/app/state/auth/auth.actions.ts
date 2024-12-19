@@ -41,4 +41,16 @@ export const signInUserFail = createAction(
   props<{ error: HttpErrorResponse }>()
 );
 
+export const updatePass = createAction(
+  '[Users] Update User',
+  props<{ oldPassword: string; newPassword: string }>()
+);
+
+export const updatePassSuccess = createAction('[Users] Update User Success');
+
+export const updatePassFail = createAction(
+  '[Users] Update User Fail',
+  props<{ error: string }>()
+);
+
 export const logoutUser = createAction('[Auth] Logout User');

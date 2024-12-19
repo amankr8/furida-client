@@ -3,9 +3,6 @@ import {
   loadUsers,
   loadUsersSuccess,
   loadUsersFail,
-  updateUser,
-  updateUserSuccess,
-  updateUserFail,
   deleteUser,
   deleteUserSuccess,
   deleteUserFail,
@@ -45,23 +42,6 @@ export const userReducer = createReducer(
     ...state,
     error,
     isLoaded: false,
-    loading: false,
-  })),
-
-  on(updateUser, (state) => ({
-    ...state,
-    error: null,
-    loading: true,
-  })),
-
-  on(updateUserSuccess, (state) => ({
-    ...state,
-    loading: false,
-  })),
-
-  on(updateUserFail, (state, { error }) => ({
-    ...state,
-    error,
     loading: false,
   })),
 

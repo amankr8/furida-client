@@ -10,6 +10,9 @@ import {
   loadAuthUser,
   loadAuthUserFail,
   loadAuthUserSuccess,
+  updatePass,
+  updatePassFail,
+  updatePassSuccess,
 } from './auth.actions';
 import { User } from '../../interface/user';
 
@@ -81,6 +84,23 @@ export const authReducer = createReducer(
   on(signInUserFail, (state, { error }) => ({
     ...state,
     error: error.message,
+    loading: false,
+  })),
+
+  on(updatePass, (state) => ({
+    ...state,
+    error: null,
+    loading: true,
+  })),
+
+  on(updatePassSuccess, (state) => ({
+    ...state,
+    loading: false,
+  })),
+
+  on(updatePassFail, (state, { error }) => ({
+    ...state,
+    error,
     loading: false,
   })),
 

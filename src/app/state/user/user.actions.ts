@@ -16,18 +16,6 @@ export const loadUsersFail = createAction(
 
 export const openEditDialog = createAction('[User] Open Edit Dialog');
 
-export const updateUser = createAction(
-  '[Users] Update User',
-  props<{ oldPassword: string; newPassword: string }>()
-);
-
-export const updateUserSuccess = createAction('[Users] Update User Success');
-
-export const updateUserFail = createAction(
-  '[Users] Update User Fail',
-  props<{ error: string }>()
-);
-
 export const openDeleteDialog = createAction(
   '[User] Open Delete Dialog',
   props<{ userId: number }>()

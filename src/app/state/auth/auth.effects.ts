@@ -14,6 +14,9 @@ import {
   signUpUser,
   signUpUserFail,
   signUpUserSuccess,
+  updatePass,
+  updatePassFail,
+  updatePassSuccess,
 } from '../../state/auth/auth.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { loadUsers } from '../../state/user/user.actions';
@@ -141,6 +144,45 @@ export class AuthEffects {
         return 'Error: An unknown error occurred';
     }
   }
+
+  updatePass$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updatePass),
+      mergeMap(({ oldPassword, newPassword }) =>
+        this.authService.updateUser(oldPassword, newPassword).pipe(
+          map(() => updatePassSuccess()),
+          catchError((error) => of(updatePassFail({ error: error.message })))
+        )
+      )
+    )
+  );
+
+  updatePassSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(updatePassSuccess),
+        tap(() => {
+          this.router.navigate(['/admin/users']);
+          this.snackBar.open('Details updated successfully!', 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  updatePassFail$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(updatePassFail),
+        tap(({ error }) => {
+          this.snackBar.open(`Server Error: ${error}`, 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
 
   logoutUser$ = createEffect(
     () =>

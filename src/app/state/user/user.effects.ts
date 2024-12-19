@@ -1,11 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store, Action } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { mergeMap, map, catchError, of, tap, first } from 'rxjs';
-import { User } from '../../interface/user';
 import { ConfirmDialogComponent } from '../../pages/admin/components/confirm-dialog/confirm-dialog.component';
 import { UserService } from '../../service/user/user.service';
 import {
@@ -16,15 +14,11 @@ import {
   loadUsers,
   loadUsersSuccess,
   loadUsersFail,
-  updateUser,
-  updateUserSuccess,
-  updateUserFail,
   deleteUser,
   deleteUserSuccess,
   deleteUserFail,
 } from '../../state/user/user.actions';
 import { UpdateUserComponent } from '../../pages/admin/users/update-user/update-user.component';
-import { AuthService } from '../../service/auth/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
@@ -34,10 +28,7 @@ export class UserEffects {
   constructor(
     private actions$: Actions,
     private userService: UserService,
-    private authService: AuthService,
-    private router: Router,
-    private snackBar: MatSnackBar,
-    private store: Store
+    private snackBar: MatSnackBar
   ) {}
 
   loadUsers$ = createEffect(() =>
@@ -61,45 +52,6 @@ export class UserEffects {
             width: '30%',
           })
         )
-      ),
-    { dispatch: false }
-  );
-
-  updateUser$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(updateUser),
-      mergeMap(({ oldPassword, newPassword }) =>
-        this.authService.updateUser(oldPassword, newPassword).pipe(
-          map(() => updateUserSuccess()),
-          catchError((error) => of(updateUserFail({ error: error.message })))
-        )
-      )
-    )
-  );
-
-  updateUserSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(updateUserSuccess),
-        tap(() => {
-          this.router.navigate(['/admin/users']);
-          this.snackBar.open('Details updated successfully!', 'Dismiss', {
-            duration: 3000,
-          });
-        })
-      ),
-    { dispatch: false }
-  );
-
-  updateUserFail$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(updateUserFail),
-        tap(({ error }) => {
-          this.snackBar.open(`Server Error: ${error}`, 'Dismiss', {
-            duration: 3000,
-          });
-        })
       ),
     { dispatch: false }
   );
