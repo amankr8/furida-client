@@ -12,9 +12,8 @@ import {
 } from '../../../../../state/message/message.actions';
 import { Observable } from 'rxjs';
 import {
-  selectError,
-  selectIsMessageLoaded,
-  selectLoading,
+  selectMessageLoaded,
+  selectMessageLoading,
   selectMessages,
 } from '../../../../../state/message/message.selectors';
 
@@ -31,17 +30,14 @@ export class CardsComponent {
   messages$: Observable<Message[]> = this.store.select(
     selectMessages(this.archive)
   );
-  isMessageLoaded$: Observable<boolean> = this.store.select(
-    selectIsMessageLoaded
-  );
-  loading$: Observable<boolean> = this.store.select(selectLoading);
-  error$: Observable<string | null> = this.store.select(selectError);
+  messageLoaded$: Observable<boolean> = this.store.select(selectMessageLoaded);
+  loading$: Observable<boolean> = this.store.select(selectMessageLoading);
 
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.isMessageLoaded$.subscribe((isLoaded) => {
-      if (!isLoaded) this.store.dispatch(loadMessages());
+    this.messageLoaded$.subscribe((loaded) => {
+      if (!loaded) this.store.dispatch(loadMessages());
     });
   }
 

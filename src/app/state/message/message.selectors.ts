@@ -9,17 +9,22 @@ export const selectMessages = (archived: boolean) =>
     state.messages.filter((msg) => msg.read === archived)
   );
 
-export const selectIsMessageLoaded = createSelector(
+export const selectMessageLoaded = createSelector(
   selectMessagesState,
-  (state) => state.isLoaded
+  (state) => state.loaded
 );
 
-export const selectLoading = createSelector(
+export const selectMessageStatus = createSelector(
+  selectMessagesState,
+  (state) => state.status
+);
+
+export const selectMessageLoading = createSelector(
   selectMessagesState,
   (state) => state.loading
 );
 
-export const selectError = createSelector(
+export const selectMessageError = createSelector(
   selectMessagesState,
   (state) => state.error
 );

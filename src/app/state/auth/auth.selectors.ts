@@ -23,7 +23,7 @@ export const selectAuthError = createSelector(
   (state) => state.error
 );
 
-export const selectUpdatePassStatus = createSelector(
+export const selectAuthStatus = createSelector(
   selectAuthState,
-  (state) => state.updatePassStatus
+  (state) => state.status
 );
