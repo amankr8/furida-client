@@ -14,7 +14,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectLoading } from '../../../../../state/post/post.selectors';
+import { selectPostLoading } from '../../../../../state/post/post.selectors';
 import { addPost } from '../../../../../state/post/post.actions';
 
 @Component({
@@ -40,7 +40,7 @@ export class PostFormComponent {
   private maxFileSize = 2 * 1024 * 1024;
 
   constructor(private store: Store) {
-    this.loading$ = this.store.select(selectLoading);
+    this.loading$ = this.store.select(selectPostLoading);
   }
 
   ngOnInit() {

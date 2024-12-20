@@ -7,10 +7,10 @@ import { Post } from '../../../../../interface/post';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import {
-  selectIsPostLoaded,
+  selectPostLoaded,
+  selectPostLoading,
   selectPosts,
 } from '../../../../../state/post/post.selectors';
-import { selectLoading } from '../../../../../state/project/project.selectors';
 import {
   loadPosts,
   openViewDialog,
@@ -25,14 +25,14 @@ import {
 })
 export class UpdatesComponent {
   posts$: Observable<Post[]> = this.store.select(selectPosts);
-  isPostLoaded$: Observable<boolean> = this.store.select(selectIsPostLoaded);
-  loading$: Observable<boolean> = this.store.select(selectLoading);
+  postLoaded$: Observable<boolean> = this.store.select(selectPostLoaded);
+  loading$: Observable<boolean> = this.store.select(selectPostLoading);
 
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.isPostLoaded$.subscribe((isLoaded) => {
-      if (!isLoaded) this.store.dispatch(loadPosts());
+    this.postLoaded$.subscribe((loaded) => {
+      if (!loaded) this.store.dispatch(loadPosts());
     });
   }
 

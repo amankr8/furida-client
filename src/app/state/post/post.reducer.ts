@@ -17,14 +17,14 @@ import { Post } from '../../interface/post';
 
 export interface PostState {
   posts: Post[];
-  isLoaded: boolean;
+  loaded: boolean;
   loading: boolean;
   error: string | null;
 }
 
 export const initialPostsState: PostState = {
   posts: [],
-  isLoaded: false,
+  loaded: false,
   loading: false,
   error: null,
 };
@@ -40,14 +40,14 @@ export const postReducer = createReducer(
   on(loadPostsSuccess, (state, { posts }) => ({
     ...state,
     posts,
-    isLoaded: true,
+    loaded: true,
     loading: false,
   })),
 
   on(loadPostsFail, (state, { error }) => ({
     ...state,
     error,
-    isLoaded: false,
+    loaded: false,
     loading: false,
   })),
 
