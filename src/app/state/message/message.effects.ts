@@ -97,6 +97,39 @@ export class MessageEffects {
     )
   );
 
+  toggleArchiveSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(toggleArchiveSuccess),
+        tap(({ message }) => {
+          const snackMsg = message.read
+            ? 'Message archived!'
+            : 'Message unarchived!';
+          this.snackBar.open(snackMsg, 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  toggleArchiveFail$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(toggleArchiveFail),
+        tap(({ error }) => {
+          this.snackBar.open(
+            'Error: Could not archive. Please try later',
+            'Dismiss',
+            {
+              duration: 3000,
+            }
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
   openDeleteDialog$ = createEffect(
     () =>
       this.actions$.pipe(
