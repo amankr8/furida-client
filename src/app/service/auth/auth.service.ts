@@ -27,8 +27,8 @@ export class AuthService {
     return this.http.post(this.authUrl + '/update-password', payload);
   }
 
-  getAuthUser(): Observable<User> {
-    return this.http.get<User>(this.authUrl + '/auth-user');
+  getAuthUser(): Observable<User | null> {
+    return this.http.get<User | null>(this.authUrl + '/auth-user');
   }
 
   getAuthToken(): string | null {
