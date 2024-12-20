@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
+  FormGroupDirective,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -36,6 +37,7 @@ import { generalStatus } from '../../../../../constants/global-constants';
   styleUrl: './contact-form.component.scss',
 })
 export class ContactFormComponent {
+  @ViewChild('formDirective') private formDirective!: FormGroupDirective;
   form!: FormGroup;
   loading$: Observable<boolean>;
   status$: Observable<string> = this.store.select(selectMessageStatus);
@@ -62,6 +64,6 @@ export class ContactFormComponent {
         filter((status) => status === generalStatus.SUCCESS),
         first()
       )
-      .subscribe(() => this.form.reset());
+      .subscribe(() => this.formDirective.resetForm());
   }
 }
