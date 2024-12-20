@@ -14,10 +14,10 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { updatePass } from '../../../../state/auth/auth.actions';
-import { filter, first, map, Observable, tap } from 'rxjs';
+import { filter, first, Observable } from 'rxjs';
 import {
   selectAuthLoading,
-  selectUpdatePassStatus,
+  selectAuthStatus,
 } from '../../../../state/auth/auth.selectors';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { generalStatus } from '../../../../constants/global-constants';
@@ -44,9 +44,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class UpdateUserComponent {
   form!: FormGroup;
   loading$: Observable<boolean> = this.store.select(selectAuthLoading);
-  updatePassStatus: Observable<string | null> = this.store.select(
-    selectUpdatePassStatus
-  );
+  status$: Observable<string | null> = this.store.select(selectAuthStatus);
 
   hide = signal(true);
   clickEvent(event: MouseEvent) {
@@ -88,14 +86,11 @@ export class UpdateUserComponent {
         newPassword: payload.newPassword,
       })
     );
-    this.updatePassStatus
+    this.status$
       .pipe(
         filter((status) => status === generalStatus.SUCCESS),
-        first(),
-        tap(() => {
-          this.dialogRef.close();
-        })
+        first()
       )
-      .subscribe();
+      .subscribe(() => this.dialogRef.close());
   }
 }

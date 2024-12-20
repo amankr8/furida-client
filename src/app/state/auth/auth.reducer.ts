@@ -22,7 +22,7 @@ export interface AuthState {
   loaded: boolean;
   loading: boolean;
   error: string | null;
-  updatePassStatus: string | null;
+  status: string | null;
 }
 
 export const initialAuthState: AuthState = {
@@ -30,7 +30,7 @@ export const initialAuthState: AuthState = {
   loaded: false,
   loading: false,
   error: null,
-  updatePassStatus: null,
+  status: null,
 };
 
 export const authReducer = createReducer(
@@ -94,20 +94,20 @@ export const authReducer = createReducer(
     ...state,
     error: null,
     loading: true,
-    updatePassStatus: generalStatus.PENDING,
+    status: generalStatus.PENDING,
   })),
 
   on(updatePassSuccess, (state) => ({
     ...state,
     loading: false,
-    updatePassStatus: generalStatus.SUCCESS,
+    status: generalStatus.SUCCESS,
   })),
 
   on(updatePassFail, (state, { error }) => ({
     ...state,
     error,
     loading: false,
-    updatePassStatus: generalStatus.FAILURE,
+    status: generalStatus.FAILURE,
   })),
 
   on(logoutUser, (state) => ({

@@ -14,17 +14,20 @@ import {
   toggleArchiveSuccess,
 } from './message.actions';
 import { Message } from '../../interface/message';
+import { generalStatus } from '../../constants/global-constants';
 
 export interface MessageState {
   messages: Message[];
-  isLoaded: boolean;
+  status: string;
+  loaded: boolean;
   loading: boolean;
   error: string | null;
 }
 
 export const initialMessagesState: MessageState = {
   messages: [],
-  isLoaded: false,
+  status: '',
+  loaded: false,
   loading: false,
   error: null,
 };
@@ -41,13 +44,13 @@ export const messageReducer = createReducer(
   on(loadMessagesSuccess, (state, { messages }) => ({
     ...state,
     messages,
-    isLoaded: true,
+    loaded: true,
     loading: false,
   })),
 
   on(loadMessagesFail, (state, { error }) => ({
     ...state,
-    isLoaded: false,
+    loaded: false,
     loading: false,
     error,
   })),
@@ -55,18 +58,21 @@ export const messageReducer = createReducer(
   on(sendMessage, (state) => ({
     ...state,
     error: null,
+    status: generalStatus.PENDING,
     loading: true,
   })),
 
   on(sendMessageSuccess, (state, { message }) => ({
     ...state,
     messages: [...state.messages, message],
+    status: generalStatus.SUCCESS,
     loading: false,
   })),
 
   on(sendMessageFail, (state, { error }) => ({
     ...state,
     error,
+    status: generalStatus.FAILURE,
     loading: false,
   })),
 

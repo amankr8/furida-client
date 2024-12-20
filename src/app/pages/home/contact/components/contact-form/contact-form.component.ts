@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
+  FormGroupDirective,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -11,10 +12,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { Observable } from 'rxjs';
+import { filter, first, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectLoading } from '../../../../../state/message/message.selectors';
+import {
+  selectMessageLoading,
+  selectMessageStatus,
+} from '../../../../../state/message/message.selectors';
 import { sendMessage } from '../../../../../state/message/message.actions';
+import { generalStatus } from '../../../../../constants/global-constants';
 
 @Component({
   selector: 'app-contact-form',
@@ -32,11 +37,13 @@ import { sendMessage } from '../../../../../state/message/message.actions';
   styleUrl: './contact-form.component.scss',
 })
 export class ContactFormComponent {
+  @ViewChild('formDirective') private formDirective!: FormGroupDirective;
   form!: FormGroup;
   loading$: Observable<boolean>;
+  status$: Observable<string> = this.store.select(selectMessageStatus);
 
   constructor(private store: Store) {
-    this.loading$ = this.store.select(selectLoading);
+    this.loading$ = this.store.select(selectMessageLoading);
   }
 
   ngOnInit() {
@@ -50,12 +57,13 @@ export class ContactFormComponent {
     });
   }
 
-  resetForm() {
-    this.form.reset();
-  }
-
   submit() {
     this.store.dispatch(sendMessage({ message: this.form.value }));
-    this.resetForm();
+    this.status$
+      .pipe(
+        filter((status) => status === generalStatus.SUCCESS),
+        first()
+      )
+      .subscribe(() => this.formDirective.resetForm());
   }
 }
