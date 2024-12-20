@@ -5,7 +5,7 @@ export const loadAuthUser = createAction('[Auth] Load Auth User');
 
 export const loadAuthUserSuccess = createAction(
   '[Auth] Load Auth User Success',
-  props<{ user: User }>()
+  props<{ user: User | null }>()
 );
 
 export const loadAuthUserFail = createAction(
