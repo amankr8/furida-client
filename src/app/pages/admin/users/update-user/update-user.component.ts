@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { updatePass } from '../../../../state/auth/auth.actions';
-import { filter, first, map, Observable, tap } from 'rxjs';
+import { filter, first, Observable, tap } from 'rxjs';
 import {
   selectAuthLoading,
   selectUpdatePassStatus,
