@@ -35,6 +35,7 @@ import { addPost } from '../../../../../state/post/post.actions';
 })
 export class PostFormComponent {
   form!: FormGroup;
+  image: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
   loading$: Observable<boolean>;
   private maxFileSize = 2 * 1024 * 1024;
@@ -61,23 +62,22 @@ export class PostFormComponent {
   onFileSelect(event: Event): void {
     const fileInput = event.target as HTMLInputElement;
     if (fileInput.files && fileInput.files.length > 0) {
-      const file = fileInput.files[0];
-      // Check if the file type is an image
-      if (!file.type.startsWith('image/')) {
+      this.image = fileInput.files[0];
+      if (!this.image.type.startsWith('image/')) {
         alert('Only image files are allowed!');
-        fileInput.value = ''; // Clear the input if the file is not an image
-      } else if (file.size > this.maxFileSize) {
+        fileInput.value = '';
+      } else if (this.image.size > this.maxFileSize) {
         alert('File size is too large!');
-        fileInput.value = ''; // Clear the input if the file is too large
+        fileInput.value = '';
       } else {
-        this.form.patchValue({ file: file });
+        this.form.patchValue({ file: this.image });
 
         // Preview the image
         const reader = new FileReader();
         reader.onload = () => {
           this.imagePreview = reader.result;
         };
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(this.image);
       }
     }
   }
@@ -86,7 +86,11 @@ export class PostFormComponent {
     const postData = new FormData();
     postData.append('title', this.form.get('title')?.value);
     postData.append('content', this.form.get('content')?.value);
-    postData.append('file', this.form.get('file')?.value);
+
+    const file = this.form.get('file')?.value;
+    if (file !== null) {
+      postData.append('file', file);
+    }
 
     this.store.dispatch(addPost({ post: postData }));
   }

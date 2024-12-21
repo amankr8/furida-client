@@ -12,10 +12,9 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   const token = authService.getAuthToken();
 
   if (token) {
-    // Check if the token is expired
     if (jwtHelper.isTokenExpired(token)) {
       alert('Your session has expired. Please log in again.');
-      router.navigate(['/login']); // Redirect to login page
+      router.navigate(['/login']);
       return next(req); // Prevents the request from being sent
     }
 
