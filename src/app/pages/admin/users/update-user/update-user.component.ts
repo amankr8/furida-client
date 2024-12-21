@@ -61,11 +61,8 @@ export class UpdateUserComponent {
   ngOnInit() {
     this.form = new FormGroup({
       oldPassword: new FormControl('', Validators.required),
-      newPassword: new FormControl('', [
-        Validators.required,
-        Validators.minLength(8),
-      ]),
-      confirmPassword: new FormControl('', [Validators.required]),
+      newPassword: new FormControl('', Validators.required),
+      confirmPassword: new FormControl('', Validators.required),
     });
   }
 
