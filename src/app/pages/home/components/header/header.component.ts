@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -36,6 +36,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  @Output() toggleSidenav = new EventEmitter<void>();
   projects$: Observable<Project[]> = this.store.select(selectProjects);
   isProjectLoaded$: Observable<boolean> = this.store.select(
     selectIsProjectLoaded
@@ -65,5 +66,9 @@ export class HeaderComponent {
 
   isUserLoggedIn(): Observable<boolean> {
     return this.authUser$.pipe(map((user) => user !== null));
+  }
+
+  toggleMenu() {
+    this.toggleSidenav.emit();
   }
 }

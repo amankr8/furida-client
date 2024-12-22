@@ -42,7 +42,7 @@
         <button mat-button routerLink="/contact">Contact</button>
         <button mat-button>CCTV</button>
       </div>
-      <button *ngIf="smallScreen" mat-icon-button>
+      <button *ngIf="smallScreen" mat-icon-button (click)="toggleMenu()">
         <mat-icon fontIcon="menu"></mat-icon>
       </button>
     </div>
