@@ -19,6 +19,7 @@ import {
 import { User } from '../../../../interface/user';
 import { loadAuthUser } from '../../../../state/auth/auth.actions';
 import { MatIconModule } from '@angular/material/icon';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-header',
@@ -41,8 +42,12 @@ export class HeaderComponent {
   );
   authLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
   authUser$: Observable<User | null> = this.store.select(selectAuthUser);
+  smallScreen: boolean = false;
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private breakpointObserver: BreakpointObserver
+  ) {}
 
   ngOnInit() {
     this.isProjectLoaded$.subscribe((isLoaded) => {
@@ -51,6 +56,11 @@ export class HeaderComponent {
     this.authLoaded$.subscribe((loaded) => {
       if (!loaded) this.store.dispatch(loadAuthUser());
     });
+    this.breakpointObserver
+      .observe([Breakpoints.Small, Breakpoints.XSmall])
+      .subscribe((result) => {
+        this.smallScreen = result.matches;
+      });
   }
 
   isUserLoggedIn(): Observable<boolean> {
