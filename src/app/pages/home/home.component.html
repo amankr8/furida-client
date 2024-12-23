@@ -1,5 +1,7 @@
 <mat-sidenav-container hasBackdrop="true">
-  <mat-sidenav class="main-sidenav" #sidenav mode="over">Start</mat-sidenav>
+  <mat-sidenav class="main-sidenav" #sidenav mode="over"
+    ><app-side-menu (toggleSidenav)="toggleSidenav()"></app-side-menu
+  ></mat-sidenav>
   <mat-sidenav-content
     ><app-header (toggleSidenav)="toggleSidenav()"></app-header>
     <router-outlet></router-outlet>

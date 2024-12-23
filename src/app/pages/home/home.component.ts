@@ -4,6 +4,7 @@ import { BannerBottomComponent } from './components/banner-bottom/banner-bottom.
 import { FooterComponent } from './components/footer/footer.component';
 import { RouterOutlet } from '@angular/router';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
     FooterComponent,
     RouterOutlet,
     MatSidenavModule,
+    SideMenuComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
