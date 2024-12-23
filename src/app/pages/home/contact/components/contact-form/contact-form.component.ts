@@ -37,7 +37,7 @@ import { generalStatus } from '../../../../../constants/global-constants';
   styleUrl: './contact-form.component.scss',
 })
 export class ContactFormComponent {
-  @ViewChild('formDirective') private formDirective!: FormGroupDirective;
+  @ViewChild('formDirective') formDirective!: FormGroupDirective;
   form!: FormGroup;
   loading$: Observable<boolean>;
   status$: Observable<string> = this.store.select(selectMessageStatus);

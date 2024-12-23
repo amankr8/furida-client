@@ -22,9 +22,7 @@
           matSuffix
           class="mx-1"
           type="button"
-          (click)="clickEvent($event)"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide()"
+          (click)="toggleHide()"
         >
           <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
         </button>

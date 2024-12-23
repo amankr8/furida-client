@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -19,6 +19,7 @@ import {
 import { User } from '../../../../interface/user';
 import { loadAuthUser } from '../../../../state/auth/auth.actions';
 import { MatIconModule } from '@angular/material/icon';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-header',
@@ -35,14 +36,19 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  @Output() toggleSidenav = new EventEmitter<void>();
   projects$: Observable<Project[]> = this.store.select(selectProjects);
   isProjectLoaded$: Observable<boolean> = this.store.select(
     selectIsProjectLoaded
   );
   authLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
   authUser$: Observable<User | null> = this.store.select(selectAuthUser);
+  smallScreen: boolean = false;
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private breakpointObserver: BreakpointObserver
+  ) {}
 
   ngOnInit() {
     this.isProjectLoaded$.subscribe((isLoaded) => {
@@ -51,9 +57,18 @@ export class HeaderComponent {
     this.authLoaded$.subscribe((loaded) => {
       if (!loaded) this.store.dispatch(loadAuthUser());
     });
+    this.breakpointObserver
+      .observe([Breakpoints.Small, Breakpoints.XSmall])
+      .subscribe((result) => {
+        this.smallScreen = result.matches;
+      });
   }
 
   isUserLoggedIn(): Observable<boolean> {
     return this.authUser$.pipe(map((user) => user !== null));
+  }
+
+  toggleMenu() {
+    this.toggleSidenav.emit();
   }
 }

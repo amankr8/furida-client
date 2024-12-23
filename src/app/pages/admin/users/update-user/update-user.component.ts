@@ -47,9 +47,8 @@ export class UpdateUserComponent {
   status$: Observable<string | null> = this.store.select(selectAuthStatus);
 
   hide = signal(true);
-  clickEvent(event: MouseEvent) {
+  toggleHide() {
     this.hide.set(!this.hide());
-    event.stopPropagation();
   }
 
   constructor(
