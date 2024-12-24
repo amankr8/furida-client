@@ -1,14 +1,15 @@
 <div class="bg-body-secondary py-5">
   <div class="container w-75">
     <div class="row align-items-start">
-      <div class="col">
+      <!-- Column 1 -->
+      <div class="col-12 col-lg-8 mb-2 mb-lg-0">
         <p class="fs-4 mb-4">FURIDA</p>
-        <P class="w-75 mb-4">
+        <p class="w-lg-75 w-100 mb-4">
           FURIDA over the years has strived to make a positive difference in
           society through implementing various development projects by Jharkhand
-          Govt. that empower communicates at the Grass-Root level and improve
-          the quality of living with a focus on continued reflection.
-        </P>
+          Govt. that empower communities at the Grass-Root level and improve the
+          quality of living with a focus on continued reflection.
+        </p>
         <div class="mb-2">
           <span class="fw-semibold">Email: </span><span>{{ email }}</span>
         </div>
@@ -16,7 +17,12 @@
           <span class="fw-semibold">Phone: </span><span>{{ phone }}</span>
         </div>
       </div>
-      <div class="col-lg-4">
+
+      <!-- Divider for small screens -->
+      <mat-divider *ngIf="smallScreen" class="my-3"></mat-divider>
+
+      <!-- Column 2 -->
+      <div class="col-12 col-lg-4 mt-4 mt-lg-0">
         <p class="fs-5 mb-4">Quick Links</p>
         <p class="fs-6 mb-3">
           <a [routerLink]="'/'" class="link-style">Home</a>
