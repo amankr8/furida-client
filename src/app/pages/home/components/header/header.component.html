@@ -1,32 +1,7 @@
 <mat-toolbar color="primary" class="shadow-sm">
   <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-center">
-      <a
-        *ngIf="!(isUserLoggedIn() | async)"
-        routerLink="\"
-        class="navbar-brand fw-bold letter-spacing-1"
-        >FURIDA</a
-      >
-      <div class="d-flex gap-2">
-        <button
-          *ngIf="isUserLoggedIn() | async"
-          mat-raised-button
-          color="primary"
-          routerLink="/"
-        >
-          <mat-icon fontIcon="home"></mat-icon>
-          Home
-        </button>
-        <button
-          *ngIf="isUserLoggedIn() | async"
-          mat-raised-button
-          color="primary"
-          routerLink="/admin"
-        >
-          <mat-icon fontIcon="settings"></mat-icon>
-          Admin Console
-        </button>
-      </div>
+      <app-main-logo></app-main-logo>
       <div *ngIf="!smallScreen" class="d-flex gap-2">
         <button mat-button routerLink="/about">About</button>
         <button mat-button [matMenuTriggerFor]="projectMenu">Projects</button>
@@ -41,6 +16,7 @@
         </mat-menu>
         <button mat-button routerLink="/contact">Contact</button>
         <button mat-button>CCTV</button>
+        <app-admin-button></app-admin-button>
       </div>
       <button *ngIf="smallScreen" mat-icon-button (click)="toggleMenu()">
         <mat-icon fontIcon="menu"></mat-icon>
