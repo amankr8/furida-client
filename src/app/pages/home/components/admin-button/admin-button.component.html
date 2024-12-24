@@ -1,0 +1,9 @@
+<button
+  *ngIf="isUserLoggedIn() | async"
+  mat-raised-button
+  color="primary"
+  routerLink="/admin"
+>
+  <mat-icon fontIcon="settings"></mat-icon>
+  <span>Admin Console</span>
+</button>

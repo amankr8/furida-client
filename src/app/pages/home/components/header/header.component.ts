@@ -10,16 +10,12 @@ import {
   selectIsProjectLoaded,
   selectProjects,
 } from '../../../../state/project/project.selectors';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { loadProjects } from '../../../../state/project/project.actions';
-import {
-  selectAuthLoaded,
-  selectAuthUser,
-} from '../../../../state/auth/auth.selectors';
-import { User } from '../../../../interface/user';
-import { loadAuthUser } from '../../../../state/auth/auth.actions';
 import { MatIconModule } from '@angular/material/icon';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { AdminButtonComponent } from '../admin-button/admin-button.component';
+import { MainLogoComponent } from '../main-logo/main-logo.component';
 
 @Component({
   selector: 'app-header',
@@ -31,6 +27,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
     MatMenuModule,
     CommonModule,
     MatIconModule,
+    AdminButtonComponent,
+    MainLogoComponent,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -41,8 +39,6 @@ export class HeaderComponent {
   isProjectLoaded$: Observable<boolean> = this.store.select(
     selectIsProjectLoaded
   );
-  authLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
-  authUser$: Observable<User | null> = this.store.select(selectAuthUser);
   smallScreen: boolean = false;
 
   constructor(
@@ -54,18 +50,11 @@ export class HeaderComponent {
     this.isProjectLoaded$.subscribe((isLoaded) => {
       if (!isLoaded) this.store.dispatch(loadProjects());
     });
-    this.authLoaded$.subscribe((loaded) => {
-      if (!loaded) this.store.dispatch(loadAuthUser());
-    });
     this.breakpointObserver
       .observe([Breakpoints.Small, Breakpoints.XSmall])
       .subscribe((result) => {
         this.smallScreen = result.matches;
       });
-  }
-
-  isUserLoggedIn(): Observable<boolean> {
-    return this.authUser$.pipe(map((user) => user !== null));
   }
 
   toggleMenu() {
