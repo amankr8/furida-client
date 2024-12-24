@@ -17,6 +17,6 @@ import { SectionHeaderComponent } from '../components/section-header/section-hea
   styleUrl: './home-landing.component.scss',
 })
 export class HomeLandingComponent {
-  title: string = 'FURIDA NGO Jamshedpur';
+  title: string = 'FURIDA Jamshedpur';
   heading: string = 'LATEST UPDATES';
 }

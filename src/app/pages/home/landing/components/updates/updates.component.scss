@@ -1,27 +1,24 @@
-.truncate-text {
-  display: -webkit-box; // Display as a WebKit box
-  display: box; // Fallback for future standard
-  -webkit-box-orient: vertical; // Orient the box vertically
-  box-orient: vertical; // Fallback for future standard
-  -webkit-line-clamp: 3; // Number of lines to show
-  line-clamp: 3; // Future standard (currently not widely supported)
-  overflow: hidden; // Hide overflow content
-  text-overflow: ellipsis; // Add ellipsis (...) for overflow
-  max-height: 4.5em; // Adjust based on line-height to ensure only 3 lines are visible
-  line-height: 1.5em; // Adjust line height to match max-height for three lines
+.single-line-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.single-line-truncate {
-  white-space: nowrap; // Prevent text from wrapping to the next line
-  overflow: hidden; // Hide any text that overflows the container
-  text-overflow: ellipsis; // Show an ellipsis (...) at the end of the truncated text
-  max-width: 350px; // Ensure the element does not exceed the width of its container
+.truncate-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Number of lines to show */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.row > .col > mat-card {
+  height: 100%;
 }
 
 .card-image-h {
+  object-fit: cover;
   height: 300px;
-}
-
-.card-content-h {
-  height: 100px;
+  width: 100%;
 }

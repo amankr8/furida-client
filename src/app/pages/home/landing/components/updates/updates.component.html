@@ -4,8 +4,8 @@
     mode="indeterminate"
     class="mb-3"
   ></mat-progress-bar>
-  <div class="row row-cols-3 px-4">
-    <div class="col" *ngFor="let post of posts$ | async">
+  <div class="row gx-3 gy-3 px-4">
+    <div class="col-12 col-sm-6 col-lg-4" *ngFor="let post of posts$ | async">
       <mat-card appearance="outlined" class="mb-3 shadow-sm">
         <img
           mat-card-image
