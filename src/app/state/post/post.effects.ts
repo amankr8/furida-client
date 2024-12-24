@@ -100,7 +100,7 @@ export class PostEffects {
             first(),
             map((post) => {
               if (post) {
-                this.showViewPostDialog(post);
+                this.viewPostDialog(post);
               } else {
                 this.snackBar.open(
                   'Some error occurred! Try again later',
@@ -118,10 +118,9 @@ export class PostEffects {
     { dispatch: false }
   );
 
-  showViewPostDialog(post: Post) {
+  viewPostDialog(post: Post) {
     this.matDialog.open(ViewPostComponent, {
       data: post,
-      width: '30%',
     });
   }
 
