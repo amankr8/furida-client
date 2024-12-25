@@ -25,6 +25,7 @@
           mat-button
           *ngFor="let project of projects$ | async"
           [routerLink]="['/projects', project.id]"
+          (click)="toggleMenu()"
         >
           {{ project.name }}
         </button>
