@@ -120,6 +120,7 @@ export class PostEffects {
 
   viewPostDialog(post: Post) {
     this.matDialog.open(ViewPostComponent, {
+      panelClass: 'mat-dialog-container',
       data: post,
     });
   }
