@@ -4,9 +4,9 @@
     mode="indeterminate"
     class="mb-3"
   ></mat-progress-bar>
-  <div class="row row-cols-3 px-4">
-    <div class="col" *ngFor="let doc of docs$ | async">
-      <mat-card appearance="outlined" class="mb-3 shadow-sm">
+  <div class="row g-3">
+    <div class="col-12 col-md-6 col-xl-4" *ngFor="let doc of docs$ | async">
+      <mat-card appearance="outlined" class="shadow-sm">
         <mat-card-header class="mb-2">
           <mat-card-title class="single-line-truncate">
             {{ doc.name }}
@@ -15,7 +15,7 @@
             getProjectNameById(doc.projectId) | async
           }}</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content class="truncate-text card-content-h">
+        <mat-card-content class="single-line-truncate">
           <p>{{ doc.desc }}</p>
         </mat-card-content>
         <mat-card-actions>
