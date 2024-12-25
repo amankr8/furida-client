@@ -36,7 +36,7 @@ import { MainLogoComponent } from '../main-logo/main-logo.component';
 export class HeaderComponent {
   @Output() toggleSidenav = new EventEmitter<void>();
   projects$: Observable<Project[]> = this.store.select(selectProjects);
-  isProjectLoaded$: Observable<boolean> = this.store.select(
+  projectLoaded$: Observable<boolean> = this.store.select(
     selectIsProjectLoaded
   );
   smallScreen: boolean = false;
@@ -47,8 +47,8 @@ export class HeaderComponent {
   ) {}
 
   ngOnInit() {
-    this.isProjectLoaded$.subscribe((isLoaded) => {
-      if (!isLoaded) this.store.dispatch(loadProjects());
+    this.projectLoaded$.subscribe((loaded) => {
+      if (!loaded) this.store.dispatch(loadProjects());
     });
     this.breakpointObserver
       .observe([Breakpoints.Small, Breakpoints.XSmall])

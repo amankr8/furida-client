@@ -16,14 +16,20 @@
     >
       About
     </button>
-    <button
-      mat-button
-      class="text-white"
-      (click)="toggleMenu()"
-      routerLink="/projects"
-    >
-      Projects
-    </button>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Projects </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="d-flex flex-column gap-2">
+        <button
+          mat-button
+          *ngFor="let project of projects$ | async"
+          [routerLink]="['/projects', project.id]"
+        >
+          {{ project.name }}
+        </button>
+      </div>
+    </mat-expansion-panel>
     <button
       mat-button
       class="text-white"
