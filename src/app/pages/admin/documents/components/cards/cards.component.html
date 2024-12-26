@@ -10,18 +10,18 @@
       *ngFor="let doc of documents$ | async"
     >
       <div class="d-flex justify-content-center align-items-center">
-        <mat-card appearance="outlined" class="custom-card shadow-sm">
+        <mat-card appearance="outlined" class="custom-card">
           <div class="d-flex justify-content-between align-items-center">
             <div>
-              <mat-card-header class="mb-2">
-                <mat-card-title class="single-line-truncate">
+              <mat-card-header class="mb-3">
+                <mat-card-title>
                   {{ doc.name }}
                 </mat-card-title>
                 <mat-card-subtitle>{{
                   getProjectNameById(doc.projectId) | async
                 }}</mat-card-subtitle>
               </mat-card-header>
-              <mat-card-content class="truncate-text card-content-h">
+              <mat-card-content class="single-line-truncate single-line-h">
                 <p>{{ doc.desc }}</p>
               </mat-card-content>
             </div>
@@ -32,18 +32,18 @@
           </div>
           <mat-card-actions class="btn-group">
             <button
-              mat-button
+              mat-icon-button
               (click)="update(doc.id)"
               [disabled]="loading$ | async"
             >
-              EDIT
+              <mat-icon>edit</mat-icon>
             </button>
             <button
-              mat-button
+              mat-icon-button
               (click)="delete(doc.id)"
               [disabled]="loading$ | async"
             >
-              DELETE
+              <mat-icon>delete</mat-icon>
             </button>
           </mat-card-actions>
         </mat-card>

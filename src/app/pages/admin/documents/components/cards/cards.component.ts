@@ -22,6 +22,7 @@ import {
   openEditDialog,
 } from '../../../../../state/document/document.actions';
 import { loadProjects } from '../../../../../state/project/project.actions';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-document-cards',
@@ -32,6 +33,7 @@ import { loadProjects } from '../../../../../state/project/project.actions';
     CommonModule,
     MatProgressBarModule,
     MenuButtonComponent,
+    MatIconModule,
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',

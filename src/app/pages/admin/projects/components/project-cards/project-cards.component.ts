@@ -3,7 +3,6 @@ import { Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Project } from '../../../../../interface/project';
-import { ProjectService } from '../../../../../service/project/project.service';
 import { MatButtonModule } from '@angular/material/button';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -15,14 +14,20 @@ import {
 import {
   selectProjects,
   selectLoading,
-  selectError,
   selectIsProjectLoaded,
 } from '../../../../../state/project/project.selectors';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-project-cards',
   standalone: true,
-  imports: [MatCardModule, MatProgressBarModule, CommonModule, MatButtonModule],
+  imports: [
+    MatCardModule,
+    MatProgressBarModule,
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './project-cards.component.html',
   styleUrl: './project-cards.component.scss',
 })

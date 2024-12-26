@@ -11,7 +11,7 @@
           matBadge="U"
           [matBadgeHidden]="!(isLoggedInUser(user.username) | async)"
           appearance="outlined"
-          class="custom-card shadow-sm"
+          class="custom-card"
         >
           <mat-card-header class="mb-2">
             <mat-card-title class="single-line-truncate">
@@ -30,13 +30,13 @@
               [matTooltipDisabled]="isLoggedInUser(user.username) | async"
             >
               <button
-                mat-button
+                mat-icon-button
                 (click)="updateUser()"
                 [disabled]="
                   !(isLoggedInUser(user.username) | async) || (loading$ | async)
                 "
               >
-                EDIT
+                <mat-icon>edit</mat-icon>
               </button>
             </div>
             <div
@@ -46,13 +46,13 @@
               [matTooltipDisabled]="!(isLoggedInUser(user.username) | async)"
             >
               <button
-                mat-button
+                mat-icon-button
                 (click)="deleteUser(user.id)"
                 [disabled]="
                   (isLoggedInUser(user.username) | async) || (loading$ | async)
                 "
               >
-                DELETE
+                <mat-icon>delete</mat-icon>
               </button>
             </div>
           </mat-card-actions>

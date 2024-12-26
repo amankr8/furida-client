@@ -10,7 +10,7 @@
       *ngFor="let message of messages$ | async"
     >
       <div class="d-flex justify-content-center align-items-center">
-        <mat-card appearance="outlined" class="custom-card shadow-sm">
+        <mat-card appearance="outlined" class="custom-card">
           <mat-card-header class="mb-2">
             <mat-card-title class="single-line-truncate">
               {{ message.name }}
@@ -22,18 +22,18 @@
           </mat-card-content>
           <mat-card-actions class="btn-group">
             <button
-              mat-button
+              mat-icon-button
               (click)="archiveMessage(message.id)"
               [disabled]="loading$ | async"
             >
-              {{ archiveButtonText }}
+              <mat-icon>{{ archiveButtonText }}</mat-icon>
             </button>
             <button
-              mat-button
+              mat-icon-button
               (click)="deleteMessage(message.id)"
               [disabled]="loading$ | async"
             >
-              DELETE
+              <mat-icon>delete</mat-icon>
             </button>
           </mat-card-actions>
         </mat-card>

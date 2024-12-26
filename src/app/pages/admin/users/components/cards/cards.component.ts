@@ -23,6 +23,7 @@ import {
   selectAuthLoaded,
 } from '../../../../../state/auth/auth.selectors';
 import { loadAuthUser } from '../../../../../state/auth/auth.actions';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-cards',
@@ -34,6 +35,7 @@ import { loadAuthUser } from '../../../../../state/auth/auth.actions';
     CommonModule,
     MatTooltipModule,
     MatBadgeModule,
+    MatIconModule,
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
