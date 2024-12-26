@@ -13,15 +13,15 @@
         <mat-card appearance="outlined" class="custom-card">
           <div class="d-flex justify-content-between align-items-center">
             <div>
-              <mat-card-header class="mb-2">
-                <mat-card-title class="single-line-truncate">
+              <mat-card-header class="mb-3">
+                <mat-card-title>
                   {{ doc.name }}
                 </mat-card-title>
                 <mat-card-subtitle>{{
                   getProjectNameById(doc.projectId) | async
                 }}</mat-card-subtitle>
               </mat-card-header>
-              <mat-card-content class="truncate-text card-content-h">
+              <mat-card-content class="single-line-truncate single-line-h">
                 <p>{{ doc.desc }}</p>
               </mat-card-content>
             </div>
