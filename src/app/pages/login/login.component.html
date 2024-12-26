@@ -1,8 +1,8 @@
 <div class="d-flex justify-content-center align-items-center min-vh-100">
-  <form [formGroup]="form" (ngSubmit)="login()" class="w-25">
-    <mat-card appearance="outlined">
-      <div class="container py-4">
-        <div class="d-flex flex-column">
+  <form [formGroup]="form" (ngSubmit)="login()">
+    <div class="container">
+      <mat-card appearance="outlined" class="login-form">
+        <div class="d-flex flex-column container my-4">
           <p class="text-center h4 py-2">Login</p>
           <mat-form-field>
             <mat-label>Username</mat-label>
@@ -23,7 +23,6 @@
             <button
               mat-raised-button
               color="primary"
-              class="w-25"
               type="submit"
               [disabled]="form.invalid || (loading$ | async)"
             >
@@ -31,7 +30,7 @@
             </button>
           </div>
         </div>
-      </div>
-    </mat-card>
+      </mat-card>
+    </div>
   </form>
 </div>
