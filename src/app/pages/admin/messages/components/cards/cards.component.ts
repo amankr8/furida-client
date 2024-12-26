@@ -16,17 +16,24 @@ import {
   selectMessageLoading,
   selectMessages,
 } from '../../../../../state/message/message.selectors';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-message-cards',
   standalone: true,
-  imports: [MatProgressBarModule, MatCardModule, MatButtonModule, CommonModule],
+  imports: [
+    MatProgressBarModule,
+    MatCardModule,
+    MatButtonModule,
+    CommonModule,
+    MatIconModule,
+  ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
 })
 export class CardsComponent {
   @Input() archive: boolean = false;
-  archiveButtonText: string = 'ARCHIVE';
+  archiveButtonText: string = 'archive';
   messages$: Observable<Message[]> = this.store.select(
     selectMessages(this.archive)
   );
@@ -43,7 +50,7 @@ export class CardsComponent {
 
   ngOnChanges() {
     this.messages$ = this.store.select(selectMessages(this.archive));
-    this.archiveButtonText = this.archive ? 'UNARCHIVE' : 'ARCHIVE';
+    this.archiveButtonText = this.archive ? 'unarchive' : 'archive';
   }
 
   archiveMessage(id: number) {

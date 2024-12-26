@@ -24,7 +24,9 @@
             <p>{{ post.content }}</p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-button (click)="viewPost(post.id)">VIEW</button>
+            <button mat-icon-button (click)="viewPost(post.id)">
+              <mat-icon>visibility</mat-icon>
+            </button>
           </mat-card-actions>
         </mat-card>
       </div>

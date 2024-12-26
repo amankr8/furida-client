@@ -22,18 +22,18 @@
           </mat-card-content>
           <mat-card-actions class="btn-group">
             <button
-              mat-button
+              mat-icon-button
               (click)="archiveMessage(message.id)"
               [disabled]="loading$ | async"
             >
-              {{ archiveButtonText }}
+              <mat-icon>{{ archiveButtonText }}</mat-icon>
             </button>
             <button
-              mat-button
+              mat-icon-button
               (click)="deleteMessage(message.id)"
               [disabled]="loading$ | async"
             >
-              DELETE
+              <mat-icon>delete</mat-icon>
             </button>
           </mat-card-actions>
         </mat-card>

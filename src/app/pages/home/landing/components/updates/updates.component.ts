@@ -15,11 +15,18 @@ import {
   loadPosts,
   openViewDialog,
 } from '../../../../../state/post/post.actions';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-updates',
   standalone: true,
-  imports: [MatCardModule, MatProgressBarModule, MatButtonModule, CommonModule],
+  imports: [
+    MatCardModule,
+    MatProgressBarModule,
+    MatButtonModule,
+    CommonModule,
+    MatIconModule,
+  ],
   templateUrl: './updates.component.html',
   styleUrl: './updates.component.scss',
 })

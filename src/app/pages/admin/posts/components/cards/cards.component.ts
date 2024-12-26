@@ -16,11 +16,18 @@ import {
   openDeleteDialog,
   openEditDialog,
 } from '../../../../../state/post/post.actions';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-post-cards',
   standalone: true,
-  imports: [MatProgressBarModule, MatButtonModule, MatCardModule, CommonModule],
+  imports: [
+    MatProgressBarModule,
+    MatButtonModule,
+    MatCardModule,
+    CommonModule,
+    MatIconModule,
+  ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
 })

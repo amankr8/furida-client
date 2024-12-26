@@ -32,18 +32,18 @@
           </div>
           <mat-card-actions class="btn-group">
             <button
-              mat-button
+              mat-icon-button
               (click)="update(doc.id)"
               [disabled]="loading$ | async"
             >
-              EDIT
+              <mat-icon>edit</mat-icon>
             </button>
             <button
-              mat-button
+              mat-icon-button
               (click)="delete(doc.id)"
               [disabled]="loading$ | async"
             >
-              DELETE
+              <mat-icon>delete</mat-icon>
             </button>
           </mat-card-actions>
         </mat-card>
