@@ -1,15 +1,17 @@
 <div class="container">
-  <div class="d-flex justify-content-between align-items-center mt-4 px-4">
-    <app-display-text-head [textInput]="headerText"></app-display-text-head>
-    <div class="d-flex gap-2">
-      <button mat-raised-button color="primary" [routerLink]="childLevelLink">
+  <div
+    class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 px-4"
+  >
+    <div class="d-flex gap-2 mb-3 mb-md-0">
+      <button mat-stroked-button routerLink="../">
+        <mat-icon>arrow_back</mat-icon>
+        Back
+      </button>
+      <button mat-flat-button color="primary" [routerLink]="childLevelLink">
         {{ buttonText }}
       </button>
-      <button mat-raised-button routerLink="../">
-        <mat-icon>arrow_back</mat-icon>
-        Go Back
-      </button>
     </div>
+    <app-display-text-head [textInput]="headerText"></app-display-text-head>
   </div>
   <hr />
 </div>
