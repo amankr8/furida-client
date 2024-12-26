@@ -25,14 +25,18 @@
       </mat-form-field>
       <div class="d-flex justify-content-start gap-2">
         <button
-          mat-raised-button
+          mat-flat-button
           color="primary"
           [disabled]="form.invalid"
           class="dialog-action-button"
         >
           Save
         </button>
-        <button mat-raised-button mat-dialog-close class="dialog-action-button">
+        <button
+          mat-stroked-button
+          mat-dialog-close
+          class="dialog-action-button"
+        >
           Cancel
         </button>
       </div>

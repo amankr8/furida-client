@@ -12,6 +12,7 @@ import {
   selectAuthLoading,
 } from '../../../../state/auth/auth.selectors';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-level-0-header',
@@ -21,6 +22,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     LogoutButtonComponent,
     CommonModule,
     MatProgressSpinnerModule,
+    MatDividerModule,
   ],
   templateUrl: './level-0-header.component.html',
   styleUrl: './level-0-header.component.scss',

@@ -9,33 +9,35 @@
       class="col-12 col-md-6 col-xl-4"
       *ngFor="let message of messages$ | async"
     >
-      <mat-card appearance="outlined" class="shadow-sm">
-        <mat-card-header class="mb-2">
-          <mat-card-title class="single-line-truncate">
-            {{ message.name }}
-          </mat-card-title>
-          <mat-card-subtitle>{{ message.email }}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content class="truncate-text card-content-h">
-          <p>{{ message.msg }}</p>
-        </mat-card-content>
-        <mat-card-actions class="btn-group">
-          <button
-            mat-button
-            (click)="archiveMessage(message.id)"
-            [disabled]="loading$ | async"
-          >
-            {{ archiveButtonText }}
-          </button>
-          <button
-            mat-button
-            (click)="deleteMessage(message.id)"
-            [disabled]="loading$ | async"
-          >
-            DELETE
-          </button>
-        </mat-card-actions>
-      </mat-card>
+      <div class="d-flex justify-content-center align-items-center">
+        <mat-card appearance="outlined" class="custom-card shadow-sm">
+          <mat-card-header class="mb-2">
+            <mat-card-title class="single-line-truncate">
+              {{ message.name }}
+            </mat-card-title>
+            <mat-card-subtitle>{{ message.email }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="truncate-text card-content-h">
+            <p>{{ message.msg }}</p>
+          </mat-card-content>
+          <mat-card-actions class="btn-group">
+            <button
+              mat-button
+              (click)="archiveMessage(message.id)"
+              [disabled]="loading$ | async"
+            >
+              {{ archiveButtonText }}
+            </button>
+            <button
+              mat-button
+              (click)="deleteMessage(message.id)"
+              [disabled]="loading$ | async"
+            >
+              DELETE
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>

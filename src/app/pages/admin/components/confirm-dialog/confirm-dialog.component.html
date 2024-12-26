@@ -1,19 +1,19 @@
-<div class="container py-3">
+<div class="container my-3">
   <p class="text-center h4 mb-3">Confirm</p>
-  <p class="text-center blockquote mb-4">
+  <p class="text-center lh-base blockquote mb-3">
     {{ data.message }}
   </p>
   <div class="d-flex justify-content-center gap-2">
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       (click)="confirm()"
       class="dialog-action-button"
     >
-      Yes, Confirm
+      Yes
     </button>
-    <button mat-raised-button mat-dialog-close class="dialog-action-button">
-      No, Cancel
+    <button mat-stroked-button mat-dialog-close class="dialog-action-button">
+      No
     </button>
   </div>
 </div>

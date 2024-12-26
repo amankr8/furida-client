@@ -1,10 +1,12 @@
 <div class="container">
-  <div class="d-flex justify-content-between align-items-center mt-4 px-4">
-    <app-display-text-head [textInput]="headerText"></app-display-text-head>
-    <button mat-raised-button routerLink="../">
+  <div
+    class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 px-4"
+  >
+    <button mat-stroked-button class="mb-3 mb-md-0" routerLink="../">
       <mat-icon>arrow_back</mat-icon>
-      Go Back
+      Back
     </button>
+    <app-display-text-head [textInput]="headerText"></app-display-text-head>
   </div>
   <hr />
 </div>
