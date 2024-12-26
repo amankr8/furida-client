@@ -6,56 +6,58 @@
   ></mat-progress-bar>
   <div class="row g-3">
     <div class="col-12 col-md-6 col-xl-4" *ngFor="let user of users$ | async">
-      <mat-card
-        matBadge="U"
-        [matBadgeHidden]="!(isLoggedInUser(user.username) | async)"
-        appearance="outlined"
-        class="shadow-sm"
-      >
-        <mat-card-header class="mb-2">
-          <mat-card-title class="single-line-truncate">
-            {{ user.username }}
-          </mat-card-title>
-          <mat-card-subtitle>{{ user.role }}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content class="truncate-text card-content-h">
-          <p>{{ user.email }}</p>
-        </mat-card-content>
-        <mat-card-actions class="btn-group">
-          <div
-            [matTooltip]="
-              !(isLoggedInUser(user.username) | async) ? editConstraint : ''
-            "
-            [matTooltipDisabled]="isLoggedInUser(user.username) | async"
-          >
-            <button
-              mat-button
-              (click)="updateUser()"
-              [disabled]="
-                !(isLoggedInUser(user.username) | async) || (loading$ | async)
+      <div class="d-flex justify-content-center align-items-center">
+        <mat-card
+          matBadge="U"
+          [matBadgeHidden]="!(isLoggedInUser(user.username) | async)"
+          appearance="outlined"
+          class="custom-card shadow-sm"
+        >
+          <mat-card-header class="mb-2">
+            <mat-card-title class="single-line-truncate">
+              {{ user.username }}
+            </mat-card-title>
+            <mat-card-subtitle>{{ user.role }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="truncate-text card-content-h">
+            <p>{{ user.email }}</p>
+          </mat-card-content>
+          <mat-card-actions class="btn-group">
+            <div
+              [matTooltip]="
+                !(isLoggedInUser(user.username) | async) ? editConstraint : ''
               "
+              [matTooltipDisabled]="isLoggedInUser(user.username) | async"
             >
-              EDIT
-            </button>
-          </div>
-          <div
-            [matTooltip]="
-              (isLoggedInUser(user.username) | async) ? deleteConstraint : ''
-            "
-            [matTooltipDisabled]="!(isLoggedInUser(user.username) | async)"
-          >
-            <button
-              mat-button
-              (click)="deleteUser(user.id)"
-              [disabled]="
-                (isLoggedInUser(user.username) | async) || (loading$ | async)
+              <button
+                mat-button
+                (click)="updateUser()"
+                [disabled]="
+                  !(isLoggedInUser(user.username) | async) || (loading$ | async)
+                "
+              >
+                EDIT
+              </button>
+            </div>
+            <div
+              [matTooltip]="
+                (isLoggedInUser(user.username) | async) ? deleteConstraint : ''
               "
+              [matTooltipDisabled]="!(isLoggedInUser(user.username) | async)"
             >
-              DELETE
-            </button>
-          </div>
-        </mat-card-actions>
-      </mat-card>
+              <button
+                mat-button
+                (click)="deleteUser(user.id)"
+                [disabled]="
+                  (isLoggedInUser(user.username) | async) || (loading$ | async)
+                "
+              >
+                DELETE
+              </button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>
