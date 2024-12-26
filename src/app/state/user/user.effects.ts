@@ -49,7 +49,7 @@ export class UserEffects {
         ofType(openEditDialog),
         tap(() =>
           this.matDialog.open(UpdateUserComponent, {
-            width: '30%',
+            panelClass: 'custom-dialog-container',
           })
         )
       ),
@@ -69,11 +69,11 @@ export class UserEffects {
 
   showDeleteWarningDialog(action: Action) {
     this.matDialog.open(ConfirmDialogComponent, {
+      panelClass: 'alert-dialog-container',
       data: {
         action: action,
         message: 'Are you sure you want to delete this user?',
       },
-      width: '50%',
     });
   }
 

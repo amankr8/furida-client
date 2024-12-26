@@ -143,11 +143,11 @@ export class MessageEffects {
 
   showDeleteWarningDialog(action: Action) {
     this.matDialog.open(ConfirmDialogComponent, {
+      panelClass: 'alert-dialog-container',
       data: {
         action: action,
         message: 'Are you sure you want to delete this message?',
       },
-      width: '50%',
     });
   }
 

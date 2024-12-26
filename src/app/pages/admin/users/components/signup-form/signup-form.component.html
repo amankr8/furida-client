@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center align-items-center">
   <form [formGroup]="form" (ngSubmit)="signup()">
-    <mat-card appearance="outlined" class="signup-form">
+    <mat-card appearance="outlined" class="form-container">
       <div class="container py-4">
         <div class="d-flex flex-column">
           <mat-form-field>
@@ -48,7 +48,7 @@
             <button
               mat-raised-button
               color="primary"
-              class="w-25"
+              class="dialog-action-button"
               type="submit"
               [disabled]="form.invalid || (loading$ | async)"
             >
