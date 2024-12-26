@@ -4,7 +4,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 import { Document } from '../../../../../interface/document';
 import { MatButtonModule } from '@angular/material/button';
-import { map, Observable, Subscription } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
   selectIsProjectLoaded,
@@ -17,11 +17,18 @@ import {
   selectIsDocumentLoaded,
   selectLoading,
 } from '../../../../../state/document/document.selectors';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-files',
   standalone: true,
-  imports: [MatCardModule, MatProgressBarModule, CommonModule, MatButtonModule],
+  imports: [
+    MatCardModule,
+    MatProgressBarModule,
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './files.component.html',
   styleUrl: './files.component.scss',
 })

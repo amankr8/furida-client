@@ -20,7 +20,9 @@
             <p>{{ doc.desc }}</p>
           </mat-card-content>
           <mat-card-actions>
-            <a mat-button [href]="doc.docUrl" target="_blank">DOWNLOAD</a>
+            <a mat-icon-button [href]="doc.docUrl" target="_blank"
+              ><mat-icon>download</mat-icon>
+            </a>
           </mat-card-actions>
         </mat-card>
       </div>

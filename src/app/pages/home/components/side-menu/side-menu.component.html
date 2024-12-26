@@ -7,16 +7,16 @@
   <div class="d-flex justify-content-center">
     <mat-divider></mat-divider>
   </div>
-  <div class="px-4 mt-4 d-flex flex-column align-items-start gap-2">
+  <div class="px-4 mt-4 d-flex flex-column align-items-center gap-2">
     <button
       mat-button
-      class="text-white"
+      class="text-white w-100"
       (click)="toggleMenu()"
       routerLink="/about"
     >
       About
     </button>
-    <mat-expansion-panel>
+    <mat-expansion-panel class="w-100">
       <mat-expansion-panel-header>
         <mat-panel-title> Projects </mat-panel-title>
       </mat-expansion-panel-header>
@@ -33,15 +33,22 @@
     </mat-expansion-panel>
     <button
       mat-button
-      class="text-white"
+      class="text-white w-100"
       (click)="toggleMenu()"
       routerLink="/contact"
     >
       Contact
     </button>
-    <button mat-button class="text-white" (click)="toggleMenu()" routerLink="/">
+    <button
+      mat-button
+      class="text-white w-100"
+      (click)="toggleMenu()"
+      routerLink="/"
+    >
       CCTV
     </button>
-    <app-admin-button></app-admin-button>
+    <div class="d-flex justify-content-center w-100">
+      <app-admin-button></app-admin-button>
+    </div>
   </div>
 </div>
