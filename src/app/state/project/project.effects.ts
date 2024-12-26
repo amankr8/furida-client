@@ -114,8 +114,8 @@ export class ProjectEffects {
 
   showEditFormDialog(project: Project) {
     this.matDialog.open(UpdateProjectComponent, {
+      panelClass: 'custom-dialog-container',
       data: project,
-      width: '50%',
     });
   }
 
@@ -173,11 +173,11 @@ export class ProjectEffects {
 
   showDeleteWarningDialog(action: Action) {
     this.matDialog.open(ConfirmDialogComponent, {
+      panelClass: 'alert-dialog-container',
       data: {
         action: action,
         message: 'Are you sure you want to delete this project?',
       },
-      width: '50%',
     });
   }
 

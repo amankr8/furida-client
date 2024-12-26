@@ -116,8 +116,8 @@ export class DocumentEffects {
 
   showEditFormDialog(document: Document) {
     this.matDialog.open(EditDocumentComponent, {
+      panelClass: 'custom-dialog-container',
       data: document,
-      width: '50%',
     });
   }
 
@@ -177,11 +177,11 @@ export class DocumentEffects {
 
   showDeleteWarningDialog(action: Action) {
     this.matDialog.open(ConfirmDialogComponent, {
+      panelClass: 'alert-dialog-container',
       data: {
         action: action,
         message: 'Are you sure you want to delete this document?',
       },
-      width: '50%',
     });
   }
 

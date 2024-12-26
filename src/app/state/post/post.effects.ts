@@ -120,7 +120,7 @@ export class PostEffects {
 
   viewPostDialog(post: Post) {
     this.matDialog.open(ViewPostComponent, {
-      panelClass: 'mat-dialog-container',
+      panelClass: 'custom-dialog-container',
       data: post,
     });
   }
@@ -147,8 +147,8 @@ export class PostEffects {
 
   showEditFormDialog(post: Post) {
     this.matDialog.open(EditPostComponent, {
+      panelClass: 'custom-dialog-container',
       data: post,
-      width: '50%',
     });
   }
 
@@ -204,11 +204,11 @@ export class PostEffects {
 
   showDeleteWarningDialog(action: Action) {
     this.matDialog.open(ConfirmDialogComponent, {
+      panelClass: 'alert-dialog-container',
       data: {
         action: action,
         message: 'Are you sure you want to delete this post?',
       },
-      width: '50%',
     });
   }
 
