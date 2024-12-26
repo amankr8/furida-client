@@ -1,67 +1,62 @@
 <div class="container mb-3">
-  <div class="row justify-content-center">
-    <div class="contact-form">
-      <form [formGroup]="form" #formDirective="ngForm" (ngSubmit)="submit()">
-        <mat-card appearance="outlined">
-          <div class="container py-4">
-            <div class="d-flex flex-column">
-              <!-- Form Fields -->
-              <mat-form-field>
-                <mat-label>Full Name</mat-label>
-                <input matInput formControlName="name" />
-                <mat-error *ngIf="form.get('name')?.hasError('required')">
-                  Name is required
-                </mat-error>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Email</mat-label>
-                <input matInput formControlName="email" />
-                <mat-error *ngIf="form.get('email')?.hasError('required')">
-                  Email is required
-                </mat-error>
-                <mat-error
-                  *ngIf="
-                    form.get('email')?.hasError('email') &&
-                    !form.get('email')?.hasError('required')
-                  "
-                >
-                  Please enter a valid email address
-                </mat-error>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Message</mat-label>
-                <textarea matInput rows="5" formControlName="msg"></textarea>
-                <mat-error *ngIf="form.get('msg')?.hasError('required')">
-                  Message is required
-                </mat-error>
-                <mat-error
-                  *ngIf="
-                    form.get('msg')?.hasError('maxlength') &&
-                    !form.get('msg')?.hasError('required')
-                  "
-                >
-                  Message is larger than the limit
-                </mat-error>
-              </mat-form-field>
-              <div class="d-flex justify-content-end align-items-center gap-2">
-                <mat-spinner
-                  *ngIf="loading$ | async"
-                  diameter="30"
-                ></mat-spinner>
-                <button
-                  mat-raised-button
-                  color="primary"
-                  class="dialog-action-button"
-                  type="submit"
-                  [disabled]="form.invalid || (loading$ | async)"
-                >
-                  Send
-                </button>
-              </div>
+  <div class="d-flex justify-content-center align-items-center">
+    <form [formGroup]="form" #formDirective="ngForm" (ngSubmit)="submit()">
+      <mat-card appearance="outlined" class="form-container">
+        <div class="container py-4">
+          <div class="d-flex flex-column">
+            <!-- Form Fields -->
+            <mat-form-field>
+              <mat-label>Full Name</mat-label>
+              <input matInput formControlName="name" />
+              <mat-error *ngIf="form.get('name')?.hasError('required')">
+                Name is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" />
+              <mat-error *ngIf="form.get('email')?.hasError('required')">
+                Email is required
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  form.get('email')?.hasError('email') &&
+                  !form.get('email')?.hasError('required')
+                "
+              >
+                Please enter a valid email address
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Message</mat-label>
+              <textarea matInput rows="5" formControlName="msg"></textarea>
+              <mat-error *ngIf="form.get('msg')?.hasError('required')">
+                Message is required
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  form.get('msg')?.hasError('maxlength') &&
+                  !form.get('msg')?.hasError('required')
+                "
+              >
+                Message is larger than the limit
+              </mat-error>
+            </mat-form-field>
+            <div class="d-flex justify-content-end align-items-center gap-2">
+              <mat-spinner *ngIf="loading$ | async" diameter="30"></mat-spinner>
+              <button
+                mat-raised-button
+                color="primary"
+                class="dialog-action-button"
+                type="submit"
+                [disabled]="form.invalid || (loading$ | async)"
+              >
+                Send
+              </button>
             </div>
           </div>
-        </mat-card>
-      </form>
-    </div>
+        </div>
+      </mat-card>
+    </form>
   </div>
 </div>
