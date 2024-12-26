@@ -4,9 +4,9 @@
     mode="indeterminate"
     class="mb-3"
   ></mat-progress-bar>
-  <div class="row row-cols-3 px-4">
-    <div class="col" *ngFor="let post of posts$ | async">
-      <mat-card appearance="outlined" class="mb-3 shadow-sm">
+  <div class="row g-3">
+    <div class="col-12 col-md-6 col-xl-4" *ngFor="let post of posts$ | async">
+      <mat-card appearance="outlined" class="shadow-sm">
         <img
           mat-card-image
           [src]="post.imgUrl || 'https://placehold.co/600x400'"
