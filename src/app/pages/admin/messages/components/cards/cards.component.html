@@ -4,9 +4,12 @@
     mode="indeterminate"
     class="mb-3"
   ></mat-progress-bar>
-  <div class="row row-cols-3 px-4">
-    <div class="col" *ngFor="let message of messages$ | async">
-      <mat-card appearance="outlined" class="mb-3 shadow-sm">
+  <div class="row g-3">
+    <div
+      class="col-12 col-md-6 col-xl-4"
+      *ngFor="let message of messages$ | async"
+    >
+      <mat-card appearance="outlined" class="shadow-sm">
         <mat-card-header class="mb-2">
           <mat-card-title class="single-line-truncate">
             {{ message.name }}
