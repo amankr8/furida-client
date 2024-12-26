@@ -20,7 +20,7 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
         duration: 3000,
       });
       router.navigate(['/login']);
-      return EMPTY; // Stop the request entirely
+      return EMPTY;
     }
 
     // Attach Authorization header if token is valid
