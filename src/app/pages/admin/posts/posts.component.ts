@@ -11,6 +11,6 @@ import { CardsComponent } from './components/cards/cards.component';
 })
 export class PostsComponent {
   headerText: string = 'Your Posts';
-  buttonText: string = 'Add New Post';
+  buttonText: string = 'Create Post';
   childLevelLink: string = 'create-post';
 }
