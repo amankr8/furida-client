@@ -3,7 +3,6 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { EMPTY } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
@@ -20,7 +19,7 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
         duration: 3000,
       });
       router.navigate(['/login']);
-      return EMPTY;
+      return next(req);
     }
 
     // Attach Authorization header if token is valid
