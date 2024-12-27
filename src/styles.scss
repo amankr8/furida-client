@@ -20,10 +20,14 @@ body {
 
 .custom-dialog-container {
   width: 500px;
+  border-radius: 25px;
+  overflow: hidden;
 }
 
 .alert-dialog-container {
   width: 500px;
+  border-radius: 25px;
+  overflow: hidden;
 }
 
 .dialog-action-button {
