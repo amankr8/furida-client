@@ -29,7 +29,7 @@
     <mat-dialog-actions>
       <div class="d-flex justify-content-center align-items-center w-100">
         <button
-          mat-stroked-button
+          mat-flat-button
           color="primary"
           [disabled]="form.invalid"
           class="dialog-action-button"
@@ -37,10 +37,11 @@
           Save
         </button>
         <button
-          mat-stroked-button
+          mat-button
           color="primary"
           mat-dialog-close
           class="dialog-action-button"
+          cdkFocusInitial
         >
           Cancel
         </button>

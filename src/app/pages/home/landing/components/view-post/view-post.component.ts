@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-view-post',
@@ -20,6 +21,7 @@ import { CommonModule } from '@angular/common';
     MatCardModule,
     MatDividerModule,
     CommonModule,
+    MatIconModule,
   ],
   templateUrl: './view-post.component.html',
   styleUrl: './view-post.component.scss',

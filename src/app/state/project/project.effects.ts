@@ -187,11 +187,30 @@ export class ProjectEffects {
       mergeMap(({ projectId }) =>
         this.projectService.deleteProject(projectId).pipe(
           map(() => deleteProjectSuccess({ projectId })),
-          catchError((error) => of(deleteProjectFail({ error: error.message })))
+          catchError((error) =>
+            of(
+              deleteProjectFail({
+                error: this.getDeleteProjectErrorMessage(error),
+              })
+            )
+          )
         )
       )
     )
   );
+
+  getDeleteProjectErrorMessage(error: any): string {
+    switch (error.status) {
+      case 403:
+        return 'Project is linked to a document. Unlink the document first';
+      case 404:
+        return 'Project does not exist. Please refresh the page';
+      case 500:
+        return 'Internal Server Error';
+      default:
+        return 'Unknown Error Occurred';
+    }
+  }
 
   deleteProjectSuccess$ = createEffect(
     () =>
@@ -211,7 +230,7 @@ export class ProjectEffects {
       this.actions$.pipe(
         ofType(deleteProjectFail),
         tap(({ error }) => {
-          this.snackBar.open(`Failed to delete: ${error}`, 'Dismiss', {
+          this.snackBar.open(`Failed: ${error}`, 'Dismiss', {
             duration: 3000,
           });
         })
