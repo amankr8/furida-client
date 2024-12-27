@@ -24,8 +24,13 @@
             <p>{{ post.content }}</p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-icon-button (click)="viewPost(post.id)">
-              <mat-icon>visibility</mat-icon>
+            <button mat-button (click)="viewPost(post.id)">
+              <div
+                class="d-flex justify-content-between align-items-center gap-2"
+              >
+                <mat-icon>open_in_new</mat-icon>
+                <span>VIEW</span>
+              </div>
             </button>
           </mat-card-actions>
         </mat-card>

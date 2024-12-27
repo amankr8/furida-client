@@ -44,7 +44,7 @@
       <div class="d-flex justify-content-center align-items-center w-100">
         <mat-spinner *ngIf="loading$ | async" diameter="30"></mat-spinner>
         <button
-          mat-stroked-button
+          mat-flat-button
           color="primary"
           [disabled]="form.invalid || (loading$ | async)"
           class="dialog-action-button"
@@ -52,10 +52,11 @@
           Update
         </button>
         <button
-          mat-stroked-button
+          mat-button
           color="primary"
           mat-dialog-close
           class="dialog-action-button"
+          cdkFocusInitial
         >
           Cancel
         </button>
