@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Store } from '@ngrx/store';
-import { logoutUser } from '../../../../state/auth/auth.actions';
+import { confirmLogout } from '../../../../state/auth/auth.actions';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -15,6 +15,6 @@ export class LogoutButtonComponent {
   constructor(private store: Store) {}
 
   logout() {
-    this.store.dispatch(logoutUser());
+    this.store.dispatch(confirmLogout());
   }
 }
