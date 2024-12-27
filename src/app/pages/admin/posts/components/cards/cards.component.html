@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container pb-3">
   <mat-progress-bar
     *ngIf="loading$ | async"
     mode="indeterminate"
@@ -7,7 +7,7 @@
   <div class="row g-3">
     <div class="col-12 col-md-6 col-xl-4" *ngFor="let post of posts$ | async">
       <div class="d-flex justify-content-center align-items-center">
-        <mat-card appearance="outlined" class="custom-card">
+        <mat-card appearance="outlined" class="custom-card shadow-sm">
           <img
             mat-card-image
             [src]="post.imgUrl || 'https://placehold.co/600x400'"
