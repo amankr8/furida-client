@@ -11,6 +11,6 @@ import { CardsComponent } from './components/cards/cards.component';
 })
 export class AdminDocumentsComponent {
   headerText: string = 'Your Documents';
-  buttonText: string = 'Add New Doc';
+  buttonText: string = 'Add Doc';
   childLevelLink: string = 'add-document';
 }

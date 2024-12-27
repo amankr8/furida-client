@@ -6,7 +6,10 @@
         Back
       </button>
       <button mat-flat-button color="primary" [routerLink]="childLevelLink">
-        {{ buttonText }}
+        <div class="d-flex justify-content-between align-items-center gap-2">
+          <span>{{ buttonText }}</span>
+          <mat-icon>arrow_forward</mat-icon>
+        </div>
       </button>
     </div>
     <app-display-text-head [textInput]="headerText"></app-display-text-head>

@@ -11,6 +11,6 @@ import { CardsComponent } from './components/cards/cards.component';
 })
 export class UsersComponent {
   headerText: string = 'Users';
-  buttonText: string = 'Add New User';
+  buttonText: string = 'Add User';
   childLevelLink: string = 'signup';
 }

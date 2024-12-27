@@ -11,6 +11,6 @@ import { ProjectCardsComponent } from './components/project-cards/project-cards.
 })
 export class ProjectsComponent {
   headerText: string = 'Your Projects';
-  buttonText: string = 'Add New Project';
+  buttonText: string = 'Add Project';
   childLevelLink: string = 'add-project';
 }
