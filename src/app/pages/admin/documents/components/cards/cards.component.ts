@@ -15,6 +15,7 @@ import {
 import {
   selectIsProjectLoaded,
   selectProjectById,
+  selectProjects,
 } from '../../../../../state/project/project.selectors';
 import {
   loadDocuments,
@@ -23,6 +24,7 @@ import {
 } from '../../../../../state/document/document.actions';
 import { loadProjects } from '../../../../../state/project/project.actions';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-document-cards',
@@ -34,11 +36,13 @@ import { MatIconModule } from '@angular/material/icon';
     MatProgressBarModule,
     MenuButtonComponent,
     MatIconModule,
+    MatSelectModule,
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
 })
 export class CardsComponent {
+  projects$ = this.store.select(selectProjects);
   documents$: Observable<Document[]> = this.store.select(selectDocuments);
   isDocumentLoaded$: Observable<boolean> = this.store.select(
     selectIsDocumentLoaded
@@ -47,6 +51,8 @@ export class CardsComponent {
     selectIsProjectLoaded
   );
   loading$: Observable<boolean> = this.store.select(selectLoading);
+  selectedProjectId: number | null = null;
+  filteredDocuments$: Observable<Document[]> = this.documents$;
 
   constructor(private store: Store) {}
 
@@ -57,6 +63,15 @@ export class CardsComponent {
     this.isProjectLoaded$.subscribe((isLoaded) => {
       if (!isLoaded) this.store.dispatch(loadProjects());
     });
+  }
+
+  selectProject(projectId: number) {
+    this.selectedProjectId = projectId;
+    this.filteredDocuments$ = this.documents$.pipe(
+      map((docs) =>
+        projectId ? docs.filter((doc) => doc.projectId === projectId) : docs
+      )
+    );
   }
 
   getProjectNameById(id: number): Observable<String> {
