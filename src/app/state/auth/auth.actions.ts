@@ -52,4 +52,6 @@ export const updatePassFail = createAction(
   props<{ error: string }>()
 );
 
+export const confirmLogout = createAction('[Auth] Confirm Logout');
+
 export const logoutUser = createAction('[Auth] Logout User');

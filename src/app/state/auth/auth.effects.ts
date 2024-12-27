@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mergeMap, map, catchError, of, tap } from 'rxjs';
 import { AuthService } from '../../service/auth/auth.service';
 import {
+  confirmLogout,
   loadAuthUser,
   loadAuthUserFail,
   loadAuthUserSuccess,
@@ -21,9 +22,13 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { loadUsers } from '../../state/user/user.actions';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../pages/admin/components/confirm-dialog/confirm-dialog.component';
 
 @Injectable()
 export class AuthEffects {
+  readonly matDialog = inject(MatDialog);
+
   constructor(
     private actions$: Actions,
     private authService: AuthService,
@@ -184,6 +189,23 @@ export class AuthEffects {
         tap(({ error }) => {
           this.snackBar.open(error, 'Dismiss', {
             duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  confirmLogout$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(confirmLogout),
+        tap(() => {
+          this.matDialog.open(ConfirmDialogComponent, {
+            panelClass: 'alert-dialog-container',
+            data: {
+              action: logoutUser(),
+              message: 'Are you sure you want to logout?',
+            },
           });
         })
       ),
