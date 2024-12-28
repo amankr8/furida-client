@@ -2,10 +2,14 @@
   <div class="d-flex flex-column justify-content-center align-items-center">
     <h2>Settings</h2>
     <div class="settings-container d-flex flex-column gap-4">
-      <mat-slide-toggle (change)="toggleHomeHeader($event.checked)"
+      <mat-slide-toggle
+        [checked]="isNewHomeHeader$ | async"
+        (change)="toggleHomeHeader($event.checked)"
         >New Home Header</mat-slide-toggle
       >
-      <mat-slide-toggle (change)="toggleAdminHeader($event.checked)"
+      <mat-slide-toggle
+        [checked]="isNewAdminHeader$ | async"
+        (change)="toggleAdminHeader($event.checked)"
         >New Admin Header</mat-slide-toggle
       >
     </div>
