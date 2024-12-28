@@ -34,6 +34,8 @@ import { MainLogoComponent } from '../main-logo/main-logo.component';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  // deprecated in v2.0.0
+
   @Output() toggleSidenav = new EventEmitter<void>();
   projects$: Observable<Project[]> = this.store.select(selectProjects);
   projectLoaded$: Observable<boolean> = this.store.select(

@@ -19,6 +19,7 @@ import { MessagesComponent } from './pages/admin/messages/messages.component';
 import { ReadMessagesComponent } from './pages/admin/messages/read-messages/read-messages.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AdminLandingComponent } from './pages/admin/landing/admin-landing.component';
+import { ConfigComponent } from './pages/admin/config/config.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -131,6 +132,16 @@ export const routes: Routes = [
           {
             path: 'read-messages',
             component: ReadMessagesComponent,
+            canActivate: [authGuard],
+          },
+        ],
+      },
+      {
+        path: 'config',
+        children: [
+          {
+            path: '',
+            component: ConfigComponent,
             canActivate: [authGuard],
           },
         ],

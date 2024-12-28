@@ -2,8 +2,15 @@
   <mat-sidenav class="main-sidenav" #sidenav mode="over"
     ><app-side-menu (toggleSidenav)="toggleSidenav()"></app-side-menu
   ></mat-sidenav>
-  <mat-sidenav-content
-    ><app-header (toggleSidenav)="toggleSidenav()"></app-header>
+  <mat-sidenav-content>
+    <app-header
+      *ngIf="!(newHeader | async)"
+      (toggleSidenav)="toggleSidenav()"
+    ></app-header>
+    <app-navbar-v2
+      *ngIf="newHeader | async"
+      (toggleSidenav)="toggleSidenav()"
+    ></app-navbar-v2>
     <router-outlet></router-outlet>
     <app-banner-bottom></app-banner-bottom>
     <app-footer></app-footer

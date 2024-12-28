@@ -13,6 +13,7 @@ import {
 } from '../../../../state/auth/auth.selectors';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDividerModule } from '@angular/material/divider';
+import { selectHeaderConfig } from '../../../../state/config/config.selectors';
 
 @Component({
   selector: 'app-level-0-header',
@@ -32,6 +33,10 @@ export class Level0HeaderComponent {
   authUser$: Observable<User | null> = this.store.select(selectAuthUser);
   authLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
   authLoading$: Observable<boolean> = this.store.select(selectAuthLoading);
+
+  newAdminHeader: Observable<boolean> = this.store
+    .select(selectHeaderConfig)
+    .pipe(map((headerConfig) => headerConfig.newAdminHeader));
 
   constructor(private store: Store) {}
 
