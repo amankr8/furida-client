@@ -21,6 +21,7 @@ import { userReducer } from './state/user/user.reducer';
 import { UserEffects } from './state/user/user.effects';
 import { AuthEffects } from './state/auth/auth.effects';
 import { authReducer } from './state/auth/auth.reducer';
+import { configReducer } from './state/config/config.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -36,6 +37,7 @@ export const appConfig: ApplicationConfig = {
     provideState('posts', postReducer),
     provideState('users', userReducer),
     provideState('auth', authReducer),
+    provideState('config', configReducer),
     provideEffects([
       ProjectEffects,
       MessageEffects,

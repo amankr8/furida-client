@@ -11,4 +11,6 @@ import { RouterLink } from '@angular/router';
   templateUrl: './admin-header.component.html',
   styleUrl: './admin-header.component.scss',
 })
-export class AdminHeaderComponent {}
+export class AdminHeaderComponent {
+  // deprecated in v2.0.0
+}
