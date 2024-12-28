@@ -20,6 +20,10 @@
         ></span>
       </button>
       <mat-menu #profileMenu="matMenu" xPosition="before">
+        <button mat-menu-item>
+          <mat-icon fontIcon="account_circle" class="m-0"></mat-icon
+          ><span class="ms-2">Profile</span>
+        </button>
         <button mat-menu-item (click)="logout()">
           <mat-icon fontIcon="logout" class="m-0"></mat-icon
           ><span class="ms-2">Logout</span>

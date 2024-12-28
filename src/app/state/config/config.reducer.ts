@@ -12,8 +12,8 @@ export interface ConfigState {
 export const initialConfigState: ConfigState = {
   config: {
     headerConfig: {
-      newAdminHeader: false,
-      newHeader: false,
+      newAdminHeader: true,
+      newHeader: true,
     },
   },
 };

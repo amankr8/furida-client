@@ -6,7 +6,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { jwtInterceptor } from './config/jwt.interceptor';
-import { provideState, provideStore } from '@ngrx/store';
+import { MetaReducer, provideState, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { ProjectEffects } from './state/project/project.effects';
@@ -22,6 +22,9 @@ import { UserEffects } from './state/user/user.effects';
 import { AuthEffects } from './state/auth/auth.effects';
 import { authReducer } from './state/auth/auth.reducer';
 import { configReducer } from './state/config/config.reducer';
+import { localStorageSyncReducer } from './state/config/local-storage-sync.reducer';
+
+const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -30,7 +33,12 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([jwtInterceptor])),
     { provide: JWT_OPTIONS, useValue: {} },
     { provide: JwtHelperService, useClass: JwtHelperService },
-    provideStore(),
+    provideStore(
+      {},
+      {
+        metaReducers,
+      }
+    ),
     provideState('projects', projectReducer),
     provideState('messages', messageReducer),
     provideState('documents', documentReducer),
