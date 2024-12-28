@@ -4,7 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { User } from '../../interface/user';
 import { environment } from '../../../environments/environment';
-import { jwtToken } from '../../constants/global-constants';
+import { localStorageKeys } from '../../constants/global-constants';
 
 @Injectable({
   providedIn: 'root',
@@ -32,15 +32,15 @@ export class AuthService {
   }
 
   getAuthToken(): string | null {
-    return localStorage.getItem(jwtToken);
+    return localStorage.getItem(localStorageKeys.JWT_TOKEN);
   }
 
   setAuthToken(token: string) {
-    localStorage.setItem(jwtToken, token);
+    localStorage.setItem(localStorageKeys.JWT_TOKEN, token);
   }
 
   logout() {
-    localStorage.removeItem(jwtToken);
+    localStorage.removeItem(localStorageKeys.JWT_TOKEN);
   }
 
   isAuthenticated(): boolean {

@@ -1,7 +1,10 @@
-export const generalStatus = {
-  PENDING: 'pending',
-  SUCCESS: 'success',
-  FAILURE: 'failure',
-};
+export enum generalStatus {
+  PENDING = 'pending',
+  SUCCESS = 'success',
+  FAILURE = 'failure',
+}
 
-export const jwtToken = 'jwtToken';
+export enum localStorageKeys {
+  JWT_TOKEN = 'jwtToken',
+  ConfigState = 'configState',
+}
