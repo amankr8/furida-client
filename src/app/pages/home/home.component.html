@@ -4,11 +4,11 @@
   ></mat-sidenav>
   <mat-sidenav-content>
     <app-header
-      *ngIf="!newHeader"
+      *ngIf="!(newHeader | async)"
       (toggleSidenav)="toggleSidenav()"
     ></app-header>
     <app-navbar-v2
-      *ngIf="newHeader"
+      *ngIf="newHeader | async"
       (toggleSidenav)="toggleSidenav()"
     ></app-navbar-v2>
     <router-outlet></router-outlet>

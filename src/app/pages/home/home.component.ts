@@ -7,6 +7,9 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { NavbarV2Component } from '../components/navbar-v2/navbar-v2.component';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { selectHeaderConfig } from '../../state/config/config.selectors';
 
 @Component({
   selector: 'app-home',
@@ -26,7 +29,11 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeComponent {
   @ViewChild('sidenav') sidenav!: MatSidenav;
-  newHeader: boolean = true;
+  newHeader: Observable<boolean> = this.store
+    .select(selectHeaderConfig)
+    .pipe(select((config) => config.newHeader));
+
+  constructor(private store: Store) {}
 
   toggleSidenav() {
     this.sidenav.toggle();
