@@ -1,6 +1,9 @@
 <div class="container">
   <div class="d-flex flex-column align-items-center mt-4 px-3">
-    <div class="d-flex justify-content-between align-items-center w-100 mb-4">
+    <div
+      *ngIf="!newAdminHeader"
+      class="d-flex justify-content-between align-items-center w-100 mb-4"
+    >
       <div class="d-flex justify-content-center">
         <mat-spinner
           class="px-4"

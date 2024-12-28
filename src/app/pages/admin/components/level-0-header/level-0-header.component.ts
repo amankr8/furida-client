@@ -33,6 +33,8 @@ export class Level0HeaderComponent {
   authLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
   authLoading$: Observable<boolean> = this.store.select(selectAuthLoading);
 
+  newAdminHeader: boolean = true;
+
   constructor(private store: Store) {}
 
   ngOnInit() {

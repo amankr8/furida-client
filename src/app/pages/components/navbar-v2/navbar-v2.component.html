@@ -1,8 +1,6 @@
 <mat-toolbar color="primary" class="shadow">
   <div class="d-flex justify-content-between align-items-center h-100 w-100">
-    <button mat-button class="brand-button h-100 px-3" routerLink="/">
-      <p class="brand-name mb-0 fw-bold fs-5 ltr-spacing">FURIDA</p>
-    </button>
+    <app-brand-logo-v2 class="h-100"></app-brand-logo-v2>
     <div *ngIf="!smallScreen" class="h-100">
       <button mat-button class="link-button h-100">
         <p class="link-name mb-0" routerLink="/about">About</p>

@@ -20,6 +20,7 @@ import {
 } from '../../../state/project/project.selectors';
 import { loadProjects } from '../../../state/project/project.actions';
 import { MatMenuModule } from '@angular/material/menu';
+import { BrandLogoV2Component } from '../brand-logo-v2/brand-logo-v2.component';
 
 @Component({
   selector: 'app-navbar-v2',
@@ -31,6 +32,7 @@ import { MatMenuModule } from '@angular/material/menu';
     RouterModule,
     CommonModule,
     MatMenuModule,
+    BrandLogoV2Component,
   ],
   templateUrl: './navbar-v2.component.html',
   styleUrl: './navbar-v2.component.scss',
