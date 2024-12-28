@@ -3,6 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { DisplayTextHeadComponent } from '../../../components/display-text-head/display-text-head.component';
 import { RouterLink } from '@angular/router';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-level-2-header',
@@ -12,6 +13,7 @@ import { RouterLink } from '@angular/router';
     MatIconModule,
     DisplayTextHeadComponent,
     RouterLink,
+    MatDividerModule,
   ],
   templateUrl: './level-2-header.component.html',
   styleUrl: './level-2-header.component.scss',

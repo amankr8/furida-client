@@ -22,7 +22,7 @@ import { UserEffects } from './state/user/user.effects';
 import { AuthEffects } from './state/auth/auth.effects';
 import { authReducer } from './state/auth/auth.reducer';
 import { configReducer } from './state/config/config.reducer';
-import { localStorageSyncReducer } from './state/config/local-storage-sync.reducer';
+import { localStorageSyncReducer } from './state/local-storage-sync.reducer';
 
 const metaReducers: MetaReducer[] = [localStorageSyncReducer];
 
