@@ -24,7 +24,7 @@ import { authReducer } from './state/auth/auth.reducer';
 import { configReducer } from './state/config/config.reducer';
 import { localStorageSyncReducer } from './state/local-storage-sync.reducer';
 
-const metaReducers: MetaReducer[] = [localStorageSyncReducer];
+const metaReducers: MetaReducer<any>[] = [localStorageSyncReducer];
 
 export const appConfig: ApplicationConfig = {
   providers: [
