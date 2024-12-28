@@ -1,0 +1,22 @@
+@use "@angular/material" as mat;
+
+// Use Material's prebuilt red palette for primary theme
+$red-primary: mat.define-palette(mat.$red-palette, 900);
+
+// Optional: Choose other palettes for accent and warn
+$default-accent: mat.define-palette(mat.$pink-palette, 200);
+$default-warn: mat.define-palette(mat.$red-palette);
+
+// Define the theme
+$red-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $red-primary,
+      accent: $default-accent,
+      warn: $default-warn,
+    ),
+  )
+);
+
+// Apply the theme to all Angular Material components
+@include mat.all-component-themes($red-theme);
