@@ -1,15 +1,28 @@
 <mat-toolbar color="primary" class="shadow">
-  <div class="d-flex justify-content-between h-100 w-100">
+  <div class="d-flex justify-content-between align-items-center h-100 w-100">
     <button mat-button class="brand-button h-100 px-3" routerLink="/">
       <p class="brand-name mb-0 fw-bold fs-5 ltr-spacing">FURIDA</p>
     </button>
-    <div>
+    <div *ngIf="!smallScreen" class="h-100">
       <button mat-button class="link-button h-100">
         <p class="link-name mb-0" routerLink="/about">About</p>
       </button>
-      <button mat-button class="link-button h-100">
-        <p class="link-name mb-0" routerLink="/project">Projects</p>
+      <button
+        mat-button
+        class="link-button h-100"
+        [matMenuTriggerFor]="projectMenu"
+      >
+        Projects
       </button>
+      <mat-menu #projectMenu="matMenu">
+        <button
+          mat-menu-item
+          *ngFor="let project of projects$ | async"
+          [routerLink]="['/projects', project.id]"
+        >
+          {{ project.name }}
+        </button>
+      </mat-menu>
       <button mat-button class="link-button h-100">
         <p class="link-name mb-0" routerLink="/contact">Contact</p>
       </button>
@@ -26,5 +39,8 @@
         <p class="link-name mb-0" routerLink="/admin">Admin Console</p>
       </button>
     </div>
+    <button *ngIf="smallScreen" mat-icon-button (click)="toggleMenu()">
+      <mat-icon fontIcon="menu"></mat-icon>
+    </button>
   </div>
 </mat-toolbar>
