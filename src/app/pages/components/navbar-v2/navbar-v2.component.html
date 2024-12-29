@@ -1,44 +1,52 @@
-<mat-toolbar color="primary" class="shadow">
-  <div class="d-flex justify-content-between align-items-center h-100 w-100">
-    <app-brand-logo-v2 class="h-100"></app-brand-logo-v2>
-    <div *ngIf="!smallScreen" class="h-100">
-      <button mat-button class="link-button h-100">
-        <p class="link-name mb-0" routerLink="/about">About</p>
-      </button>
-      <button
-        mat-button
-        class="link-button h-100"
-        [matMenuTriggerFor]="projectMenu"
-      >
-        Projects
-      </button>
-      <mat-menu #projectMenu="matMenu">
-        <button
-          mat-menu-item
-          *ngFor="let project of projects$ | async"
-          [routerLink]="['/projects', project.id]"
+<header class="navbar shadow-lg z-50 outline outline-1 outline-slate-200">
+  <div class="flex justify-between items-center w-full h-full px-4">
+    <!-- Brand Logo -->
+    <div class="flex-1">
+      <app-brand-logo-v2 />
+    </div>
+
+    <!-- Navigation Links (for larger screens) -->
+    <div *ngIf="!smallScreen" class="flex items-center space-x-4 h-full">
+      <a class="btn btn-ghost normal-case" routerLink="/about"> About </a>
+
+      <div class="dropdown">
+        <label tabIndex="0" class="btn btn-ghost normal-case">
+          Projects <i class="material-icons">arrow_drop_down</i></label
         >
-          {{ project.name }}
-        </button>
-      </mat-menu>
-      <button mat-button class="link-button h-100">
-        <p class="link-name mb-0" routerLink="/contact">Contact</p>
-      </button>
-      <button mat-button class="link-button h-100">
-        <p class="link-name mb-0" routerLink="/cctv">CCTV</p>
-      </button>
+        <ul
+          tabIndex="0"
+          class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+        >
+          <li
+            *ngFor="let project of projects$ | async"
+            [routerLink]="['/projects', project.id]"
+          >
+            <a>{{ project.name }}</a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="btn btn-ghost normal-case" routerLink="/contact"> Contact </a>
+
+      <a class="btn btn-ghost normal-case"> CCTV </a>
+
       <button
         *ngIf="isUserLoggedIn() | async"
-        mat-raised-button
-        color="primary"
-        class="link-button mx-2"
+        class="btn btn-ghost normal-case"
+        routerLink="/admin"
       >
         <mat-icon fontIcon="settings"></mat-icon>
-        <p class="link-name mb-0" routerLink="/admin">Admin Console</p>
+        <span>Admin Console</span>
       </button>
     </div>
-    <button *ngIf="smallScreen" mat-icon-button (click)="toggleMenu()">
+
+    <!-- Mobile Menu Button (for smaller screens) -->
+    <button
+      *ngIf="smallScreen"
+      class="btn btn-square btn-ghost"
+      (click)="toggleMenu()"
+    >
       <mat-icon fontIcon="menu"></mat-icon>
     </button>
   </div>
-</mat-toolbar>
+</header>
