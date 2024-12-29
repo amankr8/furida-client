@@ -1,13 +1,13 @@
-<div class="container mb-3">
+<div class="w-full mb-3 p-4">
   <mat-progress-bar
     *ngIf="loading$ | async"
     mode="indeterminate"
     class="mb-3"
   ></mat-progress-bar>
-  <div class="row g-3">
-    <div class="col-12 col-md-6 col-xl-4" *ngFor="let doc of docs$ | async">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+    <div *ngFor="let doc of docs$ | async">
       <div class="flex justify-center align-items-center">
-        <mat-card appearance="outlined" class="custom-card shadow-sm">
+        <mat-card appearance="outlined" class="w-full shadow-sm">
           <mat-card-header class="mb-2">
             <mat-card-title class="single-line-truncate">
               {{ doc.name }}
@@ -19,7 +19,7 @@
           <mat-card-content class="single-line-truncate">
             <p>{{ doc.desc }}</p>
           </mat-card-content>
-          <mat-card-actions>
+          <mat-card-actions class="flex justify-end">
             <a mat-icon-button [href]="doc.docUrl" target="_blank"
               ><mat-icon>download</mat-icon>
             </a>
