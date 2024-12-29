@@ -35,11 +35,11 @@
         <img
           [src]="selectedPost.imgUrl || 'https://placehold.co/600x400'"
           alt="Shoes"
-          class="h-96 object-cover rounded-lg"
+          class="w-full object-cover rounded-lg"
         />
       </div>
 
-      <h2 class="text-2xl font-semibold my-2">{{ selectedPost.title }}</h2>
+      <h2 class="text-2xl font-semibold !my-4">{{ selectedPost.title }}</h2>
       <p class="text-sm text-gray-600 mb-2">{{ selectedPost.date | date }}</p>
       <p class="text-base text-gray-800 max-h-32 overflow-scroll">
         {{ selectedPost.content }}
