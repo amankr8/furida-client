@@ -1,45 +1,48 @@
-<div class="container pb-3">
-  <mat-progress-bar
-    *ngIf="loading$ | async"
-    mode="indeterminate"
-    class="mb-3"
-  ></mat-progress-bar>
-  <div class="row g-3">
-    <div class="col-12 col-md-6 col-xl-4" *ngFor="let post of posts$ | async">
-      <div class="d-flex justify-content-center align-items-center">
-        <mat-card appearance="outlined" class="custom-card shadow-sm">
-          <img
-            mat-card-image
-            [src]="post.imgUrl || 'https://placehold.co/600x400'"
-            alt="No image found"
-            class="card-image-h"
-          />
-          <mat-card-header class="mb-2">
-            <mat-card-title class="single-line-truncate">
-              {{ post.title }}
-            </mat-card-title>
-            <mat-card-subtitle>{{ post.date | date }}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content class="truncate-text card-content-h">
-            <p>{{ post.content }}</p>
-          </mat-card-content>
-          <mat-card-actions class="btn-group">
+<div class="container mx-auto pb-6">
+  <!-- Progress Bar -->
+  <div *ngIf="loading$ | async" class="mb-4">
+    <progress class="progress w-full progress-primary"></progress>
+  </div>
+
+  <!-- Grid Layout -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+    <div *ngFor="let post of posts$ | async">
+      <div class="flex justify-center items-center">
+        <div class="card w-full bg-base-100 shadow-md border border-gray-200">
+          <!-- Card Image -->
+          <figure>
+            <img
+              [src]="post.imgUrl || 'https://placehold.co/600x400'"
+              alt="No image found"
+              class="w-full h-48 object-cover"
+            />
+          </figure>
+
+          <!-- Card Body -->
+          <div class="card-body">
+            <h2 class="card-title truncate">{{ post.title }}</h2>
+            <p class="text-sm text-gray-500">{{ post.date | date }}</p>
+            <p class="truncate text-gray-700">{{ post.content }}</p>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="card-actions justify-end p-4">
             <button
-              mat-icon-button
+              class="btn btn-sm btn-outline btn-primary"
               (click)="update(post.id)"
               [disabled]="loading$ | async"
             >
-              <mat-icon>edit</mat-icon>
+              Edit
             </button>
             <button
-              mat-icon-button
+              class="btn btn-sm btn-outline btn-error"
               (click)="delete(post.id)"
               [disabled]="loading$ | async"
             >
-              <mat-icon>delete</mat-icon>
+              Delete
             </button>
-          </mat-card-actions>
-        </mat-card>
+          </div>
+        </div>
       </div>
     </div>
   </div>

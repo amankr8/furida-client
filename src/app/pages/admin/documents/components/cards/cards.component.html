@@ -1,6 +1,6 @@
-<div class="container pb-3">
-  <div class="d-flex justify-content-center">
-    <mat-form-field class="filter-container">
+<div class="w-full pb-3">
+  <div class="flex justify-center">
+    <mat-form-field class="">
       <mat-label>Filter By Project</mat-label>
       <mat-select
         [(value)]="selectedProjectId"
@@ -19,49 +19,50 @@
     mode="indeterminate"
     class="mb-3"
   ></mat-progress-bar>
-  <div class="row g-3">
-    <div
-      class="col-12 col-md-6 col-xl-4"
-      *ngFor="let doc of filteredDocuments$ | async"
-    >
-      <div class="d-flex justify-content-center align-items-center">
-        <mat-card appearance="outlined" class="custom-card shadow-sm">
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
-              <mat-card-header class="mb-3">
-                <mat-card-title>
-                  {{ doc.name }}
-                </mat-card-title>
-                <mat-card-subtitle>{{
-                  getProjectNameById(doc.projectId) | async
-                }}</mat-card-subtitle>
-              </mat-card-header>
-              <mat-card-content class="single-line-truncate single-line-h">
-                <p>{{ doc.desc }}</p>
-              </mat-card-content>
-            </div>
-            <app-menu-button
-              class="px-3"
-              [downloadLink]="doc.docUrl"
-            ></app-menu-button>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+    <div *ngFor="let doc of filteredDocuments$ | async">
+      <div class="card bg-base-100 border border-gray-300 shadow-sm">
+        <div class="flex justify-between items-center p-4">
+          <div>
+            <!-- Card Header -->
+            <h2 class="card-title text-lg font-semibold">{{ doc.name }}</h2>
+            <p class="text-sm text-gray-500">
+              {{ getProjectNameById(doc.projectId) | async }}
+            </p>
           </div>
-          <mat-card-actions class="btn-group">
-            <button
-              mat-icon-button
-              (click)="update(doc.id)"
-              [disabled]="loading$ | async"
-            >
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button
-              mat-icon-button
-              (click)="delete(doc.id)"
-              [disabled]="loading$ | async"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
-          </mat-card-actions>
-        </mat-card>
+          <app-menu-button
+            class="ml-3"
+            [downloadLink]="doc.docUrl"
+          ></app-menu-button>
+        </div>
+
+        <!-- Card Content -->
+        <div class="px-4 py-2">
+          <p class="truncate text-gray-700">{{ doc.desc }}</p>
+        </div>
+
+        <!-- Card Actions -->
+        <div class="card-actions flex justify-end px-4 py-2 space-x-2">
+          <!-- Edit Button with Font Awesome Icon -->
+          <button
+            class="btn btn-sm btn-outline btn-primary flex items-center space-x-2"
+            (click)="update(doc.id)"
+            [disabled]="loading$ | async"
+          >
+            <i class="fas fa-edit"></i>
+            <span>Edit</span>
+          </button>
+
+          <!-- Delete Button with Font Awesome Icon -->
+          <button
+            class="btn btn-sm btn-outline btn-error flex items-center space-x-2"
+            (click)="delete(doc.id)"
+            [disabled]="loading$ | async"
+          >
+            <i class="fas fa-trash-alt"></i>
+            <span>Delete</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>

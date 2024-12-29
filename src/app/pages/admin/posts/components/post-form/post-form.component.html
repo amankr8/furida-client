@@ -1,10 +1,10 @@
-<div class="container">
-  <div class="d-flex justify-content-center align-items-center">
+<div class="w-full">
+  <div class="flex justify-center align-items-center">
     <form [formGroup]="form" (ngSubmit)="submit()">
       <mat-card appearance="outlined" class="form-container shadow-sm">
         <div class="container py-3">
-          <div class="d-flex flex-column">
-            <div class="d-flex flex-column align-items-center">
+          <div class="flex flex-col">
+            <div class="flex flex-col align-items-center">
               <!-- Display selected image preview -->
               <div *ngIf="imagePreview" class="mb-3">
                 <mat-card appearance="outlined">
@@ -54,7 +54,7 @@
                 Content is too large
               </mat-error>
             </mat-form-field>
-            <div class="d-flex justify-content-end align-items-center gap-2">
+            <div class="flex justify-content-end align-items-center gap-2">
               <mat-spinner *ngIf="loading$ | async" diameter="30"></mat-spinner>
               <button
                 mat-raised-button

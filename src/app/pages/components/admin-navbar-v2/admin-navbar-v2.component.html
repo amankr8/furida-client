@@ -1,7 +1,7 @@
-<mat-toolbar color="primary">
-  <div class="d-flex justify-content-between align-items-center h-100 w-100">
+<mat-toolbar>
+  <div class="flex justify-between w-full">
     <app-brand-logo-v2 class="h-100"></app-brand-logo-v2>
-    <div class="h-100">
+    <div class="flex gap-2">
       <mat-spinner
         class="px-4"
         *ngIf="authLoading$ | async"
@@ -12,7 +12,7 @@
         class="link-button h-100 px-3"
         [matMenuTriggerFor]="profileMenu"
       >
-        <span class="d-flex align-items-center gap-1">
+        <span class="flex items-center gap-1">
           <p *ngIf="!(authLoading$ | async)" class="mb-0 fs-6 fst-italic">
             {{ getAuthUser() | async }}
           </p>

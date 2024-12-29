@@ -1,43 +1,38 @@
-<div class="container pb-3">
+<div class="w-full pb-3">
   <mat-progress-bar
     *ngIf="loading$ | async"
     mode="indeterminate"
     class="mb-3"
   ></mat-progress-bar>
-  <div class="row g-3">
-    <div
-      class="col-12 col-md-6 col-xl-4"
-      *ngFor="let message of messages$ | async"
-    >
-      <div class="d-flex justify-content-center align-items-center">
-        <mat-card appearance="outlined" class="custom-card shadow-sm">
-          <mat-card-header class="mb-2">
-            <mat-card-title class="single-line-truncate">
-              {{ message.name }}
-            </mat-card-title>
-            <mat-card-subtitle>{{ message.email }}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content class="truncate-text card-content-h">
-            <p>{{ message.msg }}</p>
-          </mat-card-content>
-          <mat-card-actions class="btn-group">
-            <button
-              mat-icon-button
-              (click)="archiveMessage(message.id)"
-              [disabled]="loading$ | async"
-            >
-              <mat-icon>{{ archiveButtonText }}</mat-icon>
-            </button>
-            <button
-              mat-icon-button
-              (click)="deleteMessage(message.id)"
-              [disabled]="loading$ | async"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+    <div *ngFor="let message of messages$ | async">
+      <mat-card appearance="outlined" class="custom-card shadow-sm w-full">
+        <mat-card-header class="mb-2">
+          <mat-card-title class="single-line-truncate">
+            {{ message.name }}
+          </mat-card-title>
+          <mat-card-subtitle>{{ message.email }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="truncate-text card-content-h">
+          <p>{{ message.msg }}</p>
+        </mat-card-content>
+        <mat-card-actions class="btn-group">
+          <button
+            mat-icon-button
+            (click)="archiveMessage(message.id)"
+            [disabled]="loading$ | async"
+          >
+            <mat-icon>{{ archiveButtonText }}</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            (click)="deleteMessage(message.id)"
+            [disabled]="loading$ | async"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
 </div>

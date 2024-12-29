@@ -4,9 +4,11 @@
     mode="indeterminate"
     class="mb-3"
   ></mat-progress-bar>
-  <div class="row g-3">
-    <div class="col-12 col-md-6 col-xl-4" *ngFor="let user of users$ | async">
-      <div class="d-flex justify-content-center align-items-center">
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4"
+  >
+    <div *ngFor="let user of users$ | async">
+      <div class="flex justify-center align-items-center">
         <mat-card
           matBadge="U"
           [matBadgeHidden]="!(isLoggedInUser(user.username) | async)"

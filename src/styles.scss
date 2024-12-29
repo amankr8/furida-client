@@ -1,9 +1,19 @@
-//@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
 
 /* Import Tailwind after Material */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 !important;
+}
 
 .btn {
   height: 2rem !important;

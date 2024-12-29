@@ -1,42 +1,33 @@
-<div class="container pb-3">
-  <mat-progress-bar
-    *ngIf="loading$ | async"
-    mode="indeterminate"
-    class="mb-3"
-  ></mat-progress-bar>
-  <div class="row g-3">
-    <div
-      class="col-12 col-md-6 col-xl-4"
-      *ngFor="let project of projects$ | async"
-    >
-      <div class="d-flex justify-content-center align-items-center">
-        <mat-card appearance="outlined" class="custom-card shadow-sm">
-          <mat-card-header class="mb-2">
-            <mat-card-title class="single-line-truncate">
-              {{ project.name }}
-            </mat-card-title>
-            <mat-card-subtitle>{{ project.address }}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content class="truncate-text card-content-h">
-            <p>{{ project.desc }}</p>
-          </mat-card-content>
-          <mat-card-actions class="btn-group">
+<div class="w-full p-4">
+  <div *ngIf="loading$ | async" class="mb-3">
+    <progress class="progress w-full progress-primary"></progress>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div *ngFor="let project of projects$ | async">
+      <div class="flex justify-center items-center">
+        <div class="card shadow-md w-full border border-gray-200">
+          <div class="card-body">
+            <h2 class="card-title truncate">{{ project.name }}</h2>
+            <p class="text-sm text-gray-500">{{ project.address }}</p>
+            <p class="truncate text-gray-700">{{ project.desc }}</p>
+          </div>
+          <div class="card-actions justify-end p-4">
             <button
-              mat-icon-button
+              class="btn btn-sm btn-outline btn-primary"
               (click)="updateProject(project.id)"
               [disabled]="loading$ | async"
             >
-              <mat-icon>edit</mat-icon>
+              Edit
             </button>
             <button
-              mat-icon-button
+              class="btn btn-sm btn-outline btn-error"
               (click)="deleteProject(project.id)"
               [disabled]="loading$ | async"
             >
-              <mat-icon>delete</mat-icon>
+              Delete
             </button>
-          </mat-card-actions>
-        </mat-card>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -1,60 +1,69 @@
-<div class="container">
-  <div class="d-flex justify-content-center">
-    <div class="menu-items">
-      <button
-        color="primary"
-        class="w-100 my-2"
-        routerLink="projects"
-        mat-fab
-        extended
-      >
-        Projects
-      </button>
-      <button
-        color="primary"
-        class="w-100 my-2"
-        routerLink="posts"
-        mat-fab
-        extended
-      >
-        Posts
-      </button>
-      <button
-        color="primary"
-        class="w-100 my-2"
-        routerLink="documents"
-        mat-fab
-        extended
-      >
-        Documents
-      </button>
-      <button
-        color="primary"
-        class="w-100 my-2"
-        routerLink="users"
-        mat-fab
-        extended
-      >
-        Users
-      </button>
-      <button
-        color="primary"
-        class="w-100 my-2"
-        routerLink="messages"
-        mat-fab
-        extended
-      >
-        Inbox
-      </button>
-      <button
-        color="primary"
-        class="w-100 my-2"
-        routerLink="config"
-        mat-fab
-        extended
-      >
-        Config Settings
-      </button>
-    </div>
+<div class="p-4">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <!-- Projects -->
+    <a
+      routerLink="projects"
+      class="card bg-base-200 shadow-md hover:shadow-lg transition cursor-pointer"
+    >
+      <div class="card-body flex items-center gap-4">
+        <i class="fas fa-project-diagram text-2xl"></i>
+        <h2 class="card-title">Projects</h2>
+      </div>
+    </a>
+
+    <!-- Posts -->
+    <a
+      routerLink="posts"
+      class="card bg-base-200 shadow-md hover:shadow-lg transition cursor-pointer"
+    >
+      <div class="card-body flex items-center gap-4">
+        <i class="fas fa-pen text-2xl"></i>
+        <h2 class="card-title">Posts</h2>
+      </div>
+    </a>
+
+    <!-- Documents -->
+    <a
+      routerLink="documents"
+      class="card bg-base-200 shadow-md hover:shadow-lg transition cursor-pointer"
+    >
+      <div class="card-body flex items-center gap-4">
+        <i class="fas fa-file-alt text-2xl"></i>
+        <h2 class="card-title">Documents</h2>
+      </div>
+    </a>
+
+    <!-- Users -->
+    <a
+      routerLink="users"
+      class="card bg-base-200 shadow-md hover:shadow-lg transition cursor-pointer"
+    >
+      <div class="card-body flex items-center gap-4">
+        <i class="fas fa-users text-2xl"></i>
+        <h2 class="card-title">Users</h2>
+      </div>
+    </a>
+
+    <!-- Inbox -->
+    <a
+      routerLink="messages"
+      class="card bg-base-200 shadow-md hover:shadow-lg transition cursor-pointer"
+    >
+      <div class="card-body flex items-center gap-4">
+        <i class="fas fa-inbox text-2xl"></i>
+        <h2 class="card-title">Inbox</h2>
+      </div>
+    </a>
+
+    <!-- Config Settings -->
+    <a
+      routerLink="config"
+      class="card bg-base-200 shadow-md hover:shadow-lg transition cursor-pointer"
+    >
+      <div class="card-body flex items-center gap-4">
+        <i class="fas fa-cog text-2xl"></i>
+        <h2 class="card-title">Config Settings</h2>
+      </div>
+    </a>
   </div>
 </div>

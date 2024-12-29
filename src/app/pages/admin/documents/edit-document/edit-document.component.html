@@ -2,7 +2,7 @@
   <form [formGroup]="form" (ngSubmit)="submit()">
     <h2 class="text-center" mat-dialog-title>Update Document</h2>
     <mat-dialog-content>
-      <div class="d-flex flex-column">
+      <div class="flex flex-col">
         <mat-form-field>
           <mat-label>Name</mat-label>
           <input matInput formControlName="name" />
@@ -20,7 +20,7 @@
       </div>
     </mat-dialog-content>
     <mat-dialog-actions>
-      <div class="d-flex justify-content-center align-items-center w-100">
+      <div class="flex justify-center align-items-center w-100">
         <button
           mat-raised-button
           color="primary"
