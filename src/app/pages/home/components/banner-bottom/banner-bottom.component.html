@@ -1,40 +1,42 @@
-<div class="bg-body-secondary py-5">
-  <div class="container w-75">
-    <div class="row align-items-start">
+<div class="bg-red-50 py-5">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <!-- Column 1 -->
-      <div class="col-12 col-lg-8 mb-2 mb-lg-0">
-        <p class="fs-4 mb-4">FURIDA</p>
-        <p class="w-lg-75 w-100 mb-4">
+      <div class="space-y-4">
+        <p class="text-3xl font-semibold text-red-600">FURIDA</p>
+        <p class="text-lg text-gray-600">
           FURIDA over the years has strived to make a positive difference in
           society through implementing various development projects by Jharkhand
           Govt. that empower communities at the Grass-Root level and improve the
           quality of living with a focus on continued reflection.
         </p>
-        <div class="mb-2">
-          <span class="fw-semibold">Email: </span><span>{{ email }}</span>
+        <div class="text-gray-800">
+          <span class="font-semibold">Email: </span><span>{{ email }}</span>
         </div>
-        <div>
-          <span class="fw-semibold">Phone: </span><span>{{ phone }}</span>
+        <div class="text-gray-800">
+          <span class="font-semibold">Phone: </span><span>{{ phone }}</span>
         </div>
       </div>
 
       <!-- Divider for small screens -->
-      <mat-divider *ngIf="smallScreen" class="my-3"></mat-divider>
+      <div class="lg:hidden my-4">
+        <div class="divider"></div>
+      </div>
 
       <!-- Column 2 -->
-      <div class="col-12 col-lg-4 mt-4 mt-lg-0">
-        <p class="fs-5 mb-4">Quick Links</p>
-        <p class="fs-6 mb-3">
-          <a [routerLink]="'/'" class="link-style">Home</a>
+      <div class="space-y-4 mt-4 lg:mt-0">
+        <p class="text-xl font-semibold text-gray-800">Quick Links</p>
+        <p class="text-lg text-gray-600">
+          <a [routerLink]="'/'" class="link link-hover">Home</a>
         </p>
-        <p class="fs-6 mb-3">
-          <a [routerLink]="'/about'" class="link-style">About</a>
+        <p class="text-lg text-gray-600">
+          <a [routerLink]="'/about'" class="link link-hover">About</a>
         </p>
-        <p class="fs-6 mb-3">
-          <a [routerLink]="'/contact'" class="link-style">Contact</a>
+        <p class="text-lg text-gray-600">
+          <a [routerLink]="'/contact'" class="link link-hover">Contact</a>
         </p>
-        <p class="fs-6 mb-3">
-          <a [routerLink]="'/cctv'" class="link-style">CCTV</a>
+        <p class="text-lg text-gray-600">
+          <a [routerLink]="'/cctv'" class="link link-hover">CCTV</a>
         </p>
       </div>
     </div>
