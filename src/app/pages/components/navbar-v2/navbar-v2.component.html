@@ -7,12 +7,12 @@
 
     <!-- Navigation Links (for larger screens) -->
     <div *ngIf="!smallScreen" class="flex items-center space-x-2 h-full">
-      <a class="btn btn-ghost normal-case" routerLink="/about"> About </a>
+      <a class="btn btn-ghost normal-case" routerLink="/about">About</a>
 
       <div class="dropdown">
-        <label tabIndex="0" class="btn btn-ghost normal-case">
-          Projects <i class="material-icons">arrow_drop_down</i></label
-        >
+        <label tabIndex="0" class="btn btn-ghost normal-case"
+          >Projects <i class="fas fa-chevron-down"></i
+        ></label>
         <ul
           tabIndex="0"
           class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
@@ -26,16 +26,16 @@
         </ul>
       </div>
 
-      <a class="btn btn-ghost normal-case" routerLink="/contact"> Contact </a>
+      <a class="btn btn-ghost normal-case" routerLink="/contact">Contact</a>
 
-      <a class="btn btn-ghost normal-case"> CCTV </a>
+      <a class="btn btn-ghost normal-case">CCTV</a>
 
       <button
         *ngIf="isUserLoggedIn() | async"
         class="btn btn-ghost normal-case"
         routerLink="/admin"
       >
-        <mat-icon fontIcon="settings"></mat-icon>
+        <i class="fas fa-sliders"></i>
         <span>Admin Console</span>
       </button>
     </div>

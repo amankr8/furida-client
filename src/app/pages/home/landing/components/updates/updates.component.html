@@ -4,81 +4,50 @@
     mode="indeterminate"
     class="mb-3"
   ></mat-progress-bar>
-  <div class="row g-3">
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-4 gap-4"
-      *ngFor="let post of posts$ | async"
-    >
-      <!-- <mat-card appearance="outlined" class="custom-card shadow-sm">
-        <img
-          mat-card-image
-          [src]="post.imgUrl || 'https://placehold.co/600x400'"
-          alt="No image found"
-          class="card-image-h"
-        />
-        <mat-card-header class="mb-2">
-          <mat-card-title class="single-line-truncate">
-            {{ post.title }}
-          </mat-card-title>
-          <mat-card-subtitle>{{ post.date | date }}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content class="truncate-text card-content-h">
-          <p>{{ post.content }}</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button (click)="viewPost(post.id)">
-            <div
-              class="d-flex justify-content-between align-items-center gap-2"
-            >
-              <mat-icon>open_in_new</mat-icon>
-              <span>VIEW</span>
-            </div>
-          </button>
-        </mat-card-actions>
-      </mat-card> -->
+
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-4 gap-4"
+  >
+    <div class="" *ngFor="let post of posts$ | async">
       <div class="card bg-base-100 w-full shadow-xl">
         <figure>
           <img
             [src]="post.imgUrl || 'https://placehold.co/600x400'"
             alt="Shoes"
+            class="h-56 object-cover w-full rounded-t-lg"
           />
         </figure>
         <div class="card-body p-4">
-          <h2 class="card-title">{{ post.title }}</h2>
+          <h2 class="card-title truncate">{{ post.title }}</h2>
           <p class="text-xs text-base-content">{{ post.date | date }}</p>
-          <p>{{ post.content }}</p>
+          <p class="truncate">{{ post.content }}</p>
           <div class="card-actions justify-end">
-            <button class="btn btn-ghost">View</button>
+            <button class="btn btn-ghost" (click)="viewPost(post)">View</button>
           </div>
         </div>
       </div>
-
-      <dialog id="{{ post.id }}" class="modal">
-        <div class="modal-box p-4">
-          <!-- Image -->
-          <img
-            [src]="post.imgUrl || 'https://placehold.co/600x400'"
-            alt="Shoes"
-            class="h-1/2 rounded-lg mb-4"
-          />
-
-          <!-- Title -->
-          <h2 class="text-2xl font-semibold mb-2">{{ post.title }}</h2>
-
-          <!-- Date -->
-          <p class="text-sm text-gray-600 mb-4">{{ post.date | date }}</p>
-
-          <!-- Content -->
-          <p class="text-base text-gray-800">{{ post.content }}</p>
-
-          <!-- Actions -->
-          <div class="modal-action mt-4">
-            <form method="dialog">
-              <button class="btn btn-primary">Close</button>
-            </form>
-          </div>
-        </div>
-      </dialog>
     </div>
   </div>
+  @if(selectedPost) {
+  <dialog #myModal class="modal" [class.modal-open]="isModalVisible">
+    <div class="modal-box p-4">
+      <div class="flex justify-center items-center">
+        <img
+          [src]="selectedPost.imgUrl || 'https://placehold.co/600x400'"
+          alt="Shoes"
+          class="h-96 object-cover rounded-lg"
+        />
+      </div>
+
+      <h2 class="text-2xl font-semibold my-2">{{ selectedPost.title }}</h2>
+      <p class="text-sm text-gray-600 mb-2">{{ selectedPost.date | date }}</p>
+      <p class="text-base text-gray-800 max-h-32 overflow-scroll">
+        {{ selectedPost.content }}
+      </p>
+      <div class="modal-action mt-4">
+        <button class="btn btn-primary" (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </dialog>
+  }
 </div>
