@@ -1,4 +1,4 @@
-<div class="container pb-3">
+<div class="w-full pb-3">
   <mat-progress-bar
     *ngIf="loading$ | async"
     mode="indeterminate"
@@ -13,7 +13,7 @@
           matBadge="U"
           [matBadgeHidden]="!(isLoggedInUser(user.username) | async)"
           appearance="outlined"
-          class="custom-card shadow-sm"
+          class="w-full shadow-sm"
         >
           <mat-card-header class="mb-2">
             <mat-card-title class="single-line-truncate">
