@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://furida-fab61ec7daec.herokuapp.com',
+  baseUrl: import.meta.env['NG_APP_PROD_URL'],
 };
