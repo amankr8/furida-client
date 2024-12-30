@@ -12,5 +12,21 @@ if [[ ! $local_branch =~ $valid_branch_regex ]]; then
     exit 1
 fi
 
+# Validate commit messages
+commit_message_regex="^FWA-[0-9]+"
+commit_message_error="Invalid commit message. Commit messages must start with 'FWA-' followed by a number (e.g., 'FWA-123')."
+
+# Fetch the list of commits to be pushed
+commits=$(git log --oneline origin/$(git rev-parse --abbrev-ref HEAD)..HEAD)
+
+while IFS= read -r commit; do
+    commit_message=$(echo "$commit" | cut -d ' ' -f2-)
+    if [[ ! $commit_message =~ $commit_message_regex ]]; then
+        echo "$commit_message_error"
+        echo "Invalid commit: $commit"
+        exit 1
+    fi
+done <<< "$commits"
+
 # If all validations pass
 exit 0
