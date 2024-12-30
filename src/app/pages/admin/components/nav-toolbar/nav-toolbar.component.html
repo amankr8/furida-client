@@ -1,0 +1,30 @@
+<mat-toolbar *ngIf="isChild()">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <button mat-raised-button routerLink="../">
+          <mat-icon>arrow_back</mat-icon>
+          <span>Back</span>
+        </button>
+      </div>
+      <div>
+        <button
+          *ngIf="hasChild()"
+          mat-raised-button
+          color="primary"
+          [routerLink]="childLevelLink"
+        >
+          <div class="d-flex justify-content-between align-items-center gap-2">
+            <span>{{ buttonText }}</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
+<div class="container mt-4">
+  <div class="d-flex justify-content-start px-4">
+    <app-display-text-head [textInput]="headerText"></app-display-text-head>
+  </div>
+  <mat-divider class="my-3"></mat-divider>
+</div>
