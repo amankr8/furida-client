@@ -13,7 +13,7 @@ import {
   selectLoading,
 } from '../../../../../state/document/document.selectors';
 import {
-  selectIsProjectLoaded,
+  selectProjectLoaded,
   selectProjectById,
   selectProjects,
 } from '../../../../../state/project/project.selectors';
@@ -47,9 +47,8 @@ export class CardsComponent {
   isDocumentLoaded$: Observable<boolean> = this.store.select(
     selectIsDocumentLoaded
   );
-  isProjectLoaded$: Observable<boolean> = this.store.select(
-    selectIsProjectLoaded
-  );
+  isProjectLoaded$: Observable<boolean> =
+    this.store.select(selectProjectLoaded);
   loading$: Observable<boolean> = this.store.select(selectLoading);
   selectedProjectId: number | null = null;
   filteredDocuments$: Observable<Document[]> = this.documents$;

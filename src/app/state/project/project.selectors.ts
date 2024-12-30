@@ -14,17 +14,17 @@ export const selectProjects = createSelector(
   (state) => state.projects
 );
 
-export const selectIsProjectLoaded = createSelector(
+export const selectProjectLoaded = createSelector(
   selectProjectsState,
   (state) => state.isLoaded
 );
 
-export const selectLoading = createSelector(
+export const selectProjectLoading = createSelector(
   selectProjectsState,
   (state) => state.loading
 );
 
-export const selectError = createSelector(
+export const selectProjectError = createSelector(
   selectProjectsState,
   (state) => state.error
 );

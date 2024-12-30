@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
-  selectIsProjectLoaded,
+  selectProjectLoaded,
   selectProjectById,
 } from '../../../../../state/project/project.selectors';
 import { loadProjects } from '../../../../../state/project/project.actions';
@@ -37,22 +37,20 @@ export class FilesComponent {
   docs$: Observable<Document[]> = this.store.select(
     selectDocumentsByProjectId(this.projectId)
   );
-  isDocumentsLoaded$: Observable<boolean> = this.store.select(
+  documentLoaded$: Observable<boolean> = this.store.select(
     selectIsDocumentLoaded
   );
-  isProjectsLoaded$: Observable<boolean> = this.store.select(
-    selectIsProjectLoaded
-  );
+  projectLoaded$: Observable<boolean> = this.store.select(selectProjectLoaded);
   loading$: Observable<boolean> = this.store.select(selectLoading);
 
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.isDocumentsLoaded$.subscribe((isLoaded) => {
-      if (!isLoaded) this.store.dispatch(loadDocuments());
+    this.documentLoaded$.subscribe((loaded) => {
+      if (!loaded) this.store.dispatch(loadDocuments());
     });
-    this.isProjectsLoaded$.subscribe((isLoaded) => {
-      if (!isLoaded) this.store.dispatch(loadProjects());
+    this.projectLoaded$.subscribe((loaded) => {
+      if (!loaded) this.store.dispatch(loadProjects());
     });
   }
 

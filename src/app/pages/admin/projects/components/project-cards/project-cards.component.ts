@@ -13,8 +13,8 @@ import {
 } from '../../../../../state/project/project.actions';
 import {
   selectProjects,
-  selectLoading,
-  selectIsProjectLoaded,
+  selectProjectLoading,
+  selectProjectLoaded,
 } from '../../../../../state/project/project.selectors';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -33,16 +33,14 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ProjectCardsComponent {
   projects$: Observable<Project[]> = this.store.select(selectProjects);
-  isProjectLoaded: Observable<boolean> = this.store.select(
-    selectIsProjectLoaded
-  );
-  loading$: Observable<boolean> = this.store.select(selectLoading);
+  projectLoaded: Observable<boolean> = this.store.select(selectProjectLoaded);
+  loading$: Observable<boolean> = this.store.select(selectProjectLoading);
 
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.isProjectLoaded.subscribe((isLoaded) => {
-      if (!isLoaded) this.store.dispatch(loadProjects());
+    this.projectLoaded.subscribe((loaded) => {
+      if (!loaded) this.store.dispatch(loadProjects());
     });
   }
 
