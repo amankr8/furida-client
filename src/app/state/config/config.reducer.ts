@@ -1,43 +1,25 @@
 import { createReducer, on } from '@ngrx/store';
-import { Config } from '../../interface/config';
-import {
-  toggleAdminHeaderVersion,
-  toggleHeaderVersion,
-} from './config.actions';
+import { toggleBoolSetting1, toggleBoolSetting2 } from './config.actions';
 
 export interface ConfigState {
-  config: Config;
+  boolSetting1: boolean;
+  boolSetting2: boolean;
 }
 
 export const initialConfigState: ConfigState = {
-  config: {
-    headerConfig: {
-      newAdminHeader: true,
-      newHeader: true,
-    },
-  },
+  boolSetting1: false,
+  boolSetting2: false,
 };
 
 export const configReducer = createReducer(
   initialConfigState,
-  on(toggleHeaderVersion, (state, { newHeader }) => ({
+  on(toggleBoolSetting1, (state, { boolSetting1 }) => ({
     ...state,
-    config: {
-      ...state.config,
-      headerConfig: {
-        ...state.config.headerConfig,
-        newHeader,
-      },
-    },
+    boolSetting1,
   })),
 
-  on(toggleAdminHeaderVersion, (state, { newAdminHeader }) => ({
+  on(toggleBoolSetting2, (state, { boolSetting2 }) => ({
     ...state,
-    config: {
-      headerConfig: {
-        ...state.config.headerConfig,
-        newAdminHeader,
-      },
-    },
+    boolSetting2,
   }))
 );

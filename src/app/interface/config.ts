@@ -1,8 +1,8 @@
 export interface Config {
-  headerConfig: HeaderConfig;
-}
-
-export interface HeaderConfig {
-  newAdminHeader: boolean;
-  newHeader: boolean;
+  boolSetting1: boolean;
+  boolSetting2: boolean;
+  numSetting1: number;
+  numSetting2: number;
+  strSetting1: string;
+  strSetting2: string;
 }

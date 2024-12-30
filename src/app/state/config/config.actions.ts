@@ -1,11 +1,11 @@
 import { createAction, props } from '@ngrx/store';
 
-export const toggleHeaderVersion = createAction(
-  '[Config] Toggle Header',
-  props<{ newHeader: boolean }>()
+export const toggleBoolSetting1 = createAction(
+  '[Config] Toggle Boolean Setting 1',
+  props<{ boolSetting1: boolean }>()
 );
 
-export const toggleAdminHeaderVersion = createAction(
-  '[Config] Toggle Admin Header',
-  props<{ newAdminHeader: boolean }>()
+export const toggleBoolSetting2 = createAction(
+  '[Config] Toggle Boolean Setting 2',
+  props<{ boolSetting2: boolean }>()
 );

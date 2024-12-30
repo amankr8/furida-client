@@ -3,14 +3,14 @@
     <h2>Settings</h2>
     <div class="settings-container d-flex flex-column gap-4">
       <mat-slide-toggle
-        [checked]="isNewHomeHeader$ | async"
+        [checked]="isBoolSetting1$ | async"
         (change)="toggleHomeHeader($event.checked)"
-        >New Home Header</mat-slide-toggle
+        >Enable Setting 1</mat-slide-toggle
       >
       <mat-slide-toggle
-        [checked]="isNewAdminHeader$ | async"
+        [checked]="isBoolSetting2$ | async"
         (change)="toggleAdminHeader($event.checked)"
-        >New Admin Header</mat-slide-toggle
+        >Enable Setting 1</mat-slide-toggle
       >
     </div>
   </div>
