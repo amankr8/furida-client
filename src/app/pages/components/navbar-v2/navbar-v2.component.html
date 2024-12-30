@@ -31,10 +31,11 @@
         *ngIf="isUserLoggedIn() | async"
         mat-raised-button
         color="primary"
+        routerLink="/admin"
         class="link-button mx-2"
       >
         <mat-icon fontIcon="settings"></mat-icon>
-        <p class="link-name mb-0" routerLink="/admin">Admin Console</p>
+        <span>Admin Console</span>
       </button>
     </div>
     <button *ngIf="smallScreen" mat-icon-button (click)="toggleMenu()">
