@@ -32,6 +32,6 @@ export class NavToolbarComponent {
   }
 
   isChild(): boolean {
-    return true;
+    return this.headerText !== 'Admin Console';
   }
 }

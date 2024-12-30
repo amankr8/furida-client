@@ -1,8 +1,8 @@
-<mat-toolbar class="mb-3">
+<mat-toolbar *ngIf="isChild()">
   <div class="container">
     <div class="d-flex justify-content-between align-items-center">
       <div>
-        <button *ngIf="isChild()" mat-raised-button routerLink="../">
+        <button mat-raised-button routerLink="../">
           <mat-icon>arrow_back</mat-icon>
           <span>Back</span>
         </button>
@@ -22,7 +22,7 @@
     </div>
   </div>
 </mat-toolbar>
-<div class="container">
+<div class="container mt-3">
   <div class="d-flex justify-content-start px-4">
     <app-display-text-head [textInput]="headerText"></app-display-text-head>
   </div>
