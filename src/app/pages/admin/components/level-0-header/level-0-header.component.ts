@@ -27,6 +27,7 @@ import { selectHeaderConfig } from '../../../../state/config/config.selectors';
   styleUrl: './level-0-header.component.scss',
 })
 export class Level0HeaderComponent {
+  // deprecated and marked for removal
   headerText: string = 'Admin Console';
   authUser$: Observable<User | null> = this.store.select(selectAuthUser);
   authLoading$: Observable<boolean> = this.store.select(selectAuthLoading);
