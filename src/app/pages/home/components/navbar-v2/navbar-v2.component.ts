@@ -5,20 +5,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
-import { User } from '../../../../interface/user';
-import { loadAuthUser } from '../../../../state/auth/auth.actions';
-import {
-  selectAuthLoaded,
-  selectAuthUser,
-} from '../../../../state/auth/auth.selectors';
 import { CommonModule } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Project } from '../../../../interface/project';
-import {
-  selectProjects,
-  selectProjectLoaded,
-} from '../../../../state/project/project.selectors';
-import { loadProjects } from '../../../../state/project/project.actions';
+import { selectProjects } from '../../../../state/project/project.selectors';
 import { MatMenuModule } from '@angular/material/menu';
 import { BrandLogoV2Component } from '../../../components/brand-logo-v2/brand-logo-v2.component';
 import { AdminButtonComponent } from '../admin-button/admin-button.component';
@@ -42,7 +32,6 @@ import { AdminButtonComponent } from '../admin-button/admin-button.component';
 export class NavbarV2Component {
   @Output() toggleSidenav = new EventEmitter<void>();
   projects$: Observable<Project[]> = this.store.select(selectProjects);
-  projectLoaded$: Observable<boolean> = this.store.select(selectProjectLoaded);
   smallScreen: boolean = false;
 
   constructor(
@@ -51,9 +40,6 @@ export class NavbarV2Component {
   ) {}
 
   ngOnInit() {
-    this.projectLoaded$.subscribe((loaded) => {
-      if (!loaded) this.store.dispatch(loadProjects());
-    });
     this.breakpointObserver
       .observe([Breakpoints.Small, Breakpoints.XSmall])
       .subscribe((result) => {

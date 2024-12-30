@@ -11,6 +11,10 @@ import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { selectHeaderConfig } from '../../state/config/config.selectors';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { loadProjects } from '../../state/project/project.actions';
+import { selectProjectLoaded } from '../../state/project/project.selectors';
+import { loadAuthUser } from '../../state/auth/auth.actions';
+import { selectAuthLoaded } from '../../state/auth/auth.selectors';
 
 @Component({
   selector: 'app-home',
@@ -33,6 +37,8 @@ export class HomeComponent {
   newHeader: Observable<boolean> = this.store
     .select(selectHeaderConfig)
     .pipe(select((config) => config.newHeader));
+  authLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
+  projectLoaded$: Observable<boolean> = this.store.select(selectProjectLoaded);
   smallScreen: boolean = false;
 
   constructor(
@@ -46,6 +52,12 @@ export class HomeComponent {
       .subscribe((result) => {
         this.smallScreen = result.matches;
       });
+    this.projectLoaded$.subscribe((loaded) => {
+      if (!loaded) this.store.dispatch(loadProjects());
+    });
+    this.authLoaded$.subscribe((loaded) => {
+      if (!loaded) this.store.dispatch(loadAuthUser());
+    });
   }
 
   toggleSidenav() {

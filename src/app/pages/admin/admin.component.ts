@@ -6,6 +6,8 @@ import { AdminNavbarV2Component } from './components/admin-navbar-v2/admin-navba
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { selectHeaderConfig } from '../../state/config/config.selectors';
+import { loadAuthUser } from '../../state/auth/auth.actions';
+import { selectAuthLoaded } from '../../state/auth/auth.selectors';
 
 @Component({
   selector: 'app-admin',
@@ -23,6 +25,13 @@ export class AdminComponent {
   newAdminHeader: Observable<boolean> = this.store
     .select(selectHeaderConfig)
     .pipe(map((headerConfig) => headerConfig.newAdminHeader));
+  authLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
 
   constructor(private store: Store) {}
+
+  ngOnInit() {
+    this.authLoaded$.subscribe((loaded) => {
+      if (!loaded) this.store.dispatch(loadAuthUser());
+    });
+  }
 }

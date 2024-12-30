@@ -6,15 +6,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrandLogoV2Component } from '../../../components/brand-logo-v2/brand-logo-v2.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { Store } from '@ngrx/store';
-import {
-  confirmLogout,
-  loadAuthUser,
-} from '../../../../state/auth/auth.actions';
+import { confirmLogout } from '../../../../state/auth/auth.actions';
 import { map, Observable } from 'rxjs';
 import { User } from '../../../../interface/user';
 import {
   selectAuthUser,
-  selectAuthLoaded,
   selectAuthLoading,
 } from '../../../../state/auth/auth.selectors';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -36,14 +32,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class AdminNavbarV2Component {
   authUser$: Observable<User | null> = this.store.select(selectAuthUser);
-  authLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
   authLoading$: Observable<boolean> = this.store.select(selectAuthLoading);
 
-  constructor(private store: Store) {
-    this.authLoaded$.subscribe((loaded) => {
-      if (!loaded) this.store.dispatch(loadAuthUser());
-    });
-  }
+  constructor(private store: Store) {}
 
   ngOnInit() {}
 
