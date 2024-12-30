@@ -16,7 +16,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Project } from '../../../interface/project';
 import {
   selectProjects,
-  selectIsProjectLoaded,
+  selectProjectLoaded,
 } from '../../../state/project/project.selectors';
 import { loadProjects } from '../../../state/project/project.actions';
 import { MatMenuModule } from '@angular/material/menu';
@@ -42,9 +42,7 @@ export class NavbarV2Component {
   authLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
   authUser$: Observable<User | null> = this.store.select(selectAuthUser);
   projects$: Observable<Project[]> = this.store.select(selectProjects);
-  projectLoaded$: Observable<boolean> = this.store.select(
-    selectIsProjectLoaded
-  );
+  projectLoaded$: Observable<boolean> = this.store.select(selectProjectLoaded);
   smallScreen: boolean = false;
 
   constructor(

@@ -7,7 +7,7 @@ import { Project } from '../../../../interface/project';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import {
-  selectIsProjectLoaded,
+  selectProjectLoaded,
   selectProjects,
 } from '../../../../state/project/project.selectors';
 import { Observable } from 'rxjs';
@@ -38,9 +38,7 @@ export class HeaderComponent {
 
   @Output() toggleSidenav = new EventEmitter<void>();
   projects$: Observable<Project[]> = this.store.select(selectProjects);
-  projectLoaded$: Observable<boolean> = this.store.select(
-    selectIsProjectLoaded
-  );
+  projectLoaded$: Observable<boolean> = this.store.select(selectProjectLoaded);
   smallScreen: boolean = false;
 
   constructor(

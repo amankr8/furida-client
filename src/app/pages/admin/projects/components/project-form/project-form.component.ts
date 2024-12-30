@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { addProject } from '../../../../../state/project/project.actions';
 import { Observable } from 'rxjs';
-import { selectLoading } from '../../../../../state/project/project.selectors';
+import { selectProjectLoading } from '../../../../../state/project/project.selectors';
 
 @Component({
   selector: 'app-project-form',
@@ -36,7 +36,7 @@ export class ProjectFormComponent {
   loading$: Observable<Boolean>;
 
   constructor(private store: Store) {
-    this.loading$ = this.store.select(selectLoading);
+    this.loading$ = this.store.select(selectProjectLoading);
   }
 
   ngOnInit() {
