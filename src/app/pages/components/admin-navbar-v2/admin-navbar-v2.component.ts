@@ -50,7 +50,7 @@ export class AdminNavbarV2Component {
 
   getAuthUser(): Observable<string> {
     return this.authUser$.pipe(
-      map((user) => (user ? `${user.username}(${user.role})` : ''))
+      map((user) => (user ? `${user.username}(${user.role})` : '[Unknown]'))
     );
   }
 }

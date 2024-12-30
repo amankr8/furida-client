@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { selectHeaderConfig } from '../../state/config/config.selectors';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-home',
@@ -32,8 +33,20 @@ export class HomeComponent {
   newHeader: Observable<boolean> = this.store
     .select(selectHeaderConfig)
     .pipe(select((config) => config.newHeader));
+  smallScreen: boolean = false;
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private breakpointObserver: BreakpointObserver
+  ) {}
+
+  ngOnInit() {
+    this.breakpointObserver
+      .observe([Breakpoints.Small, Breakpoints.XSmall])
+      .subscribe((result) => {
+        this.smallScreen = result.matches;
+      });
+  }
 
   toggleSidenav() {
     this.sidenav.toggle();
