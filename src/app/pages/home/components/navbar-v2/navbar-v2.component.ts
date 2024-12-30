@@ -5,22 +5,22 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
-import { User } from '../../../interface/user';
-import { loadAuthUser } from '../../../state/auth/auth.actions';
+import { User } from '../../../../interface/user';
+import { loadAuthUser } from '../../../../state/auth/auth.actions';
 import {
   selectAuthLoaded,
   selectAuthUser,
-} from '../../../state/auth/auth.selectors';
+} from '../../../../state/auth/auth.selectors';
 import { CommonModule } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Project } from '../../../interface/project';
+import { Project } from '../../../../interface/project';
 import {
   selectProjects,
   selectProjectLoaded,
-} from '../../../state/project/project.selectors';
-import { loadProjects } from '../../../state/project/project.actions';
+} from '../../../../state/project/project.selectors';
+import { loadProjects } from '../../../../state/project/project.actions';
 import { MatMenuModule } from '@angular/material/menu';
-import { BrandLogoV2Component } from '../brand-logo-v2/brand-logo-v2.component';
+import { BrandLogoV2Component } from '../../../components/brand-logo-v2/brand-logo-v2.component';
 
 @Component({
   selector: 'app-navbar-v2',

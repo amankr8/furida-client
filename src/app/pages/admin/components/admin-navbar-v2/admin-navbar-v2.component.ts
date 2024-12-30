@@ -3,17 +3,20 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { BrandLogoV2Component } from '../brand-logo-v2/brand-logo-v2.component';
+import { BrandLogoV2Component } from '../../../components/brand-logo-v2/brand-logo-v2.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { Store } from '@ngrx/store';
-import { confirmLogout, loadAuthUser } from '../../../state/auth/auth.actions';
+import {
+  confirmLogout,
+  loadAuthUser,
+} from '../../../../state/auth/auth.actions';
 import { map, Observable } from 'rxjs';
-import { User } from '../../../interface/user';
+import { User } from '../../../../interface/user';
 import {
   selectAuthUser,
   selectAuthLoaded,
   selectAuthLoading,
-} from '../../../state/auth/auth.selectors';
+} from '../../../../state/auth/auth.selectors';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
