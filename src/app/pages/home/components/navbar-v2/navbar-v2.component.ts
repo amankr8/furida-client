@@ -21,6 +21,7 @@ import {
 import { loadProjects } from '../../../../state/project/project.actions';
 import { MatMenuModule } from '@angular/material/menu';
 import { BrandLogoV2Component } from '../../../components/brand-logo-v2/brand-logo-v2.component';
+import { AdminButtonComponent } from '../admin-button/admin-button.component';
 
 @Component({
   selector: 'app-navbar-v2',
@@ -33,14 +34,13 @@ import { BrandLogoV2Component } from '../../../components/brand-logo-v2/brand-lo
     CommonModule,
     MatMenuModule,
     BrandLogoV2Component,
+    AdminButtonComponent,
   ],
   templateUrl: './navbar-v2.component.html',
   styleUrl: './navbar-v2.component.scss',
 })
 export class NavbarV2Component {
   @Output() toggleSidenav = new EventEmitter<void>();
-  authLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
-  authUser$: Observable<User | null> = this.store.select(selectAuthUser);
   projects$: Observable<Project[]> = this.store.select(selectProjects);
   projectLoaded$: Observable<boolean> = this.store.select(selectProjectLoaded);
   smallScreen: boolean = false;
@@ -51,9 +51,6 @@ export class NavbarV2Component {
   ) {}
 
   ngOnInit() {
-    this.authLoaded$.subscribe((loaded) => {
-      if (!loaded) this.store.dispatch(loadAuthUser());
-    });
     this.projectLoaded$.subscribe((loaded) => {
       if (!loaded) this.store.dispatch(loadProjects());
     });
@@ -62,10 +59,6 @@ export class NavbarV2Component {
       .subscribe((result) => {
         this.smallScreen = result.matches;
       });
-  }
-
-  isUserLoggedIn(): Observable<boolean> {
-    return this.authUser$.pipe(map((user) => user !== null));
   }
 
   toggleMenu() {
