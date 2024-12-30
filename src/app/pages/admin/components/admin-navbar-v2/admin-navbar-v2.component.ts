@@ -42,9 +42,13 @@ export class AdminNavbarV2Component {
     this.store.dispatch(confirmLogout());
   }
 
-  getAuthUser(): Observable<string> {
+  getAuthUsername(): Observable<string> {
     return this.authUser$.pipe(
-      map((user) => (user ? `${user.username}(${user.role})` : '[Unknown]'))
+      map((user) => (user ? user.username : 'Unknown'))
     );
+  }
+
+  getAuthRole(): Observable<string> {
+    return this.authUser$.pipe(map((user) => (user ? user.role : 'Unknown')));
   }
 }
