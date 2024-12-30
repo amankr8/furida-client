@@ -1,9 +1,2 @@
-<app-level-2-header
-  *ngIf="!newNavToolbar"
-  [headerText]="headerText"
-></app-level-2-header>
-<app-nav-toolbar
-  *ngIf="newNavToolbar"
-  [headerText]="headerText"
-></app-nav-toolbar>
+<app-nav-toolbar [headerText]="headerText"></app-nav-toolbar>
 <app-doc-form></app-doc-form>

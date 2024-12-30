@@ -2,7 +2,7 @@
   <div class="container">
     <div class="d-flex justify-content-between align-items-center">
       <div>
-        <button mat-raised-button routerLink="../">
+        <button mat-button routerLink="../">
           <mat-icon>arrow_back</mat-icon>
           <span>Back</span>
         </button>
@@ -10,7 +10,7 @@
       <div>
         <button
           *ngIf="hasChild()"
-          mat-raised-button
+          mat-button
           color="primary"
           [routerLink]="childLevelLink"
         >
