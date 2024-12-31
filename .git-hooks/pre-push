@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Validate branch name
+local_branch="$(git rev-parse --abbrev-ref HEAD)"
+valid_branch_regex="^(feature|bugfix|task)\/fwa-[0-9]+$"
+
+branch_name_error="Invalid branch name. Branch names must adhere to this contract: $valid_branch_regex. Your push will be rejected. Please rename your branch and try again."
+
+if [[ ! $local_branch =~ $valid_branch_regex ]]; then
+    echo "$branch_name_error"
+    exit 1
+fi
+
+# Define allowed commit message pattern
+commit_message_regex="^FWA-[0-9]+ - .+"
+commit_message_error="Invalid commit message. Commit messages must follow the pattern: 'FWA-<number> - <description>' (e.g., 'FWA-0 - Initial commit'). Your push will be rejected."
+
+# Validate commit messages for new commits being pushed
+while read -r local_ref local_sha remote_ref remote_sha; do
+    # If pushing a new branch (remote SHA is all zeros), validate all local commits
+    if [ "$remote_sha" = "0000000000000000000000000000000000000000" ]; then
+        commits=$(git rev-list "$local_sha")
+    else
+        # Otherwise, validate only the new commits
+        commits=$(git rev-list "$remote_sha..$local_sha")
+    fi
+
+    # Get commits that are new in the current branch but not in master
+    commits_to_check=$(git log master..$local_branch --pretty=format:"%H")
+
+    # If there are new commits, validate them
+    if [ -n "$commits_to_check" ]; then
+        # Check each new commit message
+        for commit in $commits_to_check; do
+            commit_message=$(git log --format=%B -n 1 "$commit")
+            if [[ ! $commit_message =~ $commit_message_regex ]]; then
+                echo "$commit_message_error"
+                echo "Offending commit message: '$commit_message'"
+                exit 1
+            fi
+        done
+    else
+        echo "No new commits to validate"
+    fi
+done
+
+exit 0
