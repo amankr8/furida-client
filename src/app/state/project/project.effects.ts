@@ -11,8 +11,8 @@ import {
   loadProjects,
   loadProjectsFail,
   loadProjectsSuccess,
-  openDeleteDialog,
-  openEditDialog,
+  openProjectDeleteDialog,
+  openProjectEditDialog,
   updateProject,
   updateProjectFail,
   updateProjectSuccess,
@@ -24,7 +24,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../pages/admin/components/confirm-dialog/confirm-dialog.component';
 import { Action, Store } from '@ngrx/store';
-import { UpdateProjectComponent } from '../../pages/admin/projects/update-project/update-project.component';
+import { UpdateProjectComponent } from '../../pages/admin/projects/components/update-project/update-project.component';
 import { selectProjectById } from './project.selectors';
 
 @Injectable()
@@ -95,7 +95,7 @@ export class ProjectEffects {
   openEditDialog$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(openEditDialog),
+        ofType(openProjectEditDialog),
         mergeMap(({ projectId }) =>
           this.store.select(selectProjectById(projectId)).pipe(
             first(),
@@ -163,7 +163,7 @@ export class ProjectEffects {
   openDeleteDialog$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(openDeleteDialog),
+        ofType(openProjectDeleteDialog),
         tap(({ projectId }) => {
           this.showDeleteWarningDialog(deleteProject({ projectId }));
         })

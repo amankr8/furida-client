@@ -6,16 +6,12 @@ import { Document } from '../../../../../interface/document';
 import { MatButtonModule } from '@angular/material/button';
 import { map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import {
-  selectProjectLoaded,
-  selectProjectById,
-} from '../../../../../state/project/project.selectors';
-import { loadProjects } from '../../../../../state/project/project.actions';
+import { selectProjectById } from '../../../../../state/project/project.selectors';
 import { loadDocuments } from '../../../../../state/document/document.actions';
 import {
   selectDocumentsByProjectId,
-  selectIsDocumentLoaded,
-  selectLoading,
+  selectDocumentLoaded,
+  selectDocumentLoading,
 } from '../../../../../state/document/document.selectors';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -37,11 +33,9 @@ export class FilesComponent {
   docs$: Observable<Document[]> = this.store.select(
     selectDocumentsByProjectId(this.projectId)
   );
-  documentLoaded$: Observable<boolean> = this.store.select(
-    selectIsDocumentLoaded
-  );
-  projectLoaded$: Observable<boolean> = this.store.select(selectProjectLoaded);
-  loading$: Observable<boolean> = this.store.select(selectLoading);
+  documentLoaded$: Observable<boolean> =
+    this.store.select(selectDocumentLoaded);
+  loading$: Observable<boolean> = this.store.select(selectDocumentLoading);
 
   constructor(private store: Store) {}
 
@@ -49,14 +43,11 @@ export class FilesComponent {
     this.documentLoaded$.subscribe((loaded) => {
       if (!loaded) this.store.dispatch(loadDocuments());
     });
-    this.projectLoaded$.subscribe((loaded) => {
-      if (!loaded) this.store.dispatch(loadProjects());
-    });
   }
 
   ngOnChanges() {
     this.docs$ = this.store.select(selectDocumentsByProjectId(this.projectId));
-    this.loading$ = this.store.select(selectLoading);
+    this.loading$ = this.store.select(selectDocumentLoading);
   }
 
   getProjectNameById(id: number): Observable<String> {

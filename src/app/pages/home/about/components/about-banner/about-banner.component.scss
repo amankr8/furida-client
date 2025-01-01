@@ -1,19 +1,4 @@
-$padding-default: 3rem;
-$padding-medium: 6rem;
-$padding-large: 8rem;
-
-.about-section {
-  padding: $padding-default;
-
-  @media (min-width: 768px) {
-    padding: $padding-default $padding-medium;
-  }
-
-  @media (min-width: 992px) {
-    padding: $padding-default $padding-large;
-  }
-}
-
 .about-text {
+  max-width: 60rem;
   font-size: larger;
 }

@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { UpdateProjectComponent } from '../../projects/update-project/update-project.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
@@ -53,7 +52,7 @@ export class UpdateUserComponent {
 
   constructor(
     public store: Store,
-    public dialogRef: MatDialogRef<UpdateProjectComponent>,
+    public dialogRef: MatDialogRef<UpdateUserComponent>,
     private snackBar: MatSnackBar
   ) {}
 

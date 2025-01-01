@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import {
   FormControl,
@@ -13,50 +12,52 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { Project } from '../../../../../interface/project';
+import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
-import { Document } from '../../../../interface/document';
 import { Store } from '@ngrx/store';
-import { updateDocument } from '../../../../state/document/document.actions';
+import { updateProject } from '../../../../../state/project/project.actions';
 
 @Component({
-  selector: 'app-edit-document',
+  selector: 'app-update-project',
   standalone: true,
   imports: [
     ReactiveFormsModule,
+    MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
-    CommonModule,
     MatDialogModule,
+    CommonModule,
   ],
-  templateUrl: './edit-document.component.html',
-  styleUrl: './edit-document.component.scss',
+  templateUrl: './update-project.component.html',
+  styleUrl: './update-project.component.scss',
 })
-export class EditDocumentComponent {
+export class UpdateProjectComponent {
   form!: FormGroup;
 
   constructor(
     public store: Store,
-    public dialogRef: MatDialogRef<EditDocumentComponent>,
+    public dialogRef: MatDialogRef<UpdateProjectComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: Document
+    public data: Project
   ) {}
 
   ngOnInit() {
     this.form = new FormGroup({
       name: new FormControl(this.data.name, Validators.required),
       desc: new FormControl(this.data.desc, Validators.required),
+      address: new FormControl(this.data.address, Validators.required),
     });
   }
 
   submit() {
-    const docData = new FormData();
-    docData.append('name', this.form.get('name')?.value);
-    docData.append('desc', this.form.get('desc')?.value);
-
-    this.store.dispatch(
-      updateDocument({ documentId: this.data.id, document: docData })
-    );
+    const updatedProject = {
+      ...this.data,
+      name: this.form.value.name,
+      desc: this.form.value.desc,
+      address: this.form.value.address,
+    };
+    this.store.dispatch(updateProject({ project: updatedProject }));
     this.dialogRef.close();
   }
 }

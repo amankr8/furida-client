@@ -28,7 +28,7 @@ export const addProjectFail = createAction(
   props<{ error: string }>()
 );
 
-export const openEditDialog = createAction(
+export const openProjectEditDialog = createAction(
   '[Project] Open Edit Dialog',
   props<{ projectId: number }>()
 );
@@ -48,7 +48,7 @@ export const updateProjectFail = createAction(
   props<{ error: string }>()
 );
 
-export const openDeleteDialog = createAction(
+export const openProjectDeleteDialog = createAction(
   '[Project] Open Delete Dialog',
   props<{ projectId: number }>()
 );

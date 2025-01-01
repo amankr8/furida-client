@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainLogoComponent } from './main-logo.component';
+import { DocumentTableComponent } from './document-table.component';
 
-describe('MainLogoComponent', () => {
-  let component: MainLogoComponent;
-  let fixture: ComponentFixture<MainLogoComponent>;
+describe('DocumentTableComponent', () => {
+  let component: DocumentTableComponent;
+  let fixture: ComponentFixture<DocumentTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MainLogoComponent]
+      imports: [DocumentTableComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(MainLogoComponent);
+    fixture = TestBed.createComponent(DocumentTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

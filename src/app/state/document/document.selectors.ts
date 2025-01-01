@@ -19,17 +19,17 @@ export const selectDocuments = createSelector(
   (state) => state.documents
 );
 
-export const selectIsDocumentLoaded = createSelector(
+export const selectDocumentLoaded = createSelector(
   selectDocumentsState,
   (state) => state.isLoaded
 );
 
-export const selectLoading = createSelector(
+export const selectDocumentLoading = createSelector(
   selectDocumentsState,
   (state) => state.loading
 );
 
-export const selectError = createSelector(
+export const selectDocumentError = createSelector(
   selectDocumentsState,
   (state) => state.error
 );

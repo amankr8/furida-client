@@ -1,43 +1,36 @@
-<div class="container pb-3">
-  <mat-progress-bar
-    *ngIf="loading$ | async"
-    mode="indeterminate"
-    class="mb-3"
-  ></mat-progress-bar>
-  <div class="row g-3">
-    <div
-      class="col-12 col-md-6 col-xl-4"
-      *ngFor="let project of projects$ | async"
-    >
-      <div class="d-flex justify-content-center align-items-center">
-        <mat-card appearance="outlined" class="custom-card shadow-sm">
-          <mat-card-header class="mb-2">
-            <mat-card-title class="single-line-truncate">
-              {{ project.name }}
-            </mat-card-title>
-            <mat-card-subtitle>{{ project.address }}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content class="truncate-text card-content-h">
-            <p>{{ project.desc }}</p>
-          </mat-card-content>
-          <mat-card-actions class="btn-group">
-            <button
-              mat-icon-button
-              (click)="updateProject(project.id)"
-              [disabled]="loading$ | async"
-            >
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button
-              mat-icon-button
-              (click)="deleteProject(project.id)"
-              [disabled]="loading$ | async"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
+<div class="row g-3">
+  <div
+    class="col-12 col-md-6 col-xl-4"
+    *ngFor="let project of projects$ | async"
+  >
+    <div class="d-flex justify-content-center align-items-center">
+      <mat-card appearance="outlined" class="custom-card shadow-sm">
+        <mat-card-header class="mb-2">
+          <mat-card-title class="single-line-truncate">
+            {{ project.name }}
+          </mat-card-title>
+          <mat-card-subtitle>{{ project.address }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="truncate-text card-content-h">
+          <p>{{ project.desc }}</p>
+        </mat-card-content>
+        <mat-card-actions class="btn-group">
+          <button
+            mat-icon-button
+            (click)="updateProject(project.id)"
+            [disabled]="loading$ | async"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            (click)="deleteProject(project.id)"
+            [disabled]="loading$ | async"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
 </div>

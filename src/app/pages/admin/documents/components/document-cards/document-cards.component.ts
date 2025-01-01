@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -9,8 +9,8 @@ import { map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
   selectDocuments,
-  selectIsDocumentLoaded,
-  selectLoading,
+  selectDocumentLoaded,
+  selectDocumentLoading,
 } from '../../../../../state/document/document.selectors';
 import {
   selectProjectLoaded,
@@ -19,8 +19,8 @@ import {
 } from '../../../../../state/project/project.selectors';
 import {
   loadDocuments,
-  openDeleteDialog,
-  openEditDialog,
+  openDocDeleteDialog,
+  openDocEditDialog,
 } from '../../../../../state/document/document.actions';
 import { loadProjects } from '../../../../../state/project/project.actions';
 import { MatIconModule } from '@angular/material/icon';
@@ -38,40 +38,14 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule,
     MatSelectModule,
   ],
-  templateUrl: './cards.component.html',
-  styleUrl: './cards.component.scss',
+  templateUrl: './document-cards.component.html',
+  styleUrl: './document-cards.component.scss',
 })
-export class CardsComponent {
-  projects$ = this.store.select(selectProjects);
-  documents$: Observable<Document[]> = this.store.select(selectDocuments);
-  isDocumentLoaded$: Observable<boolean> = this.store.select(
-    selectIsDocumentLoaded
-  );
-  isProjectLoaded$: Observable<boolean> =
-    this.store.select(selectProjectLoaded);
-  loading$: Observable<boolean> = this.store.select(selectLoading);
-  selectedProjectId: number | null = null;
-  filteredDocuments$: Observable<Document[]> = this.documents$;
+export class DocumentCardsComponent {
+  @Input() documents$!: Observable<Document[]>;
+  loading$: Observable<boolean> = this.store.select(selectDocumentLoading);
 
   constructor(private store: Store) {}
-
-  ngOnInit() {
-    this.isDocumentLoaded$.subscribe((isLoaded) => {
-      if (!isLoaded) this.store.dispatch(loadDocuments());
-    });
-    this.isProjectLoaded$.subscribe((isLoaded) => {
-      if (!isLoaded) this.store.dispatch(loadProjects());
-    });
-  }
-
-  selectProject(projectId: number) {
-    this.selectedProjectId = projectId;
-    this.filteredDocuments$ = this.documents$.pipe(
-      map((docs) =>
-        projectId ? docs.filter((doc) => doc.projectId === projectId) : docs
-      )
-    );
-  }
 
   getProjectNameById(id: number): Observable<String> {
     return this.store
@@ -79,11 +53,11 @@ export class CardsComponent {
       .pipe(map((project) => (project ? project.name : 'Unknown')));
   }
 
-  update(id: number) {
-    this.store.dispatch(openEditDialog({ documentId: id }));
+  updateDoc(id: number) {
+    this.store.dispatch(openDocEditDialog({ documentId: id }));
   }
 
-  delete(id: number) {
-    this.store.dispatch(openDeleteDialog({ documentId: id }));
+  deleteDoc(id: number) {
+    this.store.dispatch(openDocDeleteDialog({ documentId: id }));
   }
 }
