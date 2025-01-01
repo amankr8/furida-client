@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { CardsComponent } from './components/cards/cards.component';
+import { DocumentCardsComponent } from './components/document-cards/document-cards.component';
 import { NavToolbarComponent } from '../components/nav-toolbar/nav-toolbar.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-admin-documents',
   standalone: true,
-  imports: [CardsComponent, NavToolbarComponent, CommonModule],
+  imports: [DocumentCardsComponent, NavToolbarComponent, CommonModule],
   templateUrl: './documents.component.html',
   styleUrl: './documents.component.scss',
 })

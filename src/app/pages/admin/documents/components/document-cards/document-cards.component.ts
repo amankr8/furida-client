@@ -38,10 +38,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule,
     MatSelectModule,
   ],
-  templateUrl: './cards.component.html',
-  styleUrl: './cards.component.scss',
+  templateUrl: './document-cards.component.html',
+  styleUrl: './document-cards.component.scss',
 })
-export class CardsComponent {
+export class DocumentCardsComponent {
   projects$ = this.store.select(selectProjects);
   documents$: Observable<Document[]> = this.store.select(selectDocuments);
   isDocumentLoaded$: Observable<boolean> = this.store.select(
