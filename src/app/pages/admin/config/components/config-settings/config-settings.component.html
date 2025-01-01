@@ -3,8 +3,11 @@
     <h2>Settings</h2>
     <div class="settings-container d-flex flex-column gap-4">
       <mat-slide-toggle
+        matTooltip="Not supported on mobile"
+        [matTooltipDisabled]="!isMobile"
         [checked]="isBoolSetting1$ | async"
         (change)="toggleHomeHeader($event.checked)"
+        [disabled]="isMobile"
         >Table View (Beta)</mat-slide-toggle
       >
       <mat-slide-toggle
