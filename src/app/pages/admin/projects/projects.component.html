@@ -9,5 +9,6 @@
     mode="indeterminate"
     class="mb-3"
   ></mat-progress-bar>
-  <app-project-table></app-project-table>
+  <app-project-table *ngIf="tableView$ | async"></app-project-table>
+  <app-project-cards *ngIf="!(tableView$ | async)"></app-project-cards>
 </div>
