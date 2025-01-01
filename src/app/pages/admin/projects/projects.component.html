@@ -3,6 +3,11 @@
   [buttonText]="buttonText"
   [childLevelLink]="childLevelLink"
 ></app-nav-toolbar>
-<div class="container">
+<div class="container pb-3">
+  <mat-progress-bar
+    *ngIf="loading$ | async"
+    mode="indeterminate"
+    class="mb-3"
+  ></mat-progress-bar>
   <app-project-table></app-project-table>
 </div>
