@@ -24,7 +24,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../pages/admin/components/confirm-dialog/confirm-dialog.component';
 import { Action, Store } from '@ngrx/store';
-import { UpdateProjectComponent } from '../../pages/admin/projects/update-project/update-project.component';
+import { UpdateProjectComponent } from '../../pages/admin/projects/components/update-project/update-project.component';
 import { selectProjectById } from './project.selectors';
 
 @Injectable()
