@@ -6,11 +6,7 @@ import { Document } from '../../../../../interface/document';
 import { MatButtonModule } from '@angular/material/button';
 import { map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import {
-  selectProjectLoaded,
-  selectProjectById,
-} from '../../../../../state/project/project.selectors';
-import { loadProjects } from '../../../../../state/project/project.actions';
+import { selectProjectById } from '../../../../../state/project/project.selectors';
 import { loadDocuments } from '../../../../../state/document/document.actions';
 import {
   selectDocumentsByProjectId,
@@ -39,7 +35,6 @@ export class FilesComponent {
   );
   documentLoaded$: Observable<boolean> =
     this.store.select(selectDocumentLoaded);
-  projectLoaded$: Observable<boolean> = this.store.select(selectProjectLoaded);
   loading$: Observable<boolean> = this.store.select(selectDocumentLoading);
 
   constructor(private store: Store) {}
@@ -47,9 +42,6 @@ export class FilesComponent {
   ngOnInit() {
     this.documentLoaded$.subscribe((loaded) => {
       if (!loaded) this.store.dispatch(loadDocuments());
-    });
-    this.projectLoaded$.subscribe((loaded) => {
-      if (!loaded) this.store.dispatch(loadProjects());
     });
   }
 
