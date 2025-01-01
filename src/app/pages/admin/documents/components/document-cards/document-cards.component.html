@@ -2,7 +2,7 @@
   <div class="row g-3">
     <div
       class="col-12 col-md-6 col-xl-4"
-      *ngFor="let doc of documents$ | async"
+      *ngFor="let doc of filteredDocuments$ | async"
     >
       <div class="d-flex justify-content-center align-items-center">
         <mat-card appearance="outlined" class="custom-card shadow-sm">

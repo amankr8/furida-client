@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -42,11 +42,24 @@ import { MatSelectModule } from '@angular/material/select';
   styleUrl: './document-cards.component.scss',
 })
 export class DocumentCardsComponent {
+  @Input() projectId: number | null = null;
   documents$: Observable<Document[]> = this.store.select(selectDocuments);
   loading$: Observable<boolean> = this.store.select(selectDocumentLoading);
-  selectedProjectId: number | null = null;
+  filteredDocuments$: Observable<Document[]> = this.documents$;
 
   constructor(private store: Store) {}
+
+  ngOnChanges() {
+    if (this.projectId) {
+      this.filteredDocuments$ = this.documents$.pipe(
+        map((documents) =>
+          documents.filter((document) => document.projectId === this.projectId)
+        )
+      );
+    } else {
+      this.filteredDocuments$ = this.documents$;
+    }
+  }
 
   getProjectNameById(id: number): Observable<String> {
     return this.store
