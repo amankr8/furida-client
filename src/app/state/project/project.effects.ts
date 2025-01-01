@@ -11,8 +11,8 @@ import {
   loadProjects,
   loadProjectsFail,
   loadProjectsSuccess,
-  openDeleteDialog,
-  openEditDialog,
+  openProjectDeleteDialog,
+  openProjectEditDialog,
   updateProject,
   updateProjectFail,
   updateProjectSuccess,
@@ -95,7 +95,7 @@ export class ProjectEffects {
   openEditDialog$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(openEditDialog),
+        ofType(openProjectEditDialog),
         mergeMap(({ projectId }) =>
           this.store.select(selectProjectById(projectId)).pipe(
             first(),
@@ -163,7 +163,7 @@ export class ProjectEffects {
   openDeleteDialog$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(openDeleteDialog),
+        ofType(openProjectDeleteDialog),
         tap(({ projectId }) => {
           this.showDeleteWarningDialog(deleteProject({ projectId }));
         })

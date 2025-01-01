@@ -1,37 +1,31 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { Project } from '../../../../../interface/project';
-import { MatButtonModule } from '@angular/material/button';
-import { Store } from '@ngrx/store';
+import { MatTableModule } from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { Project } from '../../../../../interface/project';
+import {
+  selectProjectLoading,
+  selectProjects,
+} from '../../../../../state/project/project.selectors';
+import { Store } from '@ngrx/store';
+import { CommonModule } from '@angular/common';
 import {
   openProjectDeleteDialog,
   openProjectEditDialog,
 } from '../../../../../state/project/project.actions';
-import {
-  selectProjects,
-  selectProjectLoading,
-} from '../../../../../state/project/project.selectors';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-project-cards',
+  selector: 'app-project-table',
   standalone: true,
-  imports: [
-    MatCardModule,
-    MatProgressBarModule,
-    CommonModule,
-    MatButtonModule,
-    MatIconModule,
-  ],
-  templateUrl: './project-cards.component.html',
-  styleUrl: './project-cards.component.scss',
+  imports: [MatTableModule, CommonModule, MatIconModule, MatButtonModule],
+  templateUrl: './project-table.component.html',
+  styleUrl: './project-table.component.scss',
 })
-export class ProjectCardsComponent {
+export class ProjectTableComponent {
   projects$: Observable<Project[]> = this.store.select(selectProjects);
   loading$: Observable<boolean> = this.store.select(selectProjectLoading);
+  displayedColumns: string[] = ['name', 'desc', 'address', 'edit', 'delete'];
 
   constructor(private store: Store) {}
 
