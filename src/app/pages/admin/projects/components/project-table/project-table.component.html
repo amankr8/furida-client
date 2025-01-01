@@ -1,44 +1,58 @@
 <div class="px-3">
   <table mat-table [dataSource]="projects$" class="mat-elevation-z1">
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class="d-flex justify-content-center">Name</div>
+      </th>
       <td mat-cell *matCellDef="let project">{{ project.name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="desc">
-      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class="d-flex justify-content-center">Description</div>
+      </th>
       <td mat-cell *matCellDef="let project">{{ project.desc }}</td>
     </ng-container>
 
     <ng-container matColumnDef="address">
-      <th mat-header-cell *matHeaderCellDef>Address</th>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class="d-flex justify-content-center">Address</div>
+      </th>
       <td mat-cell *matCellDef="let project">{{ project.address }}</td>
     </ng-container>
 
     <ng-container matColumnDef="edit">
-      <th mat-header-cell *matHeaderCellDef>Edit</th>
-      <td mat-cell *matCellDef="let project">
-        <button
-          mat-icon-button
-          class="edit-btn"
-          (click)="updateProject(project.id)"
-          [disabled]="loading$ | async"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class="d-flex justify-content-center">Edit</div>
+      </th>
+      <td mat-cell *matCellDef="let project" class="p-3">
+        <div class="d-flex justify-content-center w-100">
+          <button
+            mat-icon-button
+            class="edit-btn"
+            (click)="updateProject(project.id)"
+            [disabled]="loading$ | async"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef>Delete</th>
-      <td mat-cell *matCellDef="let project">
-        <button
-          mat-icon-button
-          (click)="deleteProject(project.id)"
-          [disabled]="loading$ | async"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
+      <th mat-header-cell *matHeaderCellDef>
+        <div class="d-flex justify-content-center">Delete</div>
+      </th>
+      <td mat-cell *matCellDef="let project" class="p-3">
+        <div class="d-flex justify-content-center w-100">
+          <button
+            mat-icon-button
+            (click)="deleteProject(project.id)"
+            [disabled]="loading$ | async"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </td>
     </ng-container>
 
