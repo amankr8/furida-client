@@ -28,14 +28,14 @@
           <mat-card-actions class="btn-group">
             <button
               mat-icon-button
-              (click)="update(doc.id)"
+              (click)="updateDoc(doc.id)"
               [disabled]="loading$ | async"
             >
               <mat-icon>edit</mat-icon>
             </button>
             <button
               mat-icon-button
-              (click)="delete(doc.id)"
+              (click)="deleteDoc(doc.id)"
               [disabled]="loading$ | async"
             >
               <mat-icon>delete</mat-icon>

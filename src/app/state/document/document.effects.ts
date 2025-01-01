@@ -22,8 +22,8 @@ import {
   deleteDocumentFail,
 } from '../../state/document/document.actions';
 import {
-  openEditDialog,
-  openDeleteDialog,
+  openDocEditDialog,
+  openDocDeleteDialog,
 } from '../../state/document/document.actions';
 import { selectDocumentById } from './document.selectors';
 import { Document } from '../../interface/document';
@@ -97,7 +97,7 @@ export class DocumentEffects {
   openEditDialog$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(openEditDialog),
+        ofType(openDocEditDialog),
         mergeMap(({ documentId }) =>
           this.store.select(selectDocumentById(documentId)).pipe(
             first(),
@@ -167,7 +167,7 @@ export class DocumentEffects {
   openDeleteDialog$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(openDeleteDialog),
+        ofType(openDocDeleteDialog),
         tap(({ documentId }) => {
           this.showDeleteWarningDialog(deleteDocument({ documentId }));
         })

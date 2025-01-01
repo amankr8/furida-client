@@ -19,8 +19,8 @@ import {
 } from '../../../../../state/project/project.selectors';
 import {
   loadDocuments,
-  openDeleteDialog,
-  openEditDialog,
+  openDocDeleteDialog,
+  openDocEditDialog,
 } from '../../../../../state/document/document.actions';
 import { loadProjects } from '../../../../../state/project/project.actions';
 import { MatIconModule } from '@angular/material/icon';
@@ -53,11 +53,11 @@ export class DocumentCardsComponent {
       .pipe(map((project) => (project ? project.name : 'Unknown')));
   }
 
-  update(id: number) {
-    this.store.dispatch(openEditDialog({ documentId: id }));
+  updateDoc(id: number) {
+    this.store.dispatch(openDocEditDialog({ documentId: id }));
   }
 
-  delete(id: number) {
-    this.store.dispatch(openDeleteDialog({ documentId: id }));
+  deleteDoc(id: number) {
+    this.store.dispatch(openDocDeleteDialog({ documentId: id }));
   }
 }

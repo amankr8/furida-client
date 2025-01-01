@@ -28,7 +28,7 @@ export const addDocumentFail = createAction(
   props<{ error: string }>()
 );
 
-export const openEditDialog = createAction(
+export const openDocEditDialog = createAction(
   '[Document] Open Edit Dialog',
   props<{ documentId: number }>()
 );
@@ -48,7 +48,7 @@ export const updateDocumentFail = createAction(
   props<{ error: string }>()
 );
 
-export const openDeleteDialog = createAction(
+export const openDocDeleteDialog = createAction(
   '[Document] Open Delete Dialog',
   props<{ documentId: number }>()
 );
