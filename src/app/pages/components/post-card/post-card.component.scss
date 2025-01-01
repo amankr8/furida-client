@@ -1,0 +1,27 @@
+.single-line-truncate {
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Number of lines to show */
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Number of lines to show */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-content-h {
+  height: 60px;
+}
+
+.card-image-h {
+  object-fit: cover;
+  height: 300px;
+  width: 100%;
+}

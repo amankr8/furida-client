@@ -1,0 +1,41 @@
+<mat-card appearance="outlined" class="custom-card shadow-sm">
+  <img
+    mat-card-image
+    [src]="post.imgUrl || 'https://placehold.co/600x400'"
+    alt="No image found"
+    class="card-image-h"
+  />
+  <mat-card-header class="mb-2">
+    <mat-card-title class="single-line-truncate">
+      {{ post.title }}
+    </mat-card-title>
+    <mat-card-subtitle>{{ post.date | date }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="card-content-h">
+    <p class="truncate-text">{{ post.content }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button *ngIf="!isAdminRoute" mat-button (click)="viewPost()">
+      <div class="d-flex justify-content-between align-items-center gap-2">
+        <mat-icon>open_in_new</mat-icon>
+        <span>VIEW</span>
+      </div>
+    </button>
+    <button
+      *ngIf="isAdminRoute"
+      mat-icon-button
+      (click)="updatePost()"
+      [disabled]="loading$ | async"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button
+      *ngIf="isAdminRoute"
+      mat-icon-button
+      (click)="deletePost()"
+      [disabled]="loading$ | async"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

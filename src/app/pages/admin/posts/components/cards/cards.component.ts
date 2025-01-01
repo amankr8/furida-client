@@ -17,6 +17,7 @@ import {
   openEditDialog,
 } from '../../../../../state/post/post.actions';
 import { MatIconModule } from '@angular/material/icon';
+import { PostCardComponent } from '../../../../components/post-card/post-card.component';
 
 @Component({
   selector: 'app-post-cards',
@@ -27,6 +28,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     CommonModule,
     MatIconModule,
+    PostCardComponent,
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
@@ -42,13 +44,5 @@ export class CardsComponent {
     this.postLoaded$.subscribe((loaded) => {
       if (!loaded) this.store.dispatch(loadPosts());
     });
-  }
-
-  update(id: number) {
-    this.store.dispatch(openEditDialog({ postId: id }));
-  }
-
-  delete(id: number) {
-    this.store.dispatch(openDeleteDialog({ postId: id }));
   }
 }

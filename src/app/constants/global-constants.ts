@@ -6,5 +6,5 @@ export enum generalStatus {
 
 export enum localStorageKeys {
   JWT_TOKEN = 'jwtToken',
-  ConfigState = 'configState',
+  CONFIG_STATE = 'configState',
 }

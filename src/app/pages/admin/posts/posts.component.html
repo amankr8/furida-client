@@ -3,4 +3,11 @@
   [buttonText]="buttonText"
   [childLevelLink]="childLevelLink"
 ></app-nav-toolbar>
-<app-post-cards></app-post-cards>
+<div class="container pb-3">
+  <mat-progress-bar
+    *ngIf="loading$ | async"
+    mode="indeterminate"
+    class="mb-3"
+  ></mat-progress-bar>
+  <app-post-cards></app-post-cards>
+</div>

@@ -6,7 +6,7 @@ export function localStorageSyncReducer<T>(
 ): ActionReducer<T> {
   return (state: T | undefined, action: any): T => {
     if (action.type === INIT || action.type === UPDATE) {
-      const storedConfig = localStorage.getItem(localStorageKeys.ConfigState);
+      const storedConfig = localStorage.getItem(localStorageKeys.CONFIG_STATE);
       if (storedConfig) {
         const parsedConfig = JSON.parse(storedConfig);
         return {
@@ -21,7 +21,7 @@ export function localStorageSyncReducer<T>(
     const configState = (nextState as any)?.config;
     if (configState) {
       localStorage.setItem(
-        localStorageKeys.ConfigState,
+        localStorageKeys.CONFIG_STATE,
         JSON.stringify(configState)
       );
     }
