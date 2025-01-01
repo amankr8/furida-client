@@ -45,12 +45,4 @@ export class CardsComponent {
       if (!loaded) this.store.dispatch(loadPosts());
     });
   }
-
-  update(id: number) {
-    this.store.dispatch(openEditDialog({ postId: id }));
-  }
-
-  delete(id: number) {
-    this.store.dispatch(openDeleteDialog({ postId: id }));
-  }
 }
