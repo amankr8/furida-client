@@ -42,24 +42,10 @@ import { MatSelectModule } from '@angular/material/select';
   styleUrl: './document-cards.component.scss',
 })
 export class DocumentCardsComponent {
-  @Input() projectId: number | null = null;
-  documents$: Observable<Document[]> = this.store.select(selectDocuments);
+  @Input() documents$!: Observable<Document[]>;
   loading$: Observable<boolean> = this.store.select(selectDocumentLoading);
-  filteredDocuments$: Observable<Document[]> = this.documents$;
 
   constructor(private store: Store) {}
-
-  ngOnChanges() {
-    if (this.projectId) {
-      this.filteredDocuments$ = this.documents$.pipe(
-        map((documents) =>
-          documents.filter((document) => document.projectId === this.projectId)
-        )
-      );
-    } else {
-      this.filteredDocuments$ = this.documents$;
-    }
-  }
 
   getProjectNameById(id: number): Observable<String> {
     return this.store

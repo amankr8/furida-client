@@ -3,7 +3,7 @@ import { DocumentCardsComponent } from './components/document-cards/document-car
 import { NavToolbarComponent } from '../components/nav-toolbar/nav-toolbar.component';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import {
   selectDocumentLoaded,
   selectDocumentLoading,
@@ -38,12 +38,13 @@ export class AdminDocumentsComponent {
   childLevelLink: string = 'add-document';
 
   documents$: Observable<Document[]> = this.store.select(selectDocuments);
+  filteredDocuments$: Observable<Document[]> = this.documents$;
   isDocumentLoaded$: Observable<boolean> =
     this.store.select(selectDocumentLoaded);
+  loading$: Observable<boolean> = this.store.select(selectDocumentLoading);
   projects$ = this.store.select(selectProjects);
   isProjectLoaded$: Observable<boolean> =
     this.store.select(selectProjectLoaded);
-  loading$: Observable<boolean> = this.store.select(selectDocumentLoading);
   selectedProjectId: number | null = null;
 
   constructor(private store: Store) {}
@@ -59,5 +60,12 @@ export class AdminDocumentsComponent {
 
   selectProject(projectId: number) {
     this.selectedProjectId = projectId;
+    this.filteredDocuments$ = this.documents$.pipe(
+      map((documents) =>
+        this.selectedProjectId
+          ? documents.filter((document) => document.projectId === projectId)
+          : documents
+      )
+    );
   }
 }
