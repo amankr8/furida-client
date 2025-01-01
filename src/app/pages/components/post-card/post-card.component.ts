@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { selectPostLoading } from '../../../state/post/post.selectors';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-card',
@@ -23,8 +24,13 @@ import { CommonModule } from '@angular/common';
 export class PostCardComponent {
   @Input() post!: Post;
   loading$: Observable<boolean> = this.store.select(selectPostLoading);
+  isAdminRoute: boolean = false;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
+
+  ngOnInit() {
+    this.isAdminRoute = this.router.url.startsWith('/admin');
+  }
 
   viewPost() {
     this.store.dispatch(openViewDialog({ postId: this.post.id }));
