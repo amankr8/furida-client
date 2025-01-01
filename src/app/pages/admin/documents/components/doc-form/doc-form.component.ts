@@ -18,7 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectProjects } from '../../../../../state/project/project.selectors';
-import { selectLoading } from '../../../../../state/document/document.selectors';
+import { selectDocumentLoading } from '../../../../../state/document/document.selectors';
 import { addDocument } from '../../../../../state/document/document.actions';
 
 @Component({
@@ -48,7 +48,7 @@ export class DocFormComponent {
 
   constructor(private store: Store) {
     this.projects$ = this.store.select(selectProjects);
-    this.loading$ = this.store.select(selectLoading);
+    this.loading$ = this.store.select(selectDocumentLoading);
   }
 
   ngOnInit() {

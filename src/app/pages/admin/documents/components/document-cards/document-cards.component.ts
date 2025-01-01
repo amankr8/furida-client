@@ -9,8 +9,8 @@ import { map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
   selectDocuments,
-  selectIsDocumentLoaded,
-  selectLoading,
+  selectDocumentLoaded,
+  selectDocumentLoading,
 } from '../../../../../state/document/document.selectors';
 import {
   selectProjectLoaded,
@@ -44,12 +44,11 @@ import { MatSelectModule } from '@angular/material/select';
 export class DocumentCardsComponent {
   projects$ = this.store.select(selectProjects);
   documents$: Observable<Document[]> = this.store.select(selectDocuments);
-  isDocumentLoaded$: Observable<boolean> = this.store.select(
-    selectIsDocumentLoaded
-  );
+  isDocumentLoaded$: Observable<boolean> =
+    this.store.select(selectDocumentLoaded);
   isProjectLoaded$: Observable<boolean> =
     this.store.select(selectProjectLoaded);
-  loading$: Observable<boolean> = this.store.select(selectLoading);
+  loading$: Observable<boolean> = this.store.select(selectDocumentLoading);
   selectedProjectId: number | null = null;
   filteredDocuments$: Observable<Document[]> = this.documents$;
 

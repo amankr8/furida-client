@@ -14,8 +14,8 @@ import { loadProjects } from '../../../../../state/project/project.actions';
 import { loadDocuments } from '../../../../../state/document/document.actions';
 import {
   selectDocumentsByProjectId,
-  selectIsDocumentLoaded,
-  selectLoading,
+  selectDocumentLoaded,
+  selectDocumentLoading,
 } from '../../../../../state/document/document.selectors';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -37,11 +37,10 @@ export class FilesComponent {
   docs$: Observable<Document[]> = this.store.select(
     selectDocumentsByProjectId(this.projectId)
   );
-  documentLoaded$: Observable<boolean> = this.store.select(
-    selectIsDocumentLoaded
-  );
+  documentLoaded$: Observable<boolean> =
+    this.store.select(selectDocumentLoaded);
   projectLoaded$: Observable<boolean> = this.store.select(selectProjectLoaded);
-  loading$: Observable<boolean> = this.store.select(selectLoading);
+  loading$: Observable<boolean> = this.store.select(selectDocumentLoading);
 
   constructor(private store: Store) {}
 
@@ -56,7 +55,7 @@ export class FilesComponent {
 
   ngOnChanges() {
     this.docs$ = this.store.select(selectDocumentsByProjectId(this.projectId));
-    this.loading$ = this.store.select(selectLoading);
+    this.loading$ = this.store.select(selectDocumentLoading);
   }
 
   getProjectNameById(id: number): Observable<String> {
