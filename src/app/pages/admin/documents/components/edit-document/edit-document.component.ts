@@ -14,9 +14,9 @@ import {
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Document } from '../../../../interface/document';
+import { Document } from '../../../../../interface/document';
 import { Store } from '@ngrx/store';
-import { updateDocument } from '../../../../state/document/document.actions';
+import { updateDocument } from '../../../../../state/document/document.actions';
 
 @Component({
   selector: 'app-edit-document',
