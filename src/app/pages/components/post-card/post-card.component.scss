@@ -15,3 +15,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.card-content-h {
+  height: 60px;
+}
+
+.card-image-h {
+  object-fit: cover;
+  height: 300px;
+  width: 100%;
+}

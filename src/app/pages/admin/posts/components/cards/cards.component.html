@@ -7,39 +7,7 @@
   <div class="row g-3">
     <div class="col-12 col-md-6 col-xl-4" *ngFor="let post of posts$ | async">
       <div class="d-flex justify-content-center align-items-center">
-        <mat-card appearance="outlined" class="custom-card shadow-sm">
-          <img
-            mat-card-image
-            [src]="post.imgUrl || 'https://placehold.co/600x400'"
-            alt="No image found"
-            class="card-image-h"
-          />
-          <mat-card-header class="mb-2">
-            <mat-card-title class="single-line-truncate">
-              {{ post.title }}
-            </mat-card-title>
-            <mat-card-subtitle>{{ post.date | date }}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content class="truncate-text card-content-h">
-            <p>{{ post.content }}</p>
-          </mat-card-content>
-          <mat-card-actions class="btn-group">
-            <button
-              mat-icon-button
-              (click)="update(post.id)"
-              [disabled]="loading$ | async"
-            >
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button
-              mat-icon-button
-              (click)="delete(post.id)"
-              [disabled]="loading$ | async"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
-          </mat-card-actions>
-        </mat-card>
+        <app-post-card [post]="post"></app-post-card>
       </div>
     </div>
   </div>

@@ -16,6 +16,7 @@ import {
   openViewDialog,
 } from '../../../../../state/post/post.actions';
 import { MatIconModule } from '@angular/material/icon';
+import { PostCardComponent } from '../../../../components/post-card/post-card.component';
 
 @Component({
   selector: 'app-updates',
@@ -26,6 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     CommonModule,
     MatIconModule,
+    PostCardComponent,
   ],
   templateUrl: './updates.component.html',
   styleUrl: './updates.component.scss',

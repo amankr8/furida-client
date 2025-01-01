@@ -11,10 +11,10 @@
     </mat-card-title>
     <mat-card-subtitle>{{ post.date | date }}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content class="truncate-text card-content-h">
-    <p>{{ post.content }}</p>
+  <mat-card-content class="card-content-h">
+    <p class="truncate-text">{{ post.content }}</p>
   </mat-card-content>
-  <mat-card-actions class="btn-group">
+  <mat-card-actions>
     <button mat-button (click)="viewPost()">
       <div class="d-flex justify-content-between align-items-center gap-2">
         <mat-icon>open_in_new</mat-icon>
