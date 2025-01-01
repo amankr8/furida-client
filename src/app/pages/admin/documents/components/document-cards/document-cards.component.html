@@ -1,28 +1,8 @@
-<div class="container pb-3">
-  <div class="d-flex justify-content-center">
-    <mat-form-field class="filter-container">
-      <mat-label>Filter By Project</mat-label>
-      <mat-select
-        [(value)]="selectedProjectId"
-        (selectionChange)="selectProject($event.value)"
-      >
-        <mat-option
-          *ngFor="let project of projects$ | async"
-          [value]="project.id"
-          >{{ project.name }}</mat-option
-        >
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <mat-progress-bar
-    *ngIf="loading$ | async"
-    mode="indeterminate"
-    class="mb-3"
-  ></mat-progress-bar>
+<div class="px-4">
   <div class="row g-3">
     <div
       class="col-12 col-md-6 col-xl-4"
-      *ngFor="let doc of filteredDocuments$ | async"
+      *ngFor="let doc of documents$ | async"
     >
       <div class="d-flex justify-content-center align-items-center">
         <mat-card appearance="outlined" class="custom-card shadow-sm">

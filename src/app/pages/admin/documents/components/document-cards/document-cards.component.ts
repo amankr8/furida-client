@@ -42,35 +42,11 @@ import { MatSelectModule } from '@angular/material/select';
   styleUrl: './document-cards.component.scss',
 })
 export class DocumentCardsComponent {
-  projects$ = this.store.select(selectProjects);
   documents$: Observable<Document[]> = this.store.select(selectDocuments);
-  isDocumentLoaded$: Observable<boolean> =
-    this.store.select(selectDocumentLoaded);
-  isProjectLoaded$: Observable<boolean> =
-    this.store.select(selectProjectLoaded);
   loading$: Observable<boolean> = this.store.select(selectDocumentLoading);
   selectedProjectId: number | null = null;
-  filteredDocuments$: Observable<Document[]> = this.documents$;
 
   constructor(private store: Store) {}
-
-  ngOnInit() {
-    this.isDocumentLoaded$.subscribe((isLoaded) => {
-      if (!isLoaded) this.store.dispatch(loadDocuments());
-    });
-    this.isProjectLoaded$.subscribe((isLoaded) => {
-      if (!isLoaded) this.store.dispatch(loadProjects());
-    });
-  }
-
-  selectProject(projectId: number) {
-    this.selectedProjectId = projectId;
-    this.filteredDocuments$ = this.documents$.pipe(
-      map((docs) =>
-        projectId ? docs.filter((doc) => doc.projectId === projectId) : docs
-      )
-    );
-  }
 
   getProjectNameById(id: number): Observable<String> {
     return this.store

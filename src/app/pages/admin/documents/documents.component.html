@@ -3,4 +3,26 @@
   [buttonText]="buttonText"
   [childLevelLink]="childLevelLink"
 ></app-nav-toolbar>
-<app-document-cards></app-document-cards>
+<div class="container pb-3">
+  <div class="d-flex justify-content-center">
+    <mat-form-field class="filter-container">
+      <mat-label>Filter By Project</mat-label>
+      <mat-select
+        [(value)]="selectedProjectId"
+        (selectionChange)="selectProject($event.value)"
+      >
+        <mat-option
+          *ngFor="let project of projects$ | async"
+          [value]="project.id"
+          >{{ project.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <mat-progress-bar
+    *ngIf="loading$ | async"
+    mode="indeterminate"
+    class="mb-3"
+  ></mat-progress-bar>
+  <app-document-cards></app-document-cards>
+</div>
