@@ -7,17 +7,29 @@ import {
   openDocDeleteDialog,
   openDocEditDialog,
 } from '../../../../../state/document/document.actions';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+import { Document } from '../../../../../interface/document';
 
 @Component({
   selector: 'app-document-table',
   standalone: true,
-  imports: [],
+  imports: [MatTableModule, MatButtonModule, MatIconModule, CommonModule],
   templateUrl: './document-table.component.html',
   styleUrl: './document-table.component.scss',
 })
 export class DocumentTableComponent {
   @Input() documents$!: Observable<Document[]>;
   loading$: Observable<boolean> = this.store.select(selectDocumentLoading);
+  displayedColumns: string[] = [
+    'name',
+    'desc',
+    'downloadLink',
+    'edit',
+    'delete',
+  ];
 
   constructor(private store: Store) {}
 

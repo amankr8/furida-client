@@ -24,5 +24,12 @@
     mode="indeterminate"
     class="mb-3"
   ></mat-progress-bar>
-  <app-document-cards [documents$]="filteredDocuments$"></app-document-cards>
+  <app-document-cards
+    *ngIf="!(tableView$ | async)"
+    [documents$]="filteredDocuments$"
+  ></app-document-cards>
+  <app-document-table
+    *ngIf="tableView$ | async"
+    [documents$]="filteredDocuments$"
+  ></app-document-table>
 </div>

@@ -18,6 +18,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { loadProjects } from '../../../state/project/project.actions';
 import { Document } from '../../../interface/document';
 import { loadDocuments } from '../../../state/document/document.actions';
+import { DocumentTableComponent } from './components/document-table/document-table.component';
+import { selectConfig } from '../../../state/config/config.selectors';
 
 @Component({
   selector: 'app-admin-documents',
@@ -28,6 +30,7 @@ import { loadDocuments } from '../../../state/document/document.actions';
     CommonModule,
     MatProgressBarModule,
     MatSelectModule,
+    DocumentTableComponent,
   ],
   templateUrl: './documents.component.html',
   styleUrl: './documents.component.scss',
@@ -36,6 +39,10 @@ export class AdminDocumentsComponent {
   headerText: string = 'Your Documents';
   buttonText: string = 'Add Doc';
   childLevelLink: string = 'add-document';
+
+  tableView$: Observable<boolean> = this.store
+    .select(selectConfig)
+    .pipe(map((config) => config.boolSetting1));
 
   documents$: Observable<Document[]> = this.store.select(selectDocuments);
   filteredDocuments$: Observable<Document[]> = this.documents$;
