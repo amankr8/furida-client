@@ -1,6 +1,11 @@
 <mat-toolbar color="primary" class="shadow">
   <div class="d-flex justify-content-between align-items-center h-100 w-100">
-    <app-brand-logo-v2 class="h-100"></app-brand-logo-v2>
+    <div class="d-flex align-items-center h-100">
+      <button *ngIf="smallScreen" mat-icon-button (click)="toggleMenu()">
+        <mat-icon fontIcon="menu"></mat-icon>
+      </button>
+      <app-brand-logo-v2 class="h-100"></app-brand-logo-v2>
+    </div>
     <div *ngIf="!smallScreen" class="h-100">
       <button mat-button class="link-button h-100">
         <p class="link-name mb-0" routerLink="/about">About</p>
@@ -27,10 +32,7 @@
       <button mat-button class="link-button h-100">
         <p class="link-name mb-0" routerLink="/cctv">CCTV</p>
       </button>
-      <app-admin-button class="link-button mx-2"></app-admin-button>
+      <app-admin-button class="link-button"></app-admin-button>
     </div>
-    <button *ngIf="smallScreen" mat-icon-button (click)="toggleMenu()">
-      <mat-icon fontIcon="menu"></mat-icon>
-    </button>
   </div>
 </mat-toolbar>
