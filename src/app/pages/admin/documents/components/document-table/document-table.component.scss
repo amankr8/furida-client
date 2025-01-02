@@ -1,10 +1,10 @@
 .mat-column-name {
-  width: 200px;
+  min-width: 150px;
   border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .mat-column-desc {
-  min-width: 300px;
+  min-width: 200px;
   border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 
@@ -20,5 +20,4 @@
 
 .mat-column-delete {
   width: 100px;
-  border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
