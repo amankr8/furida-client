@@ -1,10 +1,8 @@
 .single-line-truncate {
-  display: -webkit-box;
-  -webkit-line-clamp: 1; /* Number of lines to show */
-  line-clamp: 1;
-  -webkit-box-orient: vertical;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: 260px;
 }
 
 .filter-container {
