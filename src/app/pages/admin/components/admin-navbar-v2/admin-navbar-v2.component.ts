@@ -48,7 +48,7 @@ export class AdminNavbarV2Component {
     );
   }
 
-  getAuthRole(): Observable<string> {
-    return this.authUser$.pipe(map((user) => (user ? user.role : 'Unknown')));
+  getAuthEmail(): Observable<string> {
+    return this.authUser$.pipe(map((user) => (user ? user.email : 'Unknown')));
   }
 }
