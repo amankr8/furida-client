@@ -14,6 +14,12 @@ export class BreakpointService {
       .pipe(map((result) => result.matches));
   }
 
+  isSmallerScreen() {
+    return this.breakpointObserver
+      .observe([Breakpoints.Small, Breakpoints.XSmall, Breakpoints.Medium])
+      .pipe(map((result) => result.matches));
+  }
+
   isHandset() {
     return this.breakpointObserver
       .observe(Breakpoints.Handset)

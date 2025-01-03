@@ -27,14 +27,13 @@ import { toggleBoolSetting1 } from '../../state/config/config.actions';
 export class AdminComponent {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   authLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
-  smallScreen: boolean = false;
+  smallScreen$: Observable<boolean> = this.breakpointService.isSmallScreen();
 
   constructor(
     private store: Store,
     private breakpointService: BreakpointService
   ) {
-    this.breakpointService.isSmallScreen().subscribe((small) => {
-      this.smallScreen = small;
+    this.breakpointService.isSmallerScreen().subscribe((small) => {
       if (small)
         this.store.dispatch(toggleBoolSetting1({ boolSetting1: false }));
       else this.store.dispatch(toggleBoolSetting1({ boolSetting1: true }));
