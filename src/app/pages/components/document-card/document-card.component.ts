@@ -13,11 +13,18 @@ import { Observable, map } from 'rxjs';
 import { selectProjectById } from '../../../state/project/project.selectors';
 import { selectDocumentLoading } from '../../../state/document/document.selectors';
 import { Router } from '@angular/router';
+import { DocMenuItemComponent } from '../doc-menu-item/doc-menu-item.component';
 
 @Component({
   selector: 'app-document-card',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, MatIconModule],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    CommonModule,
+    MatIconModule,
+    DocMenuItemComponent,
+  ],
   templateUrl: './document-card.component.html',
   styleUrl: './document-card.component.scss',
 })
@@ -36,13 +43,5 @@ export class DocumentCardComponent {
     return this.store
       .select(selectProjectById(id))
       .pipe(map((project) => (project ? project.name : 'Unknown')));
-  }
-
-  updateDocument() {
-    this.store.dispatch(openDocEditDialog({ documentId: this.document.id }));
-  }
-
-  deleteDocument() {
-    this.store.dispatch(openDocDeleteDialog({ documentId: this.document.id }));
   }
 }
