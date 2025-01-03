@@ -1,0 +1,25 @@
+<mat-card appearance="outlined" class="custom-card shadow-sm">
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <mat-card-header class="mb-2">
+        <mat-card-title>
+          {{ document.name }}
+        </mat-card-title>
+        <mat-card-subtitle>{{
+          getProjectNameById(document.projectId) | async
+        }}</mat-card-subtitle>
+      </mat-card-header>
+    </div>
+    <div *ngIf="isAdminRoute" class="px-3">
+      <app-doc-menu-item [docId]="document.id"></app-doc-menu-item>
+    </div>
+  </div>
+  <mat-card-content>
+    <p class="single-line-truncate">{{ document.desc }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <a mat-icon-button [href]="document.docUrl" target="_blank"
+      ><mat-icon>download</mat-icon>
+    </a>
+  </mat-card-actions>
+</mat-card>
