@@ -1,29 +1,37 @@
-<mat-toolbar *ngIf="isChild()">
-  <div class="container">
-    <div class="d-flex justify-content-between align-items-center">
-      <div>
-        <button mat-button routerLink="../">
-          <mat-icon>arrow_back</mat-icon>
-          <span>Back</span>
-        </button>
-      </div>
-      <div>
-        <button
-          *ngIf="hasChild()"
-          mat-button
-          color="primary"
-          [routerLink]="childLevelLink"
-        >
-          <div class="d-flex justify-content-between align-items-center gap-2">
-            <span>{{ buttonText }}</span>
-          </div>
-        </button>
-      </div>
-    </div>
+<mat-toolbar *ngIf="smallScreen$ | async">
+  <div class="d-flex justify-content-start align-items-center">
+    <button *ngIf="isChild" mat-button routerLink="../">
+      <mat-icon>arrow_back</mat-icon>
+      <span>Back</span>
+    </button>
+    <button
+      *ngIf="!isChild"
+      mat-button
+      color="primary"
+      [routerLink]="childLevelLink"
+    >
+      {{ buttonText }}
+    </button>
   </div>
 </mat-toolbar>
 <div class="container mt-4">
-  <div class="d-flex justify-content-start px-4">
+  <div class="d-flex justify-content-between align-items-center px-4">
+    <button
+      *ngIf="isChild && !(smallScreen$ | async)"
+      mat-button
+      routerLink="../"
+    >
+      <mat-icon>arrow_back</mat-icon>
+      <span>Back</span>
+    </button>
+    <button
+      *ngIf="!isChild && !(smallScreen$ | async)"
+      mat-button
+      color="primary"
+      [routerLink]="childLevelLink"
+    >
+      {{ buttonText }}
+    </button>
     <app-display-text-head [textInput]="headerText"></app-display-text-head>
   </div>
   <mat-divider class="my-3"></mat-divider>

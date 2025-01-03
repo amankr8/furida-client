@@ -7,7 +7,7 @@ export interface ConfigState {
 }
 
 export const initialConfigState: ConfigState = {
-  boolSetting1: false,
+  boolSetting1: true,
   boolSetting2: false,
 };
 

@@ -1,2 +1,13 @@
-<app-navbar-v2></app-navbar-v2>
-<router-outlet></router-outlet>
+<mat-sidenav-container class="min-vh-100">
+  <mat-sidenav
+    #sidenav
+    class="admin-sidenav"
+    [mode]="smallScreen ? 'over' : 'side'"
+    [opened]="!smallScreen"
+    ><app-admin-side-menu (toggleSidenav)="toggleDrawer()"></app-admin-side-menu
+  ></mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar-v2 (toggleSidenav)="toggleDrawer()"></app-navbar-v2>
+    <router-outlet></router-outlet
+  ></mat-sidenav-content>
+</mat-sidenav-container>
