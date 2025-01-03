@@ -6,6 +6,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { DisplayTextHeadComponent } from '../../../components/display-text-head/display-text-head.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { Observable } from 'rxjs';
+import { BreakpointService } from '../../../../service/breakpoint/breakpoint.service';
 
 @Component({
   selector: 'app-nav-toolbar',
@@ -23,15 +25,15 @@ import { MatDividerModule } from '@angular/material/divider';
   styleUrl: './nav-toolbar.component.scss',
 })
 export class NavToolbarComponent {
-  @Input() headerText: string = 'Projects';
+  @Input() headerText: string = '';
   @Input() buttonText: string = '';
   @Input() childLevelLink: string = '';
+  smallScreen$: Observable<boolean> = this.breakpointService.isSmallScreen();
+  isChild: boolean = false;
 
-  hasChild(): boolean {
-    return this.childLevelLink !== '';
-  }
+  constructor(private breakpointService: BreakpointService) {}
 
-  isChild(): boolean {
-    return this.headerText !== 'Admin Console';
+  ngOnChanges() {
+    this.isChild = this.childLevelLink === '';
   }
 }
