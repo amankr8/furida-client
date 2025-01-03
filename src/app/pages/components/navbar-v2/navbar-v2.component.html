@@ -10,9 +10,13 @@
       </button>
       <app-brand-logo-v2 class="h-100"></app-brand-logo-v2>
     </div>
-    <app-navbar-buttons
-      *ngIf="!(smallScreen$ | async)"
-      class="h-100"
-    ></app-navbar-buttons>
+    <div class="d-flex align-items-center h-100">
+      <app-navbar-buttons
+        *ngIf="!(smallScreen$ | async) && !isAdminRoute"
+        class="h-100"
+      ></app-navbar-buttons>
+      <app-profile-button *ngIf="isAdminRoute" class="link-button">
+      </app-profile-button>
+    </div>
   </div>
 </mat-toolbar>
