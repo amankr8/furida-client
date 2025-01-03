@@ -1,78 +1,76 @@
-<div class="container">
-  <div class="d-flex justify-content-center align-items-center">
-    <form [formGroup]="form" (ngSubmit)="submit()">
-      <mat-card appearance="outlined" class="form-container shadow-sm">
-        <div class="container py-3">
-          <div class="d-flex flex-column">
-            <div class="d-flex flex-column align-items-center">
-              <!-- Display selected filename preview -->
-              <mat-card appearance="outlined" class="mb-3">
-                <div class="p-4">
-                  <span *ngIf="fileName">{{ fileName }}</span>
-                  <mat-error *ngIf="form.get('file')?.hasError('required')">
-                    Document is required
-                  </mat-error>
-                </div>
-              </mat-card>
-              <input
-                #fileInput
-                type="file"
-                (change)="onFileSelect($event)"
-                accept="application/pdf"
-                hidden
-              />
-              <button
-                mat-raised-button
-                color="accent"
-                class="upload-button mb-3"
-                type="button"
-                (click)="fileInput.click()"
+<div class="d-flex justify-content-center align-items-center">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-card appearance="outlined" class="form-container shadow-sm">
+      <div class="container py-3">
+        <div class="d-flex flex-column">
+          <div class="d-flex flex-column align-items-center">
+            <!-- Display selected filename preview -->
+            <mat-card appearance="outlined" class="mb-3">
+              <div class="p-4">
+                <span *ngIf="fileName">{{ fileName }}</span>
+                <mat-error *ngIf="form.get('file')?.hasError('required')">
+                  Document is required
+                </mat-error>
+              </div>
+            </mat-card>
+            <input
+              #fileInput
+              type="file"
+              (change)="onFileSelect($event)"
+              accept="application/pdf"
+              hidden
+            />
+            <button
+              mat-raised-button
+              color="accent"
+              class="upload-button mb-3"
+              type="button"
+              (click)="fileInput.click()"
+            >
+              <mat-icon>file_upload</mat-icon> Upload Document
+            </button>
+          </div>
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" />
+            <mat-error *ngIf="form.get('name')?.hasError('required')">
+              Name is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="desc" />
+            <mat-error *ngIf="form.get('desc')?.hasError('required')">
+              Description is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Project</mat-label>
+            <mat-select matInput formControlName="projectId">
+              <mat-option
+                *ngFor="let project of projects$ | async"
+                [value]="project.id"
+                >{{ project.name }}</mat-option
               >
-                <mat-icon>file_upload</mat-icon> Upload Document
-              </button>
-            </div>
-            <mat-form-field>
-              <mat-label>Name</mat-label>
-              <input matInput formControlName="name" />
-              <mat-error *ngIf="form.get('name')?.hasError('required')">
-                Name is required
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Description</mat-label>
-              <input matInput formControlName="desc" />
-              <mat-error *ngIf="form.get('desc')?.hasError('required')">
-                Description is required
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Project</mat-label>
-              <mat-select matInput formControlName="projectId">
-                <mat-option
-                  *ngFor="let project of projects$ | async"
-                  [value]="project.id"
-                  >{{ project.name }}</mat-option
-                >
-              </mat-select>
-              <mat-error *ngIf="form.get('projectId')?.hasError('required')">
-                Project is required
-              </mat-error>
-            </mat-form-field>
-            <div class="d-flex justify-content-end align-items-center gap-2">
-              <mat-spinner *ngIf="loading$ | async" diameter="30"></mat-spinner>
-              <button
-                mat-raised-button
-                color="primary"
-                class="dialog-action-button"
-                type="submit"
-                [disabled]="form.invalid || (loading$ | async)"
-              >
-                Submit
-              </button>
-            </div>
+            </mat-select>
+            <mat-error *ngIf="form.get('projectId')?.hasError('required')">
+              Project is required
+            </mat-error>
+          </mat-form-field>
+          <div class="d-flex justify-content-end align-items-center gap-2">
+            <mat-spinner *ngIf="loading$ | async" diameter="30"></mat-spinner>
+            <button
+              mat-raised-button
+              color="primary"
+              class="dialog-action-button"
+              type="submit"
+              [disabled]="form.invalid || (loading$ | async)"
+            >
+              Submit
+            </button>
           </div>
         </div>
-      </mat-card>
-    </form>
-  </div>
+      </div>
+    </mat-card>
+  </form>
 </div>
