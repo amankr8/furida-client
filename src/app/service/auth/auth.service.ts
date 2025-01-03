@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
-import { User } from '../../interface/user';
+import { User } from '../../shared/interface/user';
 import { environment } from '../../../environments/environment';
-import { localStorageKeys } from '../../constants/global-constants';
+import { localStorageKeys } from '../../shared/constants/global-constants';
 
 @Injectable({
   providedIn: 'root',

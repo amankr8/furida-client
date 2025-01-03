@@ -13,7 +13,7 @@ import {
   deletePostSuccess,
   deletePostFail,
 } from './post.actions';
-import { Post } from '../../interface/post';
+import { Post } from '../../shared/interface/post';
 
 export interface PostState {
   posts: Post[];

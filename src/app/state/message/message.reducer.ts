@@ -13,8 +13,8 @@ import {
   toggleArchiveFail,
   toggleArchiveSuccess,
 } from './message.actions';
-import { Message } from '../../interface/message';
-import { generalStatus } from '../../constants/global-constants';
+import { Message } from '../../shared/interface/message';
+import { generalStatus } from '../../shared/constants/global-constants';
 
 export interface MessageState {
   messages: Message[];

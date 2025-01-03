@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NavToolbarComponent } from '../components/nav-toolbar/nav-toolbar.component';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Post } from '../../../interface/post';
+import { Post } from '../../../shared/interface/post';
 import { loadPosts } from '../../../state/post/post.actions';
 import {
   selectPosts,

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
-import { User } from '../../../../interface/user';
+import { User } from '../../../../shared/interface/user';
 import { selectAuthUser } from '../../../../state/auth/auth.selectors';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';

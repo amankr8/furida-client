@@ -1,5 +1,5 @@
 import { ActionReducer, INIT, UPDATE } from '@ngrx/store';
-import { localStorageKeys } from '../../constants/global-constants';
+import { localStorageKeys } from '../../shared/constants/global-constants';
 
 export function localStorageSyncReducer<T>(
   reducer: ActionReducer<T>

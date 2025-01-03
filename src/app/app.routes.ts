@@ -4,7 +4,7 @@ import { EditPostComponent } from './pages/admin/posts/edit-post/edit-post.compo
 import { PostsComponent } from './pages/admin/posts/posts.component';
 import { SignupComponent } from './pages/admin/users/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
-import { authGuard } from './guard/auth.guard';
+import { authGuard } from './shared/guard/auth.guard';
 import { AdminComponent } from './pages/admin/admin.component';
 import { HomeLandingComponent } from './pages/home/landing/home-landing.component';
 import { UsersComponent } from './pages/admin/users/users.component';

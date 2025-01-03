@@ -7,7 +7,7 @@ import {
   deleteUserSuccess,
   deleteUserFail,
 } from './user.actions';
-import { User } from '../../interface/user';
+import { User } from '../../shared/interface/user';
 
 export interface UserState {
   users: User[];

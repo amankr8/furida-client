@@ -14,8 +14,8 @@ import {
   updatePassFail,
   updatePassSuccess,
 } from './auth.actions';
-import { User } from '../../interface/user';
-import { generalStatus } from '../../constants/global-constants';
+import { User } from '../../shared/interface/user';
+import { generalStatus } from '../../shared/constants/global-constants';
 
 export interface AuthState {
   user: User | null;

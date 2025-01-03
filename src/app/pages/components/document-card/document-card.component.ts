@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { Document } from '../../../interface/document';
+import { Document } from '../../../shared/interface/document';
 import { Store } from '@ngrx/store';
 import {
   openDocDeleteDialog,

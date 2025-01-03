@@ -19,7 +19,7 @@ import {
   selectAuthStatus,
 } from '../../../../state/auth/auth.selectors';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { generalStatus } from '../../../../constants/global-constants';
+import { generalStatus } from '../../../../shared/constants/global-constants';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 

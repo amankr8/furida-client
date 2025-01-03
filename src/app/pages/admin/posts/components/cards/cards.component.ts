@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { Post } from '../../../../../interface/post';
+import { Post } from '../../../../../shared/interface/post';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import {

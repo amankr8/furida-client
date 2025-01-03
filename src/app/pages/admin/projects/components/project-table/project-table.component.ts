@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { Observable } from 'rxjs';
-import { Project } from '../../../../../interface/project';
+import { Project } from '../../../../../shared/interface/project';
 import {
   selectProjectLoading,
   selectProjects,

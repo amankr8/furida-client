@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { Post } from '../../../interface/post';
+import { Post } from '../../../shared/interface/post';
 import { Store } from '@ngrx/store';
 import {
   openDeleteDialog,

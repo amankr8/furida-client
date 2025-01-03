@@ -13,7 +13,7 @@ import {
   updateProjectFail,
   updateProjectSuccess,
 } from './project.actions';
-import { Project } from '../../interface/project';
+import { Project } from '../../shared/interface/project';
 
 export interface ProjectState {
   projects: Project[];

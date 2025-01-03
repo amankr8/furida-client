@@ -26,7 +26,7 @@ import {
   openDocDeleteDialog,
 } from '../../state/document/document.actions';
 import { selectDocumentById } from './document.selectors';
-import { Document } from '../../interface/document';
+import { Document } from '../../shared/interface/document';
 import { EditDocumentComponent } from '../../pages/admin/documents/components/edit-document/edit-document.component';
 
 @Injectable()

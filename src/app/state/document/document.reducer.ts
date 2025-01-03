@@ -13,7 +13,7 @@ import {
   deleteDocumentSuccess,
   deleteDocumentFail,
 } from './document.actions';
-import { Document } from '../../interface/document';
+import { Document } from '../../shared/interface/document';
 
 export interface DocumentState {
   documents: Document[];

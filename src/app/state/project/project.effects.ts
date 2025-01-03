@@ -18,7 +18,7 @@ import {
   updateProjectSuccess,
 } from '../../state/project/project.actions';
 import { catchError, first, map, mergeMap, of, tap } from 'rxjs';
-import { Project } from '../../interface/project';
+import { Project } from '../../shared/interface/project';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';

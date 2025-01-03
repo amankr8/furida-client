@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from '../../interface/user';
+import { User } from '../../shared/interface/user';
 import { HttpErrorResponse } from '@angular/common/http';
 
 export const loadUsers = createAction('[Users] Load Users');

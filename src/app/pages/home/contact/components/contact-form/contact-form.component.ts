@@ -19,7 +19,7 @@ import {
   selectMessageStatus,
 } from '../../../../../state/message/message.selectors';
 import { sendMessage } from '../../../../../state/message/message.actions';
-import { generalStatus } from '../../../../../constants/global-constants';
+import { generalStatus } from '../../../../../shared/constants/global-constants';
 
 @Component({
   selector: 'app-contact-form',

@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Project } from '../../../../interface/project';
+import { Project } from '../../../../shared/interface/project';
 import { selectProjects } from '../../../../state/project/project.selectors';
 import { MatMenuModule } from '@angular/material/menu';
 import { BrandLogoV2Component } from '../../../components/brand-logo-v2/brand-logo-v2.component';

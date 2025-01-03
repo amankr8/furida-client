@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { Message } from '../../../../../interface/message';
+import { Message } from '../../../../../shared/interface/message';
 import { Store } from '@ngrx/store';
 import {
   deleteMessage,

@@ -8,7 +8,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { Store } from '@ngrx/store';
 import { confirmLogout } from '../../../../state/auth/auth.actions';
 import { map, Observable } from 'rxjs';
-import { User } from '../../../../interface/user';
+import { User } from '../../../../shared/interface/user';
 import {
   selectAuthUser,
   selectAuthLoading,

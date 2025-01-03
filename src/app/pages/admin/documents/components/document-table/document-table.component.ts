@@ -10,7 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { Document } from '../../../../../interface/document';
+import { Document } from '../../../../../shared/interface/document';
 
 @Component({
   selector: 'app-document-table',

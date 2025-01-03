@@ -12,7 +12,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Project } from '../../../../../interface/project';
+import { Project } from '../../../../../shared/interface/project';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';

@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 import { AdminButtonComponent } from '../admin-button/admin-button.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Observable } from 'rxjs';
-import { Project } from '../../../../interface/project';
+import { Project } from '../../../../shared/interface/project';
 import { selectProjects } from '../../../../state/project/project.selectors';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';

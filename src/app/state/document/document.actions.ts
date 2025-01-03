@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Document } from '../../interface/document';
+import { Document } from '../../shared/interface/document';
 
 export const loadDocuments = createAction('[Documents] Load Documents');
 
