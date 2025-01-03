@@ -1,11 +1,11 @@
 <mat-toolbar *ngIf="smallScreen$ | async">
   <div class="d-flex justify-content-start align-items-center">
-    <button *ngIf="isChild" mat-button routerLink="../">
+    <button *ngIf="allowBack" mat-button routerLink="../">
       <mat-icon>arrow_back</mat-icon>
       <span>Back</span>
     </button>
     <button
-      *ngIf="!isChild"
+      *ngIf="hasChild"
       mat-button
       color="primary"
       [routerLink]="childLevelLink"
@@ -17,7 +17,7 @@
 <div class="container mt-4">
   <div class="d-flex justify-content-between align-items-center px-4">
     <button
-      *ngIf="isChild && !(smallScreen$ | async)"
+      *ngIf="allowBack && !(smallScreen$ | async)"
       mat-button
       routerLink="../"
     >
@@ -25,7 +25,7 @@
       <span>Back</span>
     </button>
     <button
-      *ngIf="!isChild && !(smallScreen$ | async)"
+      *ngIf="hasChild && !(smallScreen$ | async)"
       mat-button
       color="primary"
       [routerLink]="childLevelLink"

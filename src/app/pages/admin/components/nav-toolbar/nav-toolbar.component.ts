@@ -28,12 +28,13 @@ export class NavToolbarComponent {
   @Input() headerText: string = '';
   @Input() buttonText: string = '';
   @Input() childLevelLink: string = '';
+  @Input() allowBack: boolean = false;
   smallScreen$: Observable<boolean> = this.breakpointService.isSmallScreen();
-  isChild: boolean = false;
+  hasChild: boolean = false;
 
   constructor(private breakpointService: BreakpointService) {}
 
   ngOnChanges() {
-    this.isChild = this.childLevelLink === '';
+    this.hasChild = this.childLevelLink !== '';
   }
 }
