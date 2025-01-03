@@ -1,3 +1,10 @@
 <app-banner [title]="title"></app-banner>
 <app-section-header [heading]="heading"></app-section-header>
-<app-files [projectId]="projectId"></app-files>
+<div class="container pb-3">
+  <mat-progress-bar
+    *ngIf="loading$ | async"
+    mode="indeterminate"
+    class="mb-3"
+  ></mat-progress-bar>
+  <app-files [projectId]="projectId"></app-files>
+</div>

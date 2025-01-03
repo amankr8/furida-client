@@ -1,14 +1,7 @@
-<div class="container mb-3">
-  <mat-progress-bar
-    *ngIf="loading$ | async"
-    mode="indeterminate"
-    class="mb-3"
-  ></mat-progress-bar>
-  <div class="row g-3">
-    <div class="col-12 col-md-6 col-xl-4" *ngFor="let doc of docs$ | async">
-      <div class="d-flex justify-content-center align-items-center">
-        <app-document-card [document]="doc"></app-document-card>
-      </div>
+<div class="row g-3">
+  <div class="col-12 col-md-6 col-xl-4" *ngFor="let doc of docs$ | async">
+    <div class="d-flex justify-content-center align-items-center">
+      <app-document-card [document]="doc"></app-document-card>
     </div>
   </div>
 </div>
