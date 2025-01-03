@@ -2,11 +2,11 @@ import { Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { loadAuthUser } from '../../state/auth/auth.actions';
 import { selectAuthLoaded } from '../../state/auth/auth.selectors';
 import { NavbarV2Component } from '../components/navbar-v2/navbar-v2.component';
-import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { AdminSideMenuComponent } from './components/admin-side-menu/admin-side-menu.component';
 import { BreakpointService } from '../../service/breakpoint/breakpoint.service';
 
@@ -24,14 +24,18 @@ import { BreakpointService } from '../../service/breakpoint/breakpoint.service';
   styleUrl: './admin.component.scss',
 })
 export class AdminComponent {
-  @ViewChild('sideDrawer') sideDrawer!: MatDrawer;
+  @ViewChild('sidenav') sidenav!: MatSidenav;
   authLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
-  smallScreen$: Observable<boolean> = this.breakpointService.isSmallScreen();
+  smallScreen: boolean = false;
 
   constructor(
     private store: Store,
     private breakpointService: BreakpointService
-  ) {}
+  ) {
+    this.breakpointService.isSmallScreen().subscribe((small) => {
+      this.smallScreen = small;
+    });
+  }
 
   ngOnInit() {
     this.authLoaded$.subscribe((loaded) => {
@@ -40,6 +44,6 @@ export class AdminComponent {
   }
 
   toggleDrawer() {
-    this.sideDrawer.toggle();
+    this.sidenav.toggle();
   }
 }

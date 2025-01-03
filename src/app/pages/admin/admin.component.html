@@ -1,9 +1,13 @@
-<mat-drawer-container class="min-vh-100">
-  <mat-drawer #sideDrawer class="admin-sidenav" mode="side" opened
+<mat-sidenav-container class="min-vh-100">
+  <mat-sidenav
+    #sidenav
+    class="admin-sidenav"
+    [mode]="smallScreen ? 'over' : 'side'"
+    opened
     ><app-admin-side-menu (toggleSidenav)="toggleDrawer()"></app-admin-side-menu
-  ></mat-drawer>
-  <mat-drawer-content>
+  ></mat-sidenav>
+  <mat-sidenav-content>
     <app-navbar-v2 (toggleSidenav)="toggleDrawer()"></app-navbar-v2>
     <router-outlet></router-outlet
-  ></mat-drawer-content>
-</mat-drawer-container>
+  ></mat-sidenav-content>
+</mat-sidenav-container>
