@@ -9,6 +9,7 @@ import { NavbarV2Component } from '../components/navbar-v2/navbar-v2.component';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { AdminSideMenuComponent } from './components/admin-side-menu/admin-side-menu.component';
 import { BreakpointService } from '../../service/breakpoint/breakpoint.service';
+import { toggleBoolSetting1 } from '../../state/config/config.actions';
 
 @Component({
   selector: 'app-admin',
@@ -34,6 +35,9 @@ export class AdminComponent {
   ) {
     this.breakpointService.isSmallScreen().subscribe((small) => {
       this.smallScreen = small;
+      if (small)
+        this.store.dispatch(toggleBoolSetting1({ boolSetting1: false }));
+      else this.store.dispatch(toggleBoolSetting1({ boolSetting1: true }));
     });
   }
 
