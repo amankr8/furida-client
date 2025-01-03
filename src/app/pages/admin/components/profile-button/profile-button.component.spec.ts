@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminNavbarV2Component } from './admin-navbar-v2.component';
+import { ProfileButtonComponent } from './profile-button.component';
 
-describe('AdminNavbarV2Component', () => {
-  let component: AdminNavbarV2Component;
-  let fixture: ComponentFixture<AdminNavbarV2Component>;
+describe('ProfileButtonComponent', () => {
+  let component: ProfileButtonComponent;
+  let fixture: ComponentFixture<ProfileButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdminNavbarV2Component]
+      imports: [ProfileButtonComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(AdminNavbarV2Component);
+    fixture = TestBed.createComponent(ProfileButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
