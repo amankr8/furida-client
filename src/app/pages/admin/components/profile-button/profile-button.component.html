@@ -1,0 +1,17 @@
+<button mat-icon-button class="link-button" [matMenuTriggerFor]="profileMenu">
+  <mat-icon fontIcon="account_circle"></mat-icon>
+</button>
+<mat-menu #profileMenu="matMenu" xPosition="before">
+  <div mat-menu-item class="py-2">
+    <mat-icon fontIcon="person"></mat-icon>
+    <span class="d-flex flex-column">
+      <p class="profile-text">{{ authUsername$ | async }}</p>
+      <p class="profile-text text-muted">
+        {{ authEmail$ | async }}
+      </p>
+    </span>
+  </div>
+  <button mat-menu-item (click)="logout()">
+    <mat-icon fontIcon="logout"></mat-icon><span>Logout</span>
+  </button>
+</mat-menu>
