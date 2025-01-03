@@ -3,14 +3,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { combineLatest, map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { BrandLogoV2Component } from '../brand-logo-v2/brand-logo-v2.component';
 import { BreakpointService } from '../../../service/breakpoint/breakpoint.service';
 import { NavbarButtonsComponent } from '../navbar-buttons/navbar-buttons.component';
 import { AdminRouteService } from '../../../service/admin-route/admin-route.service';
-import { ProfileButtonComponent } from '../../admin/components/profile-button/profile-button.component';
+import { LogoutButtonComponent } from '../../admin/components/logout-button/logout-button.component';
 
 @Component({
   selector: 'app-navbar-v2',
@@ -24,7 +24,7 @@ import { ProfileButtonComponent } from '../../admin/components/profile-button/pr
     MatMenuModule,
     BrandLogoV2Component,
     NavbarButtonsComponent,
-    ProfileButtonComponent,
+    LogoutButtonComponent,
   ],
   templateUrl: './navbar-v2.component.html',
   styleUrl: './navbar-v2.component.scss',

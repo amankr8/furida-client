@@ -15,8 +15,7 @@
         *ngIf="!(smallScreen$ | async) && !isAdminRoute"
         class="h-100"
       ></app-navbar-buttons>
-      <app-profile-button *ngIf="isAdminRoute" class="link-button">
-      </app-profile-button>
+      <app-logout-button></app-logout-button>
     </div>
   </div>
 </mat-toolbar>
