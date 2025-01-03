@@ -10,5 +10,5 @@ import { NavToolbarComponent } from '../components/nav-toolbar/nav-toolbar.compo
   styleUrl: './config.component.scss',
 })
 export class ConfigComponent {
-  headerText: string = 'Configuration';
+  headerText: string = 'Settings';
 }
