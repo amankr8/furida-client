@@ -1,2 +1,9 @@
-<app-navbar-v2></app-navbar-v2>
-<router-outlet></router-outlet>
+<mat-drawer-container class="min-vh-100">
+  <mat-drawer #sideDrawer class="admin-sidenav" mode="side" opened
+    ><app-admin-side-menu></app-admin-side-menu
+  ></mat-drawer>
+  <mat-drawer-content>
+    <app-navbar-v2 (toggleSidenav)="toggleDrawer()"></app-navbar-v2>
+    <router-outlet></router-outlet
+  ></mat-drawer-content>
+</mat-drawer-container>
