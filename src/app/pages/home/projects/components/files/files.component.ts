@@ -14,6 +14,7 @@ import {
   selectDocumentLoading,
 } from '../../../../../state/document/document.selectors';
 import { MatIconModule } from '@angular/material/icon';
+import { DocumentCardComponent } from '../../../../components/document-card/document-card.component';
 
 @Component({
   selector: 'app-files',
@@ -24,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     MatButtonModule,
     MatIconModule,
+    DocumentCardComponent,
   ],
   templateUrl: './files.component.html',
   styleUrl: './files.component.scss',

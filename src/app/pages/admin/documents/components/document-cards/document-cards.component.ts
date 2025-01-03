@@ -4,25 +4,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Document } from '../../../../../interface/document';
-import { MenuButtonComponent } from '../menu-button/menu-button.component';
 import { map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { selectDocumentLoading } from '../../../../../state/document/document.selectors';
+import { selectProjectById } from '../../../../../state/project/project.selectors';
 import {
-  selectDocuments,
-  selectDocumentLoaded,
-  selectDocumentLoading,
-} from '../../../../../state/document/document.selectors';
-import {
-  selectProjectLoaded,
-  selectProjectById,
-  selectProjects,
-} from '../../../../../state/project/project.selectors';
-import {
-  loadDocuments,
   openDocDeleteDialog,
   openDocEditDialog,
 } from '../../../../../state/document/document.actions';
-import { loadProjects } from '../../../../../state/project/project.actions';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 
@@ -34,7 +23,6 @@ import { MatSelectModule } from '@angular/material/select';
     MatCardModule,
     CommonModule,
     MatProgressBarModule,
-    MenuButtonComponent,
     MatIconModule,
     MatSelectModule,
   ],
