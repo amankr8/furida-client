@@ -5,15 +5,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { Document } from '../../../shared/interface/document';
 import { Store } from '@ngrx/store';
-import {
-  openDocDeleteDialog,
-  openDocEditDialog,
-} from '../../../state/document/document.actions';
 import { Observable, map } from 'rxjs';
 import { selectProjectById } from '../../../state/project/project.selectors';
 import { selectDocumentLoading } from '../../../state/document/document.selectors';
-import { Router } from '@angular/router';
 import { DocMenuItemComponent } from '../doc-menu-item/doc-menu-item.component';
+import { AdminRouteService } from '../../../service/admin-route/admin-route.service';
 
 @Component({
   selector: 'app-document-card',
@@ -31,13 +27,12 @@ import { DocMenuItemComponent } from '../doc-menu-item/doc-menu-item.component';
 export class DocumentCardComponent {
   @Input() document!: Document;
   loading$: Observable<boolean> = this.store.select(selectDocumentLoading);
-  isAdminRoute: boolean = false;
+  isAdminRoute: boolean = this.adminRouteService.isAdminRoute();
 
-  constructor(private store: Store, private router: Router) {}
-
-  ngOnInit() {
-    this.isAdminRoute = this.router.url.startsWith('/admin');
-  }
+  constructor(
+    private store: Store,
+    private adminRouteService: AdminRouteService
+  ) {}
 
   getProjectNameById(id: number): Observable<String> {
     return this.store

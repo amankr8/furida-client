@@ -1,0 +1,22 @@
+<button mat-button class="link-button h-100">
+  <p class="link-name mb-0" routerLink="/about">About</p>
+</button>
+<button mat-button class="link-button h-100" [matMenuTriggerFor]="projectMenu">
+  Projects
+</button>
+<mat-menu #projectMenu="matMenu">
+  <button
+    mat-menu-item
+    *ngFor="let project of projects$ | async"
+    [routerLink]="['/projects', project.id]"
+  >
+    {{ project.name }}
+  </button>
+</mat-menu>
+<button mat-button class="link-button h-100">
+  <p class="link-name mb-0" routerLink="/contact">Contact</p>
+</button>
+<button mat-button class="link-button h-100">
+  <p class="link-name mb-0" routerLink="/cctv">CCTV</p>
+</button>
+<app-admin-button class="link-button"></app-admin-button>

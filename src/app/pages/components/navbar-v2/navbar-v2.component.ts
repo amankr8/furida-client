@@ -3,15 +3,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { Project } from '../../../../shared/interface/project';
-import { selectProjects } from '../../../../state/project/project.selectors';
 import { MatMenuModule } from '@angular/material/menu';
-import { BrandLogoV2Component } from '../../../components/brand-logo-v2/brand-logo-v2.component';
-import { AdminButtonComponent } from '../admin-button/admin-button.component';
-import { BreakpointService } from '../../../../service/breakpoint/breakpoint.service';
+import { BrandLogoV2Component } from '../brand-logo-v2/brand-logo-v2.component';
+import { BreakpointService } from '../../../service/breakpoint/breakpoint.service';
+import { NavbarButtonsComponent } from '../navbar-buttons/navbar-buttons.component';
 
 @Component({
   selector: 'app-navbar-v2',
@@ -24,20 +21,16 @@ import { BreakpointService } from '../../../../service/breakpoint/breakpoint.ser
     CommonModule,
     MatMenuModule,
     BrandLogoV2Component,
-    AdminButtonComponent,
+    NavbarButtonsComponent,
   ],
   templateUrl: './navbar-v2.component.html',
   styleUrl: './navbar-v2.component.scss',
 })
 export class NavbarV2Component {
   @Output() toggleSidenav = new EventEmitter<void>();
-  projects$: Observable<Project[]> = this.store.select(selectProjects);
   smallScreen$: Observable<boolean> = this.breakpointService.isSmallScreen();
 
-  constructor(
-    private store: Store,
-    private breakpointService: BreakpointService
-  ) {}
+  constructor(private breakpointService: BreakpointService) {}
 
   toggleMenu() {
     this.toggleSidenav.emit();

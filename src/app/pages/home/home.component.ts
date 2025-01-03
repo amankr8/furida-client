@@ -4,7 +4,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { RouterOutlet } from '@angular/router';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
-import { NavbarV2Component } from './components/navbar-v2/navbar-v2.component';
+import { NavbarV2Component } from '../components/navbar-v2/navbar-v2.component';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
