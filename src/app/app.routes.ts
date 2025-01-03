@@ -53,8 +53,8 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: AdminLandingComponent,
-        canActivate: [authGuard],
+        pathMatch: 'full',
+        redirectTo: 'projects',
       },
       {
         path: 'projects',
@@ -122,7 +122,7 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'messages',
+        path: 'inbox',
         children: [
           {
             path: '',
@@ -137,7 +137,7 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'config',
+        path: 'settings',
         children: [
           {
             path: '',
