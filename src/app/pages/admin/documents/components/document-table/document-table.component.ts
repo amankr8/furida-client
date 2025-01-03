@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { selectDocumentLoading } from '../../../../../state/document/document.selectors';
-import { selectProjectById } from '../../../../../state/project/project.selectors';
 import {
   openDocDeleteDialog,
   openDocEditDialog,
@@ -32,12 +31,6 @@ export class DocumentTableComponent {
   ];
 
   constructor(private store: Store) {}
-
-  getProjectNameById(id: number): Observable<String> {
-    return this.store
-      .select(selectProjectById(id))
-      .pipe(map((project) => (project ? project.name : 'Unknown')));
-  }
 
   updateDoc(id: number) {
     this.store.dispatch(openDocEditDialog({ documentId: id }));
