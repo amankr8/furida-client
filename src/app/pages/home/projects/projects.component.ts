@@ -13,6 +13,7 @@ import {
   selectDocumentLoaded,
   selectDocumentLoading,
 } from '../../../state/document/document.selectors';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-main-projects',
@@ -23,6 +24,7 @@ import {
     BannerComponent,
     SectionHeaderComponent,
     MatProgressBarModule,
+    CommonModule,
   ],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
