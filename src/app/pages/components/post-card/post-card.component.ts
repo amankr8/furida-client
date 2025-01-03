@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import { selectPostLoading } from '../../../state/post/post.selectors';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { AdminRouteService } from '../../../service/admin-route/admin-route.service';
 
 @Component({
   selector: 'app-post-card',
@@ -24,13 +25,12 @@ import { Router } from '@angular/router';
 export class PostCardComponent {
   @Input() post!: Post;
   loading$: Observable<boolean> = this.store.select(selectPostLoading);
-  isAdminRoute: boolean = false;
+  isAdminRoute: boolean = this.adminRouteService.isAdminRoute();
 
-  constructor(private store: Store, private router: Router) {}
-
-  ngOnInit() {
-    this.isAdminRoute = this.router.url.startsWith('/admin');
-  }
+  constructor(
+    private store: Store,
+    private adminRouteService: AdminRouteService
+  ) {}
 
   viewPost() {
     this.store.dispatch(openViewDialog({ postId: this.post.id }));
