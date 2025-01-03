@@ -9,8 +9,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Observable, map } from 'rxjs';
 import { selectConfig } from '../../../../../state/config/config.selectors';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { BreakpointService } from '../../../../../service/breakpoint/breakpoint.service';
 
 @Component({
   selector: 'app-config-settings',
@@ -26,20 +26,12 @@ export class ConfigSettingsComponent {
   isBoolSetting2$: Observable<boolean> = this.store
     .select(selectConfig)
     .pipe(map((config) => config.boolSetting2));
-  isMobile: boolean = false;
+  isHandset$: Observable<boolean> = this.breakpointService.isHandset();
 
   constructor(
     private store: Store,
-    private breakpointObserver: BreakpointObserver
+    private breakpointService: BreakpointService
   ) {}
-
-  ngOnInit() {
-    this.breakpointObserver
-      .observe([Breakpoints.Handset])
-      .subscribe((result) => {
-        this.isMobile = result.matches;
-      });
-  }
 
   toggleHomeHeader(checked: boolean) {
     this.store.dispatch(toggleBoolSetting1({ boolSetting1: checked }));

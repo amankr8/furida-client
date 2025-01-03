@@ -8,11 +8,11 @@ import { NavbarV2Component } from './components/navbar-v2/navbar-v2.component';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { loadProjects } from '../../state/project/project.actions';
 import { selectProjectLoaded } from '../../state/project/project.selectors';
 import { loadAuthUser } from '../../state/auth/auth.actions';
 import { selectAuthLoaded } from '../../state/auth/auth.selectors';
+import { BreakpointService } from '../../service/breakpoint/breakpoint.service';
 
 @Component({
   selector: 'app-home',
@@ -33,19 +33,14 @@ export class HomeComponent {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   authLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
   projectLoaded$: Observable<boolean> = this.store.select(selectProjectLoaded);
-  smallScreen: boolean = false;
+  smallScreen$: Observable<boolean> = this.breakpointService.isSmallScreen();
 
   constructor(
     private store: Store,
-    private breakpointObserver: BreakpointObserver
+    private breakpointService: BreakpointService
   ) {}
 
   ngOnInit() {
-    this.breakpointObserver
-      .observe([Breakpoints.Small, Breakpoints.XSmall])
-      .subscribe((result) => {
-        this.smallScreen = result.matches;
-      });
     this.projectLoaded$.subscribe((loaded) => {
       if (!loaded) this.store.dispatch(loadProjects());
     });

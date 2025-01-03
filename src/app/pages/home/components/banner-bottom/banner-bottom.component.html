@@ -19,7 +19,7 @@
       </div>
 
       <!-- Divider for small screens -->
-      <mat-divider *ngIf="smallScreen" class="my-3"></mat-divider>
+      <mat-divider *ngIf="smallScreen$ | async" class="my-3"></mat-divider>
 
       <!-- Column 2 -->
       <div class="col-12 col-lg-4 mt-4 mt-lg-0">

@@ -4,10 +4,10 @@
     <div class="settings-container d-flex flex-column gap-4">
       <mat-slide-toggle
         matTooltip="Not supported on mobile"
-        [matTooltipDisabled]="!isMobile"
+        [matTooltipDisabled]="!(isHandset$ | async)"
         [checked]="isBoolSetting1$ | async"
         (change)="toggleHomeHeader($event.checked)"
-        [disabled]="isMobile"
+        [disabled]="isHandset$ | async"
         >Table View (Beta)</mat-slide-toggle
       >
       <mat-slide-toggle

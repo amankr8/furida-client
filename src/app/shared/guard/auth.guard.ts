@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CanActivateFn, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { AuthService } from '../service/auth/auth.service';
+import { AuthService } from '../../service/auth/auth.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const jwtHelper = inject(JwtHelperService);

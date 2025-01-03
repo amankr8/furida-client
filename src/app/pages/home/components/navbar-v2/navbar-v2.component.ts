@@ -6,12 +6,12 @@ import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Project } from '../../../../shared/interface/project';
 import { selectProjects } from '../../../../state/project/project.selectors';
 import { MatMenuModule } from '@angular/material/menu';
 import { BrandLogoV2Component } from '../../../components/brand-logo-v2/brand-logo-v2.component';
 import { AdminButtonComponent } from '../admin-button/admin-button.component';
+import { BreakpointService } from '../../../../service/breakpoint/breakpoint.service';
 
 @Component({
   selector: 'app-navbar-v2',
@@ -32,20 +32,12 @@ import { AdminButtonComponent } from '../admin-button/admin-button.component';
 export class NavbarV2Component {
   @Output() toggleSidenav = new EventEmitter<void>();
   projects$: Observable<Project[]> = this.store.select(selectProjects);
-  smallScreen: boolean = false;
+  smallScreen$: Observable<boolean> = this.breakpointService.isSmallScreen();
 
   constructor(
     private store: Store,
-    private breakpointObserver: BreakpointObserver
+    private breakpointService: BreakpointService
   ) {}
-
-  ngOnInit() {
-    this.breakpointObserver
-      .observe([Breakpoints.Small, Breakpoints.XSmall])
-      .subscribe((result) => {
-        this.smallScreen = result.matches;
-      });
-  }
 
   toggleMenu() {
     this.toggleSidenav.emit();

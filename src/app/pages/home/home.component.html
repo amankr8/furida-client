@@ -1,5 +1,9 @@
 <mat-sidenav-container hasBackdrop="true">
-  <mat-sidenav *ngIf="smallScreen" class="main-sidenav" #sidenav mode="over"
+  <mat-sidenav
+    *ngIf="smallScreen$ | async"
+    class="main-sidenav"
+    #sidenav
+    mode="over"
     ><app-side-menu (toggleSidenav)="toggleSidenav()"></app-side-menu
   ></mat-sidenav>
   <mat-sidenav-content>
