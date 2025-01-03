@@ -14,8 +14,8 @@
       <app-doc-menu-item [docId]="document.id"></app-doc-menu-item>
     </div>
   </div>
-  <mat-card-content class="single-line-truncate">
-    <p>{{ document.desc }}</p>
+  <mat-card-content>
+    <p class="single-line-truncate">{{ document.desc }}</p>
   </mat-card-content>
   <mat-card-actions>
     <a mat-icon-button [href]="document.docUrl" target="_blank"

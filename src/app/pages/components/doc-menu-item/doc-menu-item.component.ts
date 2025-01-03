@@ -7,16 +7,20 @@ import {
   openDocEditDialog,
   openDocDeleteDialog,
 } from '../../../state/document/document.actions';
+import { selectDocumentLoading } from '../../../state/document/document.selectors';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-doc-menu-item',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatMenuModule],
+  imports: [MatButtonModule, MatIconModule, MatMenuModule, CommonModule],
   templateUrl: './doc-menu-item.component.html',
   styleUrl: './doc-menu-item.component.scss',
 })
 export class DocMenuItemComponent {
   @Input() docId!: number;
+  loading$: Observable<boolean> = this.store.select(selectDocumentLoading);
   isAdminRoute: boolean = false;
 
   constructor(private store: Store) {}
