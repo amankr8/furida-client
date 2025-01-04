@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { CreatePostComponent } from './pages/admin/posts/create-post/create-post.component';
-import { EditPostComponent } from './pages/admin/posts/edit-post/edit-post.component';
+import { EditPostComponent } from './pages/admin/posts/components/edit-post/edit-post.component';
 import { PostsComponent } from './pages/admin/posts/posts.component';
 import { SignupComponent } from './pages/admin/users/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
