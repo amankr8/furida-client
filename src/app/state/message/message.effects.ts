@@ -102,7 +102,7 @@ export class MessageEffects {
       this.actions$.pipe(
         ofType(toggleArchiveSuccess),
         tap(({ message }) => {
-          const snackMsg = message.read
+          const snackMsg = message.archive
             ? 'Message archived!'
             : 'Message unarchived!';
           this.snackBar.open(snackMsg, 'Dismiss', {
