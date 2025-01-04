@@ -14,11 +14,18 @@ import { selectPostLoading } from '../../../state/post/post.selectors';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AdminRouteService } from '../../../service/admin-route/admin-route.service';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-post-card',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIconModule, CommonModule],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    CommonModule,
+    MatDividerModule,
+  ],
   templateUrl: './post-card.component.html',
   styleUrl: './post-card.component.scss',
 })

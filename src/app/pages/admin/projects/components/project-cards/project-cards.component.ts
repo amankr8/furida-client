@@ -15,6 +15,7 @@ import {
   selectProjectLoading,
 } from '../../../../../state/project/project.selectors';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-project-cards',
@@ -25,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     MatButtonModule,
     MatIconModule,
+    MatDividerModule,
   ],
   templateUrl: './project-cards.component.html',
   styleUrl: './project-cards.component.scss',

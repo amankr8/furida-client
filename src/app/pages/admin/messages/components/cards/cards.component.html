@@ -13,23 +13,24 @@
           </mat-card-title>
           <mat-card-subtitle>{{ message.email }}</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content class="truncate-text card-content-h">
-          <p>{{ message.msg }}</p>
+        <mat-card-content class="card-content-h mb-3">
+          <p class="single-line-truncate">{{ message.msg }}</p>
         </mat-card-content>
-        <mat-card-actions class="btn-group">
+        <mat-divider></mat-divider>
+        <mat-card-actions class="gap-2">
           <button
-            mat-icon-button
+            mat-button
             (click)="archiveMessage(message.id)"
             [disabled]="loading$ | async"
           >
-            <mat-icon>{{ archiveButtonText }}</mat-icon>
+            {{ archiveButtonText }}
           </button>
           <button
-            mat-icon-button
+            mat-button
             (click)="deleteMessage(message.id)"
             [disabled]="loading$ | async"
           >
-            <mat-icon>delete</mat-icon>
+            DELETE
           </button>
         </mat-card-actions>
       </mat-card>
