@@ -20,6 +20,8 @@ import { Document } from '../../../shared/interface/document';
 import { loadDocuments } from '../../../state/document/document.actions';
 import { DocumentTableComponent } from './components/document-table/document-table.component';
 import { selectConfig } from '../../../state/config/config.selectors';
+import { MatTabsModule } from '@angular/material/tabs';
+import { DocFormComponent } from './components/doc-form/doc-form.component';
 
 @Component({
   selector: 'app-admin-documents',
@@ -31,6 +33,8 @@ import { selectConfig } from '../../../state/config/config.selectors';
     MatProgressBarModule,
     MatSelectModule,
     DocumentTableComponent,
+    MatTabsModule,
+    DocFormComponent,
   ],
   templateUrl: './documents.component.html',
   styleUrl: './documents.component.scss',
