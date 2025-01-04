@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
+import { Component, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { Project } from '../../../../../shared/interface/project';
 import {
@@ -14,11 +14,18 @@ import {
 } from '../../../../../state/project/project.actions';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-project-table',
   standalone: true,
-  imports: [MatTableModule, CommonModule, MatIconModule, MatButtonModule],
+  imports: [
+    MatTableModule,
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+    MatPaginatorModule,
+  ],
   templateUrl: './project-table.component.html',
   styleUrl: './project-table.component.scss',
 })
@@ -26,8 +33,18 @@ export class ProjectTableComponent {
   projects$: Observable<Project[]> = this.store.select(selectProjects);
   loading$: Observable<boolean> = this.store.select(selectProjectLoading);
   displayedColumns: string[] = ['name', 'desc', 'address', 'edit', 'delete'];
+  dataSource = new MatTableDataSource<Project>([]);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private store: Store) {}
+
+  ngOnInit() {
+    this.projects$.subscribe((projects) => {
+      this.dataSource = new MatTableDataSource<Project>(projects);
+      this.dataSource.paginator = this.paginator;
+    });
+  }
 
   updateProject(id: number) {
     this.store.dispatch(openProjectEditDialog({ projectId: id }));

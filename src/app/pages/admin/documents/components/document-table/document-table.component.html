@@ -1,5 +1,5 @@
-<div class="px-3">
-  <table mat-table [dataSource]="documents$" class="mat-elevation-z1">
+<div class="mx-3 mat-elevation-z1">
+  <table mat-table [dataSource]="dataSource">
     <div matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>
         <div class="d-flex justify-content-center">Name</div>
@@ -64,4 +64,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+
+  <mat-paginator [pageSize]="5" showFirstLastButtons></mat-paginator>
 </div>
