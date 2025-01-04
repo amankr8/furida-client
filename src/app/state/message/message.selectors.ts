@@ -6,7 +6,7 @@ export const selectMessagesState =
 
 export const selectMessages = (archived: boolean) =>
   createSelector(selectMessagesState, (state) =>
-    state.messages.filter((msg) => msg.read === archived)
+    state.messages.filter((msg) => msg.archive === archived)
   );
 
 export const selectMessageLoaded = createSelector(
