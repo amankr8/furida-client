@@ -11,10 +11,11 @@
     </mat-card-title>
     <mat-card-subtitle>{{ post.date | date }}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content class="card-content-h">
+  <mat-card-content class="card-content-h mb-3">
     <p class="truncate-text">{{ post.content }}</p>
   </mat-card-content>
-  <mat-card-actions>
+  <mat-divider></mat-divider>
+  <mat-card-actions class="gap-2">
     <button *ngIf="!isAdminRoute" mat-button (click)="viewPost()">
       <div class="d-flex justify-content-between align-items-center gap-2">
         <mat-icon>open_in_new</mat-icon>
@@ -23,19 +24,19 @@
     </button>
     <button
       *ngIf="isAdminRoute"
-      mat-icon-button
+      mat-button
       (click)="updatePost()"
       [disabled]="loading$ | async"
     >
-      <mat-icon>edit</mat-icon>
+      EDIT
     </button>
     <button
       *ngIf="isAdminRoute"
-      mat-icon-button
+      mat-button
       (click)="deletePost()"
       [disabled]="loading$ | async"
     >
-      <mat-icon>delete</mat-icon>
+      DELETE
     </button>
   </mat-card-actions>
 </mat-card>

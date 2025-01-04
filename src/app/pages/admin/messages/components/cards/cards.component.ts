@@ -17,6 +17,7 @@ import {
   selectMessages,
 } from '../../../../../state/message/message.selectors';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-message-cards',
@@ -27,13 +28,14 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     CommonModule,
     MatIconModule,
+    MatDividerModule,
   ],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.scss',
 })
 export class CardsComponent {
   @Input() archive: boolean = false;
-  archiveButtonText: string = 'archive';
+  archiveButtonText: string = 'ARCHIVE';
   messages$: Observable<Message[]> = this.store.select(
     selectMessages(this.archive)
   );
@@ -50,7 +52,7 @@ export class CardsComponent {
 
   ngOnChanges() {
     this.messages$ = this.store.select(selectMessages(this.archive));
-    this.archiveButtonText = this.archive ? 'unarchive' : 'archive';
+    this.archiveButtonText = this.archive ? 'UNARCHIVE' : 'ARCHIVE';
   }
 
   archiveMessage(id: number) {

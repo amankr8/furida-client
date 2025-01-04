@@ -7,23 +7,24 @@
         </mat-card-title>
         <mat-card-subtitle>{{ project.address }}</mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content class="truncate-text card-content-h">
-        <p>{{ project.desc }}</p>
+      <mat-card-content class="card-content-h mb-3">
+        <p class="truncate-text">{{ project.desc }}</p>
       </mat-card-content>
-      <mat-card-actions class="btn-group">
+      <mat-divider></mat-divider>
+      <mat-card-actions class="gap-2">
         <button
-          mat-icon-button
+          mat-button
           (click)="updateProject(project.id)"
           [disabled]="loading$ | async"
         >
-          <mat-icon>edit</mat-icon>
+          EDIT
         </button>
         <button
-          mat-icon-button
+          mat-button
           (click)="deleteProject(project.id)"
           [disabled]="loading$ | async"
         >
-          <mat-icon>delete</mat-icon>
+          DELETE
         </button>
       </mat-card-actions>
     </mat-card>
