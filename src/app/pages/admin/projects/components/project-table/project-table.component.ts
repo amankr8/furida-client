@@ -41,9 +41,12 @@ export class ProjectTableComponent {
 
   ngOnInit() {
     this.projects$.subscribe((projects) => {
-      this.dataSource = new MatTableDataSource<Project>(projects);
-      this.dataSource.paginator = this.paginator;
+      this.dataSource.data = projects;
     });
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   updateProject(id: number) {

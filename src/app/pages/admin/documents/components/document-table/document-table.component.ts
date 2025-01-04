@@ -44,9 +44,12 @@ export class DocumentTableComponent {
 
   ngOnInit() {
     this.documents$.subscribe((documents) => {
-      this.dataSource = new MatTableDataSource<Document>(documents);
-      this.dataSource.paginator = this.paginator;
+      this.dataSource.data = documents;
     });
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   updateDoc(id: number) {
