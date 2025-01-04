@@ -12,6 +12,8 @@ import { ProjectTableComponent } from './components/project-table/project-table.
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { selectConfig } from '../../../state/config/config.selectors';
 import { ProjectCardsComponent } from './components/project-cards/project-cards.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ProjectFormComponent } from './components/project-form/project-form.component';
 
 @Component({
   selector: 'app-projects',
@@ -22,6 +24,8 @@ import { ProjectCardsComponent } from './components/project-cards/project-cards.
     ProjectTableComponent,
     MatProgressBarModule,
     ProjectCardsComponent,
+    MatTabsModule,
+    ProjectFormComponent,
   ],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',

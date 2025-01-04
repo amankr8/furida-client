@@ -12,14 +12,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
-import { updatePass } from '../../../../state/auth/auth.actions';
+import { updatePass } from '../../../../../state/auth/auth.actions';
 import { filter, first, Observable } from 'rxjs';
 import {
   selectAuthLoading,
   selectAuthStatus,
-} from '../../../../state/auth/auth.selectors';
+} from '../../../../../state/auth/auth.selectors';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { generalStatus } from '../../../../shared/constants/global-constants';
+import { generalStatus } from '../../../../../shared/constants/global-constants';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 

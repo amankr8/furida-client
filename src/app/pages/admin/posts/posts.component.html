@@ -3,11 +3,18 @@
   [buttonText]="buttonText"
   [childLevelLink]="childLevelLink"
 ></app-nav-toolbar>
-<div class="container pb-3">
-  <mat-progress-bar
-    *ngIf="loading$ | async"
-    mode="indeterminate"
-    class="mb-3"
-  ></mat-progress-bar>
-  <app-post-cards></app-post-cards>
-</div>
+<mat-tab-group>
+  <mat-tab label="Posts">
+    <div class="container py-3">
+      <mat-progress-bar
+        *ngIf="loading$ | async"
+        mode="indeterminate"
+        class="mb-3"
+      ></mat-progress-bar>
+      <app-post-cards></app-post-cards></div
+  ></mat-tab>
+  <mat-tab label="Add New Post">
+    <div class="container py-3">
+      <app-post-form></app-post-form></div
+  ></mat-tab>
+</mat-tab-group>

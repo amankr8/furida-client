@@ -10,6 +10,8 @@ import {
   selectPostLoading,
 } from '../../../state/post/post.selectors';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { PostFormComponent } from './components/post-form/post-form.component';
 
 @Component({
   selector: 'app-posts',
@@ -19,6 +21,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     CommonModule,
     NavToolbarComponent,
     MatProgressBarModule,
+    MatTabsModule,
+    PostFormComponent,
   ],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
