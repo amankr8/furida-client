@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Post } from '../../../../../shared/interface/post';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { first, map, Observable, tap } from 'rxjs';
 import {
   selectPostLoaded,
   selectPostLoading,
@@ -35,14 +35,14 @@ import { PostCardComponent } from '../../../../components/post-card/post-card.co
 })
 export class CardsComponent {
   posts$: Observable<Post[]> = this.store.select(selectPosts);
-  postLoaded$: Observable<boolean> = this.store.select(selectPostLoaded);
   loading$: Observable<boolean> = this.store.select(selectPostLoading);
+  sortedPosts$: Observable<Post[]> = this.posts$.pipe(
+    map((posts) =>
+      [...posts].sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      )
+    )
+  );
 
   constructor(private store: Store) {}
-
-  ngOnInit() {
-    this.postLoaded$.subscribe((loaded) => {
-      if (!loaded) this.store.dispatch(loadPosts());
-    });
-  }
 }
