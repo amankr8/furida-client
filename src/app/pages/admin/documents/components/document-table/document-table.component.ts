@@ -42,7 +42,7 @@ export class DocumentTableComponent {
 
   constructor(private store: Store) {}
 
-  ngOnInit() {
+  ngOnChanges() {
     this.documents$.subscribe((documents) => {
       this.dataSource.data = documents;
     });
