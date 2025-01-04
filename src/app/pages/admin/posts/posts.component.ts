@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CardsComponent } from './components/cards/cards.component';
+import { PostCardsComponent } from './components/post-cards/post-cards.component';
 import { CommonModule } from '@angular/common';
 import { NavToolbarComponent } from '../components/nav-toolbar/nav-toolbar.component';
 import { Store } from '@ngrx/store';
@@ -15,7 +15,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   selector: 'app-posts',
   standalone: true,
   imports: [
-    CardsComponent,
+    PostCardsComponent,
     CommonModule,
     NavToolbarComponent,
     MatProgressBarModule,
