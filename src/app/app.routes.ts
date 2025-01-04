@@ -1,24 +1,17 @@
 import { Routes } from '@angular/router';
-import { CreatePostComponent } from './pages/admin/posts/create-post/create-post.component';
-import { EditPostComponent } from './pages/admin/posts/components/edit-post/edit-post.component';
 import { PostsComponent } from './pages/admin/posts/posts.component';
-import { SignupComponent } from './pages/admin/users/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { authGuard } from './shared/guard/auth.guard';
 import { AdminComponent } from './pages/admin/admin.component';
 import { HomeLandingComponent } from './pages/home/landing/home-landing.component';
 import { UsersComponent } from './pages/admin/users/users.component';
 import { ProjectsComponent } from './pages/admin/projects/projects.component';
-import { AddProjectComponent } from './pages/admin/projects/add-project/add-project.component';
 import { MainProjectsComponent } from './pages/home/projects/projects.component';
 import { AdminDocumentsComponent } from './pages/admin/documents/documents.component';
-import { AddDocumentComponent } from './pages/admin/documents/add-document/add-document.component';
 import { AboutComponent } from './pages/home/about/about.component';
 import { ContactComponent } from './pages/home/contact/contact.component';
 import { MessagesComponent } from './pages/admin/messages/messages.component';
-import { ReadMessagesComponent } from './pages/admin/messages/read-messages/read-messages.component';
 import { HomeComponent } from './pages/home/home.component';
-import { AdminLandingComponent } from './pages/admin/landing/admin-landing.component';
 import { ConfigComponent } from './pages/admin/config/config.component';
 
 export const routes: Routes = [
@@ -64,11 +57,6 @@ export const routes: Routes = [
             component: ProjectsComponent,
             canActivate: [authGuard],
           },
-          {
-            path: 'add-project',
-            component: AddProjectComponent,
-            canActivate: [authGuard],
-          },
         ],
       },
       {
@@ -77,16 +65,6 @@ export const routes: Routes = [
           {
             path: '',
             component: PostsComponent,
-            canActivate: [authGuard],
-          },
-          {
-            path: 'create-post',
-            component: CreatePostComponent,
-            canActivate: [authGuard],
-          },
-          {
-            path: 'edit-post',
-            component: EditPostComponent,
             canActivate: [authGuard],
           },
         ],
@@ -99,11 +77,6 @@ export const routes: Routes = [
             component: AdminDocumentsComponent,
             canActivate: [authGuard],
           },
-          {
-            path: 'add-document',
-            component: AddDocumentComponent,
-            canActivate: [authGuard],
-          },
         ],
       },
       {
@@ -114,11 +87,6 @@ export const routes: Routes = [
             component: UsersComponent,
             canActivate: [authGuard],
           },
-          {
-            path: 'signup',
-            component: SignupComponent,
-            canActivate: [authGuard],
-          },
         ],
       },
       {
@@ -127,11 +95,6 @@ export const routes: Routes = [
           {
             path: '',
             component: MessagesComponent,
-            canActivate: [authGuard],
-          },
-          {
-            path: 'read-messages',
-            component: ReadMessagesComponent,
             canActivate: [authGuard],
           },
         ],
