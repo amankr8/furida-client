@@ -5,7 +5,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Post } from '../../../../shared/interface/post';
+import { Post } from '../../../../../shared/interface/post';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import {
@@ -17,7 +17,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { updatePost } from '../../../../state/post/post.actions';
+import { updatePost } from '../../../../../state/post/post.actions';
 
 @Component({
   selector: 'app-edit-post',

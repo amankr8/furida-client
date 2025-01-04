@@ -7,7 +7,7 @@ import { Store, Action } from '@ngrx/store';
 import { mergeMap, map, catchError, of, tap, first } from 'rxjs';
 import { Post } from '../../shared/interface/post';
 import { ConfirmDialogComponent } from '../../pages/admin/components/confirm-dialog/confirm-dialog.component';
-import { EditPostComponent } from '../../pages/admin/posts/edit-post/edit-post.component';
+import { EditPostComponent } from '../../pages/admin/posts/components/edit-post/edit-post.component';
 import { PostService } from '../../service/post/post.service';
 import {
   loadPosts,
