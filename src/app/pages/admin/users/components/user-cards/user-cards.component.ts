@@ -39,10 +39,10 @@ import { MatDividerModule } from '@angular/material/divider';
     MatIconModule,
     MatDividerModule,
   ],
-  templateUrl: './cards.component.html',
-  styleUrl: './cards.component.scss',
+  templateUrl: './user-cards.component.html',
+  styleUrl: './user-cards.component.scss',
 })
-export class CardsComponent {
+export class UserCardsComponent {
   users$: Observable<User[]> = this.store.select(selectUsers);
   isUserLoaded$: Observable<boolean> = this.store.select(selectUserLoaded);
   loading$: Observable<boolean> = this.store.select(selectLoading);
