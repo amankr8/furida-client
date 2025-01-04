@@ -18,7 +18,7 @@ import {
   deleteUserSuccess,
   deleteUserFail,
 } from '../../state/user/user.actions';
-import { UpdateUserComponent } from '../../pages/admin/users/update-user/update-user.component';
+import { UpdateUserComponent } from '../../pages/admin/users/components/update-user/update-user.component';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
