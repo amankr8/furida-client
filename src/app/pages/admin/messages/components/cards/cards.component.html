@@ -3,9 +3,9 @@
   mode="indeterminate"
   class="mb-3"
 ></mat-progress-bar>
-<div class="row justify-content-center g-3">
-  <div class="col-auto" *ngFor="let message of messages$ | async">
-    <div class="d-flex justify-content-center align-items-center">
+<div class="container">
+  <div class="row g-3">
+    <div class="col-auto" *ngFor="let message of messages$ | async">
       <mat-card appearance="outlined" class="custom-card shadow-sm">
         <mat-card-header class="mb-2">
           <mat-card-title class="single-line-truncate">
