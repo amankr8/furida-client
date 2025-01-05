@@ -8,8 +8,12 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { selectProjectById } from '../../../state/project/project.selectors';
 import { selectDocumentLoading } from '../../../state/document/document.selectors';
-import { DocMenuItemComponent } from '../doc-menu-item/doc-menu-item.component';
 import { AdminRouteService } from '../../../service/admin-route/admin-route.service';
+import {
+  openDocEditDialog,
+  openDocDeleteDialog,
+} from '../../../state/document/document.actions';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-document-card',
@@ -19,7 +23,7 @@ import { AdminRouteService } from '../../../service/admin-route/admin-route.serv
     MatButtonModule,
     CommonModule,
     MatIconModule,
-    DocMenuItemComponent,
+    MatDividerModule,
   ],
   templateUrl: './document-card.component.html',
   styleUrl: './document-card.component.scss',
@@ -38,5 +42,13 @@ export class DocumentCardComponent {
     return this.store
       .select(selectProjectById(id))
       .pipe(map((project) => (project ? project.name : 'Unknown')));
+  }
+
+  updateDocument() {
+    this.store.dispatch(openDocEditDialog({ documentId: this.document.id }));
+  }
+
+  deleteDocument() {
+    this.store.dispatch(openDocDeleteDialog({ documentId: this.document.id }));
   }
 }
