@@ -17,14 +17,14 @@ import { Project } from '../../shared/interface/project';
 
 export interface ProjectState {
   projects: Project[];
-  isLoaded: boolean;
+  loaded: boolean;
   loading: boolean;
   error: string | null;
 }
 
 export const initialProjectsState: ProjectState = {
   projects: [],
-  isLoaded: false,
+  loaded: false,
   loading: false,
   error: null,
 };
@@ -40,14 +40,14 @@ export const projectReducer = createReducer(
   on(loadProjectsSuccess, (state, { projects }) => ({
     ...state,
     projects,
-    isLoaded: true,
+    loaded: true,
     loading: false,
   })),
 
   on(loadProjectsFail, (state, { error }) => ({
     ...state,
     error,
-    isLoaded: false,
+    loaded: false,
     loading: false,
   })),
 
