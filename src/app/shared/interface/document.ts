@@ -3,5 +3,6 @@ export interface Document {
   name: string;
   desc: string;
   docUrl: string;
+  createDate: Date;
   projectId: number;
 }
