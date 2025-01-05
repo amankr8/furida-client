@@ -59,7 +59,7 @@ export const documentReducer = createReducer(
 
   on(addDocumentSuccess, (state, { document }) => ({
     ...state,
-    documents: [...state.documents, document],
+    documents: [document, ...state.documents],
     loading: false,
   })),
 
