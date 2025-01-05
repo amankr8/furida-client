@@ -44,22 +44,11 @@ import { MatDividerModule } from '@angular/material/divider';
 })
 export class UserCardsComponent {
   users$: Observable<User[]> = this.store.select(selectUsers);
-  isUserLoaded$: Observable<boolean> = this.store.select(selectUserLoaded);
   loading$: Observable<boolean> = this.store.select(selectUserLoading);
-  isAuthUserLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
   editConstraint: string = 'Cannot update other users';
   deleteConstraint: string = 'Cannot delete current user';
 
   constructor(private store: Store) {}
-
-  ngOnInit() {
-    this.isUserLoaded$.subscribe((isLoaded) => {
-      if (!isLoaded) this.store.dispatch(loadUsers());
-    });
-    this.isAuthUserLoaded$.subscribe((loaded) => {
-      if (!loaded) this.store.dispatch(loadAuthUser());
-    });
-  }
 
   isLoggedInUser(username: string): Observable<boolean> {
     return this.store

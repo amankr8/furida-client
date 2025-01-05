@@ -4,6 +4,10 @@ import { CommonModule } from '@angular/common';
 import { NavToolbarComponent } from '../components/nav-toolbar/nav-toolbar.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { loadUsers } from '../../../state/user/user.actions';
+import { selectUserLoaded } from '../../../state/user/user.selectors';
 
 @Component({
   selector: 'app-users',
@@ -22,4 +26,13 @@ export class UsersComponent {
   headerText: string = 'Users';
   buttonText: string = 'Add User';
   childLevelLink: string = 'signup';
+  isUserLoaded$: Observable<boolean> = this.store.select(selectUserLoaded);
+
+  constructor(private store: Store) {}
+
+  ngOnInit() {
+    this.isUserLoaded$.subscribe((isLoaded) => {
+      if (!isLoaded) this.store.dispatch(loadUsers());
+    });
+  }
 }
