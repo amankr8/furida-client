@@ -4,5 +4,5 @@ export interface Message {
   email: string;
   msg: string;
   archive: boolean;
-  date: Date;
+  sendDate: Date;
 }

@@ -33,7 +33,8 @@ export class PostCardsComponent {
   sortedPosts$: Observable<Post[]> = this.posts$.pipe(
     map((posts) =>
       [...posts].sort(
-        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        (a, b) =>
+          new Date(b.createDate).getTime() - new Date(a.createDate).getTime()
       )
     )
   );

@@ -2,6 +2,6 @@ export interface Post {
   id: number;
   title: string;
   content: string;
-  date: Date;
+  createDate: Date;
   imgUrl: string;
 }
