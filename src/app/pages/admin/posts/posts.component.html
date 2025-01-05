@@ -6,7 +6,7 @@
 <div class="container">
   <mat-tab-group>
     <mat-tab label="Posts">
-      <div class="container py-3">
+      <div class="py-3">
         <mat-progress-bar
           *ngIf="loading$ | async"
           mode="indeterminate"
@@ -15,7 +15,7 @@
         <app-post-cards></app-post-cards></div
     ></mat-tab>
     <mat-tab label="Add New">
-      <div class="container py-3">
+      <div class="py-3">
         <app-post-form></app-post-form></div
     ></mat-tab>
   </mat-tab-group>
