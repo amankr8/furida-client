@@ -1,7 +1,5 @@
-<div class="container">
-  <div class="row justify-content-center g-3">
-    <div class="col-auto" *ngFor="let doc of documents$ | async">
-      <app-document-card [document]="doc"></app-document-card>
-    </div>
+<div class="row justify-content-center g-3">
+  <div class="col-auto" *ngFor="let doc of documents$ | async">
+    <app-document-card [document]="doc"></app-document-card>
   </div>
 </div>
