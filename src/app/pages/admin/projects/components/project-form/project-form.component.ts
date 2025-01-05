@@ -40,7 +40,7 @@ export class ProjectFormComponent {
   form!: FormGroup;
   loading$: Observable<Boolean> = this.store.select(selectProjectLoading);
   error$: Observable<string | null> = this.store.select(selectProjectError);
-  resetForm$: Observable<Boolean> = combineLatest([
+  success$: Observable<Boolean> = combineLatest([
     this.loading$,
     this.error$,
   ]).pipe(map(([loading, error]) => !loading && !error));
@@ -57,9 +57,9 @@ export class ProjectFormComponent {
 
   submit() {
     this.store.dispatch(addProject({ project: this.form.value }));
-    this.resetForm$
+    this.success$
       .pipe(
-        filter((resetForm) => resetForm === true),
+        filter((success) => success === true),
         first()
       )
       .subscribe(() => this.formDirective.resetForm());

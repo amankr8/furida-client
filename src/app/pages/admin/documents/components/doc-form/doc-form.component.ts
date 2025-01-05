@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
+  FormGroupDirective,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -15,10 +16,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Project } from '../../../../../shared/interface/project';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-import { Observable } from 'rxjs';
+import { combineLatest, filter, first, map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectProjects } from '../../../../../state/project/project.selectors';
-import { selectDocumentLoading } from '../../../../../state/document/document.selectors';
+import {
+  selectDocumentError,
+  selectDocumentLoading,
+} from '../../../../../state/document/document.selectors';
 import { addDocument } from '../../../../../state/document/document.actions';
 
 @Component({
@@ -40,16 +44,19 @@ import { addDocument } from '../../../../../state/document/document.actions';
   styleUrl: './doc-form.component.scss',
 })
 export class DocFormComponent {
+  @ViewChild('formDirective') formDirective!: FormGroupDirective;
   form!: FormGroup;
-  projects$: Observable<Project[]>;
-  loading$: Observable<boolean>;
+  projects$: Observable<Project[]> = this.store.select(selectProjects);
+  loading$: Observable<boolean> = this.store.select(selectDocumentLoading);
   fileName: string = '';
   private maxFileSize = 5 * 1024 * 1024;
+  error$: Observable<string | null> = this.store.select(selectDocumentError);
+  success$: Observable<Boolean> = combineLatest([
+    this.loading$,
+    this.error$,
+  ]).pipe(map(([loading, error]) => !loading && !error));
 
-  constructor(private store: Store) {
-    this.projects$ = this.store.select(selectProjects);
-    this.loading$ = this.store.select(selectDocumentLoading);
-  }
+  constructor(private store: Store) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -61,21 +68,20 @@ export class DocFormComponent {
   }
 
   resetForm() {
-    this.form.reset();
     this.fileName = '';
+    this.formDirective.resetForm();
   }
 
   onFileSelect(event: Event): void {
     const fileInput = event.target as HTMLInputElement;
     if (fileInput.files && fileInput.files.length > 0) {
       const file = fileInput.files[0];
-      // Check if the file type is an image
       if (file.type !== 'application/pdf') {
         alert('Only image files are allowed!');
-        fileInput.value = ''; // Clear the input if the file is not in pdf format
+        fileInput.value = '';
       } else if (file.size > this.maxFileSize) {
         alert('File size is too large!');
-        fileInput.value = ''; // Clear the input if the file is too large
+        fileInput.value = '';
       } else {
         this.form.patchValue({ file: file });
         this.fileName = file.name;
@@ -91,5 +97,11 @@ export class DocFormComponent {
     docData.append('projectId', this.form.get('projectId')?.value);
 
     this.store.dispatch(addDocument({ document: docData }));
+    this.success$
+      .pipe(
+        filter((success) => success === true),
+        first()
+      )
+      .subscribe(() => this.resetForm());
   }
 }
