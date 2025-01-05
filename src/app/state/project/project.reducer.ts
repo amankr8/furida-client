@@ -59,7 +59,7 @@ export const projectReducer = createReducer(
 
   on(addProjectSuccess, (state, { project }) => ({
     ...state,
-    projects: [...state.projects, project],
+    projects: [project, ...state.projects],
     loading: false,
   })),
 

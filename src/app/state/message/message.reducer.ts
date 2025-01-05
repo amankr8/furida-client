@@ -60,7 +60,7 @@ export const messageReducer = createReducer(
 
   on(sendMessageSuccess, (state, { message }) => ({
     ...state,
-    messages: [...state.messages, message],
+    messages: [message, ...state.messages],
     loading: false,
   })),
 

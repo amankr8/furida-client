@@ -59,7 +59,7 @@ export const postReducer = createReducer(
 
   on(addPostSuccess, (state, { post }) => ({
     ...state,
-    posts: [...state.posts, post],
+    posts: [post, ...state.posts],
     loading: false,
   })),
 

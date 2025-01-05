@@ -30,14 +30,6 @@ import { PostCardComponent } from '../../../../components/post-card/post-card.co
 export class PostCardsComponent {
   posts$: Observable<Post[]> = this.store.select(selectPosts);
   loading$: Observable<boolean> = this.store.select(selectPostLoading);
-  sortedPosts$: Observable<Post[]> = this.posts$.pipe(
-    map((posts) =>
-      [...posts].sort(
-        (a, b) =>
-          new Date(b.createDate).getTime() - new Date(a.createDate).getTime()
-      )
-    )
-  );
 
   constructor(private store: Store) {}
 }
