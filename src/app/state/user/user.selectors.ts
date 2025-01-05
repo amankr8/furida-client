@@ -20,15 +20,15 @@ export const selectUsers = createSelector(
 
 export const selectUserLoaded = createSelector(
   selectUsersState,
-  (state) => state.isLoaded
+  (state) => state.loaded
 );
 
-export const selectLoading = createSelector(
+export const selectUserLoading = createSelector(
   selectUsersState,
   (state) => state.loading
 );
 
-export const selectError = createSelector(
+export const selectUserError = createSelector(
   selectUsersState,
   (state) => state.error
 );

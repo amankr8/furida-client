@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
+  FormGroupDirective,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -14,10 +15,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RoleService } from '../../../../../service/role/role.service';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
+import { combineLatest, filter, first, map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectAuthLoading } from '../../../../../state/auth/auth.selectors';
 import { signUpUser } from '../../../../../state/auth/auth.actions';
+import { selectUserError } from '../../../../../state/user/user.selectors';
 
 @Component({
   selector: 'app-signup-form',
@@ -37,9 +39,15 @@ import { signUpUser } from '../../../../../state/auth/auth.actions';
   styleUrl: './signup-form.component.scss',
 })
 export class SignupFormComponent {
+  @ViewChild('formDirective') formDirective!: FormGroupDirective;
   form!: FormGroup;
   loading$: Observable<boolean> = this.store.select(selectAuthLoading);
   roles: string[] = [];
+  error$: Observable<string | null> = this.store.select(selectUserError);
+  success$: Observable<Boolean> = combineLatest([
+    this.loading$,
+    this.error$,
+  ]).pipe(map(([loading, error]) => !loading && !error));
 
   constructor(private roleService: RoleService, private store: Store) {}
 
@@ -57,5 +65,11 @@ export class SignupFormComponent {
 
   signup() {
     this.store.dispatch(signUpUser({ user: this.form.value }));
+    this.success$
+      .pipe(
+        filter((success) => success === true),
+        first()
+      )
+      .subscribe(() => this.formDirective.resetForm());
   }
 }

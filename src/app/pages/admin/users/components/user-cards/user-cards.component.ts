@@ -10,7 +10,7 @@ import { map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
   selectUserLoaded,
-  selectLoading,
+  selectUserLoading,
   selectUsers,
 } from '../../../../../state/user/user.selectors';
 import {
@@ -45,7 +45,7 @@ import { MatDividerModule } from '@angular/material/divider';
 export class UserCardsComponent {
   users$: Observable<User[]> = this.store.select(selectUsers);
   isUserLoaded$: Observable<boolean> = this.store.select(selectUserLoaded);
-  loading$: Observable<boolean> = this.store.select(selectLoading);
+  loading$: Observable<boolean> = this.store.select(selectUserLoading);
   isAuthUserLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
   editConstraint: string = 'Cannot update other users';
   deleteConstraint: string = 'Cannot delete current user';
