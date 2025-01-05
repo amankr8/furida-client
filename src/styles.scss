@@ -16,16 +16,19 @@ body {
 
 .custom-card {
   width: 380px;
+  max-width: 80vw;
 }
 
 .custom-dialog-container {
   width: 500px;
+  max-width: 90vw;
   border-radius: 20px;
   overflow: hidden;
 }
 
 .alert-dialog-container {
   width: 500px;
+  max-width: 90vw;
   border-radius: 20px;
   overflow: hidden;
 }
