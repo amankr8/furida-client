@@ -3,11 +3,13 @@
   [buttonText]="buttonText"
   [childLevelLink]="childLevelLink"
 ></app-nav-toolbar>
-<mat-tab-group>
-  <mat-tab label="Users">
-    <div class="container py-3"><app-user-cards></app-user-cards></div
-  ></mat-tab>
-  <mat-tab label="Add New">
-    <div class="container py-3"><app-signup-form></app-signup-form></div
-  ></mat-tab>
-</mat-tab-group>
+<div class="container">
+  <mat-tab-group>
+    <mat-tab label="Users">
+      <div class="container py-3"><app-user-cards></app-user-cards></div
+    ></mat-tab>
+    <mat-tab label="Add New">
+      <div class="container py-3"><app-signup-form></app-signup-form></div
+    ></mat-tab>
+  </mat-tab-group>
+</div>

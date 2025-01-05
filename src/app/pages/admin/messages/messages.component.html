@@ -3,13 +3,15 @@
   [buttonText]="buttonText"
   [childLevelLink]="childLevelLink"
 ></app-nav-toolbar>
-<mat-tab-group>
-  <mat-tab label="Inbox">
-    <div class="container py-3">
-      <app-message-cards [archive]="false"></app-message-cards></div
-  ></mat-tab>
-  <mat-tab label="Archive">
-    <div class="container py-3">
-      <app-message-cards [archive]="true"></app-message-cards></div
-  ></mat-tab>
-</mat-tab-group>
+<div class="container">
+  <mat-tab-group>
+    <mat-tab label="Inbox">
+      <div class="container py-3">
+        <app-message-cards [archive]="false"></app-message-cards></div
+    ></mat-tab>
+    <mat-tab label="Archive">
+      <div class="container py-3">
+        <app-message-cards [archive]="true"></app-message-cards></div
+    ></mat-tab>
+  </mat-tab-group>
+</div>
