@@ -11,14 +11,14 @@ import { User } from '../../shared/interface/user';
 
 export interface UserState {
   users: User[];
-  isLoaded: boolean;
+  loaded: boolean;
   loading: boolean;
   error: string | null;
 }
 
 export const initialUsersState: UserState = {
   users: [],
-  isLoaded: false,
+  loaded: false,
   loading: false,
   error: null,
 };
@@ -34,14 +34,14 @@ export const userReducer = createReducer(
   on(loadUsersSuccess, (state, { users }) => ({
     ...state,
     users,
-    isLoaded: true,
+    loaded: true,
     loading: false,
   })),
 
   on(loadUsersFail, (state, { error }) => ({
     ...state,
     error,
-    isLoaded: false,
+    loaded: false,
     loading: false,
   })),
 

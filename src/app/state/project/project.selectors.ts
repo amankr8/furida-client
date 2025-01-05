@@ -16,7 +16,7 @@ export const selectProjects = createSelector(
 
 export const selectProjectLoaded = createSelector(
   selectProjectsState,
-  (state) => state.isLoaded
+  (state) => state.loaded
 );
 
 export const selectProjectLoading = createSelector(

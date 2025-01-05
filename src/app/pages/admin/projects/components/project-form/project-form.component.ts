@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
+  FormGroupDirective,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -13,8 +14,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { addProject } from '../../../../../state/project/project.actions';
-import { Observable } from 'rxjs';
-import { selectProjectLoading } from '../../../../../state/project/project.selectors';
+import { combineLatest, filter, first, map, Observable } from 'rxjs';
+import {
+  selectProjectError,
+  selectProjectLoading,
+} from '../../../../../state/project/project.selectors';
 
 @Component({
   selector: 'app-project-form',
@@ -32,12 +36,16 @@ import { selectProjectLoading } from '../../../../../state/project/project.selec
   styleUrl: './project-form.component.scss',
 })
 export class ProjectFormComponent {
+  @ViewChild('formDirective') formDirective!: FormGroupDirective;
   form!: FormGroup;
-  loading$: Observable<Boolean>;
+  loading$: Observable<Boolean> = this.store.select(selectProjectLoading);
+  error$: Observable<string | null> = this.store.select(selectProjectError);
+  success$: Observable<Boolean> = combineLatest([
+    this.loading$,
+    this.error$,
+  ]).pipe(map(([loading, error]) => !loading && !error));
 
-  constructor(private store: Store) {
-    this.loading$ = this.store.select(selectProjectLoading);
-  }
+  constructor(private store: Store) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -49,5 +57,11 @@ export class ProjectFormComponent {
 
   submit() {
     this.store.dispatch(addProject({ project: this.form.value }));
+    this.success$
+      .pipe(
+        filter((success) => success === true),
+        first()
+      )
+      .subscribe(() => this.formDirective.resetForm());
   }
 }

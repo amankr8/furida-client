@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center align-items-center">
-  <form [formGroup]="form" (ngSubmit)="signup()">
+  <form [formGroup]="form" #formDirective="ngForm" (ngSubmit)="signup()">
     <mat-card appearance="outlined" class="form-container shadow-sm">
       <div class="container py-4">
         <div class="d-flex flex-column">

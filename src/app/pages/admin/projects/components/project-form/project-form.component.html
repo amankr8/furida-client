@@ -1,45 +1,43 @@
-<div class="container">
-  <div class="d-flex justify-content-center align-items-center">
-    <form [formGroup]="form" (ngSubmit)="submit()">
-      <mat-card appearance="outlined" class="form-container shadow-sm">
-        <div class="container py-4">
-          <div class="d-flex flex-column">
-            <mat-form-field>
-              <mat-label>Project Name</mat-label>
-              <input matInput formControlName="name" />
-              <mat-error *ngIf="form.get('name')?.hasError('required')">
-                Name is required
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Project Description</mat-label>
-              <input matInput formControlName="desc" />
-              <mat-error *ngIf="form.get('desc')?.hasError('required')">
-                Description is required
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Address</mat-label>
-              <input matInput formControlName="address" />
-              <mat-error *ngIf="form.get('address')?.hasError('required')">
-                Address is required
-              </mat-error>
-            </mat-form-field>
-            <div class="d-flex justify-content-end align-items-center gap-2">
-              <mat-spinner *ngIf="loading$ | async" diameter="30"></mat-spinner>
-              <button
-                mat-raised-button
-                color="primary"
-                class="dialog-action-button"
-                type="submit"
-                [disabled]="form.invalid || (loading$ | async)"
-              >
-                Submit
-              </button>
-            </div>
+<div class="d-flex justify-content-center align-items-center">
+  <form [formGroup]="form" #formDirective="ngForm" (ngSubmit)="submit()">
+    <mat-card appearance="outlined" class="form-container shadow-sm">
+      <div class="container py-4">
+        <div class="d-flex flex-column">
+          <mat-form-field>
+            <mat-label>Project Name</mat-label>
+            <input matInput formControlName="name" />
+            <mat-error *ngIf="form.get('name')?.hasError('required')">
+              Name is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Project Description</mat-label>
+            <input matInput formControlName="desc" />
+            <mat-error *ngIf="form.get('desc')?.hasError('required')">
+              Description is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="address" />
+            <mat-error *ngIf="form.get('address')?.hasError('required')">
+              Address is required
+            </mat-error>
+          </mat-form-field>
+          <div class="d-flex justify-content-end align-items-center gap-2">
+            <mat-spinner *ngIf="loading$ | async" diameter="30"></mat-spinner>
+            <button
+              mat-raised-button
+              color="primary"
+              class="dialog-action-button"
+              type="submit"
+              [disabled]="form.invalid || (loading$ | async)"
+            >
+              Submit
+            </button>
           </div>
         </div>
-      </mat-card>
-    </form>
-  </div>
+      </div>
+    </mat-card>
+  </form>
 </div>

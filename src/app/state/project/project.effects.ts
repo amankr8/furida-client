@@ -70,7 +70,6 @@ export class ProjectEffects {
       this.actions$.pipe(
         ofType(addProjectSuccess),
         tap(() => {
-          this.router.navigate(['/admin/projects']);
           this.snackBar.open('Project created successfully!', 'Dismiss', {
             duration: 3000,
           });

@@ -13,13 +13,12 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { updatePass } from '../../../../../state/auth/auth.actions';
-import { filter, first, Observable } from 'rxjs';
+import { combineLatest, filter, first, map, Observable } from 'rxjs';
 import {
+  selectAuthError,
   selectAuthLoading,
-  selectAuthStatus,
 } from '../../../../../state/auth/auth.selectors';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { generalStatus } from '../../../../../shared/constants/global-constants';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -43,7 +42,11 @@ import { MatIconModule } from '@angular/material/icon';
 export class UpdateUserComponent {
   form!: FormGroup;
   loading$: Observable<boolean> = this.store.select(selectAuthLoading);
-  status$: Observable<string | null> = this.store.select(selectAuthStatus);
+  error$: Observable<string | null> = this.store.select(selectAuthError);
+  success$: Observable<Boolean> = combineLatest([
+    this.loading$,
+    this.error$,
+  ]).pipe(map(([loading, error]) => !loading && !error));
 
   hide = signal(true);
   toggleHide() {
@@ -81,9 +84,9 @@ export class UpdateUserComponent {
         newPassword: payload.newPassword,
       })
     );
-    this.status$
+    this.success$
       .pipe(
-        filter((status) => status === generalStatus.SUCCESS),
+        filter((success) => success === true),
         first()
       )
       .subscribe(() => this.dialogRef.close());
