@@ -23,7 +23,7 @@ export const selectPostLoading = createSelector(
   (state) => state.loading
 );
 
-export const selectError = createSelector(
+export const selectPostError = createSelector(
   selectPostsState,
   (state) => state.error
 );
