@@ -15,14 +15,12 @@ import {
   updatePassSuccess,
 } from './auth.actions';
 import { User } from '../../shared/interface/user';
-import { generalStatus } from '../../shared/constants/global-constants';
 
 export interface AuthState {
   user: User | null;
   loaded: boolean;
   loading: boolean;
   error: string | null;
-  status: string | null;
 }
 
 export const initialAuthState: AuthState = {
@@ -30,7 +28,6 @@ export const initialAuthState: AuthState = {
   loaded: false,
   loading: false,
   error: null,
-  status: null,
 };
 
 export const authReducer = createReducer(
@@ -94,20 +91,17 @@ export const authReducer = createReducer(
     ...state,
     error: null,
     loading: true,
-    status: generalStatus.PENDING,
   })),
 
   on(updatePassSuccess, (state) => ({
     ...state,
     loading: false,
-    status: generalStatus.SUCCESS,
   })),
 
   on(updatePassFail, (state, { error }) => ({
     ...state,
     error,
     loading: false,
-    status: generalStatus.FAILURE,
   })),
 
   on(logoutUser, (state) => ({

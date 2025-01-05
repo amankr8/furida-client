@@ -12,14 +12,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { filter, first, Observable } from 'rxjs';
+import { combineLatest, filter, first, map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
+  selectMessageError,
   selectMessageLoading,
-  selectMessageStatus,
 } from '../../../../../state/message/message.selectors';
 import { sendMessage } from '../../../../../state/message/message.actions';
-import { generalStatus } from '../../../../../shared/constants/global-constants';
 
 @Component({
   selector: 'app-contact-form',
@@ -39,12 +38,14 @@ import { generalStatus } from '../../../../../shared/constants/global-constants'
 export class ContactFormComponent {
   @ViewChild('formDirective') formDirective!: FormGroupDirective;
   form!: FormGroup;
-  loading$: Observable<boolean>;
-  status$: Observable<string> = this.store.select(selectMessageStatus);
+  loading$: Observable<boolean> = this.store.select(selectMessageLoading);
+  error$: Observable<string | null> = this.store.select(selectMessageError);
+  success$: Observable<Boolean> = combineLatest([
+    this.loading$,
+    this.error$,
+  ]).pipe(map(([loading, error]) => !loading && !error));
 
-  constructor(private store: Store) {
-    this.loading$ = this.store.select(selectMessageLoading);
-  }
+  constructor(private store: Store) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -59,9 +60,9 @@ export class ContactFormComponent {
 
   submit() {
     this.store.dispatch(sendMessage({ message: this.form.value }));
-    this.status$
+    this.success$
       .pipe(
-        filter((status) => status === generalStatus.SUCCESS),
+        filter((success) => success === true),
         first()
       )
       .subscribe(() => this.formDirective.resetForm());

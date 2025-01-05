@@ -14,11 +14,6 @@ export const selectMessageLoaded = createSelector(
   (state) => state.loaded
 );
 
-export const selectMessageStatus = createSelector(
-  selectMessagesState,
-  (state) => state.status
-);
-
 export const selectMessageLoading = createSelector(
   selectMessagesState,
   (state) => state.loading
