@@ -39,7 +39,7 @@ export class AdminComponent {
     });
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.authLoaded$.subscribe((loaded) => {
       if (!loaded) this.store.dispatch(loadAuthUser());
     });

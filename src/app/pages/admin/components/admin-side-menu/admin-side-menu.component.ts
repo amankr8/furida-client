@@ -12,6 +12,7 @@ import {
 } from '../../../../state/auth/auth.selectors';
 import { RouterModule } from '@angular/router';
 import { BreakpointService } from '../../../../service/breakpoint/breakpoint.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-admin-side-menu',
@@ -22,6 +23,7 @@ import { BreakpointService } from '../../../../service/breakpoint/breakpoint.ser
     CommonModule,
     MatDividerModule,
     RouterModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './admin-side-menu.component.html',
   styleUrl: './admin-side-menu.component.scss',
@@ -30,11 +32,11 @@ export class AdminSideMenuComponent {
   @Output() toggleSidenav = new EventEmitter<void>();
   authUsername$: Observable<string> = this.store
     .select(selectAuthUser)
-    .pipe(map((user) => user?.username || 'Unknown'));
+    .pipe(map((user) => user?.username || '[unknown]'));
   authEmail$: Observable<string> = this.store
     .select(selectAuthUser)
-    .pipe(map((user) => user?.email || 'Unknown'));
-  authLoading$: Observable<boolean> = this.store.select(selectAuthLoading);
+    .pipe(map((user) => user?.email || '[unknown]'));
+  loading$: Observable<boolean> = this.store.select(selectAuthLoading);
   smallScreen$: Observable<boolean> = this.breakpointService.isSmallScreen();
 
   constructor(
@@ -45,8 +47,8 @@ export class AdminSideMenuComponent {
   ngOnInit() {}
 
   toggleMenu() {
-    this.smallScreen$.subscribe((small) =>
-      small ? this.toggleSidenav.emit() : null
+    this.smallScreen$.pipe(
+      map((small) => (small ? this.toggleSidenav.emit() : null))
     );
   }
 
