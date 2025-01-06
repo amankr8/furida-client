@@ -36,7 +36,6 @@ export class AdminComponent {
     this.breakpointService.isSmallerScreen().subscribe((small) => {
       if (small)
         this.store.dispatch(toggleBoolSetting1({ boolSetting1: false }));
-      else this.store.dispatch(toggleBoolSetting1({ boolSetting1: true }));
     });
   }
 

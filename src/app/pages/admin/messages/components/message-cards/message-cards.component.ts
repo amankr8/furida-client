@@ -30,10 +30,10 @@ import { MatDividerModule } from '@angular/material/divider';
     MatIconModule,
     MatDividerModule,
   ],
-  templateUrl: './cards.component.html',
-  styleUrl: './cards.component.scss',
+  templateUrl: './message-cards.component.html',
+  styleUrl: './message-cards.component.scss',
 })
-export class CardsComponent {
+export class MessageCardsComponent {
   @Input() archive: boolean = false;
   archiveButtonText: string = 'ARCHIVE';
   messages$: Observable<Message[]> = this.store.select(
