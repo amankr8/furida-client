@@ -24,6 +24,7 @@ import { loadUsers } from '../../state/user/user.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../pages/admin/components/confirm-dialog/confirm-dialog.component';
+import { AdminRouteService } from '../../service/admin-route/admin-route.service';
 
 @Injectable()
 export class AuthEffects {
@@ -32,6 +33,7 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
+    private routeService: AdminRouteService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
@@ -53,7 +55,9 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(loadAuthUserSuccess),
         tap(() => {
-          this.router.navigate(['/admin']);
+          if (this.routeService.isLoginRoute()) {
+            this.router.navigate(['/admin']);
+          }
         })
       ),
     { dispatch: false }

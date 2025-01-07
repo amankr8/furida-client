@@ -10,4 +10,8 @@ export class AdminRouteService {
   isAdminRoute(): boolean {
     return this.router.url.startsWith('/admin');
   }
+
+  isLoginRoute(): boolean {
+    return this.router.url.startsWith('/login');
+  }
 }
