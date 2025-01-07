@@ -47,9 +47,11 @@ export class AdminSideMenuComponent {
   ngOnInit() {}
 
   toggleMenu() {
-    this.smallScreen$.pipe(
-      map((small) => (small ? this.toggleSidenav.emit() : null))
-    );
+    this.smallScreen$.subscribe((small) => {
+      if (small) {
+        this.toggleSidenav.emit();
+      }
+    });
   }
 
   logout() {
