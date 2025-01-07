@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { loadAuthUser } from '../../state/auth/auth.actions';
 import { selectAuthLoaded } from '../../state/auth/auth.selectors';
 import { NavbarV2Component } from '../components/navbar-v2/navbar-v2.component';
@@ -28,6 +28,12 @@ export class AdminComponent {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   authLoaded$: Observable<boolean> = this.store.select(selectAuthLoaded);
   smallScreen$: Observable<boolean> = this.breakpointService.isSmallScreen();
+  opened$: Observable<boolean> = this.smallScreen$.pipe(
+    map((small) => (small ? false : true))
+  );
+  mode$: Observable<any> = this.smallScreen$.pipe(
+    map((small) => (small ? 'over' : 'side'))
+  );
 
   constructor(
     private store: Store,

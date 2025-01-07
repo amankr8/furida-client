@@ -2,8 +2,8 @@
   <mat-sidenav
     #sidenav
     class="admin-sidenav"
-    [opened]="!(smallScreen$ | async)"
-    [mode]="(smallScreen$ | async) ? 'over' : 'side'"
+    [opened]="opened$ | async"
+    [mode]="mode$ | async"
     ><app-admin-side-menu (toggleSidenav)="toggleDrawer()"></app-admin-side-menu
   ></mat-sidenav>
   <mat-sidenav-content>
