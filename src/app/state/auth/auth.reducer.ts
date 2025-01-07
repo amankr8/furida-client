@@ -76,11 +76,6 @@ export const authReducer = createReducer(
     loading: true,
   })),
 
-  on(signInUserSuccess, (state) => ({
-    ...state,
-    loading: false,
-  })),
-
   on(signInUserFail, (state, { error }) => ({
     ...state,
     error,
