@@ -17,14 +17,14 @@ import { Document } from '../../shared/interface/document';
 
 export interface DocumentState {
   documents: Document[];
-  isLoaded: boolean;
+  loaded: boolean;
   loading: boolean;
   error: string | null;
 }
 
 export const initialDocumentsState: DocumentState = {
   documents: [],
-  isLoaded: false,
+  loaded: false,
   loading: false,
   error: null,
 };
@@ -40,14 +40,14 @@ export const documentReducer = createReducer(
   on(loadDocumentsSuccess, (state, { documents }) => ({
     ...state,
     documents,
-    isLoaded: true,
+    loaded: true,
     loading: false,
   })),
 
   on(loadDocumentsFail, (state, { error }) => ({
     ...state,
     error,
-    isLoaded: false,
+    loaded: false,
     loading: false,
   })),
 

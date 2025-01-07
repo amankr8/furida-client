@@ -2,11 +2,11 @@
   <div class="d-flex flex-column justify-content-center align-items-center">
     <div class="settings-container d-flex flex-column gap-4">
       <mat-slide-toggle
-        matTooltip="Not supported on mobile"
-        [matTooltipDisabled]="!(isHandset$ | async)"
+        matTooltip="Not supported on smaller screens"
+        [matTooltipDisabled]="!(isSmallerScreen$ | async)"
         [checked]="isBoolSetting1$ | async"
         (change)="toggleHomeHeader($event.checked)"
-        [disabled]="isHandset$ | async"
+        [disabled]="isSmallerScreen$ | async"
         >Table View</mat-slide-toggle
       >
     </div>

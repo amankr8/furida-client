@@ -21,7 +21,7 @@ export const selectDocuments = createSelector(
 
 export const selectDocumentLoaded = createSelector(
   selectDocumentsState,
-  (state) => state.isLoaded
+  (state) => state.loaded
 );
 
 export const selectDocumentLoading = createSelector(

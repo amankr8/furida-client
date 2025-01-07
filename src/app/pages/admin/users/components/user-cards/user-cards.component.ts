@@ -9,20 +9,14 @@ import { User } from '../../../../../shared/interface/user';
 import { map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
-  selectUserLoaded,
   selectUserLoading,
   selectUsers,
 } from '../../../../../state/user/user.selectors';
 import {
-  loadUsers,
   openDeleteDialog,
   openEditDialog,
 } from '../../../../../state/user/user.actions';
-import {
-  selectAuthUser,
-  selectAuthLoaded,
-} from '../../../../../state/auth/auth.selectors';
-import { loadAuthUser } from '../../../../../state/auth/auth.actions';
+import { selectAuthUser } from '../../../../../state/auth/auth.selectors';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 
