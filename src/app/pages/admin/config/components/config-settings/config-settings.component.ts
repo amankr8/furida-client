@@ -26,7 +26,8 @@ export class ConfigSettingsComponent {
   isBoolSetting2$: Observable<boolean> = this.store
     .select(selectConfig)
     .pipe(map((config) => config.boolSetting2));
-  isHandset$: Observable<boolean> = this.breakpointService.isHandset();
+  isSmallerScreen$: Observable<boolean> =
+    this.breakpointService.isSmallerScreen();
 
   constructor(
     private store: Store,

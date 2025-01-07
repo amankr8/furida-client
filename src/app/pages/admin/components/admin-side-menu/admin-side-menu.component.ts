@@ -44,8 +44,6 @@ export class AdminSideMenuComponent {
     private breakpointService: BreakpointService
   ) {}
 
-  ngOnInit() {}
-
   toggleMenu() {
     this.smallScreen$.subscribe((small) => {
       if (small) {

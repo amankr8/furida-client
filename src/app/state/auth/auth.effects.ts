@@ -48,6 +48,30 @@ export class AuthEffects {
     )
   );
 
+  loadAuthUserSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(loadAuthUserSuccess),
+        tap(() => {
+          this.router.navigate(['/admin']);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  loadAuthUserFail$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(loadAuthUserFail),
+        tap(() => {
+          this.snackBar.open('Error loading user details!', 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
   signUpUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(signUpUser),
@@ -118,7 +142,6 @@ export class AuthEffects {
       ofType(signInUserSuccess),
       tap(({ token }) => {
         this.authService.setAuthToken(token);
-        this.router.navigate(['/admin']);
         this.snackBar.open('Logged In successfully!', 'Dismiss', {
           duration: 3000,
         });
