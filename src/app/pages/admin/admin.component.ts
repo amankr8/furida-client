@@ -3,7 +3,6 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
-import { loadAuthUser } from '../../state/auth/auth.actions';
 import { selectAuthLoaded } from '../../state/auth/auth.selectors';
 import { NavbarV2Component } from '../components/navbar-v2/navbar-v2.component';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
@@ -42,12 +41,6 @@ export class AdminComponent {
     this.breakpointService.isSmallerScreen().subscribe((small) => {
       if (small)
         this.store.dispatch(toggleBoolSetting1({ boolSetting1: false }));
-    });
-  }
-
-  ngAfterViewInit() {
-    this.authLoaded$.subscribe((loaded) => {
-      if (!loaded) this.store.dispatch(loadAuthUser());
     });
   }
 

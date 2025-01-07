@@ -113,19 +113,18 @@ export class AuthEffects {
     )
   );
 
-  signInUserSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(signInUserSuccess),
-        tap(({ token }) => {
-          this.authService.setAuthToken(token);
-          this.router.navigate(['/admin']);
-          this.snackBar.open('Logged In successfully!', 'Dismiss', {
-            duration: 3000,
-          });
-        })
-      ),
-    { dispatch: false }
+  signInUserSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(signInUserSuccess),
+      tap(({ token }) => {
+        this.authService.setAuthToken(token);
+        this.router.navigate(['/admin']);
+        this.snackBar.open('Logged In successfully!', 'Dismiss', {
+          duration: 3000,
+        });
+      }),
+      map(() => loadAuthUser())
+    )
   );
 
   signInUserFail$ = createEffect(
