@@ -6,10 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { confirmLogout } from '../../../../state/auth/auth.actions';
-import {
-  selectAuthUser,
-  selectAuthLoading,
-} from '../../../../state/auth/auth.selectors';
+import { selectAuthUser } from '../../../../state/auth/auth.selectors';
 import { RouterModule } from '@angular/router';
 import { BreakpointService } from '../../../../service/breakpoint/breakpoint.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
