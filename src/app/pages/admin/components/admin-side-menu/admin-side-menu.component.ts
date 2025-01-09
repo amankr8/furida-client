@@ -36,7 +36,6 @@ export class AdminSideMenuComponent {
   authEmail$: Observable<string> = this.store
     .select(selectAuthUser)
     .pipe(map((user) => user?.email || '[unknown]'));
-  loading$: Observable<boolean> = this.store.select(selectAuthLoading);
   smallScreen$: Observable<boolean> = this.breakpointService.isSmallScreen();
 
   constructor(
