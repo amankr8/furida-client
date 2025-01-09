@@ -1,13 +1,7 @@
 <div class="container py-2">
   <div class="d-flex justify-content-start align-items-center p-4 gap-3">
     <mat-icon fontIcon="account_circle"></mat-icon>
-    <mat-spinner
-      *ngIf="loading$ | async"
-      diameter="30"
-      class="mx-2"
-      color="accent"
-    ></mat-spinner>
-    <span *ngIf="!(loading$ | async)" class="d-flex flex-column">
+    <span class="d-flex flex-column">
       <p class="profile-text">{{ authUsername$ | async }}</p>
       <p class="profile-text">{{ authEmail$ | async }}</p>
     </span>

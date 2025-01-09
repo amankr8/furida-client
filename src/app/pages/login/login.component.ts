@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../service/auth/auth.service';
 import { MatCardModule } from '@angular/material/card';
 import {
   MatFormField,
@@ -42,10 +41,7 @@ export class LoginComponent {
   form!: FormGroup;
   loading$: Observable<boolean> = this.store.select(selectAuthLoading);
 
-  constructor(private authService: AuthService, private store: Store) {}
-
-  ngOnInit() {
-    this.authService.logout();
+  constructor(private store: Store) {
     this.form = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
