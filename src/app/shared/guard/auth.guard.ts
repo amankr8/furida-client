@@ -17,6 +17,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     router.navigate(['/']);
     return false;
   } else if (jwtHelper.isTokenExpired(token)) {
+    authService.logout();
     router.navigate(['/login']);
     snackBarRef.open('Session expired! Please login again', 'Dismiss', {
       duration: 3000,
