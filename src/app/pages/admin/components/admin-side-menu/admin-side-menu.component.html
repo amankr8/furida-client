@@ -1,6 +1,6 @@
 <div class="container py-2">
-  <div class="d-flex justify-content-start align-items-center p-4 gap-3">
-    <mat-icon fontIcon="account_circle"></mat-icon>
+  <div class="d-flex justify-content-start align-items-center py-4 ms-2 w-100">
+    <mat-icon fontIcon="account_circle" class="me-3"></mat-icon>
     <span class="d-flex flex-column">
       <p class="profile-text">{{ authUsername$ | async }}</p>
       <p class="profile-text">{{ authEmail$ | async }}</p>
@@ -14,7 +14,7 @@
       routerLink="./projects"
       (click)="toggleMenu()"
     >
-      <mat-icon fontIcon="arrow_right"></mat-icon>
+      <mat-icon fontIcon="work" class="me-3"></mat-icon>
       Projects
     </button>
     <button
@@ -23,7 +23,7 @@
       routerLink="./posts"
       (click)="toggleMenu()"
     >
-      <mat-icon fontIcon="arrow_right"></mat-icon>
+      <mat-icon fontIcon="article" class="me-3"></mat-icon>
       Posts
     </button>
     <button
@@ -32,7 +32,7 @@
       routerLink="./documents"
       (click)="toggleMenu()"
     >
-      <mat-icon fontIcon="arrow_right"></mat-icon>
+      <mat-icon fontIcon="description" class="me-3"></mat-icon>
       Documents
     </button>
     <button
@@ -41,7 +41,7 @@
       routerLink="./users"
       (click)="toggleMenu()"
     >
-      <mat-icon fontIcon="arrow_right"></mat-icon>
+      <mat-icon fontIcon="person" class="me-3"></mat-icon>
       Users
     </button>
     <button
@@ -50,7 +50,7 @@
       routerLink="./inbox"
       (click)="toggleMenu()"
     >
-      <mat-icon fontIcon="arrow_right"></mat-icon>
+      <mat-icon fontIcon="inbox" class="me-3"></mat-icon>
       Inbox
     </button>
     <button
@@ -59,7 +59,7 @@
       routerLink="./settings"
       (click)="toggleMenu()"
     >
-      <mat-icon fontIcon="arrow_right"></mat-icon>
+      <mat-icon fontIcon="settings" class="me-3"></mat-icon>
       Settings
     </button>
   </div>
