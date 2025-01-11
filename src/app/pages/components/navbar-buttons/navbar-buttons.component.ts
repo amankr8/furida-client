@@ -8,6 +8,7 @@ import { Project } from '../../../shared/interface/project';
 import { selectProjects } from '../../../state/project/project.selectors';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-navbar-buttons',
@@ -18,6 +19,7 @@ import { CommonModule } from '@angular/common';
     RouterModule,
     AdminButtonComponent,
     CommonModule,
+    MatIconModule,
   ],
   templateUrl: './navbar-buttons.component.html',
   styleUrl: './navbar-buttons.component.scss',

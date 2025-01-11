@@ -15,9 +15,14 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
 
   if (token) {
     if (jwtHelper.isTokenExpired(token)) {
-      snackBar.open('Your session has expired. Please log in again.', 'Close', {
-        duration: 3000,
-      });
+      authService.logout();
+      snackBar.open(
+        'Unable to send request! Your session has expired.',
+        'Dismiss',
+        {
+          duration: 3000,
+        }
+      );
       router.navigate(['/login']);
       return next(req);
     }
