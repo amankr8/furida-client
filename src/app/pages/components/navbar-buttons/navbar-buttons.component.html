@@ -1,8 +1,13 @@
-<button mat-button class="link-button h-100">
+<button mat-button>
+  <p class="link-name mb-0" routerLink="/">Home</p>
+</button>
+<button mat-button>
   <p class="link-name mb-0" routerLink="/about">About</p>
 </button>
-<button mat-button class="link-button h-100" [matMenuTriggerFor]="projectMenu">
-  Projects
+<button mat-button [matMenuTriggerFor]="projectMenu">
+  <span class="d-flex align-items-center"
+    >Projects<mat-icon>expand_more</mat-icon></span
+  >
 </button>
 <mat-menu #projectMenu="matMenu">
   <button
@@ -13,10 +18,10 @@
     {{ project.name }}
   </button>
 </mat-menu>
-<button mat-button class="link-button h-100">
+<button mat-button>
   <p class="link-name mb-0" routerLink="/contact">Contact</p>
 </button>
-<button mat-button class="link-button h-100">
+<button mat-button>
   <p class="link-name mb-0" routerLink="/cctv">CCTV</p>
 </button>
-<app-admin-button class="link-button"></app-admin-button>
+<app-admin-button></app-admin-button>

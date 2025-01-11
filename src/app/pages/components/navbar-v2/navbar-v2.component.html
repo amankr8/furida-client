@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
-  <div class="d-flex justify-content-between align-items-center h-100 w-100">
-    <div class="d-flex align-items-center h-100">
+  <div class="d-flex justify-content-between align-items-center w-100">
+    <div class="d-flex align-items-center">
       <button
         *ngIf="(smallScreen$ | async) || isAdminRoute"
         mat-icon-button
@@ -8,14 +8,12 @@
       >
         <mat-icon fontIcon="menu"></mat-icon>
       </button>
-      <app-brand-logo-v2 class="h-100"></app-brand-logo-v2>
+      <app-brand-logo-v2></app-brand-logo-v2>
     </div>
-    <div class="d-flex align-items-center h-100">
-      <app-navbar-buttons
-        *ngIf="!(smallScreen$ | async) && !isAdminRoute"
-        class="h-100"
-      ></app-navbar-buttons>
-      <app-logout-button *ngIf="isAdminRoute"></app-logout-button>
-    </div>
+    <app-navbar-buttons
+      *ngIf="!(smallScreen$ | async) && !isAdminRoute"
+      class="d-flex align-items-center gap-2"
+    ></app-navbar-buttons>
+    <app-logout-button *ngIf="isAdminRoute"></app-logout-button>
   </div>
 </mat-toolbar>
