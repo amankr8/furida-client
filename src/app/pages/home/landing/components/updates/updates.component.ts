@@ -31,9 +31,6 @@ export class UpdatesComponent {
   posts$: Observable<Post[]> = this.store.select(selectPosts);
   visiblePosts: number = 3;
   increment: number = 3;
-  showSeeMore$: Observable<boolean> = this.posts$.pipe(
-    map((posts) => (posts ? posts.length > this.visiblePosts : false))
-  );
 
   constructor(private store: Store) {}
 
