@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -18,6 +18,9 @@ import {
 } from '../../../../../state/message/message.selectors';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewPostComponent } from '../../../../home/landing/components/view-post/view-post.component';
+import { MessageDialogComponent } from '../message-dialog/message-dialog.component';
 
 @Component({
   selector: 'app-message-cards',
@@ -35,6 +38,7 @@ import { MatDividerModule } from '@angular/material/divider';
 })
 export class MessageCardsComponent {
   @Input() archive: boolean = false;
+  readonly matDialog = inject(MatDialog);
   archiveButtonText: string = 'ARCHIVE';
   messages$: Observable<Message[]> = this.store.select(
     selectMessages(this.archive)
@@ -53,6 +57,13 @@ export class MessageCardsComponent {
   ngOnChanges() {
     this.messages$ = this.store.select(selectMessages(this.archive));
     this.archiveButtonText = this.archive ? 'UNARCHIVE' : 'ARCHIVE';
+  }
+
+  openMessage(message: Message) {
+    this.matDialog.open(MessageDialogComponent, {
+      panelClass: 'custom-dialog-container',
+      data: message,
+    });
   }
 
   archiveMessage(id: number) {

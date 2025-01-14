@@ -12,28 +12,41 @@
             <mat-card-title class="single-line-truncate">
               {{ message.name }}
             </mat-card-title>
+            <mat-card-subtitle>{{ message.sendDate | date }}</mat-card-subtitle>
             <mat-card-subtitle>{{ message.email }}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="card-content-h mb-3">
             <p class="single-line-truncate">{{ message.msg }}</p>
           </mat-card-content>
           <mat-divider></mat-divider>
-          <mat-card-actions class="gap-2">
-            <button
-              mat-button
-              (click)="archiveMessage(message.id)"
-              [disabled]="loading$ | async"
-            >
-              {{ archiveButtonText }}
-            </button>
-            <button
-              mat-button
-              (click)="deleteMessage(message.id)"
-              [disabled]="loading$ | async"
-            >
-              DELETE
-            </button>
-          </mat-card-actions>
+          <div class="d-flex justify-content-between">
+            <mat-card-actions class="gap-2">
+              <button
+                mat-button
+                (click)="openMessage(message)"
+                [disabled]="loading$ | async"
+              >
+                <mat-icon fontIcon="launch"></mat-icon>
+                OPEN
+              </button>
+            </mat-card-actions>
+            <mat-card-actions class="gap-2">
+              <button
+                mat-button
+                (click)="archiveMessage(message.id)"
+                [disabled]="loading$ | async"
+              >
+                {{ archiveButtonText }}
+              </button>
+              <button
+                mat-button
+                (click)="deleteMessage(message.id)"
+                [disabled]="loading$ | async"
+              >
+                DELETE
+              </button>
+            </mat-card-actions>
+          </div>
         </mat-card>
       </div>
     </div>
