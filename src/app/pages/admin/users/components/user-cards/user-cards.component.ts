@@ -13,8 +13,8 @@ import {
   selectUsers,
 } from '../../../../../state/user/user.selectors';
 import {
-  openDeleteDialog,
-  openEditDialog,
+  openUserDeleteDialog,
+  openUserEditDialog,
 } from '../../../../../state/user/user.actions';
 import { selectAuthUser } from '../../../../../state/auth/auth.selectors';
 import { MatIconModule } from '@angular/material/icon';
@@ -51,10 +51,10 @@ export class UserCardsComponent {
   }
 
   updateUser() {
-    this.store.dispatch(openEditDialog());
+    this.store.dispatch(openUserEditDialog());
   }
 
   deleteUser(id: number) {
-    this.store.dispatch(openDeleteDialog({ userId: id }));
+    this.store.dispatch(openUserDeleteDialog({ userId: id }));
   }
 }

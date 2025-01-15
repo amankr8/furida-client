@@ -14,9 +14,9 @@ export const loadUsersFail = createAction(
   props<{ error: string }>()
 );
 
-export const openEditDialog = createAction('[User] Open Edit Dialog');
+export const openUserEditDialog = createAction('[User] Open Edit Dialog');
 
-export const openDeleteDialog = createAction(
+export const openUserDeleteDialog = createAction(
   '[User] Open Delete Dialog',
   props<{ userId: number }>()
 );

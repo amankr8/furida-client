@@ -7,8 +7,8 @@ import { mergeMap, map, catchError, of, tap, first } from 'rxjs';
 import { ConfirmDialogComponent } from '../../pages/admin/components/confirm-dialog/confirm-dialog.component';
 import { UserService } from '../../service/user/user.service';
 import {
-  openEditDialog,
-  openDeleteDialog,
+  openUserEditDialog,
+  openUserDeleteDialog,
 } from '../../state/user/user.actions';
 import {
   loadUsers,
@@ -46,7 +46,7 @@ export class UserEffects {
   openEditDialog$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(openEditDialog),
+        ofType(openUserEditDialog),
         tap(() =>
           this.matDialog.open(UpdateUserComponent, {
             panelClass: 'custom-dialog-container',
@@ -59,7 +59,7 @@ export class UserEffects {
   openDeleteDialog$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(openDeleteDialog),
+        ofType(openUserDeleteDialog),
         tap(({ userId }) => {
           this.showDeleteWarningDialog(deleteUser({ userId }));
         })
