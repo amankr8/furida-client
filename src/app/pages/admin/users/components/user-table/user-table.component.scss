@@ -1,0 +1,24 @@
+.mat-column-username {
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-column-email {
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-column-createDate {
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-column-edit {
+  width: 100px;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-column-delete {
+  width: 100px;
+}
+
+mat-paginator {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
