@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { Document } from '../../../../../shared/interface/document';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { tableSettings } from '../../../../../shared/constants/global-constants';
 
 @Component({
   selector: 'app-document-table',
@@ -37,6 +38,7 @@ export class DocumentTableComponent {
     'delete',
   ];
   dataSource = new MatTableDataSource<Document>([]);
+  itemsPerPage: number = tableSettings.ITEMS_PER_PAGE;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
