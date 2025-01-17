@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { tableSettings } from '../../../../../shared/constants/global-constants';
 
 @Component({
   selector: 'app-user-table',
@@ -38,6 +39,7 @@ export class UserTableComponent {
   editConstraint: string = 'Cannot update other users';
   deleteConstraint: string = 'Cannot delete current user';
   dataSource = new MatTableDataSource<User>([]);
+  itemsPerPage: number = tableSettings.ITEMS_PER_PAGE;
   displayedColumns: string[] = [
     'username',
     'email',

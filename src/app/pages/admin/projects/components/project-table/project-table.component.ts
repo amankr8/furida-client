@@ -15,6 +15,7 @@ import {
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { tableSettings } from '../../../../../shared/constants/global-constants';
 
 @Component({
   selector: 'app-project-table',
@@ -34,6 +35,7 @@ export class ProjectTableComponent {
   loading$: Observable<boolean> = this.store.select(selectProjectLoading);
   displayedColumns: string[] = ['name', 'desc', 'address', 'edit', 'delete'];
   dataSource = new MatTableDataSource<Project>([]);
+  itemsPerPage: number = tableSettings.ITEMS_PER_PAGE;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
