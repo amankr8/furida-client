@@ -18,7 +18,10 @@ export const signUpUser = createAction(
   props<{ user: User }>()
 );
 
-export const signUpUserSuccess = createAction('[Auth] Sign Up User Success');
+export const signUpUserSuccess = createAction(
+  '[Auth] Sign Up User Success',
+  props<{ user: User }>()
+);
 
 export const signUpUserFail = createAction(
   '[Auth] Sign Up User Fail',
@@ -32,7 +35,7 @@ export const signInUser = createAction(
 
 export const signInUserSuccess = createAction(
   '[Auth] Sign In User Success',
-  props<{ token: string }>()
+  props<{ user: User; token: string }>()
 );
 
 export const signInUserFail = createAction(

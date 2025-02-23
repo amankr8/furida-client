@@ -6,6 +6,7 @@ import {
   deleteUser,
   deleteUserSuccess,
   deleteUserFail,
+  AddUser,
 } from './user.actions';
 import { User } from '../../shared/interface/user';
 
@@ -43,6 +44,11 @@ export const userReducer = createReducer(
     error,
     loaded: false,
     loading: false,
+  })),
+
+  on(AddUser, (state, { user }) => ({
+    ...state,
+    users: [...state.users, user],
   })),
 
   on(deleteUser, (state) => ({

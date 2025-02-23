@@ -14,6 +14,11 @@ export const loadUsersFail = createAction(
   props<{ error: string }>()
 );
 
+export const AddUser = createAction(
+  '[Users] Add User',
+  props<{ user: User }>()
+);
+
 export const openUserEditDialog = createAction('[User] Open Edit Dialog');
 
 export const openUserDeleteDialog = createAction(

@@ -20,7 +20,7 @@ import {
   updatePassSuccess,
 } from '../../state/auth/auth.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { loadUsers } from '../../state/user/user.actions';
+import { AddUser, loadUsers } from '../../state/user/user.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../pages/admin/components/confirm-dialog/confirm-dialog.component';
@@ -50,19 +50,6 @@ export class AuthEffects {
     )
   );
 
-  loadAuthUserSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(loadAuthUserSuccess),
-        tap(() => {
-          if (this.routeService.isLoginRoute()) {
-            this.router.navigate(['/admin']);
-          }
-        })
-      ),
-    { dispatch: false }
-  );
-
   loadAuthUserFail$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -81,7 +68,7 @@ export class AuthEffects {
       ofType(signUpUser),
       mergeMap(({ user }) =>
         this.authService.signup(user).pipe(
-          map(() => signUpUserSuccess()),
+          map((res) => signUpUserSuccess({ user: res.user })),
           catchError((err) =>
             of(signUpUserFail({ error: this.getSignUpErrMsg(err) }))
           )
@@ -99,7 +86,7 @@ export class AuthEffects {
           duration: 3000,
         });
       }),
-      map(() => loadUsers())
+      map(({ user }) => AddUser({ user }))
     )
   );
 
@@ -132,7 +119,7 @@ export class AuthEffects {
       ofType(signInUser),
       mergeMap(({ user }) =>
         this.authService.login(user).pipe(
-          map((res) => signInUserSuccess({ token: res.token })),
+          map((res) => signInUserSuccess({ user: res.user, token: res.token })),
           catchError((err) =>
             of(signInUserFail({ error: this.getAuthErrMsg(err) }))
           )
@@ -141,17 +128,19 @@ export class AuthEffects {
     )
   );
 
-  signInUserSuccess$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(signInUserSuccess),
-      tap(({ token }) => {
-        this.authService.setAuthToken(token);
-        this.snackBar.open('Logged In successfully!', 'Dismiss', {
-          duration: 3000,
-        });
-      }),
-      map(() => loadAuthUser())
-    )
+  signInUserSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(signInUserSuccess),
+        tap(({ token }) => {
+          this.authService.setAuthToken(token);
+          this.router.navigate(['/admin']);
+          this.snackBar.open('Logged In successfully!', 'Dismiss', {
+            duration: 3000,
+          });
+        })
+      ),
+    { dispatch: false }
   );
 
   signInUserFail$ = createEffect(

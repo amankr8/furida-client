@@ -4,10 +4,10 @@ import { MessageState } from './message.reducer';
 export const selectMessagesState =
   createFeatureSelector<MessageState>('messages');
 
-export const selectMessages = (archived: boolean) =>
-  createSelector(selectMessagesState, (state) =>
-    state.messages.filter((msg) => msg.archive === archived)
-  );
+export const selectMessages = createSelector(
+  selectMessagesState,
+  (state) => state.messages
+);
 
 export const selectMessageLoaded = createSelector(
   selectMessagesState,
