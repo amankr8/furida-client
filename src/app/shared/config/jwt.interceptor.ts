@@ -8,16 +8,14 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const token = authService.getAuthToken();
 
-  if (token) {
-    if (!jwtHelper.isTokenExpired(token)) {
-      // Attach Authorization header if token is valid
-      req = req.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return next(req);
-    }
+  if (token != null && !jwtHelper.isTokenExpired(token)) {
+    // Attach Authorization header if token is valid
+    req = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return next(req);
   }
 
   return next(req);

@@ -9,7 +9,6 @@ export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const snackBarRef = inject(MatSnackBar);
   const authService = inject(AuthService);
-
   const token = authService.getAuthToken();
 
   // Check if token exists and is not expired
