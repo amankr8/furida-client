@@ -22,6 +22,7 @@ import {
 } from '../../state/message/message.actions';
 import { ConfirmDialogComponent } from '../../pages/admin/components/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Message } from '../../shared/interface/message';
 
 @Injectable()
 export class MessageEffects {
@@ -52,7 +53,9 @@ export class MessageEffects {
       ofType(sendMessage),
       mergeMap(({ message }) =>
         this.messageService.sendMessage(message).pipe(
-          map(() => sendMessageSuccess({ message })),
+          map((newMessage: Message) =>
+            sendMessageSuccess({ message: newMessage })
+          ),
           catchError((error) => of(sendMessageFail({ error: error.message })))
         )
       )
