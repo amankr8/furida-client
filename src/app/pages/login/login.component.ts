@@ -19,6 +19,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectAuthLoading } from '../../state/auth/auth.selectors';
 import { signInUser } from '../../state/auth/auth.actions';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -33,6 +34,7 @@ import { signInUser } from '../../state/auth/auth.actions';
     MatButtonModule,
     CommonModule,
     MatProgressSpinnerModule,
+    RouterLink,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
