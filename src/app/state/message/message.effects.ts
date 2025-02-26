@@ -67,9 +67,13 @@ export class MessageEffects {
       this.actions$.pipe(
         ofType(sendMessageSuccess),
         tap(() => {
-          this.snackBar.open('Thank you for contacting us!', 'Dismiss', {
-            duration: 3000,
-          });
+          this.snackBar.open(
+            "Thank you for contacting us! We'll get back to you via email.",
+            'Dismiss',
+            {
+              duration: 3000,
+            }
+          );
         })
       ),
     { dispatch: false }
