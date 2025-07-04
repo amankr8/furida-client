@@ -1,6 +1,6 @@
 services:
   app:
-    image: 'amankr08/furida-server:latest'
+    image: 'flykraft/furida-server:latest'
     container_name: springboot_app
     ports:
       - "8080:8080"
